@@ -4,7 +4,6 @@
 #include <cstddef>
 
 #include "Arduino.h"
-
 #include "Timestamp.h"
 #include "TimeHandler.h"
 
