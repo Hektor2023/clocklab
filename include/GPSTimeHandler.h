@@ -14,7 +14,8 @@ class GPSTimeHandler:public TimeHandler
         // The TinyGPSPlus 
       Timestamp     GPSTimestamp;
       TinyGPSPlus   gps;
-      
+      uint8_t       centiSecond;
+
    private:
       void updateTime( Timestamp &timestamp);
    
@@ -23,7 +24,7 @@ class GPSTimeHandler:public TimeHandler
       virtual ~GPSTimeHandler( void)= default;
 
       bool encode( char c);
-
+      uint8_t getCentiSecond( void);   
      
       virtual Timestamp&  getTimestamp( void);
       virtual const char* getClassName( void);

@@ -3,7 +3,7 @@
 
 
 //===================================================================================
-GPSTimeHandler::GPSTimeHandler( TimeHandler* ptr2timeHandler):TimeHandler( ptr2timeHandler), GPSTimestamp( 0L) {}
+GPSTimeHandler::GPSTimeHandler( TimeHandler* ptr2timeHandler):TimeHandler( ptr2timeHandler), GPSTimestamp( 0L), centiSecond( 0) {}
 
 //===================================================================================
 bool GPSTimeHandler::encode( char c) 
@@ -30,6 +30,12 @@ void GPSTimeHandler::updateTime( Timestamp &timestamp)
 }
 
 //===================================================================================
+uint8_t GPSTimeHandler::getCentiSecond( void)
+{
+  return( centiSecond);
+} 
+
+//===================================================================================
 void GPSTimeHandler::updateTime( void)
 {
   static u_int8_t lastSecond= 0;
@@ -44,7 +50,7 @@ void GPSTimeHandler::updateTime( void)
     time.setHour( gps.time.hour());
     time.setMinute( gps.time.minute());
     time.setSecond( lastSecond);
-  //   gps.time.
+    centiSecond= lastCentiSecond;
   
     MyDate  date;
     date.setYear( gps.date.year());

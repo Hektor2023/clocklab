@@ -258,6 +258,42 @@ void wifi_task(void *pvParameter)
 }
 
 //=============================================================================================================
+void gps_task(void *pvParameter)
+{
+  char c;
+  MessageTime_t   gps_msg={ .src= "GPS"};
+
+  for(;;)
+  {
+    if( Serial2.available()) 
+    {
+      c= Serial2.read();
+
+      if( GPSHandler.encode(c))
+      {
+        GPSHandler.updateTime();
+
+        gps_msg.epoch= GPSHandler.getTimestamp().getEpochTime(); 
+        gps_msg.epochMillis= (uint32_t) GPSHandler.getCentiSecond()*10;  //  Serial.printf("millis => %u\n", epochMillis);
+        gps_msg.rtcMillis= millis();
+
+        if ( xQueueSend( queueTimePattern, (void *)&gps_msg, 10) != pdTRUE) 
+        {
+          Serial.println("ERROR: Could not put NTP time to queue.");  
+        }
+
+        Serial.printf("\nGPS...\n");
+
+      }
+    }
+
+    vTaskDelay( 10 / portTICK_RATE_MS);
+  }
+
+  vTaskDelete( NULL);
+}
+
+//=============================================================================================================
 void setup() 
 {
   xSemaphoreRtc = xSemaphoreCreateMutex();
@@ -268,8 +304,8 @@ void setup()
   vTaskDelay( 1000 / portTICK_RATE_MS);
   printf("======================\n"); 
 
-/*
-  xTaskCreatePinnedToCore( &wifi_task,      "wifi_task",      2048, NULL, 5, NULL, xCoreId_0);
+  xTaskCreatePinnedToCore( &gps_task,       "gps_task",       2048, NULL, 5, NULL, xCoreId_0);
+  xTaskCreatePinnedToCore( &wifi_task,      "wifi_task",      3048, NULL, 5, NULL, xCoreId_0);
   xTaskCreatePinnedToCore( &rtc_write_task, "rtc_write_task", 2048, NULL, 5, NULL, xCoreId_0);
   
   xTaskCreatePinnedToCore( &rtc_read_task,  "rtc_read_task",  2048, NULL, 5, NULL, xCoreId_1);
@@ -278,7 +314,7 @@ void setup()
   xTaskCreatePinnedToCore( &controller_task, "ctrl_write_task", 2048, NULL, 5, NULL, xCoreId_1);
 
   OLEDViewHandler.init();
-*/ 
+
 }
 
 
