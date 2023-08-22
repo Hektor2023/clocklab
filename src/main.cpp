@@ -13,11 +13,14 @@
 #include "DSTSunriseSunsetTimeHandler.h"
 #include "Controller.h"
 #include "LEDClockViewHandler.h"
-//#include "OLEDDisplayClockViewHandler.h"
 
+#include "OLEDDisplayClockViewHandler.h"
+#include "GPSTimeHandler.h"
 
-const  char*   ssid { "ocean"};
-const  char*   password{ "p^$kudn3!"};
+#include "WifiCred.h"
+
+const  char*   ssid { SSID };
+const  char*   password{ PASSWD };
 
 typedef uint32_t  epoch_t;
 
@@ -43,9 +46,12 @@ constexpr uint8_t   txd2_pin{17};
 constexpr uint8_t   sda_pin{21};
 constexpr uint8_t   scl_pin{22};
 
-constexpr uint8_t   DIO_pin{ 25};
-constexpr uint8_t   CLK_pin{ 26};
-constexpr uint8_t   STB_pin{ 27};
+constexpr uint8_t   DIO_pin{ 13}; // 25
+constexpr uint8_t   CLK_pin{ 33}; // 26
+constexpr uint8_t   STB_pin{ 32}; // 27
+
+constexpr uint8_t   sda_pin2{26};
+constexpr uint8_t   scl_pin2{27};
 
 
 // Set offset time in seconds to adjust for your timezone, for example:
@@ -64,18 +70,24 @@ double  longitude{ 20.6925219};  //
 MyTime      sunriseTime, sunsetTime;
 Timestamp   localTimestamp;
 
-//OLEDDisplayClockViewHandler OLEDViewHandler( NULL);
-LEDClockViewHandler         LEDViewHandler( NULL, STB_pin, CLK_pin, DIO_pin);
+OLEDDisplayClockViewHandler OLEDViewHandler( NULL, sda_pin2, scl_pin2);
+
+LEDClockViewHandler         LEDViewHandler( &OLEDViewHandler, STB_pin, CLK_pin, DIO_pin);
 ConsoleViewHandler          consoleViewHandler( &LEDViewHandler);
 
 SplitterTimeHandler         splitterHandler(NULL, localTimestamp);  
 DSTSunriseSunsetTimeHandler timeZoneDSTHandler( &splitterHandler, GMT_Plus_2h, longitude, latitude, sunriseTime, sunsetTime);
 RTCSystemTimeHandler        systemTimeHandler(  &timeZoneDSTHandler, sda_pin, scl_pin, irqIn_pin);
+
+ConsoleViewHandler          consoleViewHandler2( NULL);
+GPSTimeHandler GPSHandler( &consoleViewHandler2);
+
 //Controller                  controller( &systemTimeHandler);
 
 static xQueueHandle       queueTimePattern= xQueueCreate( 10, sizeof( MessageTime_t));
 static xQueueHandle       queueDisplay=     xQueueCreate( 10, sizeof( MessageTime_t));
 static SemaphoreHandle_t  xSemaphoreRtc;
+
 
 
 //=============================================================================================================
@@ -86,6 +98,7 @@ void printTick(void)
 }
 
 //=============================================================================================================
+
 void console_task(void *pvParameter)
 {
   // initialize digital pin LED_BUILTIN as an output.
@@ -157,29 +170,11 @@ void rtc_read_task(void *pvParameter)
 }
 
 //=============================================================================================================
-/*
- do
-  {
-    if( Serial.available() >0)
-    {
-      cmd= Serial.readStringUntil('\n').c_str();
-      result= controller.execute( cmd.c_str());
-
-      Serial.println( result.c_str());  
-    }
-    
-    yield(); 
-  }
-  while( systemTimeHandler.isInManualMode()); 
-*/
-
 //=============================================================================================================
 void rtc_write_task(void *pvParameter)
 {
   Timestamp       rtcTimestamp;
   MessageTime_t   rtcWriteMsg;
-
-
 
   for(;;)
   { 
@@ -251,7 +246,7 @@ void wifi_task(void *pvParameter)
       Serial.println("ERROR: Could not put NTP time to queue.");  
     }
 
-    timeClient.end();
+     timeClient.end();
 
     Serial.printf("\nDisconnect...\n");
     WiFi.disconnect();
@@ -262,20 +257,18 @@ void wifi_task(void *pvParameter)
   vTaskDelete( NULL);
 }
 
-
-
 //=============================================================================================================
 void setup() 
 {
   xSemaphoreRtc = xSemaphoreCreateMutex();
   // put your setup code here, to run once:
   Serial.begin(19200);
- 
+  Serial2.begin(9600);
 
   vTaskDelay( 1000 / portTICK_RATE_MS);
   printf("======================\n"); 
 
-
+/*
   xTaskCreatePinnedToCore( &wifi_task,      "wifi_task",      2048, NULL, 5, NULL, xCoreId_0);
   xTaskCreatePinnedToCore( &rtc_write_task, "rtc_write_task", 2048, NULL, 5, NULL, xCoreId_0);
   
@@ -283,11 +276,25 @@ void setup()
   xTaskCreatePinnedToCore( &console_task,   "console_task",   2048, NULL, 5, NULL, xCoreId_1);
 
   xTaskCreatePinnedToCore( &controller_task, "ctrl_write_task", 2048, NULL, 5, NULL, xCoreId_1);
+
+  OLEDViewHandler.init();
+*/ 
 }
 
 
 void loop() 
 {
- 
-}
+  char c;
 
+  if( Serial2.available()) 
+  {
+    c= Serial2.read();
+
+    if( GPSHandler.encode(c))
+    {
+      GPSHandler.updateTime();
+    }
+  }
+
+  yield();  
+}
