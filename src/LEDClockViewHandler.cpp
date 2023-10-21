@@ -1,5 +1,6 @@
 #include "LEDClockViewHandler.h"
 
+
 //===================================================================================
 LEDClockViewHandler::LEDClockViewHandler( TimeHandler* ptr, 
   const int STB_pin, const int CLK_pin, const int DIO_pin)
@@ -9,6 +10,7 @@ LEDClockViewHandler::LEDClockViewHandler( TimeHandler* ptr,
   pinMode( CLK_pin, OUTPUT); 
   pinMode( DIO_pin, OUTPUT);   
 
+  xSemaphoreTM1638plus = xSemaphoreCreateMutex();
   tm.displayBegin();  
 };
 
@@ -32,6 +34,21 @@ void LEDClockViewHandler::doAction( void (*fun)( void))
 }
 
 //===================================================================================
+ uint8_t LEDClockViewHandler::buttonsRead( void)
+ {
+    uint8_t keys= 0;
+
+    if( xSemaphoreTake( xSemaphoreTM1638plus,0) == pdTRUE)
+    {
+      keys= tm.readButtons();
+      xSemaphoreGive( xSemaphoreTM1638plus);
+    }
+
+    return( keys);  
+ }
+
+
+//===================================================================================
 void LEDClockViewHandler::updateTime( Timestamp &timestamp)
 { 
  
@@ -45,12 +62,17 @@ void LEDClockViewHandler::updateTime( Timestamp &timestamp)
   //  Serial.printf( "->%s\n",s);
 
   std::replace( s.begin(), s.end(), ':', '-');
-  tm.displayText( s.c_str());
+  if( xSemaphoreTake( xSemaphoreTM1638plus,0) == pdTRUE)
+  {
+    tm.displayText( s.c_str());
 
-  //  Serial.printf( "=>%s\n",s);
+    //  Serial.printf( "=>%s\n",s);
 
-  tm.setLEDs(0x0000);
-  tm.setLED( timestamp.getDayOfWeek(), 1);
+    tm.setLEDs(0x0000);
+    tm.setLED( timestamp.getDayOfWeek(), 1);
+    xSemaphoreGive( xSemaphoreTM1638plus);
+  }
+  
   
   TimeHandler::updateTime( timestamp);
 }

@@ -4,8 +4,9 @@
 
 //===================================================================================
 Controller::Controller( RTCSystemTimeHandler* systemTimeHandler)
-  :systemTimeHandler( *systemTimeHandler) {};
+  :systemTimeHandler( *systemTimeHandler), adjustMode( true) {};
   
+
 //===================================================================================
 void Controller::adjust( Controller::variable var, Controller::direction dir)
 {
@@ -71,22 +72,34 @@ void Controller::adjust( Controller::variable var, Controller::direction dir)
 }
 
 //===================================================================================
+bool Controller::isAdjustMode( void)
+{
+  return( adjustMode);
+}
+
+//===================================================================================
 const std::string Controller::execute( const std::string command) 
 {
   
   if(( command.find("stop") ==0) ||( command.find("enter") ==0))
   {
+    adjustMode= true;
 //    systemTimeHandler.manualMode( true);
     return("Enter manual mode");
   }
     
+  if( !isAdjustMode())
+  {
+     return( "Error");
+  }
+
   if(( command.find("start") ==0) ||( command.find("exit") ==0))
   {
+    adjustMode= false;
  //   systemTimeHandler.manualMode( false);
     return("Exit from manual mode");
   }
 
-  
   static Controller::variable  var;
   if( command.find("hour")==0)
   {

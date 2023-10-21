@@ -36,8 +36,8 @@ constexpr int xCoreId_1{ 1};
 
 constexpr uint8_t   irqIn_pin{ 15}; // D8 - don't use D4
 
-constexpr uint8_t   rxd2_pin{16};
-constexpr uint8_t   txd2_pin{17};
+constexpr uint8_t   rxd2_pin{17};
+constexpr uint8_t   txd2_pin{16};
 
 constexpr uint8_t   sda_pin{21};
 constexpr uint8_t   scl_pin{22};
@@ -79,7 +79,7 @@ RTCSystemTimeHandler        systemTimeHandler(  &timeZoneDSTHandler, sda_pin, sc
  
 GPSTimeHandler GPSHandler( NULL);
 
-//Controller                  controller( &systemTimeHandler);
+Controller                  controller( &systemTimeHandler);
 
 static xQueueHandle       queueTimePattern= xQueueCreate( 10, sizeof( MessageTime_t));
 static xQueueHandle       queueDisplay=     xQueueCreate( 10, sizeof( MessageTime_t));
@@ -201,6 +201,7 @@ void rtc_write_task(void *pvParameter)
 void controller_task(void *pvParameter)
 {
   vTaskDelay( 20000 / portTICK_RATE_MS);
+
   pinMode( SI_pin, OUTPUT);
   pinMode( NSCLR_pin, OUTPUT);
   pinMode( RCK_pin, OUTPUT);
@@ -210,13 +211,13 @@ void controller_task(void *pvParameter)
   digitalWrite( NSCLR_pin, HIGH);
   digitalWrite( RCK_pin, LOW);
   digitalWrite( SCK, LOW);
-
   digitalWrite( SI_pin,HIGH);
+
   uint8_t k=0;
 
   for(;;)
   {
-    digitalWrite( SI_pin, k%8==0? HIGH:LOW);
+    digitalWrite( SI_pin, k %8 ==0? HIGH:LOW);
     k++;
     
     digitalWrite( SCK_pin, HIGH);
@@ -291,7 +292,7 @@ void gps_task(void *pvParameter)
     while( Serial2.available()) 
     {
       c= Serial2.read();
-    
+//      printTick();  Serial.print( "  gps_task  ");  Serial.printf( "-> %c   ",c);
       while( GPSHandler.encode(c))
       {
         Serial.printf("| GPS...|");
@@ -343,7 +344,61 @@ void setup()
 
 }
 
+typedef 
+enum
+{ 
+  eMode     =   1,
+
+  eYear     =   2,
+  eMonth    =   4,
+  eDay      =   8,
+
+  eHour     =  16,
+  eMinute   =  32,
+
+  ePlus     =  64,
+  eMinus    = 128,
+}  eButtons;
+
 void loop() {
+  static uint8_t button= LEDViewHandler.buttonsRead();
+  bool err= false;
+
+//  Serial.printf("| Button..|  %x\n", buttons); 
+  switch( (eButtons)button)
+  {
+    case  eMode:
+      {  
+        if( controller.isAdjustMode())
+        {     
+          controller.execute("start");
+        }
+        else
+        {  
+          controller.execute("stop"); 
+        }
+
+      }    
+      break;
+
+    case  eYear:      controller.execute("year");   break;
+    case  eMonth:     controller.execute("month");  break;
+    case  eDay:       controller.execute("day");    break;
+    case  eHour:      controller.execute("hour");   break;
+    case  eMinute:    controller.execute("minute"); break;
+
+    case  ePlus:      controller.execute("+");      break;
+    case  eMinus:     controller.execute("-");      break;
+
+    default:
+          err= true;
+  }
+  if( err== false)
+  {
+    systemTimeHandler.forceUpdateTime();
+  }
+
+  vTaskDelay( 100 / portTICK_RATE_MS);
 
 }
 
