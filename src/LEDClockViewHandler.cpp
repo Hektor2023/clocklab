@@ -38,7 +38,7 @@ void LEDClockViewHandler::doAction( void (*fun)( void))
  {
     uint8_t keys= 0;
 
-    if( xSemaphoreTake( xSemaphoreTM1638plus,0) == pdTRUE)
+    if( xSemaphoreTake( xSemaphoreTM1638plus,( TickType_t ) 10) == pdTRUE)
     {
       keys= tm.readButtons();
       xSemaphoreGive( xSemaphoreTM1638plus);
@@ -62,7 +62,7 @@ void LEDClockViewHandler::updateTime( Timestamp &timestamp)
   //  Serial.printf( "->%s\n",s);
 
   std::replace( s.begin(), s.end(), ':', '-');
-  if( xSemaphoreTake( xSemaphoreTM1638plus,0) == pdTRUE)
+  if( xSemaphoreTake( xSemaphoreTM1638plus,( TickType_t ) 10) == pdTRUE)
   {
     tm.displayText( s.c_str());
 

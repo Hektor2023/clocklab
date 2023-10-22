@@ -85,8 +85,6 @@ static xQueueHandle       queueTimePattern= xQueueCreate( 10, sizeof( MessageTim
 static xQueueHandle       queueDisplay=     xQueueCreate( 10, sizeof( MessageTime_t));
 static SemaphoreHandle_t  xSemaphoreRtc;
 
-
-
 //=============================================================================================================
 void printTick(void)
 {
@@ -100,6 +98,8 @@ void console_task(void *pvParameter)
   // initialize digital pin LED_BUILTIN as an output.
   Timestamp displayTimestamp;
   MessageTime_t   rcvMsg;
+
+  printTick();  Serial.print( "\nCONSOLE_task:  start\n");
 
   for(;;)
   {
@@ -135,8 +135,12 @@ void rtc_read_task(void *pvParameter)
   Timestamp       rtcTimestamp;
   MessageTime_t   rtcReadMsg={ .src= "RTC"};
 
+  printTick();  Serial.print( "\nRTC_READ_task:  start\n");
+
+
   systemTimeHandler.init();
- 
+
+
   for(;;)
   { 
       if( xSemaphoreTake( xSemaphoreRtc,0) == pdTRUE)
@@ -170,77 +174,49 @@ void rtc_write_task(void *pvParameter)
   Timestamp       rtcTimestamp;
   MessageTime_t   rtcWriteMsg;
 
+  printTick();  Serial.print( "\nRTC_WRITE_task:  start\n");
+
   for(;;)
   { 
  
     if (xQueueReceive( queueTimePattern, (void *)&rtcWriteMsg, 10) == pdTRUE) 
     {
+
       rtcTimestamp.setEpochTime( rtcWriteMsg.epoch);
       rtcTimestamp++;
 
-      while( (millis() -rtcWriteMsg.rtcMillis) <= ( period_1000_Millis -rtcWriteMsg.epochMillis))  
-      { 
-        taskYIELD(); 
-      };
-       
-      if( xSemaphoreTake(  xSemaphoreRtc,0) == pdTRUE)
+//      while( (millis() -rtcWriteMsg.rtcMillis) <= ( period_1000_Millis -rtcWriteMsg.epochMillis))  
+//      { 
+//        taskYIELD(); 
+//      };
+
+      if( !controller.isAdjustMode()) 
       {
-        systemTimeHandler.setTimestamp( rtcTimestamp);
-        xSemaphoreGive(  xSemaphoreRtc);
+        if( xSemaphoreTake(  xSemaphoreRtc,0) == pdTRUE)
+        {
+          systemTimeHandler.setTimestamp( rtcTimestamp);
+          xSemaphoreGive(  xSemaphoreRtc);
+        }
       }
 
     }
 
-    vTaskDelay( 2 / portTICK_RATE_MS);
+    vTaskDelay( 10 / portTICK_RATE_MS);
   }
   
   vTaskDelete(NULL);
 }  
 
 //=============================================================================================================
-void controller_task(void *pvParameter)
-{
-  vTaskDelay( 20000 / portTICK_RATE_MS);
-
-  pinMode( SI_pin, OUTPUT);
-  pinMode( NSCLR_pin, OUTPUT);
-  pinMode( RCK_pin, OUTPUT);
-  pinMode( SCK_pin, OUTPUT);
-
-
-  digitalWrite( NSCLR_pin, HIGH);
-  digitalWrite( RCK_pin, LOW);
-  digitalWrite( SCK, LOW);
-  digitalWrite( SI_pin,HIGH);
-
-  uint8_t k=0;
-
-  for(;;)
-  {
-    digitalWrite( SI_pin, k %8 ==0? HIGH:LOW);
-    k++;
-    
-    digitalWrite( SCK_pin, HIGH);
-    digitalWrite( RCK_pin, LOW);
-    vTaskDelay( 5 / portTICK_RATE_MS);
-
-    digitalWrite( SCK_pin, LOW);
-    digitalWrite( RCK_pin, HIGH);
-
-    vTaskDelay( 5 / portTICK_RATE_MS);
-  }
-
-  vTaskDelete(NULL);
-}
-
-//=============================================================================================================
-void wifi_task(void *pvParameter)
+void ntp_task(void *pvParameter)
 {
   WiFiUDP     udp;
   NTPClient   timeClient( udp);
 
 
   MessageTime_t   ntp_msg={ .src= "NTP"};
+
+  printTick();  Serial.print( "\nNTP_task:  start\n"); 
 
   WiFi.mode(WIFI_STA); 
   WiFi.begin(ssid, password);
@@ -287,15 +263,21 @@ void gps_task(void *pvParameter)
 
   vTaskDelay( 800 / portTICK_RATE_MS);
 
+  printTick();  Serial.print( "\nGPS_task:  start\n");  
+
+
   for(;;)
   {
+    Serial.printf("| GPS...|");
+
     while( Serial2.available()) 
     {
       c= Serial2.read();
-//      printTick();  Serial.print( "  gps_task  ");  Serial.printf( "-> %c   ",c);
+ //     printTick();  Serial.print( "  gps_task  ");  
+ //     Serial.printf( "%c",c);
+
       while( GPSHandler.encode(c))
       {
-        Serial.printf("| GPS...|");
         GPSHandler.updateTime();
 
         gps_msg.epoch= GPSHandler.getTimestamp().getEpochTime(); 
@@ -305,17 +287,53 @@ void gps_task(void *pvParameter)
         while ( xQueueSend( queueTimePattern, (void *)&gps_msg, 10) != pdTRUE) 
         {
           Serial.println("ERROR: Could not put GPS time to queue."); 
-          vTaskDelay( 1 / portTICK_RATE_MS); 
+          vTaskDelay( 2 / portTICK_RATE_MS); 
         }
 
       }
 
     }
 
-    vTaskDelay( 10 / portTICK_RATE_MS);
+    vTaskDelay(  7000 / portTICK_RATE_MS);
   }
 
   vTaskDelete( NULL);
+}
+
+//=============================================================================================================
+void keyboard_task(void *pvParameter)
+{
+  vTaskDelay( 20000 / portTICK_RATE_MS);
+
+  pinMode( SI_pin, OUTPUT);
+  pinMode( NSCLR_pin, OUTPUT);
+  pinMode( RCK_pin, OUTPUT);
+  pinMode( SCK_pin, OUTPUT);
+
+
+  digitalWrite( NSCLR_pin, HIGH);
+  digitalWrite( RCK_pin, LOW);
+  digitalWrite( SCK, LOW);
+  digitalWrite( SI_pin,HIGH);
+
+  uint8_t k=0;
+
+  for(;;)
+  {
+    digitalWrite( SI_pin, k %8 ==0? HIGH:LOW);
+    k++;
+    
+    digitalWrite( SCK_pin, HIGH);
+    digitalWrite( RCK_pin, LOW);
+    vTaskDelay( 5 / portTICK_RATE_MS);
+
+    digitalWrite( SCK_pin, LOW);
+    digitalWrite( RCK_pin, HIGH);
+
+    vTaskDelay( 5 / portTICK_RATE_MS);
+  }
+
+  vTaskDelete(NULL);
 }
 
 //=============================================================================================================
@@ -327,59 +345,43 @@ void setup()
 
 
   vTaskDelay( 1000 / portTICK_RATE_MS);
-  printf("======================\n"); 
+  printf("setup: start ======================\n"); 
 
-  xTaskCreatePinnedToCore( &gps_task,       "gps_task",       2048, NULL, 5, NULL, xCoreId_0);
-  xTaskCreatePinnedToCore( &wifi_task,      "wifi_task",      3048, NULL, 5, NULL, xCoreId_0);
-  xTaskCreatePinnedToCore( &rtc_write_task, "rtc_write_task", 2048, NULL, 5, NULL, xCoreId_0);
+  xTaskCreate( &gps_task,       "gps_task",       3048, NULL, 5, NULL);
+  xTaskCreate( &ntp_task,       "ntp_task",       3048, NULL, 5, NULL);
+  xTaskCreate( &rtc_write_task, "rtc_write_task", 2048, NULL, 5, NULL);
   
-  xTaskCreatePinnedToCore( &rtc_read_task,  "rtc_read_task",  2048, NULL, 5, NULL, xCoreId_1);
-  xTaskCreatePinnedToCore( &console_task,   "console_task",   3048, NULL, 5, NULL, xCoreId_1);
-
-  xTaskCreatePinnedToCore( &controller_task, "ctrl_write_task", 2048, NULL, 5, NULL, xCoreId_1);
+  xTaskCreate( &rtc_read_task,  "rtc_read_task",  2048, NULL, 5, NULL);
+  xTaskCreate( &console_task,   "console_task",   3048, NULL, 5, NULL);
 
 //  OLEDViewHandler.init();
-
-
 
 }
 
 typedef 
 enum
 { 
-  eMode     =   1,
+  eMode     =  0x01,
 
-  eYear     =   2,
-  eMonth    =   4,
-  eDay      =   8,
+  eYear     =  0x02,
+  eMonth    =  0x04,
+  eDay      =  0x08,
 
-  eHour     =  16,
-  eMinute   =  32,
+  eHour     =  0x10,
+  eMinute   =  0x20,
 
-  ePlus     =  64,
-  eMinus    = 128,
+  ePlus     =  0x40,
+  eMinus    =  0x80,
 }  eButtons;
 
+
 void loop() {
-  static uint8_t button= LEDViewHandler.buttonsRead();
-  bool err= false;
+  static uint8_t buttons= LEDViewHandler.buttonsRead();
 
-//  Serial.printf("| Button..|  %x\n", buttons); 
-  switch( (eButtons)button)
+  if( buttons!= 0)  Serial.printf("| Button..|  %x\n", buttons);
+  switch( (eButtons)buttons)
   {
-    case  eMode:
-      {  
-        if( controller.isAdjustMode())
-        {     
-          controller.execute("start");
-        }
-        else
-        {  
-          controller.execute("stop"); 
-        }
-
-      }    
-      break;
+    case  eMode:      controller.execute( controller.isAdjustMode()? "start":"stop");   break;
 
     case  eYear:      controller.execute("year");   break;
     case  eMonth:     controller.execute("month");  break;
@@ -391,14 +393,10 @@ void loop() {
     case  eMinus:     controller.execute("-");      break;
 
     default:
-          err= true;
-  }
-  if( err== false)
-  {
-    systemTimeHandler.forceUpdateTime();
+        break;
   }
 
-  vTaskDelay( 100 / portTICK_RATE_MS);
+  vTaskDelay( 200 / portTICK_RATE_MS);
 
 }
 

@@ -4,7 +4,7 @@
 
 //===================================================================================
 Controller::Controller( RTCSystemTimeHandler* systemTimeHandler)
-  :systemTimeHandler( *systemTimeHandler), adjustMode( true) {};
+  :systemTimeHandler( *systemTimeHandler), adjustMode( false) {};
   
 
 //===================================================================================
@@ -64,7 +64,7 @@ void Controller::adjust( Controller::variable var, Controller::direction dir)
           break;
 
       default: 
-          break;
+          return;
     };
    
   systemTimeHandler.setTimestamp( systemTimestamp);

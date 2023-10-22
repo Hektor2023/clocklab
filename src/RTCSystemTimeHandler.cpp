@@ -112,7 +112,7 @@ void RTCSystemTimeHandler::updateTime( void)
   rtc.refresh();
   if(  lastSec2!= rtc.second())
   {
-    state=0;
+    state=0; // for irq handling
 
     lastSec2= rtc.second();
 	  forceUpdateTime();
