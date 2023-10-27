@@ -261,6 +261,7 @@ void ntp_task(void *pvParameter)
 
 const signed char endOfValidPosition= -1;
 const char delimeter=',';
+const char checkSumMarker='*';
 
 //=============================================================================================================
 void fillDelimeterMap( char *text, signed char* delMap, const unsigned int delMapSize, const char delimeter)
@@ -353,6 +354,39 @@ void getField( const unsigned char fieldNo, char* field, const char* text, const
 }
 
 //=============================================================================================================
+unsigned char calculateChecksum( const char* txt)
+{
+    
+    unsigned char chkSum= 0;
+    for( int i=0; i< (int)strlen( txt) && txt[ i]!= checkSumMarker; i++)
+    {
+        chkSum^= txt[ i];
+    }
+
+   return( chkSum);
+}
+
+//=============================================================================================================
+bool isValidCheckSum( const char* txt)
+{
+    char*Ptr2chkSumMarker= strchr( txt, checkSumMarker);
+    assert( (Ptr2chkSumMarker!= NULL) &&"Missing checksum marker");
+
+    char chkSumToTestTxt[ 3];
+    strcpy( chkSumToTestTxt, Ptr2chkSumMarker+1);
+
+    int chkSum= calculateChecksum( txt);
+    char chkSumTxt[ 3];
+
+    itoa( chkSum,chkSumTxt,16);
+    chkSumTxt[ 0]= toupper( chkSumTxt[ 0]);
+    chkSumTxt[ 1]= toupper( chkSumTxt[ 1]);
+    chkSumTxt[ 2]='\0';
+
+    return( strcmp( chkSumToTestTxt, chkSumTxt) ==0);
+}
+
+//=============================================================================================================
 void gps_task(void *pvParameter)
 {
   char c;
@@ -402,7 +436,7 @@ void gps_task(void *pvParameter)
     if( idx >0)
     {
       buffer[ idx]='\0';
-      if( strstr( buffer, "GPRMC"))
+      if( strstr( buffer, "GPRMC") && isValidCheckSum( buffer))
       {
         Serial.printf( "GPS: %s\n", buffer);
 
@@ -425,26 +459,9 @@ void gps_task(void *pvParameter)
         Serial.printf( "/ '%s'  \n", field);
 
         buffer[ 0]='\0';
-        
-      }
-      vTaskDelay( 5 / portTICK_RATE_MS);
-      
 
-    }
-    
+
 /*
-    while( Serial2.available()) 
-    {
-      c= Serial2.read();
-     
-
- //     printTick();  Serial.print( "  gps_task  ");  
-      Serial.printf( "%c",c);
-
-
-      while( GPSHandler.encode(c))
-      {
-       
         Serial.printf( "GPS: encoded\n");
         GPSHandler.updateTime();
 
@@ -457,11 +474,14 @@ void gps_task(void *pvParameter)
           Serial.println("ERROR: Could not put GPS time to queue."); 
           vTaskDelay( 2 / portTICK_RATE_MS); 
         }
+*/
 
       }
+      vTaskDelay( 5 / portTICK_RATE_MS);
+      
 
     }
-*/
+    
     vTaskDelay(  100 / portTICK_RATE_MS);
     Serial.printf("| GPS...!!!!|\n");
   }
