@@ -101,6 +101,7 @@ const std::string Controller::execute( const std::string command)
   }
 
   static Controller::variable  var;
+
   if( command.find("hour")==0)
   {
     var= Controller::variable::Hour;   

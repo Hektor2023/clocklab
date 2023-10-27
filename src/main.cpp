@@ -2,6 +2,8 @@
 #include <WiFi.h>
 #include <WiFiUdp.h>
 #include <SPI.h>
+#include <string.h>
+
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 
@@ -183,7 +185,7 @@ void rtc_write_task(void *pvParameter)
     {
 
       rtcTimestamp.setEpochTime( rtcWriteMsg.epoch);
-      rtcTimestamp++;
+      // rtcTimestamp++;
 
 //      while( (millis() -rtcWriteMsg.rtcMillis) <= ( period_1000_Millis -rtcWriteMsg.epochMillis))  
 //      { 
@@ -254,30 +256,196 @@ void ntp_task(void *pvParameter)
   vTaskDelete( NULL);
 }
 
+
+
+
+const signed char endOfValidPosition= -1;
+const char delimeter=',';
+
+//=============================================================================================================
+void fillDelimeterMap( char *text, signed char* delMap, const unsigned int delMapSize, const char delimeter)
+{
+    // clear map
+    memset( delMap, endOfValidPosition, delMapSize);
+
+    int j=0;
+    for( int i=0; i< (int)strlen(text)&& j<(int)delMapSize; i++)
+    {
+        if( text[ i]== delimeter)
+        {
+            delMap[ j++]= i;
+        }
+
+    }
+
+}
+
+//=============================================================================================================
+unsigned char countDelimeter( const signed char* delMap, const unsigned int delMapSize, const char delimeter)
+{
+    unsigned char counter=0;
+
+    for( int i=0; i< (int)delMapSize; i++)
+    {
+        if( delMap[ i]== endOfValidPosition)
+        {
+            break;
+        }
+
+        counter++;
+    }
+
+    return( counter);
+}
+
+//=============================================================================================================
+void getField( const unsigned char fieldNo, char* field, const char* text, const char delimeter, const signed char* delimeterMap, const unsigned int delimeterMapSize)
+{
+    switch( fieldNo)
+    {
+        case 0:
+            if( delimeterMap[ fieldNo] !=0)
+            {
+                size_t len= delimeterMap[ fieldNo] -1;
+                strncpy( field, text+0, len);
+                field[ len]='\0';
+            }
+            else
+            {
+                strcpy( field, " ");
+            }
+            break;
+
+        default:
+            unsigned char delimeterQty= countDelimeter(delimeterMap, delimeterMapSize, delimeter);
+//            printf("\n%d - %d\n", delimeterMap[ fieldNo-1],delimeterMap[ fieldNo]);
+
+            if( fieldNo>= delimeterQty) // last field or greater
+            {
+
+                if(( fieldNo== delimeterQty) &&( (delimeterMap[ fieldNo-1] +1) != delimeterMap[ fieldNo]))
+                {
+                    size_t len= strlen(text) -(delimeterMap[ fieldNo-1]+1);
+                    strncpy( field, text+ delimeterMap[ fieldNo-1]+1, len);
+                    field[ len]='\0';
+                }
+                else
+                {
+                    strcpy( field, " ");
+                }
+            }
+            else
+            {
+                if((delimeterMap[ fieldNo-1] +1) != delimeterMap[ fieldNo])
+                {
+                    size_t len= delimeterMap[ fieldNo] -(delimeterMap[ fieldNo-1]+1);
+                    strncpy( field, text+ delimeterMap[ fieldNo-1]+1, len);
+                    field[ len]='\0';
+                }
+                else
+                {
+                    strcpy( field, " ");
+                }
+            }
+            break;
+    }
+
+}
+
 //=============================================================================================================
 void gps_task(void *pvParameter)
 {
   char c;
   MessageTime_t   gps_msg={ .src= "GPS"};
   Serial2.begin(9600);
+  Serial2.flush();
 
   vTaskDelay( 800 / portTICK_RATE_MS);
 
   printTick();  Serial.print( "\nGPS_task:  start\n");  
 
+  char buffer[101]; 
+ 
 
   for(;;)
   {
-    Serial.printf("| GPS...|");
+//    Serial.printf("| GPS...|");
+    
+    bool next= true;
+    uint8_t idx=0;
 
+    while( next) 
+    {
+      if( !Serial2.available())  continue;
+
+      c= Serial2.read();
+      switch( c)
+      {
+        case '$':
+            idx=0;
+            break;
+
+        case '\n':
+            break;
+
+        case '\r':
+            next= false;
+            break;
+
+        default:
+            if( idx< sizeof( buffer))  buffer[ idx++]= c;
+            break;
+      }
+      
+    }
+
+    if( idx >0)
+    {
+      buffer[ idx]='\0';
+      if( strstr( buffer, "GPRMC"))
+      {
+        Serial.printf( "GPS: %s\n", buffer);
+
+        signed char  delimeterMap[20]; // map of delimeter positions
+        fillDelimeterMap( buffer, delimeterMap, sizeof( delimeterMap), delimeter);
+
+        char field[20]; 
+        unsigned char fieldNo;
+
+        fieldNo= 1;
+        getField( fieldNo, field, buffer, delimeter, delimeterMap, sizeof( delimeterMap));
+        Serial.printf( "Time: '%s'  ", field);
+
+        fieldNo= 3;
+        getField( fieldNo, field, buffer, delimeter, delimeterMap, sizeof( delimeterMap));
+        Serial.printf( "Loc: '%s'  ", field);
+
+        fieldNo= 5;
+        getField( fieldNo, field, buffer, delimeter, delimeterMap, sizeof( delimeterMap));
+        Serial.printf( "/ '%s'  \n", field);
+
+        buffer[ 0]='\0';
+        
+      }
+      vTaskDelay( 5 / portTICK_RATE_MS);
+      
+
+    }
+    
+/*
     while( Serial2.available()) 
     {
       c= Serial2.read();
+     
+
  //     printTick();  Serial.print( "  gps_task  ");  
- //     Serial.printf( "%c",c);
+      Serial.printf( "%c",c);
+
 
       while( GPSHandler.encode(c))
       {
+       
+        Serial.printf( "GPS: encoded\n");
         GPSHandler.updateTime();
 
         gps_msg.epoch= GPSHandler.getTimestamp().getEpochTime(); 
@@ -293,8 +461,9 @@ void gps_task(void *pvParameter)
       }
 
     }
-
-    vTaskDelay(  7000 / portTICK_RATE_MS);
+*/
+    vTaskDelay(  100 / portTICK_RATE_MS);
+    Serial.printf("| GPS...!!!!|\n");
   }
 
   vTaskDelete( NULL);
@@ -342,10 +511,10 @@ void setup()
   xSemaphoreRtc = xSemaphoreCreateMutex();
   // put your setup code here, to run once:
   Serial.begin(19200);
+  Serial.flush();
 
-
-  vTaskDelay( 1000 / portTICK_RATE_MS);
-  printf("setup: start ======================\n"); 
+  vTaskDelay( 3000 / portTICK_RATE_MS);
+  Serial.print("setup: start ======================\n"); 
 
   xTaskCreate( &gps_task,       "gps_task",       3048, NULL, 5, NULL);
   xTaskCreate( &ntp_task,       "ntp_task",       3048, NULL, 5, NULL);
@@ -374,18 +543,36 @@ enum
   eMinus    =  0x80,
 }  eButtons;
 
+uint8_t buttons=0;
 
 void loop() {
-  static uint8_t buttons= LEDViewHandler.buttonsRead();
+  buttons= LEDViewHandler.buttonsRead();
 
-  if( buttons!= 0)  Serial.printf("| Button..|  %x\n", buttons);
+  if( buttons!= 0)  
+  {
+    Serial.printf("| Button..|  %x\n", buttons);
+  }
+
   switch( (eButtons)buttons)
   {
-    case  eMode:      controller.execute( controller.isAdjustMode()? "start":"stop");   break;
+    case  eMode:     
+          if( !controller.isAdjustMode())
+          {
+            Serial.printf("| ADJUST|\n");
+            controller.execute( "stop");
+            LEDViewHandler.modeAdjust( true);
+          }
+          else
+          {
+            Serial.printf("| COUNTING|\n");
+            controller.execute( "start");
+            LEDViewHandler.modeAdjust( false);
+          }
+          break;
 
-    case  eYear:      controller.execute("year");   break;
-    case  eMonth:     controller.execute("month");  break;
-    case  eDay:       controller.execute("day");    break;
+//    case  eYear:      controller.execute("year");   break;
+//    case  eMonth:     controller.execute("month");  break;
+//    case  eDay:       controller.execute("day");    break;
     case  eHour:      controller.execute("hour");   break;
     case  eMinute:    controller.execute("minute"); break;
 
@@ -396,7 +583,7 @@ void loop() {
         break;
   }
 
-  vTaskDelay( 200 / portTICK_RATE_MS);
+  vTaskDelay( 100 / portTICK_RATE_MS);
 
 }
 

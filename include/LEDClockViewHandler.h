@@ -25,6 +25,7 @@ class LEDClockViewHandler:public TimeHandler
       virtual ~LEDClockViewHandler( void);
 
       uint8_t buttonsRead( void);
+      void modeAdjust( bool flagg);
 
       virtual void updateTime( Timestamp &timestamp);
       virtual const char* getClassName( void);
