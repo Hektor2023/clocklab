@@ -6,8 +6,11 @@
 
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
+  
 
 #include <NTPClient.h>   // https://github.com/arduino-libraries/NTPClient
+
+#include "Timestamp.h"
 #include "ConsoleViewHandler.h"
 #include "RTCSystemTimeHandler.h"
 #include "SplitterTimeHandler.h"
@@ -240,6 +243,12 @@ void ntp_task(void *pvParameter)
     ntp_msg.epoch= timeClient.getEpochTime(); 
     ntp_msg.epochMillis= (uint32_t)((1000.0f* timeClient.getMillis())/UINT32_MAX);  //  Serial.printf("millis => %u\n", epochMillis);
     ntp_msg.rtcMillis= millis();
+
+    Timestamp timestamp;
+    timestamp.setEpochTime( ntp_msg.epoch); 
+    char timestampAsString[  timestamp.getStringBufferSize()];
+    Serial.printf( "\nNTP TimestampAsString= %s  \n",timestamp.toString( timestampAsString ));
+
     while ( xQueueSend( queueTimePattern, (void *)&ntp_msg, 10) != pdTRUE) 
     {
       Serial.println("ERROR: Could not put NTP time to queue.");  
@@ -256,13 +265,9 @@ void ntp_task(void *pvParameter)
   vTaskDelete( NULL);
 }
 
-
-
-
 const signed char endOfValidPosition= -1;
 const char delimeter=',';
 const char checkSumMarker='*';
-
 //=============================================================================================================
 void fillDelimeterMap( char *text, signed char* delMap, const unsigned int delMapSize, const char delimeter)
 {
@@ -383,7 +388,7 @@ bool isValidCheckSum( const char* txt)
     chkSumTxt[ 1]= toupper( chkSumTxt[ 1]);
     chkSumTxt[ 2]='\0';
 
-    return( strcmp( chkSumToTestTxt, chkSumTxt) ==0);
+    return( ( *(Ptr2chkSumMarker-1)!='N') && strcmp( chkSumToTestTxt, chkSumTxt) ==0);
 }
 
 //=============================================================================================================
@@ -436,9 +441,12 @@ void gps_task(void *pvParameter)
     if( idx >0)
     {
       buffer[ idx]='\0';
+
+
       if( strstr( buffer, "GPRMC") && isValidCheckSum( buffer))
       {
-        Serial.printf( "GPS: %s\n", buffer);
+        Serial.printf("| GPS... |");
+//        Serial.printf( "GPS: %s\n", buffer);
 
         signed char  delimeterMap[20]; // map of delimeter positions
         fillDelimeterMap( buffer, delimeterMap, sizeof( delimeterMap), delimeter);
@@ -448,18 +456,76 @@ void gps_task(void *pvParameter)
 
         fieldNo= 1;
         getField( fieldNo, field, buffer, delimeter, delimeterMap, sizeof( delimeterMap));
-        Serial.printf( "Time: '%s'  ", field);
+        float timeAsFloatNumber= atoi( field);
+//        Serial.printf( "Time: '%s' %6.2f ", field, timeAsFloatNumber);
 
         fieldNo= 3;
         getField( fieldNo, field, buffer, delimeter, delimeterMap, sizeof( delimeterMap));
-        Serial.printf( "Loc: '%s'  ", field);
+        latitude= (double)atof( field)/(double)100.0f;
+//        Serial.printf( "| Loc: '%s' %f", field, latitude);
 
         fieldNo= 5;
         getField( fieldNo, field, buffer, delimeter, delimeterMap, sizeof( delimeterMap));
-        Serial.printf( "/ '%s'  \n", field);
+        longitude= (double)atof( field)/(double)100.0f;
+//        Serial.printf( "/'%s' %f", field, longitude);
+
+        fieldNo= 9;
+        getField( fieldNo, field, buffer, delimeter, delimeterMap, sizeof( delimeterMap));
+        unsigned int dateAsNumber= atoi( field);
+//        Serial.printf( "| Date: '%s' %d\n", field, dateAsNumber);
 
         buffer[ 0]='\0';
+      
+       
+        unsigned int timeAsNumber= (unsigned int)timeAsFloatNumber;
 
+        unsigned int milliSecond= (unsigned int) (timeAsFloatNumber- (float)timeAsNumber)* 100.0f;
+        unsigned int second= timeAsNumber %100;
+        timeAsNumber /=100;
+        unsigned int minute= timeAsNumber %100;
+        timeAsNumber /=100;
+        unsigned int hour=   timeAsNumber %100;
+//        Serial.printf( "\nTimeAsString= %00d.%00d.%00d.%00d  \n",hour, minute, second, milliSecond);
+
+        MyTime time;
+        time.setHour( hour);
+        time.setMinute( minute);
+        time.setSecond( second);
+//        char timeAsString[  time.getStringBufferSize()];
+//        Serial.printf( "\nTimeAsString= %s  \n",time.toString( timeAsString ));
+
+     
+        unsigned int year= 2000+ dateAsNumber %100; 
+        dateAsNumber /=100;
+        unsigned char month= dateAsNumber %100;
+        dateAsNumber /=100;
+        unsigned char day= dateAsNumber %100;
+
+        MyDate date;
+        date.setYear(  year);
+        date.setMonth( month);
+        date.setDay(   day);
+//        char dateAsString[  date.getStringBufferSize()];
+//        Serial.printf( "\nDateAsString= %s  \n",date.toString( dateAsString ));
+
+
+        Timestamp timestamp;
+        timestamp.setDate( date);
+        timestamp.setTime( time);
+//        char timestampAsString[  timestamp.getStringBufferSize()];
+//        Serial.printf( "\nTimestampAsString= %s  \n",timestamp.toString( timestampAsString ));
+
+
+//        Serial.printf( "GPS: encoded\n");
+        gps_msg.epoch=  timestamp.getEpochTime(); 
+        gps_msg.epochMillis= (uint32_t) milliSecond;  //  Serial.printf("millis => %u\n", epochMillis);
+        gps_msg.rtcMillis= millis();
+
+        while ( xQueueSend( queueTimePattern, (void *)&gps_msg, 10) != pdTRUE) 
+        {
+          Serial.println("ERROR: Could not put GPS time to queue."); 
+          vTaskDelay( 2 / portTICK_RATE_MS); 
+        }
 
 /*
         Serial.printf( "GPS: encoded\n");
@@ -483,7 +549,7 @@ void gps_task(void *pvParameter)
     }
     
     vTaskDelay(  100 / portTICK_RATE_MS);
-    Serial.printf("| GPS...!!!!|\n");
+//    Serial.printf("| GPS...!!!!|\n");
   }
 
   vTaskDelete( NULL);
@@ -536,8 +602,8 @@ void setup()
   vTaskDelay( 3000 / portTICK_RATE_MS);
   Serial.print("setup: start ======================\n"); 
 
-  xTaskCreate( &gps_task,       "gps_task",       3048, NULL, 5, NULL);
-  xTaskCreate( &ntp_task,       "ntp_task",       3048, NULL, 5, NULL);
+  xTaskCreate( &gps_task,       "gps_task",       4048, NULL, 5, NULL);
+//  xTaskCreate( &ntp_task,       "ntp_task",       3048, NULL, 5, NULL);
   xTaskCreate( &rtc_write_task, "rtc_write_task", 2048, NULL, 5, NULL);
   
   xTaskCreate( &rtc_read_task,  "rtc_read_task",  2048, NULL, 5, NULL);
