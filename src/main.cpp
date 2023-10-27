@@ -603,7 +603,7 @@ void setup()
   Serial.print("setup: start ======================\n"); 
 
   xTaskCreate( &gps_task,       "gps_task",       4048, NULL, 5, NULL);
-//  xTaskCreate( &ntp_task,       "ntp_task",       3048, NULL, 5, NULL);
+  xTaskCreate( &ntp_task,       "ntp_task",       3048, NULL, 5, NULL);
   xTaskCreate( &rtc_write_task, "rtc_write_task", 2048, NULL, 5, NULL);
   
   xTaskCreate( &rtc_read_task,  "rtc_read_task",  2048, NULL, 5, NULL);
