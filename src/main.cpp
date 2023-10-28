@@ -372,10 +372,25 @@ unsigned char calculateChecksum( const char* txt)
 }
 
 //=============================================================================================================
+bool isValidRecord( const char* txt)
+{
+    const char validRecordchar= 'N';
+    char*Ptr2chkSumMarker= strchr( txt, checkSumMarker);
+    assert( (Ptr2chkSumMarker!= NULL) &&"Missing checksum marker");
+
+    return( *(Ptr2chkSumMarker-1)!= validRecordchar);
+}
+
+//=============================================================================================================
 bool isValidCheckSum( const char* txt)
 {
     char*Ptr2chkSumMarker= strchr( txt, checkSumMarker);
     assert( (Ptr2chkSumMarker!= NULL) &&"Missing checksum marker");
+
+    if(  !isValidRecord( txt))
+    {
+      return( false);
+    }
 
     char chkSumToTestTxt[ 3];
     strcpy( chkSumToTestTxt, Ptr2chkSumMarker+1);
@@ -388,7 +403,13 @@ bool isValidCheckSum( const char* txt)
     chkSumTxt[ 1]= toupper( chkSumTxt[ 1]);
     chkSumTxt[ 2]='\0';
 
-    return( ( *(Ptr2chkSumMarker-1)!='N') && strcmp( chkSumToTestTxt, chkSumTxt) ==0);
+    return( strcmp( chkSumToTestTxt, chkSumTxt) ==0);
+}
+
+//=============================================================================================================
+void readRecord()
+{
+
 }
 
 //=============================================================================================================
@@ -429,6 +450,7 @@ void gps_task(void *pvParameter)
 
         case '\r':
             next= false;
+            buffer[ idx]='\0';
             break;
 
         default:
@@ -438,11 +460,8 @@ void gps_task(void *pvParameter)
       
     }
 
-    if( idx >0)
+//    if( idx >0)
     {
-      buffer[ idx]='\0';
-
-
       if( strstr( buffer, "GPRMC") && isValidCheckSum( buffer))
       {
         Serial.printf("| GPS... |");
