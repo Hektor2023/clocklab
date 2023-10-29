@@ -193,12 +193,14 @@ bool GPSTimeHandler2::isValidCheckSum( const char* txt)
 }
 
 //===================================================================================
-void GPSTimeHandler2::updateTime( char* buffer)
+bool GPSTimeHandler2::updateTime( char* buffer)
 {
+    bool updated= false;
+
     if( strstr( buffer, "GPRMC") && isValidCheckSum( buffer))
     {
-        Serial.printf("| GPS... |");
-        Serial.printf( "GPS: %s\n", buffer);
+//        Serial.printf("| GPS... |");
+//        Serial.printf( "GPS: %s\n", buffer);
 
         signed char  delimeterMap[20]; // map of delimeter positions
         fillDelimeterMap( buffer, delimeterMap, sizeof( delimeterMap), delimeter);
@@ -264,9 +266,15 @@ void GPSTimeHandler2::updateTime( char* buffer)
 //        Serial.printf( "\nTimestampAsString= %s  \n",GPSTimestamp.toString( timestampAsString ));
 
 //        Serial.printf( "GPS: encoded\n");  
+        updated= true;
+        
     }
 
-    baseUpdateTime( GPSTimestamp);
+    if( updated) 
+    {
+        baseUpdateTime( GPSTimestamp);
+    } 
+    return( updated);
 }
 
 //===================================================================================

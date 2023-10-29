@@ -141,10 +141,7 @@ void rtc_read_task(void *pvParameter)
   MessageTime_t   rtcReadMsg={ .src= "RTC"};
 
   printTick();  Serial.print( "\nRTC_READ_task:  start\n");
-
-
   systemTimeHandler.init();
-
 
   for(;;)
   { 
@@ -152,6 +149,10 @@ void rtc_read_task(void *pvParameter)
       { 
         systemTimeHandler.updateTime();
         xSemaphoreGive(  xSemaphoreRtc);
+
+ //       Serial.print( "\nRTC_READ_task:  systemTimeHandler.updateTime() ");
+        char timestampAsString[  localTimestamp.getStringBufferSize()];
+//        Serial.printf( "\nRTC_READ_task:  systemTimeHandler.updateTime() = %s  \n",localTimestamp.toString( timestampAsString ));
 
         if( rtcReadMsg.epoch!= localTimestamp.getEpochTime())
         {
@@ -163,6 +164,8 @@ void rtc_read_task(void *pvParameter)
           {
             Serial.println("ERROR: Could not put RTC read time to queue.");  
           }
+
+//          Serial.print( "\nRTC_READ_task: AFTER SEND systemTimeHandler.updateTime()\n");
         }  
 
       }
@@ -186,7 +189,7 @@ void rtc_write_task(void *pvParameter)
  
     if (xQueueReceive( queueTimePattern, (void *)&rtcWriteMsg, 10) == pdTRUE) 
     {
-
+      
       rtcTimestamp.setEpochTime( rtcWriteMsg.epoch);
       // rtcTimestamp++;
 
@@ -199,6 +202,7 @@ void rtc_write_task(void *pvParameter)
       {
         if( xSemaphoreTake(  xSemaphoreRtc,0) == pdTRUE)
         {
+//          Serial.print( "\nRTC_WRITE_task:  setTimestamp\n");
           systemTimeHandler.setTimestamp( rtcTimestamp);
           xSemaphoreGive(  xSemaphoreRtc);
         }
@@ -288,7 +292,8 @@ void gps_task(void *pvParameter)
     {
       if( !Serial2.available())  
       {
-        vTaskDelay( 5 / portTICK_RATE_MS);
+//        Serial.printf( "GPS: !Serial2.available\n");
+        vTaskDelay( 20 / portTICK_RATE_MS);
         continue;
       }
 
@@ -297,16 +302,17 @@ void gps_task(void *pvParameter)
     };
 
 //    Serial.printf( "GPS: %s\n", buffer);
-    GPSHandler.updateTime( buffer);
-
-//        Serial.printf( "GPS: encoded\n");
-    gps_msg.epoch=  GPSHandler.getTimestamp().getEpochTime(); 
-    gps_msg.epochMillis= (uint32_t) GPSHandler.getMilliSecond();  //  Serial.printf("millis => %u\n", epochMillis);
-    gps_msg.rtcMillis= millis();
-    while ( xQueueSend( queueTimePattern, (void *)&gps_msg, 10) != pdTRUE) 
+    if( GPSHandler.updateTime( buffer))
     {
-      Serial.println("ERROR: Could not put GPS time to queue."); 
-      vTaskDelay( 2 / portTICK_RATE_MS); 
+//        Serial.printf( "GPS: encoded\n");
+      gps_msg.epoch=  GPSHandler.getTimestamp().getEpochTime(); 
+      gps_msg.epochMillis= (uint32_t) GPSHandler.getMilliSecond();  //  Serial.printf("millis => %u\n", epochMillis);
+      gps_msg.rtcMillis= millis();
+      while ( xQueueSend( queueTimePattern, (void *)&gps_msg, 10) != pdTRUE) 
+      {
+        Serial.println("ERROR: Could not put GPS time to queue."); 
+        vTaskDelay( 2 / portTICK_RATE_MS); 
+      }
     }
 
     vTaskDelay(  100 / portTICK_RATE_MS);

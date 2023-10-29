@@ -25,6 +25,8 @@ class GPSTimeHandler2:public TimeHandler
       unsigned char countDelimeter( const signed char* delMap, const unsigned int delMapSize, const char delimeter);
       void fillDelimeterMap( char *text, signed char* delMap, const unsigned int delMapSize, const char delimeter);
 
+      virtual void updateTime( void) {};
+
    public:
       GPSTimeHandler2( TimeHandler* ptr2timeHandler= nullptr);
       virtual ~GPSTimeHandler2( void)= default;
@@ -36,9 +38,7 @@ class GPSTimeHandler2:public TimeHandler
       virtual const char* getClassName( void);
 
       bool collectRecord( char c, char* buffer, uint8_t bufferSize);
-      void updateTime( char* buffer);
-
-      virtual void updateTime( void);
+      bool updateTime( char* buffer);
 };
 
 

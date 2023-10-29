@@ -181,9 +181,10 @@ MyDate MyDate::getDSTStart( uint16_t year)
     const uint8_t SUNDAY= 6;
     MyDate   date( 31, 03, year);
 
-    while( date.getDayOfWeek() != SUNDAY)
+    auto dofw= date.getDayOfWeek();
+    if( dofw != SUNDAY)
     {
-      date.setDay( date.getDay() -1);
+      date.setDay( 31- (dofw+1));
     };
 
     return( date);
@@ -196,9 +197,10 @@ MyDate MyDate::getDSTEnd( uint16_t year)
     MyDate   date( 31, 10, year);
 
     // 31.10.2023  dofw = 1  TUESDAY //  DSTEnd 29.10.23 dofw = 6
-    while( date.getDayOfWeek() != SUNDAY)
+    auto dofw= date.getDayOfWeek();
+    if( dofw != SUNDAY)
     {
-      date.setDay( date.getDay() -1);
+      date.setDay( 31- (dofw+1));
     };
     
     return( date);
