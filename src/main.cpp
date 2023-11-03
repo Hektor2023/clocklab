@@ -133,7 +133,7 @@ void console_task(void *pvParameter)
     vTaskDelay( 10 / portTICK_RATE_MS);                    // wait for a second
   }
 
-  vTaskDelete(NULL);
+  vTaskDelete(nullptr);
 }
 
 //=============================================================================================================
@@ -175,7 +175,7 @@ void rtc_read_task(void *pvParameter)
     vTaskDelay( 2 / portTICK_RATE_MS);
   }
   
-  vTaskDelete(NULL);
+  vTaskDelete(nullptr);
 }
 
 //=============================================================================================================
@@ -215,7 +215,7 @@ void rtc_write_task(void *pvParameter)
     vTaskDelay( 10 / portTICK_RATE_MS);
   }
   
-  vTaskDelete(NULL);
+  vTaskDelete(nullptr);
 }  
 
 //=============================================================================================================
@@ -268,7 +268,7 @@ void ntp_task(void *pvParameter)
     vTaskDelay( 10*1000 / portTICK_RATE_MS);
   }
 
-  vTaskDelete( NULL);
+  vTaskDelete(nullptr);
 }
 
 //=============================================================================================================
@@ -318,7 +318,7 @@ void gps_task(void *pvParameter)
 //    Serial.printf("| GPS...!!!!|\n");
   }
 
-  vTaskDelete( NULL);
+  vTaskDelete(nullptr);
 }
 
 //=============================================================================================================
@@ -354,7 +354,7 @@ void keyboard_task(void *pvParameter)
     vTaskDelay( 5 / portTICK_RATE_MS);
   }
 
-  vTaskDelete(NULL);
+  vTaskDelete(nullptr);
 }
 
 //=============================================================================================================
@@ -368,12 +368,12 @@ void setup()
   vTaskDelay( 3000 / portTICK_RATE_MS);
   Serial.print("setup: start ======================\n"); 
 
-  xTaskCreate( &gps_task,       "gps_task",       4048, NULL, 5, NULL);
-  xTaskCreate( &ntp_task,       "ntp_task",       3048, NULL, 5, NULL);
-  xTaskCreate( &rtc_write_task, "rtc_write_task", 2048, NULL, 5, NULL);
+  xTaskCreate( &gps_task,       "gps_task",       4048, nullptr, 5, nullptr);
+  xTaskCreate( &ntp_task,       "ntp_task",       3048, nullptr, 5, nullptr);
+  xTaskCreate( &rtc_write_task, "rtc_write_task", 2048, nullptr, 5, nullptr);
   
-  xTaskCreate( &rtc_read_task,  "rtc_read_task",  2048, NULL, 5, NULL);
-  xTaskCreate( &console_task,   "console_task",   3048, NULL, 5, NULL);
+  xTaskCreate( &rtc_read_task,  "rtc_read_task",  2048, nullptr, 5, nullptr);
+  xTaskCreate( &console_task,   "console_task",   3048, nullptr, 5, nullptr);
 
 //  OLEDViewHandler.init();
 

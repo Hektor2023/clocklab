@@ -13,7 +13,8 @@ LEDClockViewHandler::LEDClockViewHandler( TimeHandler* ptr,
   xSemaphoreTM1638plus = xSemaphoreCreateMutex();
   tm.displayBegin();  
   
-  tm.setLEDs(0x0000);
+  tm.setLEDs( 0);
+
 };
 
 //===================================================================================
@@ -60,7 +61,8 @@ void LEDClockViewHandler::doAction( void (*fun)( void))
 //===================================================================================
 void LEDClockViewHandler::modeAdjust( bool flagg)
 {
-  tm.setLED( 7, flagg? 1:0);  
+  adjustMode= flagg;
+  
 }
 
 //===================================================================================
@@ -82,7 +84,9 @@ void LEDClockViewHandler::updateTime( Timestamp &timestamp)
     tm.displayText( s.c_str());
 
     //  Serial.printf( "=>%s\n",s);
+    tm.setLEDs( 0);
     tm.setLED( timestamp.getDayOfWeek(), 1);
+    tm.setLED( 7, adjustMode? 1:0); 
     xSemaphoreGive( xSemaphoreTM1638plus);
   }
   
