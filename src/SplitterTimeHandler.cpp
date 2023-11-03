@@ -3,7 +3,7 @@
 
 //===================================================================================
 SplitterTimeHandler::SplitterTimeHandler(  TimeHandler* ptr, Timestamp &duplicatedTimestamp)
-  :duplicatedTimestamp( duplicatedTimestamp) {}
+  :TimeHandler( ptr), duplicatedTimestamp( duplicatedTimestamp) {}
 
 //===================================================================================
 SplitterTimeHandler::~SplitterTimeHandler() {}

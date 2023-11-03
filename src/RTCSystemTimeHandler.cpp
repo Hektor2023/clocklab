@@ -104,7 +104,7 @@ void RTCSystemTimeHandler::updateTime( Timestamp& timestamp)
 }
 
 //===================================================================================
-void RTCSystemTimeHandler::updateTime( void)
+bool RTCSystemTimeHandler::updateTime( void)
 {
   static uint8_t lastSec2=0;
 
@@ -116,8 +116,10 @@ void RTCSystemTimeHandler::updateTime( void)
 
     lastSec2= rtc.second();
 	  forceUpdateTime();
+    return( true);
   }  
  
+ return( false);
 }
 
 //===================================================================================

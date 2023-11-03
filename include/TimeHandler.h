@@ -18,11 +18,9 @@ class TimeHandler
       void baseUpdateTime( Timestamp &timestamp);
 
    public:
-      TimeHandler( TimeHandler* ptr= nullptr);
+      TimeHandler( TimeHandler* ptr);
       virtual ~TimeHandler( void)= default;
       
-//      virtual void setValidTime( bool validFlagg);
-//      virtual bool isValidTime(void);
       virtual void updateTime( Timestamp &timestamp);
 
       virtual const char* getClassName( void)=0;

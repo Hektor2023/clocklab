@@ -6,7 +6,8 @@ const char delimeter=',';
 const char checkSumMarker='*';
 
 //===================================================================================
-GPSTimeHandler2::GPSTimeHandler2( TimeHandler* ptr2timeHandler):TimeHandler( ptr2timeHandler), GPSTimestamp( 0L), milliSecond( 0) {}
+GPSTimeHandler2::GPSTimeHandler2( TimeHandler* ptr2timeHandler):
+    TimeHandler( ptr2timeHandler), GPSTimestamp( 0L), milliSecond( 0) {}
 
 //===================================================================================
 Timestamp& GPSTimeHandler2::getTimestamp( void)
@@ -26,17 +27,18 @@ const char* GPSTimeHandler2::getClassName( void)
 }
 
 //=============================================================================================================
-void GPSTimeHandler2::fillDelimeterMap( char *text, signed char* delMap, const unsigned int delMapSize, const char delimeter)
+void GPSTimeHandler2::fillDelimeterMap( char *buffer)
 {
     // clear map
-    memset( delMap, endOfValidPosition, delMapSize);
+    const size_t delimeterSize=  sizeof( delimeterMap);
+    memset( delimeterMap, endOfValidPosition, delimeterSize);
 
     int j=0;
-    for( int i=0; i< (int)strlen(text)&& j<(int)delMapSize; i++)
+    for( int i=0; i< (int)strlen(buffer)&& j<(int)delimeterSize; i++)
     {
-        if( text[ i]== delimeter)
+        if( buffer[ i]== delimeter)
         {
-            delMap[ j++]= i;
+            delimeterMap[ j++]= i;
         }
 
     }
@@ -44,13 +46,14 @@ void GPSTimeHandler2::fillDelimeterMap( char *text, signed char* delMap, const u
 }
 
 //=============================================================================================================
-unsigned char GPSTimeHandler2::countDelimeter( const signed char* delMap, const unsigned int delMapSize, const char delimeter)
+unsigned char GPSTimeHandler2::countDelimeter( void)
 {
+    const size_t delimeterSize=  sizeof( delimeterMap);
     unsigned char counter=0;
 
-    for( int i=0; i< (int)delMapSize; i++)
+    for( int i=0; i< (int)delimeterSize; i++)
     {
-        if( delMap[ i]== endOfValidPosition)
+        if(  delimeterMap[ i]== endOfValidPosition)
         {
             break;
         }
@@ -62,7 +65,7 @@ unsigned char GPSTimeHandler2::countDelimeter( const signed char* delMap, const 
 }
 
 //=============================================================================================================
-bool GPSTimeHandler2::collectRecord( char c, char* buffer, uint8_t bufferSize)
+bool GPSTimeHandler2::collectRecord( char c)
 {
   bool next= true;
   static uint8_t idx= 0;
@@ -82,7 +85,7 @@ bool GPSTimeHandler2::collectRecord( char c, char* buffer, uint8_t bufferSize)
             break;
 
         default:
-            if( idx< bufferSize)  buffer[ idx++]= c;
+            if( idx< sizeof( buffer))  buffer[ idx++]= c;
             break;
       }
 
@@ -90,7 +93,7 @@ bool GPSTimeHandler2::collectRecord( char c, char* buffer, uint8_t bufferSize)
 }
 
 //=============================================================================================================
-void GPSTimeHandler2::getField( const unsigned char fieldNo, char* field, const char* text, const char delimeter, const signed char* delimeterMap, const unsigned int delimeterMapSize)
+void GPSTimeHandler2::getField( const unsigned char fieldNo, char* field, const char* buffer)
 {
     switch( fieldNo)
     {
@@ -98,7 +101,7 @@ void GPSTimeHandler2::getField( const unsigned char fieldNo, char* field, const 
             if( delimeterMap[ fieldNo] !=0)
             {
                 size_t len= delimeterMap[ fieldNo] -1;
-                strncpy( field, text+0, len);
+                strncpy( field, buffer+0, len);
                 field[ len]='\0';
             }
             else
@@ -108,7 +111,7 @@ void GPSTimeHandler2::getField( const unsigned char fieldNo, char* field, const 
             break;
 
         default:
-            unsigned char delimeterQty= countDelimeter(delimeterMap, delimeterMapSize, delimeter);
+            unsigned char delimeterQty= countDelimeter();
 //            printf("\n%d - %d\n", delimeterMap[ fieldNo-1],delimeterMap[ fieldNo]);
 
             if( fieldNo>= delimeterQty) // last field or greater
@@ -116,8 +119,8 @@ void GPSTimeHandler2::getField( const unsigned char fieldNo, char* field, const 
 
                 if(( fieldNo== delimeterQty) &&( (delimeterMap[ fieldNo-1] +1) != delimeterMap[ fieldNo]))
                 {
-                    size_t len= strlen(text) -(delimeterMap[ fieldNo-1]+1);
-                    strncpy( field, text+ delimeterMap[ fieldNo-1]+1, len);
+                    size_t len= strlen(buffer) -(delimeterMap[ fieldNo-1]+1);
+                    strncpy( field, buffer+ delimeterMap[ fieldNo-1]+1, len);
                     field[ len]='\0';
                 }
                 else
@@ -130,7 +133,7 @@ void GPSTimeHandler2::getField( const unsigned char fieldNo, char* field, const 
                 if((delimeterMap[ fieldNo-1] +1) != delimeterMap[ fieldNo])
                 {
                     size_t len= delimeterMap[ fieldNo] -(delimeterMap[ fieldNo-1]+1);
-                    strncpy( field, text+ delimeterMap[ fieldNo-1]+1, len);
+                    strncpy( field, buffer+ delimeterMap[ fieldNo-1]+1, len);
                     field[ len]='\0';
                 }
                 else
@@ -144,36 +147,36 @@ void GPSTimeHandler2::getField( const unsigned char fieldNo, char* field, const 
 }
 
 //=============================================================================================================
-unsigned char  GPSTimeHandler2::calculateChecksum( const char* txt)
+unsigned char  GPSTimeHandler2::calculateChecksum( void)
 {
     
     unsigned char chkSum= 0;
-    for( int i=0; i< (int)strlen( txt) && txt[ i]!= checkSumMarker; i++)
+    for( int i=0; i< (int)strlen( buffer) && buffer[ i]!= checkSumMarker; i++)
     {
-        chkSum^= txt[ i];
+        chkSum^= buffer[ i];
     }
 
    return( chkSum);
 }
 
 //=============================================================================================================
-bool GPSTimeHandler2::isValidRecord( const char* txt)
+bool GPSTimeHandler2::isValidRecord( void)
 {
-    const char validRecordchar= 'N';
+    constexpr char validRecordchar= 'N';
 
-    char*Ptr2chkSumMarker= strchr( txt, checkSumMarker);
+    char*Ptr2chkSumMarker= strchr( buffer, checkSumMarker);
     assert( (Ptr2chkSumMarker!= NULL) &&"Missing checksum marker");
 
     return( *(Ptr2chkSumMarker-1)!= validRecordchar);
 }
 
 //=============================================================================================================
-bool GPSTimeHandler2::isValidCheckSum( const char* txt)
+bool GPSTimeHandler2::isValidCheckSum( void)
 {
-    char*Ptr2chkSumMarker= strchr( txt, checkSumMarker);
+    char*Ptr2chkSumMarker= strchr( buffer, checkSumMarker);
     assert( (Ptr2chkSumMarker!= NULL) &&"Missing checksum marker");
 
-    if(  !isValidRecord( txt))
+    if(  !isValidRecord())
     {
       return( false);
     }
@@ -181,7 +184,7 @@ bool GPSTimeHandler2::isValidCheckSum( const char* txt)
     char chkSumToTestTxt[ 3];
     strcpy( chkSumToTestTxt, Ptr2chkSumMarker+1);
 
-    int chkSum= calculateChecksum( txt);
+    int chkSum= calculateChecksum();
     char chkSumTxt[ 3];
 
     itoa( chkSum,chkSumTxt,16);
@@ -193,43 +196,39 @@ bool GPSTimeHandler2::isValidCheckSum( const char* txt)
 }
 
 //===================================================================================
-bool GPSTimeHandler2::updateTime( char* buffer)
+bool GPSTimeHandler2::updateTime( void)
 {
     bool updated= false;
 
-    if( strstr( buffer, "GPRMC") && isValidCheckSum( buffer))
+    if( strstr( buffer, "GPRMC") && isValidCheckSum())
     {
 //        Serial.printf("| GPS... |");
 //        Serial.printf( "GPS: %s\n", buffer);
-
-        signed char  delimeterMap[20]; // map of delimeter positions
-        fillDelimeterMap( buffer, delimeterMap, sizeof( delimeterMap), delimeter);
+        fillDelimeterMap( buffer);
 
         char field[20]; 
         unsigned char fieldNo;
 
         fieldNo= 1;
-        getField( fieldNo, field, buffer, delimeter, delimeterMap, sizeof( delimeterMap));
+        getField( fieldNo, field, buffer);
         float timeAsFloatNumber= atoi( field);
 //        Serial.printf( "Time: '%s' %6.2f ", field, timeAsFloatNumber);
 
         fieldNo= 3;
-        getField( fieldNo, field, buffer, delimeter, delimeterMap, sizeof( delimeterMap));
+        getField( fieldNo, field, buffer);
 //        latitude= (double)atof( field)/(double)100.0f;
 //        Serial.printf( "| Loc: '%s' %f", field, latitude);
 
         fieldNo= 5;
-        getField( fieldNo, field, buffer, delimeter, delimeterMap, sizeof( delimeterMap));
+        getField( fieldNo, field, buffer);
 //        longitude= (double)atof( field)/(double)100.0f;
 //        Serial.printf( "/'%s' %f", field, longitude);
 
         fieldNo= 9;
-        getField( fieldNo, field, buffer, delimeter, delimeterMap, sizeof( delimeterMap));
+        getField( fieldNo, field, buffer);
         unsigned int dateAsNumber= atoi( field);
 //        Serial.printf( "| Date: '%s' %d\n", field, dateAsNumber);
 
-        buffer[ 0]='\0';
-      
         unsigned int timeAsNumber= (unsigned int)timeAsFloatNumber;
 
         this->milliSecond= (uint8_t) (timeAsFloatNumber- (float)timeAsNumber)* 100.0f;

@@ -73,16 +73,18 @@ double  longitude{ 20.6925219};  //
 MyTime      sunriseTime, sunsetTime;
 Timestamp   localTimestamp;
 
-//OLEDDisplayClockViewHandler OLEDViewHandler( NULL, sda_pin2, scl_pin2);
 
-LEDClockViewHandler         LEDViewHandler( NULL, STB_pin, CLK_pin, DIO_pin);
+//OLEDDisplayClockViewHandler OLEDViewHandler( nullptr, sda_pin2, scl_pin2);
+
+LEDClockViewHandler         LEDViewHandler( nullptr, STB_pin, CLK_pin, DIO_pin);
 ConsoleViewHandler          consoleViewHandler( &LEDViewHandler);
 
-SplitterTimeHandler         splitterHandler(NULL, localTimestamp);  
+SplitterTimeHandler         splitterHandler(nullptr, localTimestamp);  
 DSTSunriseSunsetTimeHandler timeZoneDSTHandler( &splitterHandler, GMT_Plus_2h, longitude, latitude, sunriseTime, sunsetTime);
 RTCSystemTimeHandler        systemTimeHandler(  &timeZoneDSTHandler, sda_pin, scl_pin, irqIn_pin);
  
-GPSTimeHandler2             GPSHandler( NULL);
+
+GPSTimeHandler2             GPSHandler( nullptr);
 
 Controller                  controller( &systemTimeHandler);
 
@@ -278,11 +280,8 @@ void gps_task(void *pvParameter)
   Serial2.flush();
 
   vTaskDelay( 800 / portTICK_RATE_MS);
-
   printTick();  Serial.print( "\nGPS_task:  start\n");  
 
-  char buffer[100]; 
- 
   for(;;)
   {
 //    Serial.printf("| GPS...|");
@@ -298,11 +297,11 @@ void gps_task(void *pvParameter)
       }
 
       c= Serial2.read();
-      next= GPSHandler.collectRecord( c, buffer, (uint8_t)sizeof( buffer));
+      next= GPSHandler.collectRecord( c);
     };
 
 //    Serial.printf( "GPS: %s\n", buffer);
-    if( GPSHandler.updateTime( buffer))
+    if( GPSHandler.updateTime())
     {
 //        Serial.printf( "GPS: encoded\n");
       gps_msg.epoch=  GPSHandler.getTimestamp().getEpochTime(); 

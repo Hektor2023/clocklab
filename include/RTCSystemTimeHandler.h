@@ -52,7 +52,7 @@ class RTCSystemTimeHandler:public TimeHandler
       virtual void        setTimestamp( const Timestamp& newTimestamp);
 
       void forceUpdateTime( void);
-      virtual void updateTime( void);
+      bool updateTime( void);
 };
 
 //===================================================================================

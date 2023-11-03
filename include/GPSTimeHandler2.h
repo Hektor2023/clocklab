@@ -6,29 +6,34 @@
 #include "Timestamp.h"
 #include <TinyGPSPlus.h>
 
+constexpr unsigned char delimeterSizeMap=  20;
+constexpr unsigned char bufferSize=  100;
+
 //===================================================================================
 class GPSTimeHandler2:public TimeHandler
 {
    protected:
       TimeHandler*  ptr2timeHandler;
-        // The TinyGPSPlus 
+
       Timestamp     GPSTimestamp;
-      
       uint8_t       milliSecond;
+
+      signed char   delimeterMap[  delimeterSizeMap]; // map of delimeter positions
+      char          buffer[ bufferSize];  
+    
 
    private:
       void updateTime( Timestamp &timestamp);
-      void getField( const unsigned char fieldNo, char* field, const char* text, const char delimeter, const signed char* delimeterMap, const unsigned int delimeterMapSize);
-      bool isValidRecord( const char* txt);
-      bool isValidCheckSum( const char* txt);
-      unsigned char calculateChecksum( const char* txt);
-      unsigned char countDelimeter( const signed char* delMap, const unsigned int delMapSize, const char delimeter);
-      void fillDelimeterMap( char *text, signed char* delMap, const unsigned int delMapSize, const char delimeter);
+      void getField( const unsigned char fieldNo, char* field, const char* text);
+      bool isValidRecord( void);
+      bool isValidCheckSum( void);
+      unsigned char calculateChecksum( void);
+      unsigned char countDelimeter( void);
+      void fillDelimeterMap( char *buffer);
 
-      virtual void updateTime( void) {};
-
+      
    public:
-      GPSTimeHandler2( TimeHandler* ptr2timeHandler= nullptr);
+      GPSTimeHandler2( TimeHandler* ptr2timeHandler);
       virtual ~GPSTimeHandler2( void)= default;
 
       uint8_t getCentiSecond( void);   
@@ -37,8 +42,10 @@ class GPSTimeHandler2:public TimeHandler
       uint8_t getMilliSecond( void);
       virtual const char* getClassName( void);
 
-      bool collectRecord( char c, char* buffer, uint8_t bufferSize);
-      bool updateTime( char* buffer);
+      bool collectRecord( char c);
+      
+      virtual bool updateTime( void);
+
 };
 
 
