@@ -20,7 +20,9 @@ class GPSTimeHandler2:public TimeHandler
 
       signed char   delimeterMap[  delimeterSizeMap]; // map of delimeter positions
       char          buffer[ bufferSize];  
-    
+      double&       longitude;
+      double&       latitude;
+   
 
    private:
       void updateTime( Timestamp &timestamp);
@@ -33,7 +35,7 @@ class GPSTimeHandler2:public TimeHandler
 
       
    public:
-      GPSTimeHandler2( TimeHandler* ptr2timeHandler);
+      GPSTimeHandler2( TimeHandler* ptr2timeHandler, double& longitude, double& latitude);
       virtual ~GPSTimeHandler2( void)= default;
 
       uint8_t getCentiSecond( void);   

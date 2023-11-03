@@ -84,7 +84,7 @@ DSTSunriseSunsetTimeHandler timeZoneDSTHandler( &splitterHandler, GMT_Plus_2h, l
 RTCSystemTimeHandler        systemTimeHandler(  &timeZoneDSTHandler, sda_pin, scl_pin, irqIn_pin);
  
 
-GPSTimeHandler2             GPSHandler( nullptr);
+GPSTimeHandler2             GPSHandler( nullptr, longitude, latitude);
 
 Controller                  controller( &systemTimeHandler);
 

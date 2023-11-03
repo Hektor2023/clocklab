@@ -6,8 +6,8 @@ const char delimeter=',';
 const char checkSumMarker='*';
 
 //===================================================================================
-GPSTimeHandler2::GPSTimeHandler2( TimeHandler* ptr2timeHandler):
-    TimeHandler( ptr2timeHandler), GPSTimestamp( 0L), milliSecond( 0) {}
+GPSTimeHandler2::GPSTimeHandler2( TimeHandler* ptr2timeHandler, double& longitude, double& latitude):
+    TimeHandler( ptr2timeHandler), longitude( longitude), latitude( latitude), GPSTimestamp( 0L), milliSecond( 0) {}
 
 //===================================================================================
 Timestamp& GPSTimeHandler2::getTimestamp( void)
@@ -216,12 +216,12 @@ bool GPSTimeHandler2::updateTime( void)
 
         fieldNo= 3;
         getField( fieldNo, field, buffer);
-//        latitude= (double)atof( field)/(double)100.0f;
+        latitude= (double)atof( field)/(double)100.0f;
 //        Serial.printf( "| Loc: '%s' %f", field, latitude);
 
         fieldNo= 5;
         getField( fieldNo, field, buffer);
-//        longitude= (double)atof( field)/(double)100.0f;
+        longitude= (double)atof( field)/(double)100.0f;
 //        Serial.printf( "/'%s' %f", field, longitude);
 
         fieldNo= 9;
