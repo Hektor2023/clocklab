@@ -1,0 +1,69 @@
+\hypertarget{_timeline_8h_source}{}\doxysection{Timeline.\+h}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ timeline\_h}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ timeline\_h}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}Timer.h"{}}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{comment}{//===================================================================================}}
+\DoxyCodeLine{00008\ \textcolor{keyword}{template}<\ \textcolor{keyword}{class}\ T>}
+\DoxyCodeLine{00009\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_timer_task}{TimerTask}}}
+\DoxyCodeLine{00010\ \{}
+\DoxyCodeLine{00011\ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00012\ \ \ \ \ T\ *ptr;}
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ \ \ interval;}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \ \ \ \ }
+\DoxyCodeLine{00016\ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00017\ \ \ \ \ \mbox{\hyperlink{class_timer_task}{TimerTask}}(\ T*\ ptr,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ interval):ptr(\ ptr),\ interval(\ interval)\ \{\};\ \ \ \ }
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_timer_task}{\string~TimerTask}}(\ \textcolor{keywordtype}{void})\ \{\};}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \ \ \ \ T*\ \ \ \ \ \ \ get\_ptr(\ \textcolor{keywordtype}{void})\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}(\ ptr);\ \};}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ \ get\_interval(\ \textcolor{keywordtype}{void})\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}(\ interval);\ \};}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \ \ execute(\ \textcolor{keywordtype}{void})\textcolor{keyword}{\ const\ }\{\};}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00026\ \ \ \ \ \mbox{\hyperlink{class_timer_task}{TimerTask}}(\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_timer_task}{TimerTask<T>}}\&)=\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_timer_task}{TimerTask}}\&\ operator=(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_timer_task}{TimerTask}}\&)\ =\ \textcolor{keyword}{delete};\ \ }
+\DoxyCodeLine{00028\ \};}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \textcolor{comment}{//===================================================================================}}
+\DoxyCodeLine{00032\ \textcolor{keyword}{template}<\ \textcolor{keyword}{class}\ T>}
+\DoxyCodeLine{00033\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_timeline}{Timeline}}}
+\DoxyCodeLine{00034\ \ \ \{}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \mbox{\hyperlink{class_timer}{Timer}}\ \ timer;}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \mbox{\hyperlink{class_timeline}{Timeline}}(\ \textcolor{keywordtype}{void})\ \{\};}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \mbox{\hyperlink{class_timeline}{Timeline}}(\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_timeline}{Timeline}}\&\ t):timer(\ t.timer)\ \{\};}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \mbox{\hyperlink{class_timeline}{\string~Timeline}}(\ \textcolor{keywordtype}{void})\ \{\};}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_timeline}{Timeline}}\&\ operator=(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_timeline}{Timeline}}\&\ t)}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ timer=\ t.timer;}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}(*\textcolor{keyword}{this});}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ }
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ execute(\ \mbox{\hyperlink{class_timer_task}{TimerTask<T>}}*\ tasks[],\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ tasks\_size)}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\ \textcolor{keyword}{auto}\ i=0;\ i<\ tasks\_size;\ i++)}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ timer.setInterval(\ tasks[\ i].get\_interval());}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \ \ timer.run(\ tasks[i].get\_ptr);\ \ \ \ \ }
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ }
+\DoxyCodeLine{00060\ \ \ \};}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \textcolor{comment}{//===================================================================================}}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

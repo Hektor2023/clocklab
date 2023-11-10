@@ -1,0 +1,81 @@
+\hypertarget{class_time_sunrise_sunset_handler}{}\doxysection{Time\+Sunrise\+Sunset\+Handler Class Reference}
+\label{class_time_sunrise_sunset_handler}\index{TimeSunriseSunsetHandler@{TimeSunriseSunsetHandler}}
+Inheritance diagram for Time\+Sunrise\+Sunset\+Handler\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_time_sunrise_sunset_handler}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_time_sunrise_sunset_handler_a51b34e5855673121c2ba780e9a4ba6f9}\label{class_time_sunrise_sunset_handler_a51b34e5855673121c2ba780e9a4ba6f9}} 
+{\bfseries Time\+Sunrise\+Sunset\+Handler} (\mbox{\hyperlink{class_time_handler}{Time\+Handler}} $\ast$ptr, double longitude, double latitude, \mbox{\hyperlink{class_my_time}{My\+Time}} \&sunrise, \mbox{\hyperlink{class_my_time}{My\+Time}} \&sunset)
+\item 
+virtual void \mbox{\hyperlink{class_time_sunrise_sunset_handler_a5f028324ed84f41ed209935564896212}{update\+Time}} (\mbox{\hyperlink{class_timestamp}{Timestamp}} \&timestamp)
+\item 
+virtual const char $\ast$ \mbox{\hyperlink{class_time_sunrise_sunset_handler_a75a2bf785721f154437a17ad8769b0ad}{get\+Class\+Name}} (void)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_time_handler}{Time\+Handler}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_time_handler_ab3034b482c6a96afe562a0c6296c4351}\label{class_time_handler_ab3034b482c6a96afe562a0c6296c4351}} 
+{\bfseries Time\+Handler} (\mbox{\hyperlink{class_time_handler}{Time\+Handler}} $\ast$ptr=nullptr)
+\item 
+\mbox{\Hypertarget{class_time_handler_a3b1794fbe2b1ca8beb25a5343884e9ac}\label{class_time_handler_a3b1794fbe2b1ca8beb25a5343884e9ac}} 
+virtual void {\bfseries bypass} (bool bypass\+Module)
+\item 
+\mbox{\Hypertarget{class_time_handler_ac0d8f7c94fc9488149a822c11427acc1}\label{class_time_handler_ac0d8f7c94fc9488149a822c11427acc1}} 
+virtual void {\bfseries set\+Valid\+Time} (bool valid\+Flagg)
+\item 
+\mbox{\Hypertarget{class_time_handler_a6aa72b07eac8b688ac817743c848bf08}\label{class_time_handler_a6aa72b07eac8b688ac817743c848bf08}} 
+virtual bool {\bfseries is\+Valid\+Time} (void)
+\item 
+\mbox{\Hypertarget{class_time_handler_a8ece7a7f39fb2ba288aaab827bba4c19}\label{class_time_handler_a8ece7a7f39fb2ba288aaab827bba4c19}} 
+virtual void {\bfseries update\+Time} (\mbox{\hyperlink{class_timestamp}{Timestamp}} \&timestamp)
+\item 
+\mbox{\Hypertarget{class_time_handler_af8593cacaca5048f9ac22ddd57d58c1a}\label{class_time_handler_af8593cacaca5048f9ac22ddd57d58c1a}} 
+virtual const char $\ast$ {\bfseries get\+Class\+Name} (void)=0
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+\doxysubsubsection*{Protected Attributes inherited from \mbox{\hyperlink{class_time_handler}{Time\+Handler}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_time_handler_a85908f188e18928da11cb676e2dd0823}\label{class_time_handler_a85908f188e18928da11cb676e2dd0823}} 
+\mbox{\hyperlink{class_time_handler}{Time\+Handler}} $\ast$ {\bfseries ptr}
+\item 
+\mbox{\Hypertarget{class_time_handler_a6d3b169b793070508966dbb870393431}\label{class_time_handler_a6d3b169b793070508966dbb870393431}} 
+bool {\bfseries bypass\+Module}
+\item 
+\mbox{\Hypertarget{class_time_handler_a91679ba9b2c29528ff78584ffce0195c}\label{class_time_handler_a91679ba9b2c29528ff78584ffce0195c}} 
+bool {\bfseries valid\+Time}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_time_sunrise_sunset_handler_a75a2bf785721f154437a17ad8769b0ad}\label{class_time_sunrise_sunset_handler_a75a2bf785721f154437a17ad8769b0ad}} 
+\index{TimeSunriseSunsetHandler@{TimeSunriseSunsetHandler}!getClassName@{getClassName}}
+\index{getClassName@{getClassName}!TimeSunriseSunsetHandler@{TimeSunriseSunsetHandler}}
+\doxysubsubsection{\texorpdfstring{getClassName()}{getClassName()}}
+{\footnotesize\ttfamily const char $\ast$ Time\+Sunrise\+Sunset\+Handler\+::get\+Class\+Name (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_time_handler}{Time\+Handler}}.
+
+\mbox{\Hypertarget{class_time_sunrise_sunset_handler_a5f028324ed84f41ed209935564896212}\label{class_time_sunrise_sunset_handler_a5f028324ed84f41ed209935564896212}} 
+\index{TimeSunriseSunsetHandler@{TimeSunriseSunsetHandler}!updateTime@{updateTime}}
+\index{updateTime@{updateTime}!TimeSunriseSunsetHandler@{TimeSunriseSunsetHandler}}
+\doxysubsubsection{\texorpdfstring{updateTime()}{updateTime()}}
+{\footnotesize\ttfamily void Time\+Sunrise\+Sunset\+Handler\+::update\+Time (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_timestamp}{Timestamp}} \&}]{timestamp }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{class_time_handler}{Time\+Handler}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Time\+Sunrise\+Sunset\+Handler.\+h\item 
+Time\+Sunrise\+Sunset\+Handler.\+cpp\end{DoxyCompactItemize}

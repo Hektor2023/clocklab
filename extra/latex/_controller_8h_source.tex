@@ -1,0 +1,33 @@
+\hypertarget{_controller_8h_source}{}\doxysection{Controller.\+h}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ controller\_h}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ controller\_h}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <cstddef>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}MyDate.h"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}Timestamp.h"{}}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}TimeHandler.h"{}}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}SystemTimeHandler.h"{}}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{comment}{//===================================================================================}}
+\DoxyCodeLine{00014\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_controller}{Controller}}}
+\DoxyCodeLine{00015\ \{}
+\DoxyCodeLine{00016\ \ \ }
+\DoxyCodeLine{00017\ \ \ \ \textcolor{keyword}{private}:\ \ }
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \mbox{\hyperlink{class_system_time_handler}{SystemTimeHandler}}\&\ \ systemClock;}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \mbox{\hyperlink{class_controller}{Controller}}(\ \mbox{\hyperlink{class_system_time_handler}{SystemTimeHandler}}*\ systemTimeHandler);}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \mbox{\hyperlink{class_controller}{\string~Controller}}(\ \textcolor{keywordtype}{void})=\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ }
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ execute(\ \textcolor{keyword}{const}\ std::string\ command);}
+\DoxyCodeLine{00025\ \};}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \textcolor{comment}{//===================================================================================}}
+\DoxyCodeLine{00028\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

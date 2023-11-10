@@ -1,0 +1,147 @@
+\hypertarget{class_timer_task}{}\doxysection{Timer\+Task\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}}
+\label{class_timer_task}\index{TimerTask$<$ T $>$@{TimerTask$<$ T $>$}}
+
+
+{\ttfamily \#include \char`\"{}Timeline.\+h\char`\"{}}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_timer_task_a767a9f62447901cc098af5c18f641043}{Timer\+Task}} (T $\ast$\mbox{\hyperlink{class_timer_task_a4e0fab5bba27ff507e909503f0770e58}{ptr}}, const unsigned long \mbox{\hyperlink{class_timer_task_a2e243d502b1d882c3b827c6b070cc02c}{interval}})
+\item 
+virtual \mbox{\hyperlink{class_timer_task_af509bd158a376fdd553ed0ff9e9b2226}{$\sim$\+Timer\+Task}} (void)
+\item 
+virtual void \mbox{\hyperlink{class_timer_task_aa79b44f89f1fc0bf0367239897a62133}{execute}} (void) const
+\item 
+const unsigned long \mbox{\hyperlink{class_timer_task_adead943566866b1c999b7d163c52869d}{get\+\_\+interval}} (void) const
+\item 
+T $\ast$ \mbox{\hyperlink{class_timer_task_a4a29415e6405cf065aa23ce45351458a}{get\+\_\+ptr}} (void) const
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_timer_task_ab10e62d7f1edd81cee4fa2b70939f08a}{Timer\+Task}} (const \mbox{\hyperlink{class_timer_task}{Timer\+Task}}$<$ T $>$ \&)=delete
+\item 
+const \mbox{\hyperlink{class_timer_task}{Timer\+Task}} \& \mbox{\hyperlink{class_timer_task_afa644e186190c48ef361efc22f02d377}{operator=}} (const \mbox{\hyperlink{class_timer_task}{Timer\+Task}} \&)=delete
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const unsigned long \mbox{\hyperlink{class_timer_task_a2e243d502b1d882c3b827c6b070cc02c}{interval}}
+\item 
+T $\ast$ \mbox{\hyperlink{class_timer_task_a4e0fab5bba27ff507e909503f0770e58}{ptr}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class T$>$\newline
+class Timer\+Task$<$ T $>$}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_timer_task_a767a9f62447901cc098af5c18f641043}\label{class_timer_task_a767a9f62447901cc098af5c18f641043}} 
+\index{TimerTask$<$ T $>$@{TimerTask$<$ T $>$}!TimerTask@{TimerTask}}
+\index{TimerTask@{TimerTask}!TimerTask$<$ T $>$@{TimerTask$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{TimerTask()}{TimerTask()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_timer_task}{Timer\+Task}} (\begin{DoxyParamCaption}\item[{T $\ast$}]{ptr,  }\item[{const unsigned long}]{interval }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00017\ :\mbox{\hyperlink{class_timer_task_a4e0fab5bba27ff507e909503f0770e58}{ptr}}(\ \mbox{\hyperlink{class_timer_task_a4e0fab5bba27ff507e909503f0770e58}{ptr}}),\ \mbox{\hyperlink{class_timer_task_a2e243d502b1d882c3b827c6b070cc02c}{interval}}(\ \mbox{\hyperlink{class_timer_task_a2e243d502b1d882c3b827c6b070cc02c}{interval}})\ \{\};\ \ \ \ }
+
+\end{DoxyCode}
+\mbox{\Hypertarget{class_timer_task_af509bd158a376fdd553ed0ff9e9b2226}\label{class_timer_task_af509bd158a376fdd553ed0ff9e9b2226}} 
+\index{TimerTask$<$ T $>$@{TimerTask$<$ T $>$}!````~TimerTask@{$\sim$TimerTask}}
+\index{````~TimerTask@{$\sim$TimerTask}!TimerTask$<$ T $>$@{TimerTask$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{$\sim$TimerTask()}{~TimerTask()}}
+{\footnotesize\ttfamily virtual $\sim$\mbox{\hyperlink{class_timer_task}{Timer\+Task}} (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00018\ \{\};}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{class_timer_task_ab10e62d7f1edd81cee4fa2b70939f08a}\label{class_timer_task_ab10e62d7f1edd81cee4fa2b70939f08a}} 
+\index{TimerTask$<$ T $>$@{TimerTask$<$ T $>$}!TimerTask@{TimerTask}}
+\index{TimerTask@{TimerTask}!TimerTask$<$ T $>$@{TimerTask$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{TimerTask()}{TimerTask()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_timer_task}{Timer\+Task}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_timer_task}{Timer\+Task}}$<$ T $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [delete]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_timer_task_aa79b44f89f1fc0bf0367239897a62133}\label{class_timer_task_aa79b44f89f1fc0bf0367239897a62133}} 
+\index{TimerTask$<$ T $>$@{TimerTask$<$ T $>$}!execute@{execute}}
+\index{execute@{execute}!TimerTask$<$ T $>$@{TimerTask$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{execute()}{execute()}}
+{\footnotesize\ttfamily virtual void execute (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00023\ \{\};}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{class_timer_task_adead943566866b1c999b7d163c52869d}\label{class_timer_task_adead943566866b1c999b7d163c52869d}} 
+\index{TimerTask$<$ T $>$@{TimerTask$<$ T $>$}!get\_interval@{get\_interval}}
+\index{get\_interval@{get\_interval}!TimerTask$<$ T $>$@{TimerTask$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{get\_interval()}{get\_interval()}}
+{\footnotesize\ttfamily const unsigned long get\+\_\+interval (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00021\ \{\ \textcolor{keywordflow}{return}(\ \mbox{\hyperlink{class_timer_task_a2e243d502b1d882c3b827c6b070cc02c}{interval}});\ \};}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00013}{Timer\+Task$<$ T $>$\+::interval}}.
+
+\mbox{\Hypertarget{class_timer_task_a4a29415e6405cf065aa23ce45351458a}\label{class_timer_task_a4a29415e6405cf065aa23ce45351458a}} 
+\index{TimerTask$<$ T $>$@{TimerTask$<$ T $>$}!get\_ptr@{get\_ptr}}
+\index{get\_ptr@{get\_ptr}!TimerTask$<$ T $>$@{TimerTask$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{get\_ptr()}{get\_ptr()}}
+{\footnotesize\ttfamily T $\ast$ get\+\_\+ptr (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00020\ \{\ \textcolor{keywordflow}{return}(\ \mbox{\hyperlink{class_timer_task_a4e0fab5bba27ff507e909503f0770e58}{ptr}});\ \};}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00012}{Timer\+Task$<$ T $>$\+::ptr}}.
+
+\mbox{\Hypertarget{class_timer_task_afa644e186190c48ef361efc22f02d377}\label{class_timer_task_afa644e186190c48ef361efc22f02d377}} 
+\index{TimerTask$<$ T $>$@{TimerTask$<$ T $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!TimerTask$<$ T $>$@{TimerTask$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{class_timer_task}{Timer\+Task}} \& operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_timer_task}{Timer\+Task}}$<$ T $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [delete]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_timer_task_a2e243d502b1d882c3b827c6b070cc02c}\label{class_timer_task_a2e243d502b1d882c3b827c6b070cc02c}} 
+\index{TimerTask$<$ T $>$@{TimerTask$<$ T $>$}!interval@{interval}}
+\index{interval@{interval}!TimerTask$<$ T $>$@{TimerTask$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{interval}{interval}}
+{\footnotesize\ttfamily const unsigned long interval\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \mbox{\hyperlink{l00021}{Timer\+Task$<$ T $>$\+::get\+\_\+interval()}}.
+
+\mbox{\Hypertarget{class_timer_task_a4e0fab5bba27ff507e909503f0770e58}\label{class_timer_task_a4e0fab5bba27ff507e909503f0770e58}} 
+\index{TimerTask$<$ T $>$@{TimerTask$<$ T $>$}!ptr@{ptr}}
+\index{ptr@{ptr}!TimerTask$<$ T $>$@{TimerTask$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{ptr}{ptr}}
+{\footnotesize\ttfamily T$\ast$ ptr\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \mbox{\hyperlink{l00020}{Timer\+Task$<$ T $>$\+::get\+\_\+ptr()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_timeline_8h}{Timeline.\+h}}\end{DoxyCompactItemize}

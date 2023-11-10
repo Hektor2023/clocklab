@@ -1,0 +1,654 @@
+\hypertarget{class_my_time}{}\doxysection{My\+Time}
+\label{class_my_time}\index{MyTime@{MyTime}}
+
+
+{\ttfamily \#include \char`\"{}My\+Time.\+h\char`\"{}}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_my_time_ad9e39def1e77419b858adc2a27142569}{My\+Time}} (const \mbox{\hyperlink{class_my_time}{My\+Time}} \&time)
+\item 
+\mbox{\hyperlink{class_my_time_aca4b67be0eda82fbce50640023ea7349}{My\+Time}} (\mbox{\hyperlink{_my_time_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}} \mbox{\hyperlink{class_my_time_ae5af4ff48939d13d480f87e56a9385d6}{hour}}, \mbox{\hyperlink{_my_time_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}} \mbox{\hyperlink{class_my_time_a8ff981ec55c945940f4a0da7d8709b3c}{minute}}, \mbox{\hyperlink{_my_time_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}} \mbox{\hyperlink{class_my_time_a8459fc4e94de7eefc74991e41779c8fc}{second}})
+\item 
+\mbox{\hyperlink{class_my_time_a50d9c9d92085b08b9939bfdfaa21f357}{My\+Time}} (void)
+\item 
+\mbox{\hyperlink{class_my_time_ae19390f3482032353647a7a2fd4afcc5}{$\sim$\+My\+Time}} (void)
+\item 
+\mbox{\hyperlink{_my_time_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}} \mbox{\hyperlink{class_my_time_a315feb0809a03c14a1104f5eaccd6233}{get\+Hour}} (void) const
+\item 
+uint16\+\_\+t \mbox{\hyperlink{class_my_time_a968d2c5006b4d4bb65feba7e0446ad22}{get\+In\+Seconds}} (void)
+\item 
+\mbox{\hyperlink{_my_time_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}} \mbox{\hyperlink{class_my_time_aaef6945b773dbd31fa01cba6575b3a46}{get\+Minute}} (void) const
+\item 
+\mbox{\hyperlink{_my_time_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}} \mbox{\hyperlink{class_my_time_a7749ba89d10dd072f2b55a0f7eb9acbe}{get\+Second}} (void) const
+\item 
+void \mbox{\hyperlink{class_my_time_add5696210a7a3b0aae7e9554563026d5}{hour\+Dec}} (void)
+\item 
+void \mbox{\hyperlink{class_my_time_a6847ed35ba1d6baa8002d6bc0c8eff42}{hour\+Inc}} (void)
+\item 
+void \mbox{\hyperlink{class_my_time_a92615a2fc05961977ef2d9d5dbe4e60d}{minute\+Dec}} (void)
+\item 
+void \mbox{\hyperlink{class_my_time_a99f3ab8ffc40dfb1bff18d8c18c3a8e6}{minute\+Inc}} (void)
+\item 
+\mbox{\hyperlink{class_my_time}{My\+Time}} \mbox{\hyperlink{class_my_time_a601e6d77a73238726d06ae3bebf21573}{operator++}} (int)
+\item 
+\mbox{\hyperlink{class_my_time}{My\+Time}} \& \mbox{\hyperlink{class_my_time_a30d942613ac5e5ecb8bc936517d8638e}{operator++}} (void)
+\item 
+\mbox{\hyperlink{class_my_time}{My\+Time}} \& \mbox{\hyperlink{class_my_time_a81ff5205d6940b30d2281d477b94878e}{operator=}} (const \mbox{\hyperlink{class_my_time}{My\+Time}} \&time)
+\item 
+void \mbox{\hyperlink{class_my_time_a7588187b265589493e0252066277f3d6}{second\+Dec}} (void)
+\item 
+void \mbox{\hyperlink{class_my_time_a171364951f01f62935b71b01b5a1f4df}{second\+Inc}} (void)
+\item 
+void \mbox{\hyperlink{class_my_time_a6c3c3bc42e5c0aca01c000ccd760e601}{set\+Hour}} (\mbox{\hyperlink{_my_time_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}} day)
+\item 
+void \mbox{\hyperlink{class_my_time_a1d7fa36d0112f9ef730d8e63f66d503f}{set\+In\+Seconds}} (uint16\+\_\+t time\+In\+Secs)
+\item 
+void \mbox{\hyperlink{class_my_time_a30c18003e7ad01a77f0250a3a4aadfea}{set\+Minute}} (\mbox{\hyperlink{_my_time_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}} \mbox{\hyperlink{class_my_time_a8ff981ec55c945940f4a0da7d8709b3c}{minute}})
+\item 
+void \mbox{\hyperlink{class_my_time_ae9a468fd389f0fe728892527c67f0771}{set\+Second}} (\mbox{\hyperlink{_my_time_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}} \mbox{\hyperlink{class_my_time_a8459fc4e94de7eefc74991e41779c8fc}{second}})
+\item 
+char $\ast$ \mbox{\hyperlink{class_my_time_a296755c77ffde8699bbb2b1e8a94a9a2}{to\+String}} (char $\ast$Stringbuffer)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static size\+\_\+t \mbox{\hyperlink{class_my_time_a89403698fcad339a13f4b1ed999318ed}{get\+String\+Buffer\+Size}} (void)
+\item 
+static const char $\ast$ \mbox{\hyperlink{class_my_time_abb76201adb97e3574d2ee21a8f2dcf54}{get\+String\+Format}} (void)
+\item 
+static bool \mbox{\hyperlink{class_my_time_aa4c1ec9d7b38c04d98d8eb00e4fc8ceb}{is\+Valid\+Hour}} (\mbox{\hyperlink{_my_time_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}} \mbox{\hyperlink{class_my_time_ae5af4ff48939d13d480f87e56a9385d6}{hour}})
+\item 
+static bool \mbox{\hyperlink{class_my_time_a4d5812de5989a6bc46df2e32c6f37a4f}{is\+Valid\+Minute}} (\mbox{\hyperlink{_my_time_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}} \mbox{\hyperlink{class_my_time_a8ff981ec55c945940f4a0da7d8709b3c}{minute}})
+\item 
+static bool \mbox{\hyperlink{class_my_time_a65ad398b0e541c663942b543b2978ef7}{is\+Valid\+Second}} (\mbox{\hyperlink{_my_time_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}} \mbox{\hyperlink{class_my_time_a8459fc4e94de7eefc74991e41779c8fc}{second}})
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_my_time_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}} \mbox{\hyperlink{class_my_time_ae5af4ff48939d13d480f87e56a9385d6}{hour}}
+\item 
+\mbox{\hyperlink{_my_time_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}} \mbox{\hyperlink{class_my_time_a8ff981ec55c945940f4a0da7d8709b3c}{minute}}
+\item 
+\mbox{\hyperlink{_my_time_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}} \mbox{\hyperlink{class_my_time_a8459fc4e94de7eefc74991e41779c8fc}{second}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_my_time_a50d9c9d92085b08b9939bfdfaa21f357}\label{class_my_time_a50d9c9d92085b08b9939bfdfaa21f357}} 
+\index{MyTime@{MyTime}!MyTime@{MyTime}}
+\index{MyTime@{MyTime}!MyTime@{MyTime}}
+\doxysubsubsection{\texorpdfstring{MyTime()}{MyTime()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_my_time}{My\+Time}} (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00005\ :\mbox{\hyperlink{class_my_time_ae5af4ff48939d13d480f87e56a9385d6}{hour}}(\ 0),\ \mbox{\hyperlink{class_my_time_a8ff981ec55c945940f4a0da7d8709b3c}{minute}}(\ 0),\ \mbox{\hyperlink{class_my_time_a8459fc4e94de7eefc74991e41779c8fc}{second}}(\ 0)\ \{\}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{class_my_time_aca4b67be0eda82fbce50640023ea7349}\label{class_my_time_aca4b67be0eda82fbce50640023ea7349}} 
+\index{MyTime@{MyTime}!MyTime@{MyTime}}
+\index{MyTime@{MyTime}!MyTime@{MyTime}}
+\doxysubsubsection{\texorpdfstring{MyTime()}{MyTime()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_my_time}{My\+Time}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_my_time_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}}}]{hour,  }\item[{\mbox{\hyperlink{_my_time_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}}}]{minute,  }\item[{\mbox{\hyperlink{_my_time_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}}}]{second }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00008\ :\mbox{\hyperlink{class_my_time_ae5af4ff48939d13d480f87e56a9385d6}{hour}}(\ \mbox{\hyperlink{class_my_time_ae5af4ff48939d13d480f87e56a9385d6}{hour}}),\ \mbox{\hyperlink{class_my_time_a8ff981ec55c945940f4a0da7d8709b3c}{minute}}(\ \mbox{\hyperlink{class_my_time_a8ff981ec55c945940f4a0da7d8709b3c}{minute}}),\ \mbox{\hyperlink{class_my_time_a8459fc4e94de7eefc74991e41779c8fc}{second}}(\ \mbox{\hyperlink{class_my_time_a8459fc4e94de7eefc74991e41779c8fc}{second}})\ \{\}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{class_my_time_ad9e39def1e77419b858adc2a27142569}\label{class_my_time_ad9e39def1e77419b858adc2a27142569}} 
+\index{MyTime@{MyTime}!MyTime@{MyTime}}
+\index{MyTime@{MyTime}!MyTime@{MyTime}}
+\doxysubsubsection{\texorpdfstring{MyTime()}{MyTime()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_my_time}{My\+Time}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_my_time}{My\+Time}} \&}]{time }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00011\ :\mbox{\hyperlink{class_my_time_ae5af4ff48939d13d480f87e56a9385d6}{hour}}(\ time.\mbox{\hyperlink{class_my_time_ae5af4ff48939d13d480f87e56a9385d6}{hour}}),\ \mbox{\hyperlink{class_my_time_a8ff981ec55c945940f4a0da7d8709b3c}{minute}}(\ time.\mbox{\hyperlink{class_my_time_a8ff981ec55c945940f4a0da7d8709b3c}{minute}}),\ \mbox{\hyperlink{class_my_time_a8459fc4e94de7eefc74991e41779c8fc}{second}}(\ time.\mbox{\hyperlink{class_my_time_a8459fc4e94de7eefc74991e41779c8fc}{second}})\ \{\}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{class_my_time_ae19390f3482032353647a7a2fd4afcc5}\label{class_my_time_ae19390f3482032353647a7a2fd4afcc5}} 
+\index{MyTime@{MyTime}!````~MyTime@{$\sim$MyTime}}
+\index{````~MyTime@{$\sim$MyTime}!MyTime@{MyTime}}
+\doxysubsubsection{\texorpdfstring{$\sim$MyTime()}{~MyTime()}}
+{\footnotesize\ttfamily $\sim$\mbox{\hyperlink{class_my_time}{My\+Time}} (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00014\ \{\}}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_my_time_a315feb0809a03c14a1104f5eaccd6233}\label{class_my_time_a315feb0809a03c14a1104f5eaccd6233}} 
+\index{MyTime@{MyTime}!getHour@{getHour}}
+\index{getHour@{getHour}!MyTime@{MyTime}}
+\doxysubsubsection{\texorpdfstring{getHour()}{getHour()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_my_time_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}} get\+Hour (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption}) const}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00018\ \{}
+\DoxyCodeLine{00019\ \ \ \textcolor{keywordflow}{return}(\ \mbox{\hyperlink{class_my_time_ae5af4ff48939d13d480f87e56a9385d6}{hour}});}
+\DoxyCodeLine{00020\ \}\ \ }
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00017}{hour}}.
+
+
+
+Referenced by \mbox{\hyperlink{l00151}{get\+In\+Seconds()}}, \mbox{\hyperlink{l00230}{Timestamp\+::set\+Time()}}, and \mbox{\hyperlink{l00171}{Analog\+Clock\+View\+Handler\+::update\+Time()}}.
+
+\mbox{\Hypertarget{class_my_time_a968d2c5006b4d4bb65feba7e0446ad22}\label{class_my_time_a968d2c5006b4d4bb65feba7e0446ad22}} 
+\index{MyTime@{MyTime}!getInSeconds@{getInSeconds}}
+\index{getInSeconds@{getInSeconds}!MyTime@{MyTime}}
+\doxysubsubsection{\texorpdfstring{getInSeconds()}{getInSeconds()}}
+{\footnotesize\ttfamily uint16\+\_\+t get\+In\+Seconds (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00152\ \{}
+\DoxyCodeLine{00153\ \ \ \textcolor{keywordflow}{return}(\ \mbox{\hyperlink{class_my_time_a315feb0809a03c14a1104f5eaccd6233}{getHour}}()*\ 3600\ +\ \mbox{\hyperlink{class_my_time_aaef6945b773dbd31fa01cba6575b3a46}{getMinute}}()*60\ +\mbox{\hyperlink{class_my_time_a7749ba89d10dd072f2b55a0f7eb9acbe}{getSecond}}());}
+\DoxyCodeLine{00154\ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00017}{get\+Hour()}}, \mbox{\hyperlink{l00029}{get\+Minute()}}, and \mbox{\hyperlink{l00041}{get\+Second()}}.
+
+\mbox{\Hypertarget{class_my_time_aaef6945b773dbd31fa01cba6575b3a46}\label{class_my_time_aaef6945b773dbd31fa01cba6575b3a46}} 
+\index{MyTime@{MyTime}!getMinute@{getMinute}}
+\index{getMinute@{getMinute}!MyTime@{MyTime}}
+\doxysubsubsection{\texorpdfstring{getMinute()}{getMinute()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_my_time_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}} get\+Minute (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption}) const}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00030\ \{}
+\DoxyCodeLine{00031\ \ \ \textcolor{keywordflow}{return}(\ \mbox{\hyperlink{class_my_time_a8ff981ec55c945940f4a0da7d8709b3c}{minute}});}
+\DoxyCodeLine{00032\ \}\ \ }
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00018}{minute}}.
+
+
+
+Referenced by \mbox{\hyperlink{l00151}{get\+In\+Seconds()}}, and \mbox{\hyperlink{l00230}{Timestamp\+::set\+Time()}}.
+
+\mbox{\Hypertarget{class_my_time_a7749ba89d10dd072f2b55a0f7eb9acbe}\label{class_my_time_a7749ba89d10dd072f2b55a0f7eb9acbe}} 
+\index{MyTime@{MyTime}!getSecond@{getSecond}}
+\index{getSecond@{getSecond}!MyTime@{MyTime}}
+\doxysubsubsection{\texorpdfstring{getSecond()}{getSecond()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_my_time_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}} get\+Second (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption}) const}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00042\ \{}
+\DoxyCodeLine{00043\ \ \ \textcolor{keywordflow}{return}(\ \mbox{\hyperlink{class_my_time_a8459fc4e94de7eefc74991e41779c8fc}{second}});}
+\DoxyCodeLine{00044\ \}\ \ }
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00019}{second}}.
+
+
+
+Referenced by \mbox{\hyperlink{l00151}{get\+In\+Seconds()}}, \mbox{\hyperlink{l00106}{Analog\+Clock\+View\+Handler\+::move\+Hands()}}, \mbox{\hyperlink{l00230}{Timestamp\+::set\+Time()}}, and \mbox{\hyperlink{l00171}{Analog\+Clock\+View\+Handler\+::update\+Time()}}.
+
+\mbox{\Hypertarget{class_my_time_a89403698fcad339a13f4b1ed999318ed}\label{class_my_time_a89403698fcad339a13f4b1ed999318ed}} 
+\index{MyTime@{MyTime}!getStringBufferSize@{getStringBufferSize}}
+\index{getStringBufferSize@{getStringBufferSize}!MyTime@{MyTime}}
+\doxysubsubsection{\texorpdfstring{getStringBufferSize()}{getStringBufferSize()}}
+{\footnotesize\ttfamily size\+\_\+t get\+String\+Buffer\+Size (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00174\ \{}
+\DoxyCodeLine{00175\ \ \ \textcolor{keywordflow}{return}(\ strlen(\ \mbox{\hyperlink{class_my_time_abb76201adb97e3574d2ee21a8f2dcf54}{MyTime::getStringFormat}}())+1);}
+\DoxyCodeLine{00176\ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00167}{get\+String\+Format()}}.
+
+
+
+Referenced by \mbox{\hyperlink{l00246}{Timestamp\+::to\+String()}}, \mbox{\hyperlink{l00031}{LEDClock\+View\+Handler\+::update\+Time()}}, \mbox{\hyperlink{l00075}{NTPWi\+Fi\+Time\+Handler\+::update\+Time()}}, and \mbox{\hyperlink{l00024}{Time\+Sunrise\+Sunset\+Handler\+::update\+Time()}}.
+
+\mbox{\Hypertarget{class_my_time_abb76201adb97e3574d2ee21a8f2dcf54}\label{class_my_time_abb76201adb97e3574d2ee21a8f2dcf54}} 
+\index{MyTime@{MyTime}!getStringFormat@{getStringFormat}}
+\index{getStringFormat@{getStringFormat}!MyTime@{MyTime}}
+\doxysubsubsection{\texorpdfstring{getStringFormat()}{getStringFormat()}}
+{\footnotesize\ttfamily const char $\ast$ get\+String\+Format (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00168\ \{}
+\DoxyCodeLine{00169\ \ \ \textcolor{keywordflow}{return}(\ \textcolor{stringliteral}{"{}\%02d:\%02d:\%02d"{}});\ \ }
+\DoxyCodeLine{00170\ \}}
+
+\end{DoxyCode}
+
+
+Referenced by \mbox{\hyperlink{l00173}{get\+String\+Buffer\+Size()}}, \mbox{\hyperlink{l00240}{Timestamp\+::get\+String\+Buffer\+Size()}}, and \mbox{\hyperlink{l00179}{to\+String()}}.
+
+\mbox{\Hypertarget{class_my_time_add5696210a7a3b0aae7e9554563026d5}\label{class_my_time_add5696210a7a3b0aae7e9554563026d5}} 
+\index{MyTime@{MyTime}!hourDec@{hourDec}}
+\index{hourDec@{hourDec}!MyTime@{MyTime}}
+\doxysubsubsection{\texorpdfstring{hourDec()}{hourDec()}}
+{\footnotesize\ttfamily void hour\+Dec (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00060\ \{}
+\DoxyCodeLine{00061\ \ \ \mbox{\hyperlink{class_my_time_ae5af4ff48939d13d480f87e56a9385d6}{hour}}\ =(\ \mbox{\hyperlink{class_my_time_ae5af4ff48939d13d480f87e56a9385d6}{hour}}>\ 0)?\ \mbox{\hyperlink{class_my_time_ae5af4ff48939d13d480f87e56a9385d6}{hour}}-\/1:23;\ }
+\DoxyCodeLine{00062\ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00017}{hour}}.
+
+
+
+Referenced by \mbox{\hyperlink{l00038}{System\+Time\+Handler\+::adjust()}}.
+
+\mbox{\Hypertarget{class_my_time_a6847ed35ba1d6baa8002d6bc0c8eff42}\label{class_my_time_a6847ed35ba1d6baa8002d6bc0c8eff42}} 
+\index{MyTime@{MyTime}!hourInc@{hourInc}}
+\index{hourInc@{hourInc}!MyTime@{MyTime}}
+\doxysubsubsection{\texorpdfstring{hourInc()}{hourInc()}}
+{\footnotesize\ttfamily void hour\+Inc (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00054\ \{}
+\DoxyCodeLine{00055\ \ \ \mbox{\hyperlink{class_my_time_ae5af4ff48939d13d480f87e56a9385d6}{hour}}\ =(\ \mbox{\hyperlink{class_my_time_ae5af4ff48939d13d480f87e56a9385d6}{hour}}<\ 24)?\ \mbox{\hyperlink{class_my_time_ae5af4ff48939d13d480f87e56a9385d6}{hour}}+1:0;\ }
+\DoxyCodeLine{00056\ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00017}{hour}}.
+
+
+
+Referenced by \mbox{\hyperlink{l00038}{System\+Time\+Handler\+::adjust()}}.
+
+\mbox{\Hypertarget{class_my_time_aa4c1ec9d7b38c04d98d8eb00e4fc8ceb}\label{class_my_time_aa4c1ec9d7b38c04d98d8eb00e4fc8ceb}} 
+\index{MyTime@{MyTime}!isValidHour@{isValidHour}}
+\index{isValidHour@{isValidHour}!MyTime@{MyTime}}
+\doxysubsubsection{\texorpdfstring{isValidHour()}{isValidHour()}}
+{\footnotesize\ttfamily bool is\+Valid\+Hour (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_my_time_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}}}]{hour }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00090\ \{}
+\DoxyCodeLine{00091\ \ \ \textcolor{keywordflow}{return}(\ \mbox{\hyperlink{class_my_time_ae5af4ff48939d13d480f87e56a9385d6}{hour}}<\ 24);}
+\DoxyCodeLine{00092\ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00017}{hour}}.
+
+
+
+Referenced by \mbox{\hyperlink{l00119}{operator++()}}.
+
+\mbox{\Hypertarget{class_my_time_a4d5812de5989a6bc46df2e32c6f37a4f}\label{class_my_time_a4d5812de5989a6bc46df2e32c6f37a4f}} 
+\index{MyTime@{MyTime}!isValidMinute@{isValidMinute}}
+\index{isValidMinute@{isValidMinute}!MyTime@{MyTime}}
+\doxysubsubsection{\texorpdfstring{isValidMinute()}{isValidMinute()}}
+{\footnotesize\ttfamily bool is\+Valid\+Minute (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_my_time_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}}}]{minute }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00096\ \{}
+\DoxyCodeLine{00097\ \ \ \textcolor{keywordflow}{return}(\ \mbox{\hyperlink{class_my_time_a8ff981ec55c945940f4a0da7d8709b3c}{minute}}<\ 60);}
+\DoxyCodeLine{00098\ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00018}{minute}}.
+
+
+
+Referenced by \mbox{\hyperlink{l00119}{operator++()}}.
+
+\mbox{\Hypertarget{class_my_time_a65ad398b0e541c663942b543b2978ef7}\label{class_my_time_a65ad398b0e541c663942b543b2978ef7}} 
+\index{MyTime@{MyTime}!isValidSecond@{isValidSecond}}
+\index{isValidSecond@{isValidSecond}!MyTime@{MyTime}}
+\doxysubsubsection{\texorpdfstring{isValidSecond()}{isValidSecond()}}
+{\footnotesize\ttfamily bool is\+Valid\+Second (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_my_time_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}}}]{second }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00102\ \{}
+\DoxyCodeLine{00103\ \ \ \textcolor{keywordflow}{return}(\ \mbox{\hyperlink{class_my_time_a8459fc4e94de7eefc74991e41779c8fc}{second}}<\ 60);\ \ }
+\DoxyCodeLine{00104\ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00019}{second}}.
+
+
+
+Referenced by \mbox{\hyperlink{l00119}{operator++()}}.
+
+\mbox{\Hypertarget{class_my_time_a92615a2fc05961977ef2d9d5dbe4e60d}\label{class_my_time_a92615a2fc05961977ef2d9d5dbe4e60d}} 
+\index{MyTime@{MyTime}!minuteDec@{minuteDec}}
+\index{minuteDec@{minuteDec}!MyTime@{MyTime}}
+\doxysubsubsection{\texorpdfstring{minuteDec()}{minuteDec()}}
+{\footnotesize\ttfamily void minute\+Dec (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00072\ \{}
+\DoxyCodeLine{00073\ \ \ \mbox{\hyperlink{class_my_time_a8ff981ec55c945940f4a0da7d8709b3c}{minute}}\ =(\ \mbox{\hyperlink{class_my_time_a8ff981ec55c945940f4a0da7d8709b3c}{minute}}>\ 0)?\ \mbox{\hyperlink{class_my_time_a8ff981ec55c945940f4a0da7d8709b3c}{minute}}-\/1:59;\ }
+\DoxyCodeLine{00074\ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00018}{minute}}.
+
+
+
+Referenced by \mbox{\hyperlink{l00038}{System\+Time\+Handler\+::adjust()}}.
+
+\mbox{\Hypertarget{class_my_time_a99f3ab8ffc40dfb1bff18d8c18c3a8e6}\label{class_my_time_a99f3ab8ffc40dfb1bff18d8c18c3a8e6}} 
+\index{MyTime@{MyTime}!minuteInc@{minuteInc}}
+\index{minuteInc@{minuteInc}!MyTime@{MyTime}}
+\doxysubsubsection{\texorpdfstring{minuteInc()}{minuteInc()}}
+{\footnotesize\ttfamily void minute\+Inc (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00066\ \{}
+\DoxyCodeLine{00067\ \ \ \mbox{\hyperlink{class_my_time_a8ff981ec55c945940f4a0da7d8709b3c}{minute}}\ =(\ \mbox{\hyperlink{class_my_time_a8ff981ec55c945940f4a0da7d8709b3c}{minute}}<\ 60)?\ \mbox{\hyperlink{class_my_time_a8ff981ec55c945940f4a0da7d8709b3c}{minute}}+1:0;\ \ \ }
+\DoxyCodeLine{00068\ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00018}{minute}}.
+
+
+
+Referenced by \mbox{\hyperlink{l00038}{System\+Time\+Handler\+::adjust()}}.
+
+\mbox{\Hypertarget{class_my_time_a601e6d77a73238726d06ae3bebf21573}\label{class_my_time_a601e6d77a73238726d06ae3bebf21573}} 
+\index{MyTime@{MyTime}!operator++@{operator++}}
+\index{operator++@{operator++}!MyTime@{MyTime}}
+\doxysubsubsection{\texorpdfstring{operator++()}{operator++()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_my_time}{My\+Time}} operator++ (\begin{DoxyParamCaption}\item[{int}]{ }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00145\ \{}
+\DoxyCodeLine{00146\ \ \ \ \ ++(\ *this);}
+\DoxyCodeLine{00147\ \ \ \ \ \textcolor{keywordflow}{return}(\ *\textcolor{keyword}{this});\ \ }
+\DoxyCodeLine{00148\ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{class_my_time_a30d942613ac5e5ecb8bc936517d8638e}\label{class_my_time_a30d942613ac5e5ecb8bc936517d8638e}} 
+\index{MyTime@{MyTime}!operator++@{operator++}}
+\index{operator++@{operator++}!MyTime@{MyTime}}
+\doxysubsubsection{\texorpdfstring{operator++()}{operator++()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_my_time}{My\+Time}} \& operator++ (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00120\ \{}
+\DoxyCodeLine{00121\ }
+\DoxyCodeLine{00122\ \ \ \ \ \mbox{\hyperlink{class_my_time_a8459fc4e94de7eefc74991e41779c8fc}{second}}++;}
+\DoxyCodeLine{00123\ \ \ \ \ \textcolor{keywordflow}{if}(\ !\mbox{\hyperlink{class_my_time_a65ad398b0e541c663942b543b2978ef7}{isValidSecond}}(\ \mbox{\hyperlink{class_my_time_a8459fc4e94de7eefc74991e41779c8fc}{second}}))}
+\DoxyCodeLine{00124\ \ \ \ \ \{}
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \mbox{\hyperlink{class_my_time_a8459fc4e94de7eefc74991e41779c8fc}{second}}=0;}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \mbox{\hyperlink{class_my_time_a8ff981ec55c945940f4a0da7d8709b3c}{minute}}++;}
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ !\mbox{\hyperlink{class_my_time_a4d5812de5989a6bc46df2e32c6f37a4f}{isValidMinute}}(\ \mbox{\hyperlink{class_my_time_a8ff981ec55c945940f4a0da7d8709b3c}{minute}}))}
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_my_time_a8ff981ec55c945940f4a0da7d8709b3c}{minute}}=0;}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_my_time_ae5af4ff48939d13d480f87e56a9385d6}{hour}}++;}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\ !\mbox{\hyperlink{class_my_time_aa4c1ec9d7b38c04d98d8eb00e4fc8ceb}{isValidHour}}(\ \mbox{\hyperlink{class_my_time_ae5af4ff48939d13d480f87e56a9385d6}{hour}}))}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_my_time_ae5af4ff48939d13d480f87e56a9385d6}{hour}}=0;}
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00136\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00138\ \ \ \ \ \}}
+\DoxyCodeLine{00139\ \ \ \ \ }
+\DoxyCodeLine{00140\ \ \ \ \ \textcolor{keywordflow}{return}(\ *\textcolor{keyword}{this});\ \ }
+\DoxyCodeLine{00141\ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00017}{hour}}, \mbox{\hyperlink{l00089}{is\+Valid\+Hour()}}, \mbox{\hyperlink{l00095}{is\+Valid\+Minute()}}, \mbox{\hyperlink{l00101}{is\+Valid\+Second()}}, \mbox{\hyperlink{l00018}{minute}}, and \mbox{\hyperlink{l00019}{second}}.
+
+\mbox{\Hypertarget{class_my_time_a81ff5205d6940b30d2281d477b94878e}\label{class_my_time_a81ff5205d6940b30d2281d477b94878e}} 
+\index{MyTime@{MyTime}!operator=@{operator=}}
+\index{operator=@{operator=}!MyTime@{MyTime}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_my_time}{My\+Time}} \& operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_my_time}{My\+Time}} \&}]{time }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00108\ \{}
+\DoxyCodeLine{00109\ \ \ \ \ \textcolor{keywordflow}{if}(\ \&time\ !=\ \textcolor{keyword}{this}\ )}
+\DoxyCodeLine{00110\ \ \ \ \ \{}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_my_time_ae5af4ff48939d13d480f87e56a9385d6}{hour}}=\ \ \ time.\mbox{\hyperlink{class_my_time_ae5af4ff48939d13d480f87e56a9385d6}{hour}};}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_my_time_a8ff981ec55c945940f4a0da7d8709b3c}{minute}}=\ time.\mbox{\hyperlink{class_my_time_a8ff981ec55c945940f4a0da7d8709b3c}{minute}};}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_my_time_a8459fc4e94de7eefc74991e41779c8fc}{second}}=\ time.\mbox{\hyperlink{class_my_time_a8459fc4e94de7eefc74991e41779c8fc}{second}};}
+\DoxyCodeLine{00114\ \ \ \ \ \}}
+\DoxyCodeLine{00115\ \ \ \ \ \textcolor{keywordflow}{return}(\ *\textcolor{keyword}{this});}
+\DoxyCodeLine{00116\ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00017}{hour}}, \mbox{\hyperlink{l00018}{minute}}, and \mbox{\hyperlink{l00019}{second}}.
+
+\mbox{\Hypertarget{class_my_time_a7588187b265589493e0252066277f3d6}\label{class_my_time_a7588187b265589493e0252066277f3d6}} 
+\index{MyTime@{MyTime}!secondDec@{secondDec}}
+\index{secondDec@{secondDec}!MyTime@{MyTime}}
+\doxysubsubsection{\texorpdfstring{secondDec()}{secondDec()}}
+{\footnotesize\ttfamily void second\+Dec (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00084\ \{}
+\DoxyCodeLine{00085\ \ \ \mbox{\hyperlink{class_my_time_a8459fc4e94de7eefc74991e41779c8fc}{second}}\ =(\ \mbox{\hyperlink{class_my_time_a8459fc4e94de7eefc74991e41779c8fc}{second}}>\ 0)?\ \mbox{\hyperlink{class_my_time_a8459fc4e94de7eefc74991e41779c8fc}{second}}-\/1:59;\ \ }
+\DoxyCodeLine{00086\ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00019}{second}}.
+
+
+
+Referenced by \mbox{\hyperlink{l00038}{System\+Time\+Handler\+::adjust()}}.
+
+\mbox{\Hypertarget{class_my_time_a171364951f01f62935b71b01b5a1f4df}\label{class_my_time_a171364951f01f62935b71b01b5a1f4df}} 
+\index{MyTime@{MyTime}!secondInc@{secondInc}}
+\index{secondInc@{secondInc}!MyTime@{MyTime}}
+\doxysubsubsection{\texorpdfstring{secondInc()}{secondInc()}}
+{\footnotesize\ttfamily void second\+Inc (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00078\ \{}
+\DoxyCodeLine{00079\ \ \ \mbox{\hyperlink{class_my_time_a8459fc4e94de7eefc74991e41779c8fc}{second}}\ =(\ \mbox{\hyperlink{class_my_time_a8459fc4e94de7eefc74991e41779c8fc}{second}}<\ 60)?\ \mbox{\hyperlink{class_my_time_a8459fc4e94de7eefc74991e41779c8fc}{second}}+1:0;\ \ }
+\DoxyCodeLine{00080\ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00019}{second}}.
+
+
+
+Referenced by \mbox{\hyperlink{l00038}{System\+Time\+Handler\+::adjust()}}.
+
+\mbox{\Hypertarget{class_my_time_a6c3c3bc42e5c0aca01c000ccd760e601}\label{class_my_time_a6c3c3bc42e5c0aca01c000ccd760e601}} 
+\index{MyTime@{MyTime}!setHour@{setHour}}
+\index{setHour@{setHour}!MyTime@{MyTime}}
+\doxysubsubsection{\texorpdfstring{setHour()}{setHour()}}
+{\footnotesize\ttfamily void set\+Hour (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_my_time_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}}}]{day }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00024\ \{}
+\DoxyCodeLine{00025\ \ \ this-\/>\mbox{\hyperlink{class_my_time_ae5af4ff48939d13d480f87e56a9385d6}{hour}}=\ \mbox{\hyperlink{class_my_time_ae5af4ff48939d13d480f87e56a9385d6}{hour}};}
+\DoxyCodeLine{00026\ \}\ \ }
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00017}{hour}}.
+
+
+
+Referenced by \mbox{\hyperlink{l00173}{Timestamp\+::get\+Time()}}, \mbox{\hyperlink{l00157}{set\+In\+Seconds()}}, \mbox{\hyperlink{l00171}{Analog\+Clock\+View\+Handler\+::update\+Time()}}, and \mbox{\hyperlink{l00024}{Time\+Sunrise\+Sunset\+Handler\+::update\+Time()}}.
+
+\mbox{\Hypertarget{class_my_time_a1d7fa36d0112f9ef730d8e63f66d503f}\label{class_my_time_a1d7fa36d0112f9ef730d8e63f66d503f}} 
+\index{MyTime@{MyTime}!setInSeconds@{setInSeconds}}
+\index{setInSeconds@{setInSeconds}!MyTime@{MyTime}}
+\doxysubsubsection{\texorpdfstring{setInSeconds()}{setInSeconds()}}
+{\footnotesize\ttfamily void set\+In\+Seconds (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{time\+In\+Secs }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00158\ \{}
+\DoxyCodeLine{00159\ \ \ uint16\_t\ tdiff=\ timeInSecs;}
+\DoxyCodeLine{00160\ \ \ \ }
+\DoxyCodeLine{00161\ \ \ \mbox{\hyperlink{class_my_time_a6c3c3bc42e5c0aca01c000ccd760e601}{setHour}}(\ \ \ (\ \mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t}})(tdiff\ /\ 3600));\ \ tdiff\ \%=\ 3600;}
+\DoxyCodeLine{00162\ \ \ \mbox{\hyperlink{class_my_time_a30c18003e7ad01a77f0250a3a4aadfea}{setMinute}}(\ (\ \mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t}})(tdiff\ /\ \ \ 60));}
+\DoxyCodeLine{00163\ \ \ \mbox{\hyperlink{class_my_time_ae9a468fd389f0fe728892527c67f0771}{setSecond}}(\ \ \ \ (\ \mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t}})(tdiff\ \%\ \ \ 60));\ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00164\ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00023}{set\+Hour()}}, \mbox{\hyperlink{l00035}{set\+Minute()}}, and \mbox{\hyperlink{l00047}{set\+Second()}}.
+
+\mbox{\Hypertarget{class_my_time_a30c18003e7ad01a77f0250a3a4aadfea}\label{class_my_time_a30c18003e7ad01a77f0250a3a4aadfea}} 
+\index{MyTime@{MyTime}!setMinute@{setMinute}}
+\index{setMinute@{setMinute}!MyTime@{MyTime}}
+\doxysubsubsection{\texorpdfstring{setMinute()}{setMinute()}}
+{\footnotesize\ttfamily void set\+Minute (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_my_time_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}}}]{minute }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00036\ \{}
+\DoxyCodeLine{00037\ \ \ this-\/>\mbox{\hyperlink{class_my_time_a8ff981ec55c945940f4a0da7d8709b3c}{minute}}=\ \mbox{\hyperlink{class_my_time_a8ff981ec55c945940f4a0da7d8709b3c}{minute}};}
+\DoxyCodeLine{00038\ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00018}{minute}}.
+
+
+
+Referenced by \mbox{\hyperlink{l00173}{Timestamp\+::get\+Time()}}, \mbox{\hyperlink{l00157}{set\+In\+Seconds()}}, and \mbox{\hyperlink{l00024}{Time\+Sunrise\+Sunset\+Handler\+::update\+Time()}}.
+
+\mbox{\Hypertarget{class_my_time_ae9a468fd389f0fe728892527c67f0771}\label{class_my_time_ae9a468fd389f0fe728892527c67f0771}} 
+\index{MyTime@{MyTime}!setSecond@{setSecond}}
+\index{setSecond@{setSecond}!MyTime@{MyTime}}
+\doxysubsubsection{\texorpdfstring{setSecond()}{setSecond()}}
+{\footnotesize\ttfamily void set\+Second (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_my_time_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}}}]{second }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00048\ \{}
+\DoxyCodeLine{00049\ \ \ this-\/>\mbox{\hyperlink{class_my_time_a8459fc4e94de7eefc74991e41779c8fc}{second}}=\ \mbox{\hyperlink{class_my_time_a8459fc4e94de7eefc74991e41779c8fc}{second}};}
+\DoxyCodeLine{00050\ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00019}{second}}.
+
+
+
+Referenced by \mbox{\hyperlink{l00173}{Timestamp\+::get\+Time()}}, \mbox{\hyperlink{l00157}{set\+In\+Seconds()}}, and \mbox{\hyperlink{l00024}{Time\+Sunrise\+Sunset\+Handler\+::update\+Time()}}.
+
+\mbox{\Hypertarget{class_my_time_a296755c77ffde8699bbb2b1e8a94a9a2}\label{class_my_time_a296755c77ffde8699bbb2b1e8a94a9a2}} 
+\index{MyTime@{MyTime}!toString@{toString}}
+\index{toString@{toString}!MyTime@{MyTime}}
+\doxysubsubsection{\texorpdfstring{toString()}{toString()}}
+{\footnotesize\ttfamily char $\ast$ to\+String (\begin{DoxyParamCaption}\item[{char $\ast$}]{Stringbuffer }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00180\ \{\ \ }
+\DoxyCodeLine{00181\ \ \ }
+\DoxyCodeLine{00182\ \ \ sprintf(\ ptr,\ \mbox{\hyperlink{class_my_time_abb76201adb97e3574d2ee21a8f2dcf54}{MyTime::getStringFormat}}(),\ \mbox{\hyperlink{class_my_time_ae5af4ff48939d13d480f87e56a9385d6}{hour}},\ \mbox{\hyperlink{class_my_time_a8ff981ec55c945940f4a0da7d8709b3c}{minute}},\ \mbox{\hyperlink{class_my_time_a8459fc4e94de7eefc74991e41779c8fc}{second}});}
+\DoxyCodeLine{00183\ \ \ \textcolor{keywordflow}{return}(\ ptr);}
+\DoxyCodeLine{00184\ \}\ \ }
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00167}{get\+String\+Format()}}, \mbox{\hyperlink{l00017}{hour}}, \mbox{\hyperlink{l00018}{minute}}, and \mbox{\hyperlink{l00019}{second}}.
+
+
+
+Referenced by \mbox{\hyperlink{l00246}{Timestamp\+::to\+String()}}, \mbox{\hyperlink{l00031}{LEDClock\+View\+Handler\+::update\+Time()}}, \mbox{\hyperlink{l00075}{NTPWi\+Fi\+Time\+Handler\+::update\+Time()}}, \mbox{\hyperlink{l00045}{OLEDDisplay\+Clock\+View\+Handler\+::update\+Time()}}, and \mbox{\hyperlink{l00024}{Time\+Sunrise\+Sunset\+Handler\+::update\+Time()}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_my_time_ae5af4ff48939d13d480f87e56a9385d6}\label{class_my_time_ae5af4ff48939d13d480f87e56a9385d6}} 
+\index{MyTime@{MyTime}!hour@{hour}}
+\index{hour@{hour}!MyTime@{MyTime}}
+\doxysubsubsection{\texorpdfstring{hour}{hour}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_my_time_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}} hour\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \mbox{\hyperlink{l00017}{get\+Hour()}}, \mbox{\hyperlink{l00059}{hour\+Dec()}}, \mbox{\hyperlink{l00053}{hour\+Inc()}}, \mbox{\hyperlink{l00089}{is\+Valid\+Hour()}}, \mbox{\hyperlink{l00119}{operator++()}}, \mbox{\hyperlink{l00107}{operator=()}}, \mbox{\hyperlink{l00023}{set\+Hour()}}, and \mbox{\hyperlink{l00179}{to\+String()}}.
+
+\mbox{\Hypertarget{class_my_time_a8ff981ec55c945940f4a0da7d8709b3c}\label{class_my_time_a8ff981ec55c945940f4a0da7d8709b3c}} 
+\index{MyTime@{MyTime}!minute@{minute}}
+\index{minute@{minute}!MyTime@{MyTime}}
+\doxysubsubsection{\texorpdfstring{minute}{minute}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_my_time_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}} minute\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \mbox{\hyperlink{l00029}{get\+Minute()}}, \mbox{\hyperlink{l00095}{is\+Valid\+Minute()}}, \mbox{\hyperlink{l00071}{minute\+Dec()}}, \mbox{\hyperlink{l00065}{minute\+Inc()}}, \mbox{\hyperlink{l00119}{operator++()}}, \mbox{\hyperlink{l00107}{operator=()}}, \mbox{\hyperlink{l00035}{set\+Minute()}}, and \mbox{\hyperlink{l00179}{to\+String()}}.
+
+\mbox{\Hypertarget{class_my_time_a8459fc4e94de7eefc74991e41779c8fc}\label{class_my_time_a8459fc4e94de7eefc74991e41779c8fc}} 
+\index{MyTime@{MyTime}!second@{second}}
+\index{second@{second}!MyTime@{MyTime}}
+\doxysubsubsection{\texorpdfstring{second}{second}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_my_time_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}} second\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \mbox{\hyperlink{l00041}{get\+Second()}}, \mbox{\hyperlink{l00101}{is\+Valid\+Second()}}, \mbox{\hyperlink{l00119}{operator++()}}, \mbox{\hyperlink{l00107}{operator=()}}, \mbox{\hyperlink{l00083}{second\+Dec()}}, \mbox{\hyperlink{l00077}{second\+Inc()}}, \mbox{\hyperlink{l00047}{set\+Second()}}, and \mbox{\hyperlink{l00179}{to\+String()}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_my_time_8h}{My\+Time.\+h}}\item 
+\mbox{\hyperlink{_my_time_8cpp}{My\+Time.\+cpp}}\end{DoxyCompactItemize}

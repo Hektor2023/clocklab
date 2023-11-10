@@ -1,0 +1,312 @@
+\hypertarget{clock2_01_8cpp}{}\doxysection{clock2 .cpp File Reference}
+\label{clock2_01_8cpp}\index{clock2 .cpp@{clock2 .cpp}}
+{\ttfamily \#include $<$cstddef$>$}\newline
+{\ttfamily \#include $<$Arduino.\+h$>$}\newline
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include \char`\"{}Build\+\_\+defs.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Timestamp.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Time\+Handler.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Console\+View\+Handler.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Analog\+Clock\+View\+Handler.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Led\+Clock\+View\+Handler.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}OLEDDisplay\+Clock\+View\+Handler.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Time\+Sunrise\+Sunset\+Handler.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Time\+Zone\+DSTHandler.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}System\+Time\+Handler.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Controller.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}NTPWifi\+Time\+Handler.\+h\char`\"{}}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{clock2_01_8cpp_a0b33edabd7f1c4e4a0bf32c67269be2f}{loop}} (void)
+\item 
+void \mbox{\hyperlink{clock2_01_8cpp_a7dfd9b79bc5a37d7df40207afbc5431f}{setup}} (void)
+\item 
+void \mbox{\hyperlink{clock2_01_8cpp_abf1f636c3510fdc6d64e8efb60401a2f}{show\+Version}} (void)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const \mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}} \mbox{\hyperlink{clock2_01_8cpp_ae9de81d22dae654a82f1f1205b52864a}{analog\+In\+Pin}} = A0
+\item 
+const \mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}} \mbox{\hyperlink{clock2_01_8cpp_a568193ce7507228a7e7ca3b95841bf7b}{CLK\+\_\+pin}} = D6
+\item 
+const auto \mbox{\hyperlink{clock2_01_8cpp_a3d919f0cc75b2508210d048a2b6483c3}{clockhostname}} \{ \char`\"{}AGClock\char`\"{}\}
+\item 
+\mbox{\hyperlink{class_l_e_d_clock_view_handler}{LEDClock\+View\+Handler}} \mbox{\hyperlink{clock2_01_8cpp_a4b77b49c7bfdea71ff4b36355e1d4549}{clock\+View\+Handler}} (nullptr, \mbox{\hyperlink{clock2_01_8cpp_a3a07459ef02acb274f463c7b784c2c08}{STB\+\_\+pin}}, \mbox{\hyperlink{clock2_01_8cpp_a568193ce7507228a7e7ca3b95841bf7b}{CLK\+\_\+pin}}, \mbox{\hyperlink{clock2_01_8cpp_a24709f0e45e86106daba825be1f5fef9}{DIO\+\_\+pin}})
+\item 
+\mbox{\hyperlink{class_time_sunrise_sunset_handler}{Time\+Sunrise\+Sunset\+Handler}} \mbox{\hyperlink{clock2_01_8cpp_a76f0771f8ccec078c18cb169ce28b1b2}{sunrise\+Time\+Handler}} \& \mbox{\hyperlink{clock2_01_8cpp_a2f2d00532495f885fde8e2d301ae47ea}{console\+View\+Handler}}
+\item 
+const \mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}} \mbox{\hyperlink{clock2_01_8cpp_a24709f0e45e86106daba825be1f5fef9}{DIO\+\_\+pin}} = D7
+\item 
+const auto \mbox{\hyperlink{clock2_01_8cpp_af1d4154e13e0dfc7b2fa7abe3e4b7ae4}{GMT\+\_\+\+Plus\+\_\+1h}} \{ 1$\ast$ 3600\}
+\item 
+double \mbox{\hyperlink{clock2_01_8cpp_a76714bdbc5c536fa77dfb14533ff82a9}{latitude}} = 52.\+447
+\item 
+double \mbox{\hyperlink{clock2_01_8cpp_ac155e35fdeebafc89723a51520fb9fe6}{longitude}} = 20.\+693
+\item 
+const auto \mbox{\hyperlink{clock2_01_8cpp_a75c3f924ae3f2a646d91cea7231d7d40}{Monitor\+\_\+\+Baudrate}} \{ 115200\}
+\item 
+const auto \mbox{\hyperlink{clock2_01_8cpp_a01353d48cedbdabf361ff70492fadd66}{one\+Second}} \{ 1000\}
+\item 
+\mbox{\hyperlink{class_system_time_handler}{System\+Time\+Handler}} \mbox{\hyperlink{clock2_01_8cpp_ab1bc055d3f9534b1b1479e908feec00e}{system\+Time\+Handler}} \& \mbox{\hyperlink{clock2_01_8cpp_a4fbfcf15f8adbc87520e9db52931f392}{source\+Time\+Handler}}
+\item 
+const auto \mbox{\hyperlink{clock2_01_8cpp_acd83569b2eedc6ce3aa2cd969eff4ad0}{start\+\_\+epoch\+\_\+time}} \{ 1654387200\}
+\item 
+const \mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}} \mbox{\hyperlink{clock2_01_8cpp_a3a07459ef02acb274f463c7b784c2c08}{STB\+\_\+pin}} = D4
+\item 
+\mbox{\hyperlink{class_my_time}{My\+Time}} \mbox{\hyperlink{clock2_01_8cpp_a42e698d8f633b4785a60d961dd07406f}{sunrise\+Time}}
+\item 
+\mbox{\hyperlink{class_time_zone_d_s_t_handler}{Time\+Zone\+DSTHandler}} \mbox{\hyperlink{clock2_01_8cpp_a3fba512c786a3d3519e39dd1c3e60c12}{time\+Zone\+DSTHandler}} \& \mbox{\hyperlink{clock2_01_8cpp_a76f0771f8ccec078c18cb169ce28b1b2}{sunrise\+Time\+Handler}}
+\item 
+\mbox{\hyperlink{class_my_time}{My\+Time}} \mbox{\hyperlink{clock2_01_8cpp_ad0aef8af0d93d71443b2c850604fab1e}{sunset\+Time}}
+\item 
+\mbox{\hyperlink{class_controller}{Controller}} controller \& \mbox{\hyperlink{clock2_01_8cpp_ab1bc055d3f9534b1b1479e908feec00e}{system\+Time\+Handler}}
+\item 
+\mbox{\hyperlink{class_n_t_p_wi_fi_time_handler}{NTPWi\+Fi\+Time\+Handler}} \mbox{\hyperlink{clock2_01_8cpp_a4fbfcf15f8adbc87520e9db52931f392}{source\+Time\+Handler}} \& \mbox{\hyperlink{clock2_01_8cpp_a3fba512c786a3d3519e39dd1c3e60c12}{time\+Zone\+DSTHandler}}
+\item 
+const auto \mbox{\hyperlink{clock2_01_8cpp_ab0fee54bb5a2d1f2de33a6900fa83029}{update\+\_\+\+NTP\+\_\+interval\+\_\+in\+\_\+m\+Sec}} \{ 30$\ast$ \mbox{\hyperlink{clock2_01_8cpp_a01353d48cedbdabf361ff70492fadd66}{one\+Second}}\}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{clock2_01_8cpp_a0b33edabd7f1c4e4a0bf32c67269be2f}\label{clock2_01_8cpp_a0b33edabd7f1c4e4a0bf32c67269be2f}} 
+\index{clock2 .cpp@{clock2 .cpp}!loop@{loop}}
+\index{loop@{loop}!clock2 .cpp@{clock2 .cpp}}
+\doxysubsubsection{\texorpdfstring{loop()}{loop()}}
+{\footnotesize\ttfamily void loop (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00100\ \{}
+\DoxyCodeLine{00101\ \ \ std::string\ \ \ cmd,\ result;}
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00103\ \ \ \textcolor{keywordflow}{do}}
+\DoxyCodeLine{00104\ \ \ \{}
+\DoxyCodeLine{00105\ \ \ \ \ \textcolor{keywordflow}{if}(\ Serial.available()\ >0)}
+\DoxyCodeLine{00106\ \ \ \ \ \{}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ cmd=\ Serial.readStringUntil(\textcolor{charliteral}{'\(\backslash\)n'}).c\_str();}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ result=\ controller.execute(\ cmd.c\_str());}
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00110\ \ \ \ \ \ \ Serial.println(\ result.c\_str());\ \ }
+\DoxyCodeLine{00111\ \ \ \ \ \}}
+\DoxyCodeLine{00112\ \ \ \ \ }
+\DoxyCodeLine{00113\ \ \ \ \ yield();\ }
+\DoxyCodeLine{00114\ \ \ \}}
+\DoxyCodeLine{00115\ \ \ \textcolor{keywordflow}{while}(\ \mbox{\hyperlink{clock2_01_8cpp_ab1bc055d3f9534b1b1479e908feec00e}{systemTimeHandler}}.isInManualMode());\ }
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00117\ \textcolor{comment}{//\ \ uint8\_t\ sensorValue\ =\ analogRead(\ analogInPin);}}
+\DoxyCodeLine{00118\ \textcolor{comment}{//\ \ Serial.printf(\ "{}sensor=\ \%d\(\backslash\)n"{},\ sensorValue);}}
+\DoxyCodeLine{00119\ \ \ }
+\DoxyCodeLine{00120\ \ \ yield();\ \ \ }
+\DoxyCodeLine{00121\ \ \ \mbox{\hyperlink{clock2_01_8cpp_ab1bc055d3f9534b1b1479e908feec00e}{systemTimeHandler}}.updateTime();}
+\DoxyCodeLine{00122\ \ \ }
+\DoxyCodeLine{00123\ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00087}{system\+Time\+Handler}}.
+
+\mbox{\Hypertarget{clock2_01_8cpp_a7dfd9b79bc5a37d7df40207afbc5431f}\label{clock2_01_8cpp_a7dfd9b79bc5a37d7df40207afbc5431f}} 
+\index{clock2 .cpp@{clock2 .cpp}!setup@{setup}}
+\index{setup@{setup}!clock2 .cpp@{clock2 .cpp}}
+\doxysubsubsection{\texorpdfstring{setup()}{setup()}}
+{\footnotesize\ttfamily void setup (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00091\ \{\ }
+\DoxyCodeLine{00092\ \ \ Serial.begin(\ \mbox{\hyperlink{clock2_01_8cpp_a75c3f924ae3f2a646d91cea7231d7d40}{Monitor\_Baudrate}});}
+\DoxyCodeLine{00093\ \ \ Serial.flush();}
+\DoxyCodeLine{00094\ \ \ }
+\DoxyCodeLine{00095\ \ \ \mbox{\hyperlink{clock2_01_8cpp_abf1f636c3510fdc6d64e8efb60401a2f}{showVersion}}();}
+\DoxyCodeLine{00096\ \ \ \mbox{\hyperlink{clock2_01_8cpp_a4fbfcf15f8adbc87520e9db52931f392}{sourceTimeHandler}}.init(\mbox{\hyperlink{clock2_01_8cpp_a3d919f0cc75b2508210d048a2b6483c3}{clockhostname}});}
+\DoxyCodeLine{00097\ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00043}{clockhostname}}, \mbox{\hyperlink{l00042}{Monitor\+\_\+\+Baudrate}}, \mbox{\hyperlink{l00062}{show\+Version()}}, and \mbox{\hyperlink{l00085}{source\+Time\+Handler}}.
+
+\mbox{\Hypertarget{clock2_01_8cpp_abf1f636c3510fdc6d64e8efb60401a2f}\label{clock2_01_8cpp_abf1f636c3510fdc6d64e8efb60401a2f}} 
+\index{clock2 .cpp@{clock2 .cpp}!showVersion@{showVersion}}
+\index{showVersion@{showVersion}!clock2 .cpp@{clock2 .cpp}}
+\doxysubsubsection{\texorpdfstring{showVersion()}{showVersion()}}
+{\footnotesize\ttfamily void show\+Version (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00063\ \{}
+\DoxyCodeLine{00064\ \ \ \mbox{\hyperlink{class_timer}{Timer}}\ \ pauseTimer(\ 2*\ \mbox{\hyperlink{_timer_8h_a9c2d7ee2b04f21a5d0d1f2d281842664}{Second}});\ }
+\DoxyCodeLine{00065\ \ \ }
+\DoxyCodeLine{00066\ \ \ \textcolor{keywordflow}{while}(\ !pauseTimer.isTimeout())\ }
+\DoxyCodeLine{00067\ \ \ \{}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ Serial.print(\ \textcolor{stringliteral}{"{}\#"{}});}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ yield();}
+\DoxyCodeLine{00070\ \ \ \};}
+\DoxyCodeLine{00071\ \ \ }
+\DoxyCodeLine{00072\ \ \ Serial.printf(\ \textcolor{stringliteral}{"{}\(\backslash\)nVer:\ \%s\(\backslash\)n"{}},\ (\textcolor{keywordtype}{char}*)\&\mbox{\hyperlink{_build__defs_8h_ab2ab8689a8f8ee180483ed204e3eaa4c}{completeVersion}});\ \ }
+\DoxyCodeLine{00073\ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00110}{complete\+Version}}, \mbox{\hyperlink{l00046}{Timer\+::is\+Timeout()}}, and \mbox{\hyperlink{l00008}{Second}}.
+
+
+
+Referenced by \mbox{\hyperlink{l00090}{setup()}}.
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{clock2_01_8cpp_ae9de81d22dae654a82f1f1205b52864a}\label{clock2_01_8cpp_ae9de81d22dae654a82f1f1205b52864a}} 
+\index{clock2 .cpp@{clock2 .cpp}!analogInPin@{analogInPin}}
+\index{analogInPin@{analogInPin}!clock2 .cpp@{clock2 .cpp}}
+\doxysubsubsection{\texorpdfstring{analogInPin}{analogInPin}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}} analog\+In\+Pin = A0}
+
+\mbox{\Hypertarget{clock2_01_8cpp_a568193ce7507228a7e7ca3b95841bf7b}\label{clock2_01_8cpp_a568193ce7507228a7e7ca3b95841bf7b}} 
+\index{clock2 .cpp@{clock2 .cpp}!CLK\_pin@{CLK\_pin}}
+\index{CLK\_pin@{CLK\_pin}!clock2 .cpp@{clock2 .cpp}}
+\doxysubsubsection{\texorpdfstring{CLK\_pin}{CLK\_pin}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}} CLK\+\_\+pin = D6}
+
+
+
+Referenced by \mbox{\hyperlink{l00004}{LEDClock\+View\+Handler\+::\+LEDClock\+View\+Handler()}}.
+
+\mbox{\Hypertarget{clock2_01_8cpp_a3d919f0cc75b2508210d048a2b6483c3}\label{clock2_01_8cpp_a3d919f0cc75b2508210d048a2b6483c3}} 
+\index{clock2 .cpp@{clock2 .cpp}!clockhostname@{clockhostname}}
+\index{clockhostname@{clockhostname}!clock2 .cpp@{clock2 .cpp}}
+\doxysubsubsection{\texorpdfstring{clockhostname}{clockhostname}}
+{\footnotesize\ttfamily const auto clockhostname \{ \char`\"{}AGClock\char`\"{}\}}
+
+
+
+Referenced by \mbox{\hyperlink{l00090}{setup()}}.
+
+\mbox{\Hypertarget{clock2_01_8cpp_a4b77b49c7bfdea71ff4b36355e1d4549}\label{clock2_01_8cpp_a4b77b49c7bfdea71ff4b36355e1d4549}} 
+\index{clock2 .cpp@{clock2 .cpp}!clockViewHandler@{clockViewHandler}}
+\index{clockViewHandler@{clockViewHandler}!clock2 .cpp@{clock2 .cpp}}
+\doxysubsubsection{\texorpdfstring{clockViewHandler}{clockViewHandler}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_console_view_handler}{Console\+View\+Handler}} \mbox{\hyperlink{clock2_01_8cpp_a2f2d00532495f885fde8e2d301ae47ea}{console\+View\+Handler}} \& clock\+View\+Handler (\begin{DoxyParamCaption}\item[{nullptr}]{,  }\item[{\mbox{\hyperlink{clock2_01_8cpp_a3a07459ef02acb274f463c7b784c2c08}{STB\+\_\+pin}}}]{,  }\item[{\mbox{\hyperlink{clock2_01_8cpp_a568193ce7507228a7e7ca3b95841bf7b}{CLK\+\_\+pin}}}]{,  }\item[{\mbox{\hyperlink{clock2_01_8cpp_a24709f0e45e86106daba825be1f5fef9}{DIO\+\_\+pin}}}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{clock2_01_8cpp_a2f2d00532495f885fde8e2d301ae47ea}\label{clock2_01_8cpp_a2f2d00532495f885fde8e2d301ae47ea}} 
+\index{clock2 .cpp@{clock2 .cpp}!consoleViewHandler@{consoleViewHandler}}
+\index{consoleViewHandler@{consoleViewHandler}!clock2 .cpp@{clock2 .cpp}}
+\doxysubsubsection{\texorpdfstring{consoleViewHandler}{consoleViewHandler}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_time_sunrise_sunset_handler}{Time\+Sunrise\+Sunset\+Handler}} \mbox{\hyperlink{clock2_01_8cpp_a76f0771f8ccec078c18cb169ce28b1b2}{sunrise\+Time\+Handler}} \& console\+View\+Handler}
+
+\mbox{\Hypertarget{clock2_01_8cpp_a24709f0e45e86106daba825be1f5fef9}\label{clock2_01_8cpp_a24709f0e45e86106daba825be1f5fef9}} 
+\index{clock2 .cpp@{clock2 .cpp}!DIO\_pin@{DIO\_pin}}
+\index{DIO\_pin@{DIO\_pin}!clock2 .cpp@{clock2 .cpp}}
+\doxysubsubsection{\texorpdfstring{DIO\_pin}{DIO\_pin}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}} DIO\+\_\+pin = D7}
+
+
+
+Referenced by \mbox{\hyperlink{l00004}{LEDClock\+View\+Handler\+::\+LEDClock\+View\+Handler()}}.
+
+\mbox{\Hypertarget{clock2_01_8cpp_af1d4154e13e0dfc7b2fa7abe3e4b7ae4}\label{clock2_01_8cpp_af1d4154e13e0dfc7b2fa7abe3e4b7ae4}} 
+\index{clock2 .cpp@{clock2 .cpp}!GMT\_Plus\_1h@{GMT\_Plus\_1h}}
+\index{GMT\_Plus\_1h@{GMT\_Plus\_1h}!clock2 .cpp@{clock2 .cpp}}
+\doxysubsubsection{\texorpdfstring{GMT\_Plus\_1h}{GMT\_Plus\_1h}}
+{\footnotesize\ttfamily const auto GMT\+\_\+\+Plus\+\_\+1h \{ 1$\ast$ 3600\}}
+
+\mbox{\Hypertarget{clock2_01_8cpp_a76714bdbc5c536fa77dfb14533ff82a9}\label{clock2_01_8cpp_a76714bdbc5c536fa77dfb14533ff82a9}} 
+\index{clock2 .cpp@{clock2 .cpp}!latitude@{latitude}}
+\index{latitude@{latitude}!clock2 .cpp@{clock2 .cpp}}
+\doxysubsubsection{\texorpdfstring{latitude}{latitude}}
+{\footnotesize\ttfamily double latitude = 52.\+447}
+
+\mbox{\Hypertarget{clock2_01_8cpp_ac155e35fdeebafc89723a51520fb9fe6}\label{clock2_01_8cpp_ac155e35fdeebafc89723a51520fb9fe6}} 
+\index{clock2 .cpp@{clock2 .cpp}!longitude@{longitude}}
+\index{longitude@{longitude}!clock2 .cpp@{clock2 .cpp}}
+\doxysubsubsection{\texorpdfstring{longitude}{longitude}}
+{\footnotesize\ttfamily double longitude = 20.\+693}
+
+\mbox{\Hypertarget{clock2_01_8cpp_a75c3f924ae3f2a646d91cea7231d7d40}\label{clock2_01_8cpp_a75c3f924ae3f2a646d91cea7231d7d40}} 
+\index{clock2 .cpp@{clock2 .cpp}!Monitor\_Baudrate@{Monitor\_Baudrate}}
+\index{Monitor\_Baudrate@{Monitor\_Baudrate}!clock2 .cpp@{clock2 .cpp}}
+\doxysubsubsection{\texorpdfstring{Monitor\_Baudrate}{Monitor\_Baudrate}}
+{\footnotesize\ttfamily const auto Monitor\+\_\+\+Baudrate \{ 115200\}}
+
+
+
+Referenced by \mbox{\hyperlink{l00090}{setup()}}.
+
+\mbox{\Hypertarget{clock2_01_8cpp_a01353d48cedbdabf361ff70492fadd66}\label{clock2_01_8cpp_a01353d48cedbdabf361ff70492fadd66}} 
+\index{clock2 .cpp@{clock2 .cpp}!oneSecond@{oneSecond}}
+\index{oneSecond@{oneSecond}!clock2 .cpp@{clock2 .cpp}}
+\doxysubsubsection{\texorpdfstring{oneSecond}{oneSecond}}
+{\footnotesize\ttfamily const auto one\+Second \{ 1000\}}
+
+\mbox{\Hypertarget{clock2_01_8cpp_a4fbfcf15f8adbc87520e9db52931f392}\label{clock2_01_8cpp_a4fbfcf15f8adbc87520e9db52931f392}} 
+\index{clock2 .cpp@{clock2 .cpp}!sourceTimeHandler@{sourceTimeHandler}}
+\index{sourceTimeHandler@{sourceTimeHandler}!clock2 .cpp@{clock2 .cpp}}
+\doxysubsubsection{\texorpdfstring{sourceTimeHandler}{sourceTimeHandler}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_system_time_handler}{System\+Time\+Handler}} \mbox{\hyperlink{clock2_01_8cpp_ab1bc055d3f9534b1b1479e908feec00e}{system\+Time\+Handler}} \& source\+Time\+Handler}
+
+
+
+Referenced by \mbox{\hyperlink{l00090}{setup()}}.
+
+\mbox{\Hypertarget{clock2_01_8cpp_acd83569b2eedc6ce3aa2cd969eff4ad0}\label{clock2_01_8cpp_acd83569b2eedc6ce3aa2cd969eff4ad0}} 
+\index{clock2 .cpp@{clock2 .cpp}!start\_epoch\_time@{start\_epoch\_time}}
+\index{start\_epoch\_time@{start\_epoch\_time}!clock2 .cpp@{clock2 .cpp}}
+\doxysubsubsection{\texorpdfstring{start\_epoch\_time}{start\_epoch\_time}}
+{\footnotesize\ttfamily const auto start\+\_\+epoch\+\_\+time \{ 1654387200\}}
+
+\mbox{\Hypertarget{clock2_01_8cpp_a3a07459ef02acb274f463c7b784c2c08}\label{clock2_01_8cpp_a3a07459ef02acb274f463c7b784c2c08}} 
+\index{clock2 .cpp@{clock2 .cpp}!STB\_pin@{STB\_pin}}
+\index{STB\_pin@{STB\_pin}!clock2 .cpp@{clock2 .cpp}}
+\doxysubsubsection{\texorpdfstring{STB\_pin}{STB\_pin}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}} STB\+\_\+pin = D4}
+
+
+
+Referenced by \mbox{\hyperlink{l00004}{LEDClock\+View\+Handler\+::\+LEDClock\+View\+Handler()}}.
+
+\mbox{\Hypertarget{clock2_01_8cpp_a42e698d8f633b4785a60d961dd07406f}\label{clock2_01_8cpp_a42e698d8f633b4785a60d961dd07406f}} 
+\index{clock2 .cpp@{clock2 .cpp}!sunriseTime@{sunriseTime}}
+\index{sunriseTime@{sunriseTime}!clock2 .cpp@{clock2 .cpp}}
+\doxysubsubsection{\texorpdfstring{sunriseTime}{sunriseTime}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_my_time}{My\+Time}} sunrise\+Time}
+
+\mbox{\Hypertarget{clock2_01_8cpp_a76f0771f8ccec078c18cb169ce28b1b2}\label{clock2_01_8cpp_a76f0771f8ccec078c18cb169ce28b1b2}} 
+\index{clock2 .cpp@{clock2 .cpp}!sunriseTimeHandler@{sunriseTimeHandler}}
+\index{sunriseTimeHandler@{sunriseTimeHandler}!clock2 .cpp@{clock2 .cpp}}
+\doxysubsubsection{\texorpdfstring{sunriseTimeHandler}{sunriseTimeHandler}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_time_zone_d_s_t_handler}{Time\+Zone\+DSTHandler}} \mbox{\hyperlink{clock2_01_8cpp_a3fba512c786a3d3519e39dd1c3e60c12}{time\+Zone\+DSTHandler}} \& sunrise\+Time\+Handler}
+
+\mbox{\Hypertarget{clock2_01_8cpp_ad0aef8af0d93d71443b2c850604fab1e}\label{clock2_01_8cpp_ad0aef8af0d93d71443b2c850604fab1e}} 
+\index{clock2 .cpp@{clock2 .cpp}!sunsetTime@{sunsetTime}}
+\index{sunsetTime@{sunsetTime}!clock2 .cpp@{clock2 .cpp}}
+\doxysubsubsection{\texorpdfstring{sunsetTime}{sunsetTime}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_my_time}{My\+Time}} sunset\+Time}
+
+\mbox{\Hypertarget{clock2_01_8cpp_ab1bc055d3f9534b1b1479e908feec00e}\label{clock2_01_8cpp_ab1bc055d3f9534b1b1479e908feec00e}} 
+\index{clock2 .cpp@{clock2 .cpp}!systemTimeHandler@{systemTimeHandler}}
+\index{systemTimeHandler@{systemTimeHandler}!clock2 .cpp@{clock2 .cpp}}
+\doxysubsubsection{\texorpdfstring{systemTimeHandler}{systemTimeHandler}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_controller}{Controller}} controller \& system\+Time\+Handler}
+
+
+
+Referenced by \mbox{\hyperlink{l00099}{loop()}}.
+
+\mbox{\Hypertarget{clock2_01_8cpp_a3fba512c786a3d3519e39dd1c3e60c12}\label{clock2_01_8cpp_a3fba512c786a3d3519e39dd1c3e60c12}} 
+\index{clock2 .cpp@{clock2 .cpp}!timeZoneDSTHandler@{timeZoneDSTHandler}}
+\index{timeZoneDSTHandler@{timeZoneDSTHandler}!clock2 .cpp@{clock2 .cpp}}
+\doxysubsubsection{\texorpdfstring{timeZoneDSTHandler}{timeZoneDSTHandler}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_n_t_p_wi_fi_time_handler}{NTPWi\+Fi\+Time\+Handler}} \mbox{\hyperlink{clock2_01_8cpp_a4fbfcf15f8adbc87520e9db52931f392}{source\+Time\+Handler}} \& time\+Zone\+DSTHandler}
+
+\mbox{\Hypertarget{clock2_01_8cpp_ab0fee54bb5a2d1f2de33a6900fa83029}\label{clock2_01_8cpp_ab0fee54bb5a2d1f2de33a6900fa83029}} 
+\index{clock2 .cpp@{clock2 .cpp}!update\_NTP\_interval\_in\_mSec@{update\_NTP\_interval\_in\_mSec}}
+\index{update\_NTP\_interval\_in\_mSec@{update\_NTP\_interval\_in\_mSec}!clock2 .cpp@{clock2 .cpp}}
+\doxysubsubsection{\texorpdfstring{update\_NTP\_interval\_in\_mSec}{update\_NTP\_interval\_in\_mSec}}
+{\footnotesize\ttfamily const auto update\+\_\+\+NTP\+\_\+interval\+\_\+in\+\_\+m\+Sec \{ 30$\ast$ \mbox{\hyperlink{clock2_01_8cpp_a01353d48cedbdabf361ff70492fadd66}{one\+Second}}\}}
+

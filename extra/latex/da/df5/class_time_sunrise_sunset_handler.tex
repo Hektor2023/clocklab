@@ -1,0 +1,260 @@
+\hypertarget{class_time_sunrise_sunset_handler}{}\doxysection{Time\+Sunrise\+Sunset\+Handler}
+\label{class_time_sunrise_sunset_handler}\index{TimeSunriseSunsetHandler@{TimeSunriseSunsetHandler}}
+
+
+{\ttfamily \#include \char`\"{}Time\+Sunrise\+Sunset\+Handler.\+h\char`\"{}}
+
+Inheritance diagram for Time\+Sunrise\+Sunset\+Handler\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{da/df5/class_time_sunrise_sunset_handler}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_time_sunrise_sunset_handler_ad67789b4d458f5cc4417e40f9c34e497}{Time\+Sunrise\+Sunset\+Handler}} (\mbox{\hyperlink{class_time_handler}{Time\+Handler}} $\ast$\mbox{\hyperlink{class_time_handler_a63ad6ab8709672dbcc67dda18383dfe3}{ptr}}, double \mbox{\hyperlink{class_time_sunrise_sunset_handler_ac155e35fdeebafc89723a51520fb9fe6}{longitude}}, double \mbox{\hyperlink{class_time_sunrise_sunset_handler_a76714bdbc5c536fa77dfb14533ff82a9}{latitude}}, \mbox{\hyperlink{class_my_time}{My\+Time}} \&sunrise, \mbox{\hyperlink{class_my_time}{My\+Time}} \&sunset)
+\item 
+virtual \mbox{\hyperlink{class_time_sunrise_sunset_handler_a54a84011b8f347431b83b53a7312039c}{$\sim$\+Time\+Sunrise\+Sunset\+Handler}} (void)
+\item 
+virtual const char $\ast$ \mbox{\hyperlink{class_time_sunrise_sunset_handler_aaf53e0d3de2d6ffb42903578a4c4ec5b}{get\+Class\+Name}} (void)
+\item 
+virtual void \mbox{\hyperlink{class_time_sunrise_sunset_handler_a9caf3b8852098554173231248ecffc10}{update\+Time}} (\mbox{\hyperlink{class_timestamp}{Timestamp}} \&timestamp)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_time_handler}{Time\+Handler}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_time_handler_a5e0eb1999bca334190f57ce2d633eac8}{Time\+Handler}} (\mbox{\hyperlink{class_time_handler}{Time\+Handler}} $\ast$\mbox{\hyperlink{class_time_handler_a63ad6ab8709672dbcc67dda18383dfe3}{ptr}}=nullptr)
+\item 
+virtual \mbox{\hyperlink{class_time_handler_a196abf140e55a092784a779e78f05a43}{$\sim$\+Time\+Handler}} (void)
+\item 
+virtual void \mbox{\hyperlink{class_time_handler_aa9fe17491ab4c7f708547996a47970d2}{bypass}} (bool \mbox{\hyperlink{class_time_handler_ad11dd77562d80b745b5d3f8bb7d19e8a}{bypass\+Module}})
+\item 
+virtual const char $\ast$ \mbox{\hyperlink{class_time_handler_a9f78e5d51abbc956af40d5c72c6bccf4}{get\+Class\+Name}} (void)=0
+\item 
+virtual bool \mbox{\hyperlink{class_time_handler_afb78175ac039184b6fa7513b44f98055}{is\+Valid\+Time}} (void)
+\item 
+virtual void \mbox{\hyperlink{class_time_handler_a7299a2f6b8eecfce70480cb66276b684}{set\+Valid\+Time}} (bool valid\+Flagg)
+\item 
+virtual void \mbox{\hyperlink{class_time_handler_a9caf3b8852098554173231248ecffc10}{update\+Time}} (\mbox{\hyperlink{class_timestamp}{Timestamp}} \&timestamp)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+long \mbox{\hyperlink{class_time_sunrise_sunset_handler_a2e45bed8deadfb754a7ff07162f9bae8}{modd}} (double a, double b)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{class_time_sunrise_sunset_handler_a76714bdbc5c536fa77dfb14533ff82a9}{latitude}}
+\item 
+double \mbox{\hyperlink{class_time_sunrise_sunset_handler_ac155e35fdeebafc89723a51520fb9fe6}{longitude}}
+\item 
+\mbox{\hyperlink{class_my_time}{My\+Time}} \& \mbox{\hyperlink{class_time_sunrise_sunset_handler_afdc4991625899eb534aa5beb9a2a43a4}{sunrise\+Time}}
+\item 
+\mbox{\hyperlink{class_my_time}{My\+Time}} \& \mbox{\hyperlink{class_time_sunrise_sunset_handler_a44eabf6998430556eb1be65f41605d6f}{sunset\+Time}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+\doxysubsubsection*{Protected Attributes inherited from \mbox{\hyperlink{class_time_handler}{Time\+Handler}}}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{class_time_handler_ad11dd77562d80b745b5d3f8bb7d19e8a}{bypass\+Module}}
+\item 
+\mbox{\hyperlink{class_time_handler}{Time\+Handler}} $\ast$ \mbox{\hyperlink{class_time_handler_a63ad6ab8709672dbcc67dda18383dfe3}{ptr}}
+\item 
+bool \mbox{\hyperlink{class_time_handler_aea16ad32369656bd8bbb7871d3eeb5f0}{valid\+Time}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_time_sunrise_sunset_handler_ad67789b4d458f5cc4417e40f9c34e497}\label{class_time_sunrise_sunset_handler_ad67789b4d458f5cc4417e40f9c34e497}} 
+\index{TimeSunriseSunsetHandler@{TimeSunriseSunsetHandler}!TimeSunriseSunsetHandler@{TimeSunriseSunsetHandler}}
+\index{TimeSunriseSunsetHandler@{TimeSunriseSunsetHandler}!TimeSunriseSunsetHandler@{TimeSunriseSunsetHandler}}
+\doxysubsubsection{\texorpdfstring{TimeSunriseSunsetHandler()}{TimeSunriseSunsetHandler()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_time_sunrise_sunset_handler}{Time\+Sunrise\+Sunset\+Handler}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_time_handler}{Time\+Handler}} $\ast$}]{ptr,  }\item[{double}]{longitude,  }\item[{double}]{latitude,  }\item[{\mbox{\hyperlink{class_my_time}{My\+Time}} \&}]{sunrise,  }\item[{\mbox{\hyperlink{class_my_time}{My\+Time}} \&}]{sunset }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00005\ :\mbox{\hyperlink{class_time_handler}{TimeHandler}}(\ \mbox{\hyperlink{class_time_handler_a63ad6ab8709672dbcc67dda18383dfe3}{ptr}}),\mbox{\hyperlink{class_time_sunrise_sunset_handler_ac155e35fdeebafc89723a51520fb9fe6}{longitude}}(\ \mbox{\hyperlink{class_time_sunrise_sunset_handler_ac155e35fdeebafc89723a51520fb9fe6}{longitude}}),\ \mbox{\hyperlink{class_time_sunrise_sunset_handler_a76714bdbc5c536fa77dfb14533ff82a9}{latitude}}(\ \mbox{\hyperlink{class_time_sunrise_sunset_handler_a76714bdbc5c536fa77dfb14533ff82a9}{latitude}}),\ \mbox{\hyperlink{class_time_sunrise_sunset_handler_afdc4991625899eb534aa5beb9a2a43a4}{sunriseTime}}(\ sunrise),\ \mbox{\hyperlink{class_time_sunrise_sunset_handler_a44eabf6998430556eb1be65f41605d6f}{sunsetTime}}(\ sunset)\ \  }
+\DoxyCodeLine{00006\ \{\};}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{class_time_sunrise_sunset_handler_a54a84011b8f347431b83b53a7312039c}\label{class_time_sunrise_sunset_handler_a54a84011b8f347431b83b53a7312039c}} 
+\index{TimeSunriseSunsetHandler@{TimeSunriseSunsetHandler}!````~TimeSunriseSunsetHandler@{$\sim$TimeSunriseSunsetHandler}}
+\index{````~TimeSunriseSunsetHandler@{$\sim$TimeSunriseSunsetHandler}!TimeSunriseSunsetHandler@{TimeSunriseSunsetHandler}}
+\doxysubsubsection{\texorpdfstring{$\sim$TimeSunriseSunsetHandler()}{~TimeSunriseSunsetHandler()}}
+{\footnotesize\ttfamily $\sim$\mbox{\hyperlink{class_time_sunrise_sunset_handler}{Time\+Sunrise\+Sunset\+Handler}} (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00009\ \{\};}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_time_sunrise_sunset_handler_aaf53e0d3de2d6ffb42903578a4c4ec5b}\label{class_time_sunrise_sunset_handler_aaf53e0d3de2d6ffb42903578a4c4ec5b}} 
+\index{TimeSunriseSunsetHandler@{TimeSunriseSunsetHandler}!getClassName@{getClassName}}
+\index{getClassName@{getClassName}!TimeSunriseSunsetHandler@{TimeSunriseSunsetHandler}}
+\doxysubsubsection{\texorpdfstring{getClassName()}{getClassName()}}
+{\footnotesize\ttfamily const char $\ast$ get\+Class\+Name (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_time_handler_a9f78e5d51abbc956af40d5c72c6bccf4}{Time\+Handler}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00013\ \{}
+\DoxyCodeLine{00014\ \ \ \textcolor{keywordflow}{return}(\textcolor{stringliteral}{"{}TimeSunriseSunsetHandler"{}});}
+\DoxyCodeLine{00015\ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{class_time_sunrise_sunset_handler_a2e45bed8deadfb754a7ff07162f9bae8}\label{class_time_sunrise_sunset_handler_a2e45bed8deadfb754a7ff07162f9bae8}} 
+\index{TimeSunriseSunsetHandler@{TimeSunriseSunsetHandler}!modd@{modd}}
+\index{modd@{modd}!TimeSunriseSunsetHandler@{TimeSunriseSunsetHandler}}
+\doxysubsubsection{\texorpdfstring{modd()}{modd()}}
+{\footnotesize\ttfamily long modd (\begin{DoxyParamCaption}\item[{double}]{a,  }\item[{double}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00019\ \{}
+\DoxyCodeLine{00020\ \ \ \textcolor{keywordflow}{return}((a-\/\textcolor{keywordtype}{long}(a))*b);}
+\DoxyCodeLine{00021\ \}}
+
+\end{DoxyCode}
+
+
+Referenced by \mbox{\hyperlink{l00024}{update\+Time()}}.
+
+\mbox{\Hypertarget{class_time_sunrise_sunset_handler_a9caf3b8852098554173231248ecffc10}\label{class_time_sunrise_sunset_handler_a9caf3b8852098554173231248ecffc10}} 
+\index{TimeSunriseSunsetHandler@{TimeSunriseSunsetHandler}!updateTime@{updateTime}}
+\index{updateTime@{updateTime}!TimeSunriseSunsetHandler@{TimeSunriseSunsetHandler}}
+\doxysubsubsection{\texorpdfstring{updateTime()}{updateTime()}}
+{\footnotesize\ttfamily void update\+Time (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_timestamp}{Timestamp}} \&}]{timestamp }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{class_time_handler_a9caf3b8852098554173231248ecffc10}{Time\+Handler}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00025\ \{}
+\DoxyCodeLine{00026\ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t}}\ \ lastday=\ 0;}
+\DoxyCodeLine{00027\ \ \ \mbox{\hyperlink{class_my_date}{MyDate}}\ \ date=\ timestamp.\mbox{\hyperlink{class_timestamp_a5ccbcc11205465afe0e47cf20ab91fac}{getDate}}();}
+\DoxyCodeLine{00028\ \ \ }
+\DoxyCodeLine{00029\ \ \ \textcolor{keywordflow}{if}(\ date.\mbox{\hyperlink{class_my_date_ad730ea4ed90e952a6164e438f3c7d4ec}{getDay}}()\ !=\ lastday)}
+\DoxyCodeLine{00030\ \ \ \{}
+\DoxyCodeLine{00031\ \ \ \ \ lastday=\ date.\mbox{\hyperlink{class_my_date_ad730ea4ed90e952a6164e438f3c7d4ec}{getDay}}();}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \ \ \ \ \mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t}}\ day=\ \ \ date.\mbox{\hyperlink{class_my_date_ad730ea4ed90e952a6164e438f3c7d4ec}{getDay}}();}
+\DoxyCodeLine{00034\ \ \ \ \ \mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t}}\ month=\ date.\mbox{\hyperlink{class_my_date_a2170dd4ffb311f1795eef21f41e4de59}{getMonth}}();}
+\DoxyCodeLine{00035\ \ \ \ \ uint16\_t\ year=\ date.\mbox{\hyperlink{class_my_date_a189e1b766ca37529602497c6297d782a}{getYear}}();}
+\DoxyCodeLine{00036\ \ \ \ \ }
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordtype}{double}\ E6=\ (\ month<=2)?\ (\ month+12)\ :month;}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{double}\ E7=\ (\ month<=2)?\ (\ year-\/1):\ year;}
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordtype}{double}\ L6\ =\ 2-\/int(year/100)+int(year/400);}
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordtype}{double}\ L7\ =\ int(365.25*(E7+4716))+int(30.6001*(E6+1))+day+L6-\/1524.5;}
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordtype}{double}\ M3\ =\ (L7-\/2451545)/36525;}
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordtype}{double}\ M4\ =\ 280.46646\ +36000.76983*M3+0.0003032*M3*M3;}
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordtype}{double}\ M5\ =\ 357.52911\ +35999.05029*M3-\/0.0001537*M3*M3;}
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordtype}{double}\ O5=\ \ \mbox{\hyperlink{class_time_sunrise_sunset_handler_a2e45bed8deadfb754a7ff07162f9bae8}{modd}}(\ (M5/360),\ 360)\ *\mbox{\hyperlink{_time_sunrise_sunset_handler_8h_a1899157b7608cbbd425ea88aab515f90}{GradToRad}};}
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordtype}{double}\ O4\ =\ \mbox{\hyperlink{class_time_sunrise_sunset_handler_a2e45bed8deadfb754a7ff07162f9bae8}{modd}}(\ (M4/360),\ 360);}
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keywordtype}{double}\ M6\ =\ (1.914602-\/0.004817*M3-\/0.000014*M3*M3)*sin(\ \ O5);}
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{double}\ M7\ =\ (0.019993-\/0.000101*M3\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ )*sin(2*O5);}
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keywordtype}{double}\ M8\ =\ \ 0.000289\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *sin(3*O5);}
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordtype}{double}\ M9\ =\ \ M6+M7+M8;}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keywordtype}{double}\ N7\ =\ 125.04-\/1934.136*M3;}
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keywordtype}{double}\ N9\ =\ (N7\ <0)?\ (\ N7+360):\ N7;}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keywordtype}{double}\ M11\ =\ 23.43930278-\/0.0130042*M3-\/0.000000163*M3*M3;}
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keywordtype}{double}\ N10\ =\ O4\ +M9\ -\/0.00569\ -\/0.00478*sin(N9*\mbox{\hyperlink{_time_sunrise_sunset_handler_8h_a1899157b7608cbbd425ea88aab515f90}{GradToRad}});}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keywordtype}{double}\ N11\ =\ asin(\ sin(\ M11*\mbox{\hyperlink{_time_sunrise_sunset_handler_8h_a1899157b7608cbbd425ea88aab515f90}{GradToRad}})*sin(N10*\mbox{\hyperlink{_time_sunrise_sunset_handler_8h_a1899157b7608cbbd425ea88aab515f90}{GradToRad}}));}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keywordtype}{double}\ N16\ =\ -\/0.01483-\/sin(\ N11)*sin(\ \mbox{\hyperlink{class_time_sunrise_sunset_handler_a76714bdbc5c536fa77dfb14533ff82a9}{latitude}}*\mbox{\hyperlink{_time_sunrise_sunset_handler_8h_a1899157b7608cbbd425ea88aab515f90}{GradToRad}});}
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordtype}{double}\ O16\ =\ \ \ \ \ \ \ \ \ \ cos(\ N11)*cos(\ \mbox{\hyperlink{class_time_sunrise_sunset_handler_a76714bdbc5c536fa77dfb14533ff82a9}{latitude}}*\mbox{\hyperlink{_time_sunrise_sunset_handler_8h_a1899157b7608cbbd425ea88aab515f90}{GradToRad}});}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keywordtype}{double}\ Z=\ \ \ \ 13-\/\mbox{\hyperlink{class_time_sunrise_sunset_handler_ac155e35fdeebafc89723a51520fb9fe6}{longitude}}/15+\ (7.7*sin((O4+78)*\mbox{\hyperlink{_time_sunrise_sunset_handler_8h_a1899157b7608cbbd425ea88aab515f90}{GradToRad}})-\/9.5*sin(2*O4*\mbox{\hyperlink{_time_sunrise_sunset_handler_8h_a1899157b7608cbbd425ea88aab515f90}{GradToRad}}))/60;}
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keywordtype}{double}\ P15\ =\ (\ acos(N16/O16)*57.29577951)/15;}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keywordtype}{double}\ P17\ =\ Z-\/P15;\ \textcolor{comment}{//-\/\ godzina\ wschodu\ Słońca}}
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keywordtype}{double}\ Q17\ =\ Z+P15;\ \textcolor{comment}{//-\/\ godzina\ zachodu\ Słońca\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ \ \ \ }
+\DoxyCodeLine{00071\ \ \ \ \ this-\/>\mbox{\hyperlink{class_time_sunrise_sunset_handler_afdc4991625899eb534aa5beb9a2a43a4}{sunriseTime}}.\mbox{\hyperlink{class_my_time_a6c3c3bc42e5c0aca01c000ccd760e601}{setHour}}(\ (\mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t}})P17);}
+\DoxyCodeLine{00072\ \ \ \ \ this-\/>\mbox{\hyperlink{class_time_sunrise_sunset_handler_afdc4991625899eb534aa5beb9a2a43a4}{sunriseTime}}.\mbox{\hyperlink{class_my_time_a30c18003e7ad01a77f0250a3a4aadfea}{setMinute}}(\ (\mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t}})\ \mbox{\hyperlink{class_time_sunrise_sunset_handler_a2e45bed8deadfb754a7ff07162f9bae8}{modd}}(\ P17,\ 60));}
+\DoxyCodeLine{00073\ \ \ \ \ this-\/>\mbox{\hyperlink{class_time_sunrise_sunset_handler_afdc4991625899eb534aa5beb9a2a43a4}{sunriseTime}}.\mbox{\hyperlink{class_my_time_ae9a468fd389f0fe728892527c67f0771}{setSecond}}(\ (\mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t}})\ \mbox{\hyperlink{class_time_sunrise_sunset_handler_a2e45bed8deadfb754a7ff07162f9bae8}{modd}}(\ P17,\ 3600)/10);}
+\DoxyCodeLine{00074\ \ \ \ \ }
+\DoxyCodeLine{00075\ \ \ \ \ this-\/>\mbox{\hyperlink{class_time_sunrise_sunset_handler_a44eabf6998430556eb1be65f41605d6f}{sunsetTime}}.\mbox{\hyperlink{class_my_time_a6c3c3bc42e5c0aca01c000ccd760e601}{setHour}}(\ (\mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t}})Q17);}
+\DoxyCodeLine{00076\ \ \ \ \ this-\/>\mbox{\hyperlink{class_time_sunrise_sunset_handler_a44eabf6998430556eb1be65f41605d6f}{sunsetTime}}.\mbox{\hyperlink{class_my_time_a30c18003e7ad01a77f0250a3a4aadfea}{setMinute}}(\ (\mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t}})\mbox{\hyperlink{class_time_sunrise_sunset_handler_a2e45bed8deadfb754a7ff07162f9bae8}{modd}}(\ Q17,\ 60));}
+\DoxyCodeLine{00077\ \ \ \ \ this-\/>\mbox{\hyperlink{class_time_sunrise_sunset_handler_a44eabf6998430556eb1be65f41605d6f}{sunsetTime}}.\mbox{\hyperlink{class_my_time_ae9a468fd389f0fe728892527c67f0771}{setSecond}}(\ (\mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t}})\ \mbox{\hyperlink{class_time_sunrise_sunset_handler_a2e45bed8deadfb754a7ff07162f9bae8}{modd}}(\ Q17,\ 3600)/10);}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keywordtype}{char}\ timeStrBuffer[\ \mbox{\hyperlink{class_my_time_a89403698fcad339a13f4b1ed999318ed}{MyTime::getStringBufferSize}}()];}
+\DoxyCodeLine{00080\ \ \ \ \ Serial.printf(\textcolor{stringliteral}{"{}Wsch:\ \%s\ \ "{}},\ \ \ \ this-\/>\mbox{\hyperlink{class_time_sunrise_sunset_handler_afdc4991625899eb534aa5beb9a2a43a4}{sunriseTime}}.\mbox{\hyperlink{class_my_time_a296755c77ffde8699bbb2b1e8a94a9a2}{toString}}(\ timeStrBuffer));}
+\DoxyCodeLine{00081\ \ \ \ \ Serial.printf(\textcolor{stringliteral}{"{}/\ \ Zach:\ \%s\(\backslash\)n"{}},\ this-\/>\mbox{\hyperlink{class_time_sunrise_sunset_handler_a44eabf6998430556eb1be65f41605d6f}{sunsetTime}}.\mbox{\hyperlink{class_my_time_a296755c77ffde8699bbb2b1e8a94a9a2}{toString}}(\ timeStrBuffer));}
+\DoxyCodeLine{00082\ \ \ \}}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00084\ \ \ \mbox{\hyperlink{class_time_handler_a9caf3b8852098554173231248ecffc10}{TimeHandler::updateTime}}(\ timestamp);\ \ }
+\DoxyCodeLine{00085\ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00131}{Timestamp\+::get\+Date()}}, \mbox{\hyperlink{l00018}{My\+Date\+::get\+Day()}}, \mbox{\hyperlink{l00031}{My\+Date\+::get\+Month()}}, \mbox{\hyperlink{l00173}{My\+Time\+::get\+String\+Buffer\+Size()}}, \mbox{\hyperlink{l00043}{My\+Date\+::get\+Year()}}, \mbox{\hyperlink{l00010}{Grad\+To\+Rad}}, \mbox{\hyperlink{l00018}{latitude}}, \mbox{\hyperlink{l00017}{longitude}}, \mbox{\hyperlink{l00018}{modd()}}, \mbox{\hyperlink{l00023}{My\+Time\+::set\+Hour()}}, \mbox{\hyperlink{l00035}{My\+Time\+::set\+Minute()}}, \mbox{\hyperlink{l00047}{My\+Time\+::set\+Second()}}, \mbox{\hyperlink{l00019}{sunrise\+Time}}, \mbox{\hyperlink{l00020}{sunset\+Time}}, \mbox{\hyperlink{l00179}{My\+Time\+::to\+String()}}, and \mbox{\hyperlink{l00040}{Time\+Handler\+::update\+Time()}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_time_sunrise_sunset_handler_a76714bdbc5c536fa77dfb14533ff82a9}\label{class_time_sunrise_sunset_handler_a76714bdbc5c536fa77dfb14533ff82a9}} 
+\index{TimeSunriseSunsetHandler@{TimeSunriseSunsetHandler}!latitude@{latitude}}
+\index{latitude@{latitude}!TimeSunriseSunsetHandler@{TimeSunriseSunsetHandler}}
+\doxysubsubsection{\texorpdfstring{latitude}{latitude}}
+{\footnotesize\ttfamily double latitude\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \mbox{\hyperlink{l00024}{update\+Time()}}.
+
+\mbox{\Hypertarget{class_time_sunrise_sunset_handler_ac155e35fdeebafc89723a51520fb9fe6}\label{class_time_sunrise_sunset_handler_ac155e35fdeebafc89723a51520fb9fe6}} 
+\index{TimeSunriseSunsetHandler@{TimeSunriseSunsetHandler}!longitude@{longitude}}
+\index{longitude@{longitude}!TimeSunriseSunsetHandler@{TimeSunriseSunsetHandler}}
+\doxysubsubsection{\texorpdfstring{longitude}{longitude}}
+{\footnotesize\ttfamily double longitude\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \mbox{\hyperlink{l00024}{update\+Time()}}.
+
+\mbox{\Hypertarget{class_time_sunrise_sunset_handler_afdc4991625899eb534aa5beb9a2a43a4}\label{class_time_sunrise_sunset_handler_afdc4991625899eb534aa5beb9a2a43a4}} 
+\index{TimeSunriseSunsetHandler@{TimeSunriseSunsetHandler}!sunriseTime@{sunriseTime}}
+\index{sunriseTime@{sunriseTime}!TimeSunriseSunsetHandler@{TimeSunriseSunsetHandler}}
+\doxysubsubsection{\texorpdfstring{sunriseTime}{sunriseTime}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_my_time}{My\+Time}}\& sunrise\+Time\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \mbox{\hyperlink{l00024}{update\+Time()}}.
+
+\mbox{\Hypertarget{class_time_sunrise_sunset_handler_a44eabf6998430556eb1be65f41605d6f}\label{class_time_sunrise_sunset_handler_a44eabf6998430556eb1be65f41605d6f}} 
+\index{TimeSunriseSunsetHandler@{TimeSunriseSunsetHandler}!sunsetTime@{sunsetTime}}
+\index{sunsetTime@{sunsetTime}!TimeSunriseSunsetHandler@{TimeSunriseSunsetHandler}}
+\doxysubsubsection{\texorpdfstring{sunsetTime}{sunsetTime}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_my_time}{My\+Time}}\& sunset\+Time\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \mbox{\hyperlink{l00024}{update\+Time()}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_time_sunrise_sunset_handler_8h}{Time\+Sunrise\+Sunset\+Handler.\+h}}\item 
+\mbox{\hyperlink{_time_sunrise_sunset_handler_8cpp}{Time\+Sunrise\+Sunset\+Handler.\+cpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,107 @@
+\hypertarget{lcd__st7567s_8h_source}{}\doxysection{lcd\+\_\+st7567s.\+h}
+\label{lcd__st7567s_8h_source}\index{extra/ST7567S\_128X64\_I2C/lcd\_st7567s.h@{extra/ST7567S\_128X64\_I2C/lcd\_st7567s.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/******************************}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ original\ code\ from}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *\ URL:\ https://github.com/mworkfun/ST7567A\_128X32DOT\_LCD}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *\ }}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *\ \ }}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ *\ Modify\ for\ LCD\ ST7567S\ 128x64}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ *\ screen:}}
+\DoxyCodeLine{00008\ \textcolor{comment}{\ *\ x-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/>\ +}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ *\ y\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ |}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ *\ |\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ |}}
+\DoxyCodeLine{00011\ \textcolor{comment}{\ *\ |-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ *\ |\ }}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ *\ v\ +}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ *\ \ }}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ ******************************/}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#ifndef\ LCD\_ST7567S\_h}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#define\ LCD\_ST7567S\_h}}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ <Arduino.h>}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#include\ <Wire.h>}}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#define\ DRAW\_UPPER\_RIGHT\ 0x01}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#define\ DRAW\_UPPER\_LEFT\ \ 0x02}}
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#define\ DRAW\_LOWER\_LEFT\ 0x04}}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#define\ DRAW\_LOWER\_RIGHT\ \ 0x08}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#define\ DRAW\_ALL\ (DRAW\_UPPER\_RIGHT|DRAW\_UPPER\_LEFT|DRAW\_LOWER\_RIGHT|DRAW\_LOWER\_LEFT)}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classlcd__st7567s}{lcd\_st7567s}}\{}
+\DoxyCodeLine{00029\ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{comment}{//\ LCD\ is\ driven\ by\ ST7567A\ IC.}}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{comment}{//\ Define\ instructions\ on\ page\ 37\ of\ the\ ST7567A\ data\ sheet.}}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keyword}{enum}\ ST7567A\_C\ \{}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ displayON\ \ =\ 0xaf,\ \ \textcolor{comment}{//display\ on.}}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ displayOFF\ =\ 0xae,\ \ \textcolor{comment}{//display\ off.}}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ }
+\DoxyCodeLine{00036\ \ \ \ \ \ \ startLine\ \ =\ 0x40,\ \ \textcolor{comment}{//Set\ display\ start\ line.}}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ restart\ \ \ \ =\ 0xe2,\ \ \textcolor{comment}{//restart\ command.}}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ seg\ \ \ \ \ \ \ \ =\ 0xa0,\ \ \textcolor{comment}{//Set\ scan\ direction\ of\ SEG,\ SEG\ =\ 1-\/0-\/1-\/0-\/0-\/0-\/0-\/MX;\ }}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//MX=1-\/-\/>reverse\ direction,\ MX=0-\/-\/>normal\ direction.}}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \ \ \ \ \ \ INV\_normal\ =\ 0xa6,\ \ \textcolor{comment}{//normal\ display.}}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ AP\_normal\ \ =\ 0xa4,\ \ \textcolor{comment}{//normal\ display.}}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ }
+\DoxyCodeLine{00044\ \ \ \ \ \ \ BS\ \ \ \ \ \ \ \ \ =\ 0xa3,\ \ \textcolor{comment}{//select\ bias\ setting,\ bias\ =\ 1-\/0-\/1-\/0-\/0-\/0-\/1-\/BS,\ BS(0)=1/9,\ \ BS(1)=1/7(at\ 1/65\ duty).}}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ com\ \ \ \ \ \ \ \ =\ 0xc8,\ \ \textcolor{comment}{//Set\ output\ direction\ of\ COM,\ COM\ =\ 1-\/1-\/0-\/0-\/MY-\/X-\/X-\/X;}}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//MY=1-\/-\/>reverse\ direction,\ MY=0-\/-\/>normal\ direction.}}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00048\ \ \ \ \ \ \ powerCon1\ \ =\ 0x2c,\ \ \textcolor{comment}{//Controls\ the\ built-\/in\ power\ circuits;}}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ powerCon2\ \ =\ 0x2e,\ \ \textcolor{comment}{//Define\ instructions\ on\ page\ 43\ of\ the\ ST7567A\ data\ sheet.}}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ powerCon3\ \ =\ 0x2f,}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \textcolor{comment}{\ \ \ \ \ \ /********Adjust\ display\ brightness********/}}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ regRatio\ \ \ =\ 0x22,\ \ \textcolor{comment}{//Controls\ the\ regulation\ ratio\ of\ the\ built-\/in\ regulator;}}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Define\ instructions\ on\ page\ 43\ of\ the\ ST7567A\ data\ sheet.}}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ EV1\ \ \ \ \ \ \ \ =\ 0x81,\ \ \textcolor{comment}{//Define\ instructions\ on\ page\ 44\ of\ the\ ST7567A\ data\ sheet.}}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ EV2\ \ \ \ \ \ \ \ =\ 0x30,\ \ }
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \textcolor{comment}{\ \ \ \ \ \ /**********entension\ command\ set**********/}}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ exit\_EC\ \ \ \ =\ 0xfe,\ \ \textcolor{comment}{//exit\ extension\ command\ set.}}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ enter\_EC\ \ \ =\ 0xff,\ \ \textcolor{comment}{//enter\ extension\ command\ set.}}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \ \ \ \ \ \ DSM\_ON\ \ \ \ \ =\ 0x72,\ \ \textcolor{comment}{//display\ setting\ mode\ on.}}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ DSM\_OFF\ \ \ \ =\ 0x70,\ \ \textcolor{comment}{//display\ setting\ mode\ off.}}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ DT\ \ \ \ \ \ \ \ \ =\ 0xd6,\ \ \textcolor{comment}{//set\ the\ display\ duty,\ DT=33.}}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ BA\ \ \ \ \ \ \ \ \ =\ 0x90,\ \ \textcolor{comment}{//BA=1/9,\ selects\ LCD\ bias\ ratio\ for\ the\ internal\ voltage\ follower\ to\ drive\ the\ LCD.\ }}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//This\ command\ has\ priority\ over\ the\ Bias\ Select\ (BS).}}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ FR\ \ \ \ \ \ \ \ \ =\ 0x9d,\ \ \textcolor{comment}{//specifies\ the\ frame\ rate\ for\ duty.}}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00069\ \ \ \ \ \ \ RMW\ \ \ \ \ \ \ \ =\ 0xe0,\ \ \textcolor{comment}{//Read-\/modify-\/Write\ command\ on\ page\ 42\ of\ ST7567A\ datasheet.}}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ END\ \ \ \ \ \ \ \ =\ 0xee,}
+\DoxyCodeLine{00071\ \ \ \ \ \};}
+\DoxyCodeLine{00072\ \ \ \ \ }
+\DoxyCodeLine{00073\ \ \ \ \ \mbox{\hyperlink{classlcd__st7567s}{lcd\_st7567s}}();}
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{keywordtype}{void}\ WriteByte\_command(\textcolor{keywordtype}{int}\ dat);\ \ \ \ \ \ \textcolor{comment}{//Write\ a\ command\ to\ LCD.}}
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keywordtype}{void}\ WriteCont\_command(\textcolor{keywordtype}{int}\ str[]);\ \ \ \ \textcolor{comment}{//Continuously\ write\ commands\ to\ LCD.}}
+\DoxyCodeLine{00076\ \ \ \ \ \textcolor{keywordtype}{void}\ Init();\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//This\ initialization\ function\ is\ called\ when\ using\ LCD.}}
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keywordtype}{void}\ testPixel(\textcolor{keywordtype}{int}\ t);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//use\ to\ test\ LCD\ screen.}}
+\DoxyCodeLine{00078\ \ \ \ \ }
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keywordtype}{void}\ WriteByte\_dat(\textcolor{keywordtype}{int}\ dat);\ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Write\ a\ data\ to\ RAM.}}
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keywordtype}{void}\ WriteCont\_dat(\textcolor{keywordtype}{int}\ str[]);\ \ \ \ \ \ \ \ \textcolor{comment}{//Continuously\ write\ data\ to\ RAM.}}
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{keywordtype}{int}\ \ ReadByte\_dat(\textcolor{keywordtype}{int}\ col,\ \textcolor{keywordtype}{int}\ page);\ \textcolor{comment}{//read\ one\ byte\ RAM\ data\ to\ MCU.\ col=0-\/127,\ page=0-\/3}}
+\DoxyCodeLine{00082\ \ \ \ \ \textcolor{keywordtype}{void}\ DisplayPixel(\textcolor{keywordtype}{int}\ x,\textcolor{keywordtype}{int}\ y);\ \ \ \ \ \ \ \textcolor{comment}{//display\ one\ pixel.\ X=0-\/31,\ Y=0-\/127}}
+\DoxyCodeLine{00083\ \ \ \ \ \textcolor{keywordtype}{void}\ ClearPixel(\textcolor{keywordtype}{int}\ x,\textcolor{keywordtype}{int}\ y);\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Does\ not\ display\ a\ pixel.\ X=0-\/31,\ Y=0-\/127\ }}
+\DoxyCodeLine{00084\ \ \ \ \ \textcolor{keywordtype}{void}\ Clear(\textcolor{keywordtype}{bool}\ invcolor);\ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ false\ =\ RAM\ write\ '0',\ all\ pixels\ turn\ off.\ }}
+\DoxyCodeLine{00085\ \ \ \ \ \textcolor{keywordtype}{void}\ FontSize(\textcolor{keywordtype}{int}\ num);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//reserve}}
+\DoxyCodeLine{00086\ \ \ \ \ \textcolor{keywordtype}{void}\ Cursor(\textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y);\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Character\ display\ position.\ x=0-\/17,\ y=0-\/3}}
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keywordtype}{void}\ DisplayPicture();\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//display\ picture.}}
+\DoxyCodeLine{00088\ \ \ \ \ \textcolor{keywordtype}{void}\ WriteFont(\textcolor{keywordtype}{int}\ num);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Writes\ the\ data\ from\ the\ font.c\ file\ to\ RAM.}}
+\DoxyCodeLine{00089\ \ \ \ \ \textcolor{keywordtype}{void}\ Display(\textcolor{keywordtype}{char}\ *str);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//4\ lines\ of\ 18\ characters\ each.}}
+\DoxyCodeLine{00090\ \ \ \ \ }
+\DoxyCodeLine{00091\ \ \ \ \ \textcolor{comment}{//\ import\ from\ U8G2\ }}
+\DoxyCodeLine{00092\ \ \ \ \ \textcolor{comment}{//\ https://github.com/olikraus/u8g2}}
+\DoxyCodeLine{00093\ \ \ \ \ \textcolor{keywordtype}{void}\ DrawLine(\textcolor{keywordtype}{int}\ x1,\ \textcolor{keywordtype}{int}\ y1,\ \textcolor{keywordtype}{int}\ x2,\ \textcolor{keywordtype}{int}\ y2,\ \textcolor{keywordtype}{bool}\ invcolor);}
+\DoxyCodeLine{00094\ \ \ \ \ \textcolor{keywordtype}{void}\ draw\_circle\_section(\textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y,\ \textcolor{keywordtype}{int}\ x0,\ \textcolor{keywordtype}{int}\ y0,\ \textcolor{keywordtype}{int}\ option,\ \textcolor{keywordtype}{bool}\ invcolor,\ \textcolor{keywordtype}{bool}\ solid);}
+\DoxyCodeLine{00095\ \ \ \ \ \textcolor{keywordtype}{void}\ draw\_circle(\textcolor{keywordtype}{int}\ x0,\ \textcolor{keywordtype}{int}\ y0,\ \textcolor{keywordtype}{int}\ rad,\ \textcolor{keywordtype}{int}\ option,\ \textcolor{keywordtype}{bool}\ invcolor,\ \textcolor{keywordtype}{bool}\ solid);}
+\DoxyCodeLine{00096\ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00097\ \ \ \ \ \textcolor{keywordtype}{int}\ addr\ =\ 0x3f;\ \ \textcolor{comment}{//Address\ of\ LCD\ device.}}
+\DoxyCodeLine{00098\ \ \ \ \ \textcolor{keywordtype}{int}\ cursor[2]=\{0,0\};}
+\DoxyCodeLine{00099\ \};}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00101\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

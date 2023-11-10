@@ -1,0 +1,73 @@
+
+\begin{DoxyItemize}
+\item version 1.\+0.\+0 June 2019
+\begin{DoxyItemize}
+\item First release
+\item An Arduino library to display data on a 8-\/digit TM1638 seven segment module. This version is for the (KEY \& LED) variant which has 8 LED\textquotesingle{}s and 8 Push buttons.
+\item Fork of \char`\"{}\+Tm1638lite\char`\"{}
+\item Much Improved memory footprint.
+\item Support for Decimal point, Segment select and Brightness control added.
+\end{DoxyItemize}
+\item Version 1.\+1.\+0 August 2019
+\begin{DoxyItemize}
+\item Added support for \char`\"{}model 2\char`\"{} Tm1638 module(the one with no LEDS and 16 push buttons )
+\item This model is marked QFY-\/\+TM1638.
+\end{DoxyItemize}
+\item Version 1.\+2.\+0 November 2019
+\begin{DoxyItemize}
+\item Patch to deal with issue number 3 on github dealing with swapped displays on some modules(model 2) with different wiring, See Note A in readme
+\item Removed ASCII font to a separate file for efficiency purposes as it was duplicated in both header files.
+\item Memory footprint decrease for Model 2 library by using Progmem for the ASCII font file data as per Model 1.
+\end{DoxyItemize}
+\item Version 1.\+3.\+0 Jan 2020
+\begin{DoxyItemize}
+\item Two new example files for Model2, demonstrating practical examples and scrolling text
+\item Example file for model 1 extended, demonstrating practical examples and scrolling text
+\item New function display\+Int\+Num(model 1 only ) For displaying integer numbers
+\item New function Display\+Dec\+Num\+Nibble, allow two separate numbers to be sent to each nibble
+\item Model 2 Read\+Key16() button function optimised.
+\item ASCII font reduced in size \{ $\vert$ \} $\sim$ characters removed.
+\end{DoxyItemize}
+\item Version 1.\+4.\+0 Feb 2020
+\begin{DoxyItemize}
+\item \char`\"{}begin\+Display\char`\"{} method added.
+\item Two new example files added.
+\item Tested on Nodemcu ESP-\/12E ESP2866 , it works.
+\end{DoxyItemize}
+\item Version 1.\+5.\+0 May 2020
+\begin{DoxyItemize}
+\item Minor update to bring in pull request 7 to deal with github issues 6 and 7.
+\item Display overflow check and dealing with multiple dots.
+\item Changes are for Model 1 only and \char`\"{}display\+Text\char`\"{} function only.
+\item Pull request 1 by \href{https://github.com/gabormay}{\texttt{ gabormay}}
+\end{DoxyItemize}
+\item Version 1.\+6.\+0 August 2020
+\begin{DoxyItemize}
+\item Pull request 2 by \href{https://github.com/centic9}{\texttt{ centic9}} Model 1 constructor duplicate code removed.
+\item Closed Issue 1 and 2 on github by adding support for high frequency MCU, such as ESP32 The constructor of all models has a new parameter if set to true the code uses a custom \char`\"{}shiftin\char`\"{} function
+\item Closed Issue 8 on github, LKM1638 bi-\/colour LED module support added (named Model 3 for purposes of library )
+\item New function set\+LEDs added to turn on all LEDs at once, for model 1 and 3.
+\end{DoxyItemize}
+\item Version 1.\+7.\+0 October 2020
+\begin{DoxyItemize}
+\item Added Read\+Key16\+Two function to model 2 to detect multiple key presses see issue 12 on github.
+\item TM1638\+\_\+common files created for common code and settings between the different models
+\item Example file added by \href{https://github.com/wunderbaum}{\texttt{ wunderbaum}} see pull request 3.
+\item Optimisations to example files.
+\end{DoxyItemize}
+\item Version 1.\+8.\+0 November 2021
+\begin{DoxyItemize}
+\item Minor update
+\item Some users (two) have reported the high frequency shift\+In function does not work fully with some micro-\/controller boards at high frequency(\+ESP32 240\+Mhz) and the fix is minor adjustment to sequence in said function. Never saw the issue in my testing. The change makes the function sequence similar to the official Arduino shift\+In function structure in the Arduino Core (wiring.\+shift.\+c) , See issue 16 on github for full details.
+\end{DoxyItemize}
+\item Version 1.\+9.\+0 November 2022
+\begin{DoxyItemize}
+\item Change made to Model 1/3 display\+Hex method as per pull request \#19.
+\item Right aligned text mode added to (as per pull request \#17)
+\begin{DoxyItemize}
+\item Model 1/3, methods display\+Int\+Num and Display\+Dec\+Num\+Nibble
+\item Model 2 , methods Display\+Dec\+Num, Display\+Dec\+Num\+Nibble \& Display\+Hex\+Num
+\item Previously it was just Left aligned text and added leading zeros. 
+\end{DoxyItemize}
+\end{DoxyItemize}
+\end{DoxyItemize}

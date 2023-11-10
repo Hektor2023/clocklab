@@ -1,0 +1,127 @@
+\hypertarget{class_timeline}{}\doxysection{Timeline\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}}
+\label{class_timeline}\index{Timeline$<$ T $>$@{Timeline$<$ T $>$}}
+
+
+{\ttfamily \#include \char`\"{}Timeline.\+h\char`\"{}}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_timeline_ab37c1d03e49962158115c6c86143708f}{Timeline}} (const \mbox{\hyperlink{class_timeline}{Timeline}} \&t)
+\item 
+\mbox{\hyperlink{class_timeline_ac50156db70c1c6ecc80a60a2c23bb075}{Timeline}} (void)
+\item 
+\mbox{\hyperlink{class_timeline_a2eea7f6eb4c98543dd2ced99a05d6508}{$\sim$\+Timeline}} (void)
+\item 
+void \mbox{\hyperlink{class_timeline_aa3109acd47404c36a91c3965f180af5f}{execute}} (\mbox{\hyperlink{class_timer_task}{Timer\+Task}}$<$ T $>$ $\ast$tasks\mbox{[}$\,$\mbox{]}, const unsigned char tasks\+\_\+size)
+\item 
+const \mbox{\hyperlink{class_timeline}{Timeline}} \& \mbox{\hyperlink{class_timeline_a5309586a8a5038b5100bdff2e8a1a759}{operator=}} (const \mbox{\hyperlink{class_timeline}{Timeline}} \&t)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_timer}{Timer}} \mbox{\hyperlink{class_timeline_aaf7e0389622e8f7b78393ee10d8e93a4}{timer}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class T$>$\newline
+class Timeline$<$ T $>$}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_timeline_ac50156db70c1c6ecc80a60a2c23bb075}\label{class_timeline_ac50156db70c1c6ecc80a60a2c23bb075}} 
+\index{Timeline$<$ T $>$@{Timeline$<$ T $>$}!Timeline@{Timeline}}
+\index{Timeline@{Timeline}!Timeline$<$ T $>$@{Timeline$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Timeline()}{Timeline()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_timeline}{Timeline}} (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00039\ \{\};}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{class_timeline_ab37c1d03e49962158115c6c86143708f}\label{class_timeline_ab37c1d03e49962158115c6c86143708f}} 
+\index{Timeline$<$ T $>$@{Timeline$<$ T $>$}!Timeline@{Timeline}}
+\index{Timeline@{Timeline}!Timeline$<$ T $>$@{Timeline$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Timeline()}{Timeline()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_timeline}{Timeline}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_timeline}{Timeline}}$<$ T $>$ \&}]{t }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00040\ :\mbox{\hyperlink{class_timeline_aaf7e0389622e8f7b78393ee10d8e93a4}{timer}}(\ t.\mbox{\hyperlink{class_timeline_aaf7e0389622e8f7b78393ee10d8e93a4}{timer}})\ \{\};}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{class_timeline_a2eea7f6eb4c98543dd2ced99a05d6508}\label{class_timeline_a2eea7f6eb4c98543dd2ced99a05d6508}} 
+\index{Timeline$<$ T $>$@{Timeline$<$ T $>$}!````~Timeline@{$\sim$Timeline}}
+\index{````~Timeline@{$\sim$Timeline}!Timeline$<$ T $>$@{Timeline$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{$\sim$Timeline()}{~Timeline()}}
+{\footnotesize\ttfamily $\sim$\mbox{\hyperlink{class_timeline}{Timeline}} (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00041\ \{\};}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_timeline_aa3109acd47404c36a91c3965f180af5f}\label{class_timeline_aa3109acd47404c36a91c3965f180af5f}} 
+\index{Timeline$<$ T $>$@{Timeline$<$ T $>$}!execute@{execute}}
+\index{execute@{execute}!Timeline$<$ T $>$@{Timeline$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{execute()}{execute()}}
+{\footnotesize\ttfamily void execute (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_timer_task}{Timer\+Task}}$<$ T $>$ $\ast$}]{tasks\mbox{[}$\,$\mbox{]},  }\item[{const unsigned char}]{tasks\+\_\+size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\ \textcolor{keyword}{auto}\ i=0;\ i<\ tasks\_size;\ i++)}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_timeline_aaf7e0389622e8f7b78393ee10d8e93a4}{timer}}.\mbox{\hyperlink{class_timer_a87196752431dfa903717d6cb2bdffb6a}{setInterval}}(\ tasks[\ i].get\_interval());}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_timeline_aaf7e0389622e8f7b78393ee10d8e93a4}{timer}}.\mbox{\hyperlink{class_timer_a1cb444f6744f5853fbf202ff16cf24ea}{run}}(\ tasks[i].get\_ptr);\ \ \ \ \ }
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00068}{Timer\+::run()}}, \mbox{\hyperlink{l00016}{Timer\+::set\+Interval()}}, and \mbox{\hyperlink{l00036}{Timeline$<$ T $>$\+::timer}}.
+
+\mbox{\Hypertarget{class_timeline_a5309586a8a5038b5100bdff2e8a1a759}\label{class_timeline_a5309586a8a5038b5100bdff2e8a1a759}} 
+\index{Timeline$<$ T $>$@{Timeline$<$ T $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!Timeline$<$ T $>$@{Timeline$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{class_timeline}{Timeline}} \& operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_timeline}{Timeline}}$<$ T $>$ \&}]{t }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_timeline_aaf7e0389622e8f7b78393ee10d8e93a4}{timer}}=\ t.\mbox{\hyperlink{class_timeline_aaf7e0389622e8f7b78393ee10d8e93a4}{timer}};}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}(*\textcolor{keyword}{this});}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00036}{Timeline$<$ T $>$\+::timer}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_timeline_aaf7e0389622e8f7b78393ee10d8e93a4}\label{class_timeline_aaf7e0389622e8f7b78393ee10d8e93a4}} 
+\index{Timeline$<$ T $>$@{Timeline$<$ T $>$}!timer@{timer}}
+\index{timer@{timer}!Timeline$<$ T $>$@{Timeline$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{timer}{timer}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_timer}{Timer}} timer\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \mbox{\hyperlink{l00049}{Timeline$<$ T $>$\+::execute()}}, and \mbox{\hyperlink{l00043}{Timeline$<$ T $>$\+::operator=()}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_timeline_8h}{Timeline.\+h}}\end{DoxyCompactItemize}
