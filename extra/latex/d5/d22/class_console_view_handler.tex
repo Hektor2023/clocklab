@@ -1,0 +1,146 @@
+\hypertarget{class_console_view_handler}{}\doxysection{Console\+View\+Handler}
+\label{class_console_view_handler}\index{ConsoleViewHandler@{ConsoleViewHandler}}
+
+
+{\ttfamily \#include \char`\"{}Console\+View\+Handler.\+h\char`\"{}}
+
+Inheritance diagram for Console\+View\+Handler\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{d5/d22/class_console_view_handler}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_console_view_handler_aab6d24d9ceb5fbfa6041e376709490bf}{Console\+View\+Handler}} (\mbox{\hyperlink{class_time_handler}{Time\+Handler}} $\ast$\mbox{\hyperlink{class_time_handler_a63ad6ab8709672dbcc67dda18383dfe3}{ptr}}=nullptr)
+\item 
+virtual \mbox{\hyperlink{class_console_view_handler_a7503548f295b03beb4e5aeb40255becc}{$\sim$\+Console\+View\+Handler}} (void)
+\item 
+virtual const char $\ast$ \mbox{\hyperlink{class_console_view_handler_aaf53e0d3de2d6ffb42903578a4c4ec5b}{get\+Class\+Name}} (void)
+\item 
+virtual void \mbox{\hyperlink{class_console_view_handler_a9caf3b8852098554173231248ecffc10}{update\+Time}} (\mbox{\hyperlink{class_timestamp}{Timestamp}} \&timestamp)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_time_handler}{Time\+Handler}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_time_handler_a5e0eb1999bca334190f57ce2d633eac8}{Time\+Handler}} (\mbox{\hyperlink{class_time_handler}{Time\+Handler}} $\ast$\mbox{\hyperlink{class_time_handler_a63ad6ab8709672dbcc67dda18383dfe3}{ptr}}=nullptr)
+\item 
+virtual \mbox{\hyperlink{class_time_handler_a196abf140e55a092784a779e78f05a43}{$\sim$\+Time\+Handler}} (void)
+\item 
+virtual void \mbox{\hyperlink{class_time_handler_aa9fe17491ab4c7f708547996a47970d2}{bypass}} (bool \mbox{\hyperlink{class_time_handler_ad11dd77562d80b745b5d3f8bb7d19e8a}{bypass\+Module}})
+\item 
+virtual const char $\ast$ \mbox{\hyperlink{class_time_handler_a9f78e5d51abbc956af40d5c72c6bccf4}{get\+Class\+Name}} (void)=0
+\item 
+virtual bool \mbox{\hyperlink{class_time_handler_afb78175ac039184b6fa7513b44f98055}{is\+Valid\+Time}} (void)
+\item 
+virtual void \mbox{\hyperlink{class_time_handler_a7299a2f6b8eecfce70480cb66276b684}{set\+Valid\+Time}} (bool valid\+Flagg)
+\item 
+virtual void \mbox{\hyperlink{class_time_handler_a9caf3b8852098554173231248ecffc10}{update\+Time}} (\mbox{\hyperlink{class_timestamp}{Timestamp}} \&timestamp)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_timestamp}{Timestamp}} \mbox{\hyperlink{class_console_view_handler_a62e91a62435c4dc5c1ad8c6a8be139f9}{last\+Timestamp}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+\doxysubsubsection*{Protected Attributes inherited from \mbox{\hyperlink{class_time_handler}{Time\+Handler}}}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{class_time_handler_ad11dd77562d80b745b5d3f8bb7d19e8a}{bypass\+Module}}
+\item 
+\mbox{\hyperlink{class_time_handler}{Time\+Handler}} $\ast$ \mbox{\hyperlink{class_time_handler_a63ad6ab8709672dbcc67dda18383dfe3}{ptr}}
+\item 
+bool \mbox{\hyperlink{class_time_handler_aea16ad32369656bd8bbb7871d3eeb5f0}{valid\+Time}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_console_view_handler_aab6d24d9ceb5fbfa6041e376709490bf}\label{class_console_view_handler_aab6d24d9ceb5fbfa6041e376709490bf}} 
+\index{ConsoleViewHandler@{ConsoleViewHandler}!ConsoleViewHandler@{ConsoleViewHandler}}
+\index{ConsoleViewHandler@{ConsoleViewHandler}!ConsoleViewHandler@{ConsoleViewHandler}}
+\doxysubsubsection{\texorpdfstring{ConsoleViewHandler()}{ConsoleViewHandler()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_console_view_handler}{Console\+View\+Handler}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_time_handler}{Time\+Handler}} $\ast$}]{ptr = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00004\ :\mbox{\hyperlink{class_time_handler}{TimeHandler}}(\ \mbox{\hyperlink{class_time_handler_a63ad6ab8709672dbcc67dda18383dfe3}{ptr}})\ \{\};}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{class_console_view_handler_a7503548f295b03beb4e5aeb40255becc}\label{class_console_view_handler_a7503548f295b03beb4e5aeb40255becc}} 
+\index{ConsoleViewHandler@{ConsoleViewHandler}!````~ConsoleViewHandler@{$\sim$ConsoleViewHandler}}
+\index{````~ConsoleViewHandler@{$\sim$ConsoleViewHandler}!ConsoleViewHandler@{ConsoleViewHandler}}
+\doxysubsubsection{\texorpdfstring{$\sim$ConsoleViewHandler()}{~ConsoleViewHandler()}}
+{\footnotesize\ttfamily $\sim$\mbox{\hyperlink{class_console_view_handler}{Console\+View\+Handler}} (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00007\ \{\};}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_console_view_handler_aaf53e0d3de2d6ffb42903578a4c4ec5b}\label{class_console_view_handler_aaf53e0d3de2d6ffb42903578a4c4ec5b}} 
+\index{ConsoleViewHandler@{ConsoleViewHandler}!getClassName@{getClassName}}
+\index{getClassName@{getClassName}!ConsoleViewHandler@{ConsoleViewHandler}}
+\doxysubsubsection{\texorpdfstring{getClassName()}{getClassName()}}
+{\footnotesize\ttfamily const char $\ast$ get\+Class\+Name (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_time_handler_a9f78e5d51abbc956af40d5c72c6bccf4}{Time\+Handler}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00024\ \{}
+\DoxyCodeLine{00025\ \ \ \textcolor{keywordflow}{return}(\ \textcolor{stringliteral}{"{}ConsoleViewHandler"{}});}
+\DoxyCodeLine{00026\ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{class_console_view_handler_a9caf3b8852098554173231248ecffc10}\label{class_console_view_handler_a9caf3b8852098554173231248ecffc10}} 
+\index{ConsoleViewHandler@{ConsoleViewHandler}!updateTime@{updateTime}}
+\index{updateTime@{updateTime}!ConsoleViewHandler@{ConsoleViewHandler}}
+\doxysubsubsection{\texorpdfstring{updateTime()}{updateTime()}}
+{\footnotesize\ttfamily void update\+Time (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_timestamp}{Timestamp}} \&}]{timestamp }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{class_time_handler_a9caf3b8852098554173231248ecffc10}{Time\+Handler}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00011\ \{}
+\DoxyCodeLine{00012\ \ }
+\DoxyCodeLine{00013\ \ \ \textcolor{keywordtype}{char}\ timestampStrBuffer[\ \mbox{\hyperlink{class_timestamp_a89403698fcad339a13f4b1ed999318ed}{Timestamp::getStringBufferSize}}()];}
+\DoxyCodeLine{00014\ \ \ Serial.printf(\textcolor{stringliteral}{"{}(\%10s)\ \%s\(\backslash\)n"{}},}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ timestamp.\mbox{\hyperlink{class_timestamp_abf515f4bf5ef449479adbd9ab4e94d36}{getDayOfWeekAsString}}(),\ }
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ timestamp.\mbox{\hyperlink{class_timestamp_a296755c77ffde8699bbb2b1e8a94a9a2}{toString}}(\ timestampStrBuffer));}
+\DoxyCodeLine{00017\ \ \ \mbox{\hyperlink{class_time_handler_a9caf3b8852098554173231248ecffc10}{TimeHandler::updateTime}}(\ timestamp);}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \ \ }
+\DoxyCodeLine{00020\ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00043}{Timestamp\+::get\+Day\+Of\+Week\+As\+String()}}, \mbox{\hyperlink{l00240}{Timestamp\+::get\+String\+Buffer\+Size()}}, \mbox{\hyperlink{l00246}{Timestamp\+::to\+String()}}, and \mbox{\hyperlink{l00040}{Time\+Handler\+::update\+Time()}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_console_view_handler_a62e91a62435c4dc5c1ad8c6a8be139f9}\label{class_console_view_handler_a62e91a62435c4dc5c1ad8c6a8be139f9}} 
+\index{ConsoleViewHandler@{ConsoleViewHandler}!lastTimestamp@{lastTimestamp}}
+\index{lastTimestamp@{lastTimestamp}!ConsoleViewHandler@{ConsoleViewHandler}}
+\doxysubsubsection{\texorpdfstring{lastTimestamp}{lastTimestamp}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_timestamp}{Timestamp}} last\+Timestamp\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_console_view_handler_8h}{Console\+View\+Handler.\+h}}\item 
+\mbox{\hyperlink{_console_view_handler_8cpp}{Console\+View\+Handler.\+cpp}}\end{DoxyCompactItemize}

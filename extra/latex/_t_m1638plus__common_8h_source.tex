@@ -1,0 +1,167 @@
+\hypertarget{_t_m1638plus__common_8h_source}{}\doxysection{TM1638plus\+\_\+common.\+h}
+\label{_t_m1638plus__common_8h_source}\index{extra/TM1638plus-\/master/TM1638plus-\/master/src/TM1638plus\_common.h@{extra/TM1638plus-\/master/TM1638plus-\/master/src/TM1638plus\_common.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{*\ Project\ Name:\ TM1638plus\ }}
+\DoxyCodeLine{00003\ \textcolor{comment}{*\ File:\ TM1638plus\_common.h}}
+\DoxyCodeLine{00004\ \textcolor{comment}{*\ Description:\ header\ \ file\ for\ common\ data\ and\ functions\ between\ model\ 1\ and\ 2\ classes}}
+\DoxyCodeLine{00005\ \textcolor{comment}{*\ Arduino\ library\ TM1638plus}}
+\DoxyCodeLine{00006\ \textcolor{comment}{*\ Author:\ Gavin\ Lyons.}}
+\DoxyCodeLine{00007\ \textcolor{comment}{*\ URL:\ https://github.com/gavinlyonsrepo/TM1638plus}}
+\DoxyCodeLine{00008\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#ifndef\ TM1638PLUS\_COMMON\_H}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#define\ TM1638PLUS\_COMMON\_H}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#if\ (ARDUINO\ >=100)}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\ \ \#include\ "{}Arduino.h"{}}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\ \ \#include\ "{}WProgram.h"{}}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#define\ TM\_ACTIVATE\ 0x8F\ }\textcolor{comment}{//\ Start\ up}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#define\ TM\_BUTTONS\_MODE\ 0x42\ }\textcolor{comment}{//\ Buttons\ mode}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#define\ TM\_WRITE\_LOC\ 0x44\ }\textcolor{comment}{//\ Write\ to\ a\ location}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#define\ TM\_WRITE\_INC\ 0x40\ }\textcolor{comment}{//\ Incremental\ write}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#define\ TM\_SEG\_ADR\ 0xC0\ \ }\textcolor{comment}{//\ leftmost\ segment\ Address\ C0\ C2\ C4\ C6\ C8\ CA\ CC\ CE}}
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#define\ TM\_LEDS\_ADR\ 0xC1\ \ }\textcolor{comment}{//\ Leftmost\ LED\ address\ C1\ C3\ C5\ C7\ C9\ CB\ CD\ CF}}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#define\ TM\_BRIGHT\_ADR\ 0x88\ }\textcolor{comment}{//\ Brightness\ address}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#define\ TM\_BRIGHT\_MASK\ 0x07\ }\textcolor{comment}{//\ Brightness\ mask\ }}
+\DoxyCodeLine{00027\ \textcolor{preprocessor}{\#define\ TM\_DEFAULT\_BRIGHTNESS\ 0x02\ }\textcolor{comment}{//can\ be\ 0x00\ to\ 0x07\ }}
+\DoxyCodeLine{00028\ \textcolor{preprocessor}{\#define\ TM\_DISPLAY\_SIZE\ 8\ }\textcolor{comment}{//size\ of\ display}}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \textcolor{preprocessor}{\#define\ TM\_ASCII\_OFFSET\ 32\ }\textcolor{comment}{//\ Ascii\ table\ offset\ to\ jump\ over\ first\ missing\ 32\ chars}}
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#define\ TM\_HEX\_OFFSET\ \ \ 16\ }\textcolor{comment}{//\ Ascii\ table\ offset\ to\ reach\ number\ position}}
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#define\ TM\_DOT\_MASK\_DEC\ \ \ \ 128\ }\textcolor{comment}{//\ 0x80\ Mask\ to\ \ switch\ on\ decimal\ point\ in\ seven\ seg.\ \ \ }}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \textcolor{preprocessor}{\#define\ TM\_RED\_LED\ 0x02\ }\textcolor{comment}{//\ Model\ 3}}
+\DoxyCodeLine{00035\ \textcolor{preprocessor}{\#define\ TM\_GREEN\_LED\ 0x01\ }\textcolor{comment}{//\ Model\ 3}}
+\DoxyCodeLine{00036\ \textcolor{preprocessor}{\#define\ TM\_OFF\_LED\ 0x00}}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \textcolor{preprocessor}{\#define\ TM\_HFIN\_DELAY\ \ \ 1\ }\textcolor{comment}{//\ uS\ Delay\ used\ by\ shiftIn\ function\ for\ High-\/freq\ MCU\ \ }}
+\DoxyCodeLine{00039\ \textcolor{preprocessor}{\#define\ TM\_HFOUT\_DELAY\ \ 1\ }\textcolor{comment}{//\ uS\ Delay\ used\ by\ shiftOut\ function\ for\ High-\/freq\ MCU\ \ \ }}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ }
+\DoxyCodeLine{00042\ \{}
+\DoxyCodeLine{00043\ \ \ \ \ TMAlignTextRight\ =\ 1,\ }
+\DoxyCodeLine{00044\ \ \ \ \ TMAlignTextLeft\ =\ 2,\ }
+\DoxyCodeLine{00045\ \}AlignTextType\_e;\ \textcolor{comment}{//\ Alignment\ of\ text}}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \textcolor{comment}{//\ font\ ,\ map\ of\ ASCII\ values/table\ to\ 7-\/segment,\ offset\ to\ position\ 32.\ }}
+\DoxyCodeLine{00048\ \textcolor{keyword}{const}\ \ PROGMEM\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ SevenSeg[]\ =\ \{}
+\DoxyCodeLine{00049\ \ \ 0x00,\ \textcolor{comment}{/*\ (space)\ */}}
+\DoxyCodeLine{00050\ \ \ 0x86,\ \textcolor{comment}{/*\ !\ */}}
+\DoxyCodeLine{00051\ \ \ 0x22,\ \textcolor{comment}{/*\ "{}\ */}}
+\DoxyCodeLine{00052\ \ \ 0x7E,\ \textcolor{comment}{/*\ \#\ */}}
+\DoxyCodeLine{00053\ \ \ 0x6D,\ \textcolor{comment}{/*\ \$\ */}}
+\DoxyCodeLine{00054\ \ \ 0xD2,\ \textcolor{comment}{/*\ \%\ */}}
+\DoxyCodeLine{00055\ \ \ 0x46,\ \textcolor{comment}{/*\ \&\ */}}
+\DoxyCodeLine{00056\ \ \ 0x20,\ \textcolor{comment}{/*\ '\ */}}
+\DoxyCodeLine{00057\ \ \ 0x29,\ \textcolor{comment}{/*\ (\ */}}
+\DoxyCodeLine{00058\ \ \ 0x0B,\ \textcolor{comment}{/*\ )\ */}}
+\DoxyCodeLine{00059\ \ \ 0x21,\ \textcolor{comment}{/*\ *\ */}}
+\DoxyCodeLine{00060\ \ \ 0x70,\ \textcolor{comment}{/*\ +\ */}}
+\DoxyCodeLine{00061\ \ \ 0x10,\ \textcolor{comment}{/*\ ,\ */}}
+\DoxyCodeLine{00062\ \ \ 0x40,\ \textcolor{comment}{/*\ -\/\ */}}
+\DoxyCodeLine{00063\ \ \ 0x80,\ \textcolor{comment}{/*\ .\ */}}
+\DoxyCodeLine{00064\ \ \ 0x52,\ \textcolor{comment}{/*\ /\ */}}
+\DoxyCodeLine{00065\ \ \ 0x3F,\ \textcolor{comment}{/*\ 0\ */}}
+\DoxyCodeLine{00066\ \ \ 0x06,\ \textcolor{comment}{/*\ 1\ */}}
+\DoxyCodeLine{00067\ \ \ 0x5B,\ \textcolor{comment}{/*\ 2\ */}}
+\DoxyCodeLine{00068\ \ \ 0x4F,\ \textcolor{comment}{/*\ 3\ */}}
+\DoxyCodeLine{00069\ \ \ 0x66,\ \textcolor{comment}{/*\ 4\ */}}
+\DoxyCodeLine{00070\ \ \ 0x6D,\ \textcolor{comment}{/*\ 5\ */}}
+\DoxyCodeLine{00071\ \ \ 0x7D,\ \textcolor{comment}{/*\ 6\ */}}
+\DoxyCodeLine{00072\ \ \ 0x07,\ \textcolor{comment}{/*\ 7\ */}}
+\DoxyCodeLine{00073\ \ \ 0x7F,\ \textcolor{comment}{/*\ 8\ */}}
+\DoxyCodeLine{00074\ \ \ 0x6F,\ \textcolor{comment}{/*\ 9\ */}}
+\DoxyCodeLine{00075\ \ \ 0x09,\ \textcolor{comment}{/*\ :\ */}}
+\DoxyCodeLine{00076\ \ \ 0x0D,\ \textcolor{comment}{/*\ ;\ */}}
+\DoxyCodeLine{00077\ \ \ 0x61,\ \textcolor{comment}{/*\ <\ */}}
+\DoxyCodeLine{00078\ \ \ 0x48,\ \textcolor{comment}{/*\ =\ */}}
+\DoxyCodeLine{00079\ \ \ 0x43,\ \textcolor{comment}{/*\ >\ */}}
+\DoxyCodeLine{00080\ \ \ 0xD3,\ \textcolor{comment}{/*\ ?\ */}}
+\DoxyCodeLine{00081\ \ \ 0x5F,\ \textcolor{comment}{/*\ @\ */}}
+\DoxyCodeLine{00082\ \ \ 0x77,\ \textcolor{comment}{/*\ A\ */}}
+\DoxyCodeLine{00083\ \ \ 0x7C,\ \textcolor{comment}{/*\ B\ */}}
+\DoxyCodeLine{00084\ \ \ 0x39,\ \textcolor{comment}{/*\ C\ */}}
+\DoxyCodeLine{00085\ \ \ 0x5E,\ \textcolor{comment}{/*\ D\ */}}
+\DoxyCodeLine{00086\ \ \ 0x79,\ \textcolor{comment}{/*\ E\ */}}
+\DoxyCodeLine{00087\ \ \ 0x71,\ \textcolor{comment}{/*\ F\ */}}
+\DoxyCodeLine{00088\ \ \ 0x3D,\ \textcolor{comment}{/*\ G\ */}}
+\DoxyCodeLine{00089\ \ \ 0x76,\ \textcolor{comment}{/*\ H\ */}}
+\DoxyCodeLine{00090\ \ \ 0x30,\ \textcolor{comment}{/*\ I\ */}}
+\DoxyCodeLine{00091\ \ \ 0x1E,\ \textcolor{comment}{/*\ J\ */}}
+\DoxyCodeLine{00092\ \ \ 0x75,\ \textcolor{comment}{/*\ K\ */}}
+\DoxyCodeLine{00093\ \ \ 0x38,\ \textcolor{comment}{/*\ L\ */}}
+\DoxyCodeLine{00094\ \ \ 0x15,\ \textcolor{comment}{/*\ M\ */}}
+\DoxyCodeLine{00095\ \ \ 0x37,\ \textcolor{comment}{/*\ N\ */}}
+\DoxyCodeLine{00096\ \ \ 0x3F,\ \textcolor{comment}{/*\ O\ */}}
+\DoxyCodeLine{00097\ \ \ 0x73,\ \textcolor{comment}{/*\ P\ */}}
+\DoxyCodeLine{00098\ \ \ 0x6B,\ \textcolor{comment}{/*\ Q\ */}}
+\DoxyCodeLine{00099\ \ \ 0x33,\ \textcolor{comment}{/*\ R\ */}}
+\DoxyCodeLine{00100\ \ \ 0x6D,\ \textcolor{comment}{/*\ S\ */}}
+\DoxyCodeLine{00101\ \ \ 0x78,\ \textcolor{comment}{/*\ T\ */}}
+\DoxyCodeLine{00102\ \ \ 0x3E,\ \textcolor{comment}{/*\ U\ */}}
+\DoxyCodeLine{00103\ \ \ 0x3E,\ \textcolor{comment}{/*\ V\ */}}
+\DoxyCodeLine{00104\ \ \ 0x2A,\ \textcolor{comment}{/*\ W\ */}}
+\DoxyCodeLine{00105\ \ \ 0x76,\ \textcolor{comment}{/*\ X\ */}}
+\DoxyCodeLine{00106\ \ \ 0x6E,\ \textcolor{comment}{/*\ Y\ */}}
+\DoxyCodeLine{00107\ \ \ 0x5B,\ \textcolor{comment}{/*\ Z\ */}}
+\DoxyCodeLine{00108\ \ \ 0x39,\ \textcolor{comment}{/*\ [\ */}}
+\DoxyCodeLine{00109\ \ \ 0x64,\ \textcolor{comment}{/*\ \(\backslash\)\ */}}
+\DoxyCodeLine{00110\ \ \ 0x0F,\ \textcolor{comment}{/*\ ]\ */}}
+\DoxyCodeLine{00111\ \ \ 0x23,\ \textcolor{comment}{/*\ \string^\ */}}
+\DoxyCodeLine{00112\ \ \ 0x08,\ \textcolor{comment}{/*\ \_\ */}}
+\DoxyCodeLine{00113\ \ \ 0x02,\ \textcolor{comment}{/*\ `\ */}}
+\DoxyCodeLine{00114\ \ \ 0x5F,\ \textcolor{comment}{/*\ a\ */}}
+\DoxyCodeLine{00115\ \ \ 0x7C,\ \textcolor{comment}{/*\ b\ */}}
+\DoxyCodeLine{00116\ \ \ 0x58,\ \textcolor{comment}{/*\ c\ */}}
+\DoxyCodeLine{00117\ \ \ 0x5E,\ \textcolor{comment}{/*\ d\ */}}
+\DoxyCodeLine{00118\ \ \ 0x7B,\ \textcolor{comment}{/*\ e\ */}}
+\DoxyCodeLine{00119\ \ \ 0x71,\ \textcolor{comment}{/*\ f\ */}}
+\DoxyCodeLine{00120\ \ \ 0x6F,\ \textcolor{comment}{/*\ g\ */}}
+\DoxyCodeLine{00121\ \ \ 0x74,\ \textcolor{comment}{/*\ h\ */}}
+\DoxyCodeLine{00122\ \ \ 0x10,\ \textcolor{comment}{/*\ i\ */}}
+\DoxyCodeLine{00123\ \ \ 0x0C,\ \textcolor{comment}{/*\ j\ */}}
+\DoxyCodeLine{00124\ \ \ 0x75,\ \textcolor{comment}{/*\ k\ */}}
+\DoxyCodeLine{00125\ \ \ 0x30,\ \textcolor{comment}{/*\ l\ */}}
+\DoxyCodeLine{00126\ \ \ 0x14,\ \textcolor{comment}{/*\ m\ */}}
+\DoxyCodeLine{00127\ \ \ 0x54,\ \textcolor{comment}{/*\ n\ */}}
+\DoxyCodeLine{00128\ \ \ 0x5C,\ \textcolor{comment}{/*\ o\ */}}
+\DoxyCodeLine{00129\ \ \ 0x73,\ \textcolor{comment}{/*\ p\ */}}
+\DoxyCodeLine{00130\ \ \ 0x67,\ \textcolor{comment}{/*\ q\ */}}
+\DoxyCodeLine{00131\ \ \ 0x50,\ \textcolor{comment}{/*\ r\ */}}
+\DoxyCodeLine{00132\ \ \ 0x6D,\ \textcolor{comment}{/*\ s\ */}}
+\DoxyCodeLine{00133\ \ \ 0x78,\ \textcolor{comment}{/*\ t\ */}}
+\DoxyCodeLine{00134\ \ \ 0x1C,\ \textcolor{comment}{/*\ u\ */}}
+\DoxyCodeLine{00135\ \ \ 0x1C,\ \textcolor{comment}{/*\ v\ */}}
+\DoxyCodeLine{00136\ \ \ 0x14,\ \textcolor{comment}{/*\ w\ */}}
+\DoxyCodeLine{00137\ \ \ 0x76,\ \textcolor{comment}{/*\ x\ */}}
+\DoxyCodeLine{00138\ \ \ 0x6E,\ \textcolor{comment}{/*\ y\ */}}
+\DoxyCodeLine{00139\ \ \ 0x5B,\ \textcolor{comment}{/*\ z\ */}}
+\DoxyCodeLine{00140\ \ \textcolor{comment}{//\ Note\ :\ Removed\ last\ 4\ characters\ to\ reduce\ program\ size\ as\ of\ v\ 1.3.0\ }}
+\DoxyCodeLine{00141\ \textcolor{comment}{//\ \ 0x46,\ /*\ \{\ */}}
+\DoxyCodeLine{00142\ \textcolor{comment}{//\ \ 0x30,\ /*\ |\ */}}
+\DoxyCodeLine{00143\ \textcolor{comment}{//\ \ 0x70,\ /*\ \}\ */}}
+\DoxyCodeLine{00144\ \textcolor{comment}{//\ \ 0x01,\ /*\ \string~\ */\ }}
+\DoxyCodeLine{00145\ \};}
+\DoxyCodeLine{00146\ }
+\DoxyCodeLine{00147\ \textcolor{comment}{//\ Class\ for\ some\ common\ functions\ }}
+\DoxyCodeLine{00148\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_t_m1638plus__common}{TM1638plus\_common}}\{}
+\DoxyCodeLine{00149\ }
+\DoxyCodeLine{00150\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00151\ \ \ \ \ \textcolor{comment}{//\ Constructor\ }}
+\DoxyCodeLine{00152\ \ \ \ \ \mbox{\hyperlink{class_t_m1638plus__common}{TM1638plus\_common}}();}
+\DoxyCodeLine{00153\ \ \ \ \ }
+\DoxyCodeLine{00154\ \ \ \ \ \textcolor{comment}{//\ \ Used\ instead\ of\ arduino\ function\ "{}shiftin"{}\ when\ \_HIGH\_FREQ\ is\ set\ to\ true}}
+\DoxyCodeLine{00155\ \ \ \ \ uint8\_t\ \ HighFreqshiftin(uint8\_t\ dataPin,\ uint8\_t\ clockPin,\ uint8\_t\ bitOrder)\ ;}
+\DoxyCodeLine{00156\ \ \ \ \ \ \textcolor{comment}{//\ \ Used\ instead\ of\ arduino\ function\ "{}shiftOut"{}\ when\ \_HIGH\_FREQ\ is\ set\ to\ true}}
+\DoxyCodeLine{00157\ \ \ \ \ \textcolor{keywordtype}{void}\ HighFreqshiftOut(uint8\_t\ dataPin,\ uint8\_t\ clockPin,\ uint8\_t\ bitOrder,\ uint8\_t\ val);}
+\DoxyCodeLine{00158\ }
+\DoxyCodeLine{00159\ \};}
+\DoxyCodeLine{00160\ }
+\DoxyCodeLine{00161\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

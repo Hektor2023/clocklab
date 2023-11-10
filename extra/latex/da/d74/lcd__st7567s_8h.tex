@@ -1,0 +1,55 @@
+\hypertarget{lcd__st7567s_8h}{}\doxysection{extra/\+ST7567\+S\+\_\+128\+X64\+\_\+\+I2\+C/lcd\+\_\+st7567s.h File Reference}
+\label{lcd__st7567s_8h}\index{extra/ST7567S\_128X64\_I2C/lcd\_st7567s.h@{extra/ST7567S\_128X64\_I2C/lcd\_st7567s.h}}
+{\ttfamily \#include $<$Arduino.\+h$>$}\newline
+{\ttfamily \#include $<$Wire.\+h$>$}\newline
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classlcd__st7567s}{lcd\+\_\+st7567s}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{lcd__st7567s_8h_a32bacb5d961707e813d62695be000976}{DRAW\+\_\+\+ALL}}~(\mbox{\hyperlink{lcd__st7567s_8h_a1283077a23f96883a4a6297928e7b777}{DRAW\+\_\+\+UPPER\+\_\+\+RIGHT}}$\vert$\mbox{\hyperlink{lcd__st7567s_8h_af9f40fd033ad635689a79dc988e63559}{DRAW\+\_\+\+UPPER\+\_\+\+LEFT}}$\vert$\mbox{\hyperlink{lcd__st7567s_8h_aecb0f151d6dc1aee842635a406f8da13}{DRAW\+\_\+\+LOWER\+\_\+\+RIGHT}}$\vert$\mbox{\hyperlink{lcd__st7567s_8h_a6817fdd2bb7bf581f304d0488db107a2}{DRAW\+\_\+\+LOWER\+\_\+\+LEFT}})
+\item 
+\#define \mbox{\hyperlink{lcd__st7567s_8h_a6817fdd2bb7bf581f304d0488db107a2}{DRAW\+\_\+\+LOWER\+\_\+\+LEFT}}~0x04
+\item 
+\#define \mbox{\hyperlink{lcd__st7567s_8h_aecb0f151d6dc1aee842635a406f8da13}{DRAW\+\_\+\+LOWER\+\_\+\+RIGHT}}~0x08
+\item 
+\#define \mbox{\hyperlink{lcd__st7567s_8h_af9f40fd033ad635689a79dc988e63559}{DRAW\+\_\+\+UPPER\+\_\+\+LEFT}}~0x02
+\item 
+\#define \mbox{\hyperlink{lcd__st7567s_8h_a1283077a23f96883a4a6297928e7b777}{DRAW\+\_\+\+UPPER\+\_\+\+RIGHT}}~0x01
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{lcd__st7567s_8h_a32bacb5d961707e813d62695be000976}\label{lcd__st7567s_8h_a32bacb5d961707e813d62695be000976}} 
+\index{lcd\_st7567s.h@{lcd\_st7567s.h}!DRAW\_ALL@{DRAW\_ALL}}
+\index{DRAW\_ALL@{DRAW\_ALL}!lcd\_st7567s.h@{lcd\_st7567s.h}}
+\doxysubsubsection{\texorpdfstring{DRAW\_ALL}{DRAW\_ALL}}
+{\footnotesize\ttfamily \#define DRAW\+\_\+\+ALL~(\mbox{\hyperlink{lcd__st7567s_8h_a1283077a23f96883a4a6297928e7b777}{DRAW\+\_\+\+UPPER\+\_\+\+RIGHT}}$\vert$\mbox{\hyperlink{lcd__st7567s_8h_af9f40fd033ad635689a79dc988e63559}{DRAW\+\_\+\+UPPER\+\_\+\+LEFT}}$\vert$\mbox{\hyperlink{lcd__st7567s_8h_aecb0f151d6dc1aee842635a406f8da13}{DRAW\+\_\+\+LOWER\+\_\+\+RIGHT}}$\vert$\mbox{\hyperlink{lcd__st7567s_8h_a6817fdd2bb7bf581f304d0488db107a2}{DRAW\+\_\+\+LOWER\+\_\+\+LEFT}})}
+
+\mbox{\Hypertarget{lcd__st7567s_8h_a6817fdd2bb7bf581f304d0488db107a2}\label{lcd__st7567s_8h_a6817fdd2bb7bf581f304d0488db107a2}} 
+\index{lcd\_st7567s.h@{lcd\_st7567s.h}!DRAW\_LOWER\_LEFT@{DRAW\_LOWER\_LEFT}}
+\index{DRAW\_LOWER\_LEFT@{DRAW\_LOWER\_LEFT}!lcd\_st7567s.h@{lcd\_st7567s.h}}
+\doxysubsubsection{\texorpdfstring{DRAW\_LOWER\_LEFT}{DRAW\_LOWER\_LEFT}}
+{\footnotesize\ttfamily \#define DRAW\+\_\+\+LOWER\+\_\+\+LEFT~0x04}
+
+\mbox{\Hypertarget{lcd__st7567s_8h_aecb0f151d6dc1aee842635a406f8da13}\label{lcd__st7567s_8h_aecb0f151d6dc1aee842635a406f8da13}} 
+\index{lcd\_st7567s.h@{lcd\_st7567s.h}!DRAW\_LOWER\_RIGHT@{DRAW\_LOWER\_RIGHT}}
+\index{DRAW\_LOWER\_RIGHT@{DRAW\_LOWER\_RIGHT}!lcd\_st7567s.h@{lcd\_st7567s.h}}
+\doxysubsubsection{\texorpdfstring{DRAW\_LOWER\_RIGHT}{DRAW\_LOWER\_RIGHT}}
+{\footnotesize\ttfamily \#define DRAW\+\_\+\+LOWER\+\_\+\+RIGHT~0x08}
+
+\mbox{\Hypertarget{lcd__st7567s_8h_af9f40fd033ad635689a79dc988e63559}\label{lcd__st7567s_8h_af9f40fd033ad635689a79dc988e63559}} 
+\index{lcd\_st7567s.h@{lcd\_st7567s.h}!DRAW\_UPPER\_LEFT@{DRAW\_UPPER\_LEFT}}
+\index{DRAW\_UPPER\_LEFT@{DRAW\_UPPER\_LEFT}!lcd\_st7567s.h@{lcd\_st7567s.h}}
+\doxysubsubsection{\texorpdfstring{DRAW\_UPPER\_LEFT}{DRAW\_UPPER\_LEFT}}
+{\footnotesize\ttfamily \#define DRAW\+\_\+\+UPPER\+\_\+\+LEFT~0x02}
+
+\mbox{\Hypertarget{lcd__st7567s_8h_a1283077a23f96883a4a6297928e7b777}\label{lcd__st7567s_8h_a1283077a23f96883a4a6297928e7b777}} 
+\index{lcd\_st7567s.h@{lcd\_st7567s.h}!DRAW\_UPPER\_RIGHT@{DRAW\_UPPER\_RIGHT}}
+\index{DRAW\_UPPER\_RIGHT@{DRAW\_UPPER\_RIGHT}!lcd\_st7567s.h@{lcd\_st7567s.h}}
+\doxysubsubsection{\texorpdfstring{DRAW\_UPPER\_RIGHT}{DRAW\_UPPER\_RIGHT}}
+{\footnotesize\ttfamily \#define DRAW\+\_\+\+UPPER\+\_\+\+RIGHT~0x01}
+

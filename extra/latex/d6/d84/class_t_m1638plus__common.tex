@@ -1,0 +1,113 @@
+\hypertarget{class_t_m1638plus__common}{}\doxysection{TM1638plus\+\_\+common}
+\label{class_t_m1638plus__common}\index{TM1638plus\_common@{TM1638plus\_common}}
+
+
+{\ttfamily \#include \char`\"{}TM1638plus\+\_\+common.\+h\char`\"{}}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_t_m1638plus__common_a7c44c2da73f5d77265137aaec1b69d57}{TM1638plus\+\_\+common}} ()
+\item 
+\mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}} \mbox{\hyperlink{class_t_m1638plus__common_ac4730a4de4f7023d27ba1acfe874131c}{High\+Freqshiftin}} (\mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}} data\+Pin, \mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}} clock\+Pin, \mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}} bit\+Order)
+\item 
+void \mbox{\hyperlink{class_t_m1638plus__common_a29b06cf808b08fc4f226d1b73fe48dcf}{High\+Freqshift\+Out}} (\mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}} data\+Pin, \mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}} clock\+Pin, \mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}} bit\+Order, \mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}} val)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_t_m1638plus__common_a7c44c2da73f5d77265137aaec1b69d57}\label{class_t_m1638plus__common_a7c44c2da73f5d77265137aaec1b69d57}} 
+\index{TM1638plus\_common@{TM1638plus\_common}!TM1638plus\_common@{TM1638plus\_common}}
+\index{TM1638plus\_common@{TM1638plus\_common}!TM1638plus\_common@{TM1638plus\_common}}
+\doxysubsubsection{\texorpdfstring{TM1638plus\_common()}{TM1638plus\_common()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_t_m1638plus__common}{TM1638plus\+\_\+common}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00014\ \{}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{comment}{//\ Blank\ constructor}}
+\DoxyCodeLine{00016\ \}}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_t_m1638plus__common_ac4730a4de4f7023d27ba1acfe874131c}\label{class_t_m1638plus__common_ac4730a4de4f7023d27ba1acfe874131c}} 
+\index{TM1638plus\_common@{TM1638plus\_common}!HighFreqshiftin@{HighFreqshiftin}}
+\index{HighFreqshiftin@{HighFreqshiftin}!TM1638plus\_common@{TM1638plus\_common}}
+\doxysubsubsection{\texorpdfstring{HighFreqshiftin()}{HighFreqshiftin()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}} High\+Freqshiftin (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}}}]{data\+Pin,  }\item[{\mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}}}]{clock\+Pin,  }\item[{\mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}}}]{bit\+Order }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00019\ \{}
+\DoxyCodeLine{00020\ \ \ \ \ \mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t}}\ value\ =\ 0;}
+\DoxyCodeLine{00021\ \ \ \ \ \mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t}}\ i\ =\ 0;}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keywordflow}{for}(i\ =\ 0;\ i\ <\ 8;\ ++i)\ \{}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ digitalWrite(clockPin,\ HIGH);}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ delayMicroseconds(\mbox{\hyperlink{_t_m1638plus__common_8h_ae8eee8cc907e60024816523dcb9e91e5}{TM\_HFIN\_DELAY}});}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(bitOrder\ ==\ LSBFIRST)}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \ \ \ \ value\ |=\ digitalRead(dataPin)\ <<\ i;}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \ \ \ \ value\ |=\ digitalRead(dataPin)\ <<\ (7\ -\/\ i);}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ digitalWrite(clockPin,\ LOW);}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ delayMicroseconds(\mbox{\hyperlink{_t_m1638plus__common_8h_ae8eee8cc907e60024816523dcb9e91e5}{TM\_HFIN\_DELAY}});}
+\DoxyCodeLine{00035\ \ \ \ \ \}}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordflow}{return}\ value;}
+\DoxyCodeLine{00037\ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00038}{TM\+\_\+\+HFIN\+\_\+\+DELAY}}.
+
+
+
+Referenced by \mbox{\hyperlink{l00186}{TM1638plus\+::read\+Buttons()}}, \mbox{\hyperlink{l00181}{TM1638plus\+\_\+\+Model2\+::\+Read\+Key16()}}, and \mbox{\hyperlink{l00208}{TM1638plus\+\_\+\+Model2\+::\+Read\+Key16\+Two()}}.
+
+\mbox{\Hypertarget{class_t_m1638plus__common_a29b06cf808b08fc4f226d1b73fe48dcf}\label{class_t_m1638plus__common_a29b06cf808b08fc4f226d1b73fe48dcf}} 
+\index{TM1638plus\_common@{TM1638plus\_common}!HighFreqshiftOut@{HighFreqshiftOut}}
+\index{HighFreqshiftOut@{HighFreqshiftOut}!TM1638plus\_common@{TM1638plus\_common}}
+\doxysubsubsection{\texorpdfstring{HighFreqshiftOut()}{HighFreqshiftOut()}}
+{\footnotesize\ttfamily void High\+Freqshift\+Out (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}}}]{data\+Pin,  }\item[{\mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}}}]{clock\+Pin,  }\item[{\mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}}}]{bit\+Order,  }\item[{\mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}}}]{val }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00040\ \{}
+\DoxyCodeLine{00041\ \ \ \ \ \mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t}}\ i;}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordflow}{for}\ (i\ =\ 0;\ i\ <\ 8;\ i++)\ \ \{}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (bitOrder\ ==\ LSBFIRST)}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \ \ \ \ digitalWrite(dataPin,\ !!(val\ \&\ (1\ <<\ i)));}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \ \ \ }
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \ \ \ \ digitalWrite(dataPin,\ !!(val\ \&\ (1\ <<\ (7\ -\/\ i))));}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ digitalWrite(clockPin,\ HIGH);}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ delayMicroseconds(\mbox{\hyperlink{_t_m1638plus__common_8h_a61c187fb4d72569bf4b63bd62e1f4e7c}{TM\_HFOUT\_DELAY}});}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ digitalWrite(clockPin,\ LOW);}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ delayMicroseconds(\mbox{\hyperlink{_t_m1638plus__common_8h_a61c187fb4d72569bf4b63bd62e1f4e7c}{TM\_HFOUT\_DELAY}});}
+\DoxyCodeLine{00053\ \ \ \ \ \}}
+\DoxyCodeLine{00054\ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00039}{TM\+\_\+\+HFOUT\+\_\+\+DELAY}}.
+
+
+
+Referenced by \mbox{\hyperlink{l00037}{TM1638plus\+::send\+Data()}}, and \mbox{\hyperlink{l00037}{TM1638plus\+\_\+\+Model2\+::send\+Data()}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+extra/\+TM1638plus-\/master/\+TM1638plus-\/master/src/\mbox{\hyperlink{_t_m1638plus__common_8h}{TM1638plus\+\_\+common.\+h}}\item 
+extra/\+TM1638plus-\/master/\+TM1638plus-\/master/src/\mbox{\hyperlink{_t_m1638plus__common_8cpp}{TM1638plus\+\_\+common.\+cpp}}\end{DoxyCompactItemize}

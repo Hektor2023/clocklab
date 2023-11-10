@@ -1,0 +1,761 @@
+\hypertarget{class_my_date}{}\doxysection{My\+Date}
+\label{class_my_date}\index{MyDate@{MyDate}}
+
+
+{\ttfamily \#include \char`\"{}My\+Date.\+h\char`\"{}}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_my_date_a1b9f69246b55e87a4fb7c86d01864f37}{My\+Date}} (const \mbox{\hyperlink{class_my_date}{My\+Date}} \&date)
+\item 
+\mbox{\hyperlink{class_my_date_a1af4ae751be6314395ec3168c14fa00b}{My\+Date}} (\mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}} \mbox{\hyperlink{class_my_date_a72369a1087b2aeffe374bb054cb97c12}{day}}, \mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}} \mbox{\hyperlink{class_my_date_a3e00faf7fbf9805e9ec4d2edd6339050}{month}}, uint16\+\_\+t \mbox{\hyperlink{class_my_date_a57ca98d8f6d4baf0fe41c583c7dcb0d5}{year}})
+\item 
+\mbox{\hyperlink{class_my_date_a4030052d422e6b0dc2de376b9f1f480c}{My\+Date}} (void)
+\item 
+\mbox{\hyperlink{class_my_date_a12d2ae2e0539277cd1aa1ae1696214fb}{$\sim$\+My\+Date}} (void)
+\item 
+void \mbox{\hyperlink{class_my_date_a00de32ef532b51665b825ac20c60b52f}{day\+Dec}} (void)
+\item 
+void \mbox{\hyperlink{class_my_date_a7d4f87babaca259755ad2f2fe1a8c1b0}{day\+Inc}} (void)
+\item 
+\mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}} \mbox{\hyperlink{class_my_date_ad730ea4ed90e952a6164e438f3c7d4ec}{get\+Day}} (void) const
+\item 
+\mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}} \mbox{\hyperlink{class_my_date_aaa6dcc0616dd7690902dffcd2e7ec2be}{get\+Day\+Of\+Week}} (void) const
+\item 
+\mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}} \mbox{\hyperlink{class_my_date_a2170dd4ffb311f1795eef21f41e4de59}{get\+Month}} (void) const
+\item 
+uint16\+\_\+t \mbox{\hyperlink{class_my_date_a189e1b766ca37529602497c6297d782a}{get\+Year}} (void) const
+\item 
+void \mbox{\hyperlink{class_my_date_a9b1eb032beeba99948a18af9b8d6e248}{month\+Dec}} (void)
+\item 
+void \mbox{\hyperlink{class_my_date_a890cc89151d51eab1103ae31133873a0}{month\+Inc}} (void)
+\item 
+\mbox{\hyperlink{class_my_date}{My\+Date}} \& \mbox{\hyperlink{class_my_date_adff6fd8be5cf4476b213df3f0aec22c5}{operator=}} (const \mbox{\hyperlink{class_my_date}{My\+Date}} \&date)
+\item 
+void \mbox{\hyperlink{class_my_date_ab3e28bc0a0a933b298c951a0cf5e8ea4}{set\+Day}} (const \mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}} \mbox{\hyperlink{class_my_date_a72369a1087b2aeffe374bb054cb97c12}{day}})
+\item 
+void \mbox{\hyperlink{class_my_date_aecbdec4ebe381e7a0d74baf2cbf770e1}{set\+Month}} (const \mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}} \mbox{\hyperlink{class_my_date_a3e00faf7fbf9805e9ec4d2edd6339050}{month}})
+\item 
+void \mbox{\hyperlink{class_my_date_aca918dc0c119b0630297d527c2c9b103}{set\+Year}} (const uint16\+\_\+t \mbox{\hyperlink{class_my_date_a57ca98d8f6d4baf0fe41c583c7dcb0d5}{year}})
+\item 
+char $\ast$ \mbox{\hyperlink{class_my_date_a8c1a2aa6577c40d1afc6ba8a8c8cb627}{to\+String}} (char $\ast$buffer)
+\item 
+void \mbox{\hyperlink{class_my_date_ad2dd67353938b18f7854f5d169833366}{year\+Dec}} (void)
+\item 
+void \mbox{\hyperlink{class_my_date_acc0cd27c3b99020186c57029f65bb131}{year\+Inc}} (void)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{class_my_date}{My\+Date}} \mbox{\hyperlink{class_my_date_af8b635ac1ddc3809f4efd8a9213bf6e5}{get\+DSTEnd}} (uint16\+\_\+t \mbox{\hyperlink{class_my_date_a57ca98d8f6d4baf0fe41c583c7dcb0d5}{year}})
+\item 
+static \mbox{\hyperlink{class_my_date}{My\+Date}} \mbox{\hyperlink{class_my_date_ab5649ffa7b0fd91e9d8cfb539ba2a596}{get\+DSTStart}} (uint16\+\_\+t \mbox{\hyperlink{class_my_date_a57ca98d8f6d4baf0fe41c583c7dcb0d5}{year}})
+\item 
+static size\+\_\+t \mbox{\hyperlink{class_my_date_a89403698fcad339a13f4b1ed999318ed}{get\+String\+Buffer\+Size}} (void)
+\item 
+static const char $\ast$ \mbox{\hyperlink{class_my_date_abb76201adb97e3574d2ee21a8f2dcf54}{get\+String\+Format}} (void)
+\item 
+static bool \mbox{\hyperlink{class_my_date_a0abb181d1c1033623eeadd8097abdf37}{is\+Valid\+Day}} (\mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}} \mbox{\hyperlink{class_my_date_a72369a1087b2aeffe374bb054cb97c12}{day}}, \mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}} \mbox{\hyperlink{class_my_date_a3e00faf7fbf9805e9ec4d2edd6339050}{month}}, uint16\+\_\+t \mbox{\hyperlink{class_my_date_a57ca98d8f6d4baf0fe41c583c7dcb0d5}{year}})
+\item 
+static bool \mbox{\hyperlink{class_my_date_a6d75cc8afe6bfb61f3df241abcf5bec5}{is\+Valid\+Month}} (\mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}} \mbox{\hyperlink{class_my_date_a3e00faf7fbf9805e9ec4d2edd6339050}{month}})
+\item 
+static bool \mbox{\hyperlink{class_my_date_a08c09c58d45f69bdc1299d9007149af2}{is\+Valid\+Year}} (uint16\+\_\+t \mbox{\hyperlink{class_my_date_a57ca98d8f6d4baf0fe41c583c7dcb0d5}{year}})
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}} \mbox{\hyperlink{class_my_date_a949dd4cc38d0488625a66c4e2736ed33}{get\+Century\+Code}} (void) const
+\item 
+\mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}} \mbox{\hyperlink{class_my_date_a3958f0dedaaeb8c95fbbd10dffe2f897}{get\+Day\+Code}} (void) const
+\item 
+\mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}} \mbox{\hyperlink{class_my_date_a804d4d35267ac40e4178b772a31d6522}{get\+Leap\+Code}} (void) const
+\item 
+\mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}} \mbox{\hyperlink{class_my_date_a88c0c4189b2b1b6fbd1391339692a6b9}{get\+Month\+Code}} (void) const
+\item 
+\mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}} \mbox{\hyperlink{class_my_date_ab0287ce1cb6fe971234762eb9667a0c4}{get\+Year\+Code}} (void) const
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}} \mbox{\hyperlink{class_my_date_a72369a1087b2aeffe374bb054cb97c12}{day}}
+\item 
+\mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}} \mbox{\hyperlink{class_my_date_a3e00faf7fbf9805e9ec4d2edd6339050}{month}}
+\item 
+uint16\+\_\+t \mbox{\hyperlink{class_my_date_a57ca98d8f6d4baf0fe41c583c7dcb0d5}{year}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_my_date_a4030052d422e6b0dc2de376b9f1f480c}\label{class_my_date_a4030052d422e6b0dc2de376b9f1f480c}} 
+\index{MyDate@{MyDate}!MyDate@{MyDate}}
+\index{MyDate@{MyDate}!MyDate@{MyDate}}
+\doxysubsubsection{\texorpdfstring{MyDate()}{MyDate()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_my_date}{My\+Date}} (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00006\ :\mbox{\hyperlink{class_my_date_a72369a1087b2aeffe374bb054cb97c12}{day}}(\ \mbox{\hyperlink{_my_date_8h_a214678fc1531b3929d2df0c821632349}{BASE\_DAY}}),\ \mbox{\hyperlink{class_my_date_a3e00faf7fbf9805e9ec4d2edd6339050}{month}}(\ \mbox{\hyperlink{_my_date_8h_a979ddebe064c2bb32d4d78711f4aa311}{BASE\_MONTH}}),\ \mbox{\hyperlink{class_my_date_a57ca98d8f6d4baf0fe41c583c7dcb0d5}{year}}(\ \mbox{\hyperlink{_my_date_8h_a9784182b131041c188da44ff2993a34e}{BASE\_YEAR}})\ \{\}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{class_my_date_a1af4ae751be6314395ec3168c14fa00b}\label{class_my_date_a1af4ae751be6314395ec3168c14fa00b}} 
+\index{MyDate@{MyDate}!MyDate@{MyDate}}
+\index{MyDate@{MyDate}!MyDate@{MyDate}}
+\doxysubsubsection{\texorpdfstring{MyDate()}{MyDate()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_my_date}{My\+Date}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}}}]{day,  }\item[{\mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}}}]{month,  }\item[{uint16\+\_\+t}]{year }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00009\ :\mbox{\hyperlink{class_my_date_a72369a1087b2aeffe374bb054cb97c12}{day}}(\ \mbox{\hyperlink{class_my_date_a72369a1087b2aeffe374bb054cb97c12}{day}}),\ \mbox{\hyperlink{class_my_date_a3e00faf7fbf9805e9ec4d2edd6339050}{month}}(\ \mbox{\hyperlink{class_my_date_a3e00faf7fbf9805e9ec4d2edd6339050}{month}}),\ \mbox{\hyperlink{class_my_date_a57ca98d8f6d4baf0fe41c583c7dcb0d5}{year}}(\ \mbox{\hyperlink{class_my_date_a57ca98d8f6d4baf0fe41c583c7dcb0d5}{year}})\ \{\}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{class_my_date_a1b9f69246b55e87a4fb7c86d01864f37}\label{class_my_date_a1b9f69246b55e87a4fb7c86d01864f37}} 
+\index{MyDate@{MyDate}!MyDate@{MyDate}}
+\index{MyDate@{MyDate}!MyDate@{MyDate}}
+\doxysubsubsection{\texorpdfstring{MyDate()}{MyDate()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_my_date}{My\+Date}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_my_date}{My\+Date}} \&}]{date }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00012\ :\mbox{\hyperlink{class_my_date_a72369a1087b2aeffe374bb054cb97c12}{day}}(\ date.\mbox{\hyperlink{class_my_date_a72369a1087b2aeffe374bb054cb97c12}{day}}),\ \mbox{\hyperlink{class_my_date_a3e00faf7fbf9805e9ec4d2edd6339050}{month}}(\ date.\mbox{\hyperlink{class_my_date_a3e00faf7fbf9805e9ec4d2edd6339050}{month}}),\ \mbox{\hyperlink{class_my_date_a57ca98d8f6d4baf0fe41c583c7dcb0d5}{year}}(\ date.\mbox{\hyperlink{class_my_date_a57ca98d8f6d4baf0fe41c583c7dcb0d5}{year}})\ \{\}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{class_my_date_a12d2ae2e0539277cd1aa1ae1696214fb}\label{class_my_date_a12d2ae2e0539277cd1aa1ae1696214fb}} 
+\index{MyDate@{MyDate}!````~MyDate@{$\sim$MyDate}}
+\index{````~MyDate@{$\sim$MyDate}!MyDate@{MyDate}}
+\doxysubsubsection{\texorpdfstring{$\sim$MyDate()}{~MyDate()}}
+{\footnotesize\ttfamily $\sim$\mbox{\hyperlink{class_my_date}{My\+Date}} (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00015\ \{\};}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_my_date_a00de32ef532b51665b825ac20c60b52f}\label{class_my_date_a00de32ef532b51665b825ac20c60b52f}} 
+\index{MyDate@{MyDate}!dayDec@{dayDec}}
+\index{dayDec@{dayDec}!MyDate@{MyDate}}
+\doxysubsubsection{\texorpdfstring{dayDec()}{dayDec()}}
+{\footnotesize\ttfamily void day\+Dec (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00062\ \{}
+\DoxyCodeLine{00063\ \ \ \mbox{\hyperlink{class_my_date_a72369a1087b2aeffe374bb054cb97c12}{day}}\ =(\ \mbox{\hyperlink{class_my_date_a72369a1087b2aeffe374bb054cb97c12}{day}}>\ 1)?\ \mbox{\hyperlink{class_my_date_a72369a1087b2aeffe374bb054cb97c12}{day}}-\/1:31;\ }
+\DoxyCodeLine{00064\ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00021}{day}}.
+
+
+
+Referenced by \mbox{\hyperlink{l00038}{System\+Time\+Handler\+::adjust()}}.
+
+\mbox{\Hypertarget{class_my_date_a7d4f87babaca259755ad2f2fe1a8c1b0}\label{class_my_date_a7d4f87babaca259755ad2f2fe1a8c1b0}} 
+\index{MyDate@{MyDate}!dayInc@{dayInc}}
+\index{dayInc@{dayInc}!MyDate@{MyDate}}
+\doxysubsubsection{\texorpdfstring{dayInc()}{dayInc()}}
+{\footnotesize\ttfamily void day\+Inc (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00056\ \{}
+\DoxyCodeLine{00057\ \ \ \mbox{\hyperlink{class_my_date_a72369a1087b2aeffe374bb054cb97c12}{day}}\ =(\ \mbox{\hyperlink{class_my_date_a72369a1087b2aeffe374bb054cb97c12}{day}}<\ 31)?\ \mbox{\hyperlink{class_my_date_a72369a1087b2aeffe374bb054cb97c12}{day}}+1:1;\ }
+\DoxyCodeLine{00058\ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00021}{day}}.
+
+
+
+Referenced by \mbox{\hyperlink{l00038}{System\+Time\+Handler\+::adjust()}}.
+
+\mbox{\Hypertarget{class_my_date_a949dd4cc38d0488625a66c4e2736ed33}\label{class_my_date_a949dd4cc38d0488625a66c4e2736ed33}} 
+\index{MyDate@{MyDate}!getCenturyCode@{getCenturyCode}}
+\index{getCenturyCode@{getCenturyCode}!MyDate@{MyDate}}
+\doxysubsubsection{\texorpdfstring{getCenturyCode()}{getCenturyCode()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}} get\+Century\+Code (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00128\ \{\ \ \ \textcolor{comment}{//\ Gegorian\ Calendar}}
+\DoxyCodeLine{00129\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 1700\ \ 1800\ \ 1900\ \ 2000\ \ 2100\ \ 2200\ 2300}}
+\DoxyCodeLine{00130\ \ \ \ \ \mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t}}\ idx,\ code[]=\{\ \ \ \ 4,\ \ \ \ 2,\ \ \ \ 0,\ \ \ \ 6,\ \ \ \ 4,\ \ \ \ 2,\ \ \ 0\};}
+\DoxyCodeLine{00131\ \ \ \ \ idx=\ (\mbox{\hyperlink{class_my_date_a57ca98d8f6d4baf0fe41c583c7dcb0d5}{year}}/100)\ -\/17;}
+\DoxyCodeLine{00132\ \ \ \ \ }
+\DoxyCodeLine{00133\ \ \ \ \ \textcolor{keywordflow}{return}(\ code[\ idx]);}
+\DoxyCodeLine{00134\ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00023}{year}}.
+
+
+
+Referenced by \mbox{\hyperlink{l00137}{get\+Day\+Of\+Week()}}.
+
+\mbox{\Hypertarget{class_my_date_ad730ea4ed90e952a6164e438f3c7d4ec}\label{class_my_date_ad730ea4ed90e952a6164e438f3c7d4ec}} 
+\index{MyDate@{MyDate}!getDay@{getDay}}
+\index{getDay@{getDay}!MyDate@{MyDate}}
+\doxysubsubsection{\texorpdfstring{getDay()}{getDay()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}} get\+Day (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption}) const}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00019\ \{}
+\DoxyCodeLine{00020\ \ \ \textcolor{keywordflow}{return}(\ \mbox{\hyperlink{class_my_date_a72369a1087b2aeffe374bb054cb97c12}{day}});\ \ \ \ }
+\DoxyCodeLine{00021\ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00021}{day}}.
+
+
+
+Referenced by \mbox{\hyperlink{l00217}{Timestamp\+::set\+Date()}}, and \mbox{\hyperlink{l00024}{Time\+Sunrise\+Sunset\+Handler\+::update\+Time()}}.
+
+\mbox{\Hypertarget{class_my_date_a3958f0dedaaeb8c95fbbd10dffe2f897}\label{class_my_date_a3958f0dedaaeb8c95fbbd10dffe2f897}} 
+\index{MyDate@{MyDate}!getDayCode@{getDayCode}}
+\index{getDayCode@{getDayCode}!MyDate@{MyDate}}
+\doxysubsubsection{\texorpdfstring{getDayCode()}{getDayCode()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}} get\+Day\+Code (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00100\ \{}
+\DoxyCodeLine{00101\ \ \ \ \ \textcolor{keywordflow}{return}(\ \mbox{\hyperlink{class_my_date_a72369a1087b2aeffe374bb054cb97c12}{day}});}
+\DoxyCodeLine{00102\ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00021}{day}}.
+
+
+
+Referenced by \mbox{\hyperlink{l00137}{get\+Day\+Of\+Week()}}.
+
+\mbox{\Hypertarget{class_my_date_aaa6dcc0616dd7690902dffcd2e7ec2be}\label{class_my_date_aaa6dcc0616dd7690902dffcd2e7ec2be}} 
+\index{MyDate@{MyDate}!getDayOfWeek@{getDayOfWeek}}
+\index{getDayOfWeek@{getDayOfWeek}!MyDate@{MyDate}}
+\doxysubsubsection{\texorpdfstring{getDayOfWeek()}{getDayOfWeek()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}} get\+Day\+Of\+Week (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption}) const}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00138\ \{}
+\DoxyCodeLine{00139\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \#1\ \#2\ \ \#8\ \ \ \ \ \ \ \ \ \ \ \ \#3\ \ \ \ \ \ \ \ \ \#4\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#5\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#6}}
+\DoxyCodeLine{00140\ \ \ \ \ \mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t}}\ code=\ \mbox{\hyperlink{class_my_date_ab0287ce1cb6fe971234762eb9667a0c4}{getYearCode}}()+\ \mbox{\hyperlink{class_my_date_a3958f0dedaaeb8c95fbbd10dffe2f897}{getDayCode}}()+\ \mbox{\hyperlink{class_my_date_a88c0c4189b2b1b6fbd1391339692a6b9}{getMonthCode}}()-\/\ \mbox{\hyperlink{class_my_date_a804d4d35267ac40e4178b772a31d6522}{getLeapCode}}()+\ \ \mbox{\hyperlink{class_my_date_a949dd4cc38d0488625a66c4e2736ed33}{getCenturyCode}}()-\/1;}
+\DoxyCodeLine{00141\ \ \ \ \ \textcolor{keywordflow}{return}(\ code\ \%7);}
+\DoxyCodeLine{00142\ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00127}{get\+Century\+Code()}}, \mbox{\hyperlink{l00099}{get\+Day\+Code()}}, \mbox{\hyperlink{l00114}{get\+Leap\+Code()}}, \mbox{\hyperlink{l00105}{get\+Month\+Code()}}, and \mbox{\hyperlink{l00091}{get\+Year\+Code()}}.
+
+
+
+Referenced by \mbox{\hyperlink{l00188}{get\+DSTEnd()}}, and \mbox{\hyperlink{l00178}{get\+DSTStart()}}.
+
+\mbox{\Hypertarget{class_my_date_af8b635ac1ddc3809f4efd8a9213bf6e5}\label{class_my_date_af8b635ac1ddc3809f4efd8a9213bf6e5}} 
+\index{MyDate@{MyDate}!getDSTEnd@{getDSTEnd}}
+\index{getDSTEnd@{getDSTEnd}!MyDate@{MyDate}}
+\doxysubsubsection{\texorpdfstring{getDSTEnd()}{getDSTEnd()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_my_date}{My\+Date}} get\+DSTEnd (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{year }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00189\ \{}
+\DoxyCodeLine{00190\ \ \ \ \ \mbox{\hyperlink{class_my_date}{MyDate}}\ \ \ date(\ 31,\ 10,\ \mbox{\hyperlink{class_my_date_a57ca98d8f6d4baf0fe41c583c7dcb0d5}{year}});}
+\DoxyCodeLine{00191\ }
+\DoxyCodeLine{00192\ \ \ \ \ \mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t}}\ dayOfWeek=\ \ date.getDayOfWeek();}
+\DoxyCodeLine{00193\ \ \ \ \ date.setDay(\ 31-\/\ dayOfWeek);}
+\DoxyCodeLine{00194\ \ \ \ \ \textcolor{keywordflow}{return}(\ date);}
+\DoxyCodeLine{00195\ \}\ \ \ \ \ \ \ \ \ \ \ }
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00137}{get\+Day\+Of\+Week()}}, \mbox{\hyperlink{l00024}{set\+Day()}}, and \mbox{\hyperlink{l00023}{year}}.
+
+
+
+Referenced by \mbox{\hyperlink{l00023}{Time\+Zone\+DSTHandler\+::update\+Time()}}.
+
+\mbox{\Hypertarget{class_my_date_ab5649ffa7b0fd91e9d8cfb539ba2a596}\label{class_my_date_ab5649ffa7b0fd91e9d8cfb539ba2a596}} 
+\index{MyDate@{MyDate}!getDSTStart@{getDSTStart}}
+\index{getDSTStart@{getDSTStart}!MyDate@{MyDate}}
+\doxysubsubsection{\texorpdfstring{getDSTStart()}{getDSTStart()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_my_date}{My\+Date}} get\+DSTStart (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{year }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00179\ \{}
+\DoxyCodeLine{00180\ \ \ \ \ \mbox{\hyperlink{class_my_date}{MyDate}}\ \ \ date(\ 31,\ 03,\ \mbox{\hyperlink{class_my_date_a57ca98d8f6d4baf0fe41c583c7dcb0d5}{year}});}
+\DoxyCodeLine{00181\ }
+\DoxyCodeLine{00182\ \ \ \ \ \mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t}}\ dayOfWeek=\ \ date.getDayOfWeek();}
+\DoxyCodeLine{00183\ \ \ \ \ date.setDay(\ 31-\/\ dayOfWeek);}
+\DoxyCodeLine{00184\ \ \ \ \ \textcolor{keywordflow}{return}(\ date);}
+\DoxyCodeLine{00185\ \}\ \ \ \ }
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00137}{get\+Day\+Of\+Week()}}, \mbox{\hyperlink{l00024}{set\+Day()}}, and \mbox{\hyperlink{l00023}{year}}.
+
+
+
+Referenced by \mbox{\hyperlink{l00023}{Time\+Zone\+DSTHandler\+::update\+Time()}}.
+
+\mbox{\Hypertarget{class_my_date_a804d4d35267ac40e4178b772a31d6522}\label{class_my_date_a804d4d35267ac40e4178b772a31d6522}} 
+\index{MyDate@{MyDate}!getLeapCode@{getLeapCode}}
+\index{getLeapCode@{getLeapCode}!MyDate@{MyDate}}
+\doxysubsubsection{\texorpdfstring{getLeapCode()}{getLeapCode()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}} get\+Leap\+Code (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00115\ \{}
+\DoxyCodeLine{00116\ \ \ \ \ \mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t}}\ \ result=0;}
+\DoxyCodeLine{00117\ }
+\DoxyCodeLine{00118\ \ \ \ \ \textcolor{keywordflow}{if}(\ \mbox{\hyperlink{_my_date_8h_af70259e940a72ac0b3c8d34d4ce26ef6}{IS\_LEAP\_YEAR}}(\ \mbox{\hyperlink{class_my_date_a57ca98d8f6d4baf0fe41c583c7dcb0d5}{year}})\ \&\&\ (\ \mbox{\hyperlink{class_my_date_a3e00faf7fbf9805e9ec4d2edd6339050}{month}}\ <3))}
+\DoxyCodeLine{00119\ \ \ \ \ \{}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ result=\ 1;}
+\DoxyCodeLine{00121\ \ \ \ \ \}}
+\DoxyCodeLine{00122\ }
+\DoxyCodeLine{00123\ \ \ \ \ \textcolor{keywordflow}{return}(\ result);}
+\DoxyCodeLine{00124\ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00007}{IS\+\_\+\+LEAP\+\_\+\+YEAR}}, \mbox{\hyperlink{l00022}{month}}, and \mbox{\hyperlink{l00023}{year}}.
+
+
+
+Referenced by \mbox{\hyperlink{l00137}{get\+Day\+Of\+Week()}}.
+
+\mbox{\Hypertarget{class_my_date_a2170dd4ffb311f1795eef21f41e4de59}\label{class_my_date_a2170dd4ffb311f1795eef21f41e4de59}} 
+\index{MyDate@{MyDate}!getMonth@{getMonth}}
+\index{getMonth@{getMonth}!MyDate@{MyDate}}
+\doxysubsubsection{\texorpdfstring{getMonth()}{getMonth()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}} get\+Month (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption}) const}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00032\ \{}
+\DoxyCodeLine{00033\ \ \ \textcolor{keywordflow}{return}(\ \mbox{\hyperlink{class_my_date_a3e00faf7fbf9805e9ec4d2edd6339050}{month}});\ \ \ \ }
+\DoxyCodeLine{00034\ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00022}{month}}.
+
+
+
+Referenced by \mbox{\hyperlink{l00217}{Timestamp\+::set\+Date()}}, and \mbox{\hyperlink{l00024}{Time\+Sunrise\+Sunset\+Handler\+::update\+Time()}}.
+
+\mbox{\Hypertarget{class_my_date_a88c0c4189b2b1b6fbd1391339692a6b9}\label{class_my_date_a88c0c4189b2b1b6fbd1391339692a6b9}} 
+\index{MyDate@{MyDate}!getMonthCode@{getMonthCode}}
+\index{getMonthCode@{getMonthCode}!MyDate@{MyDate}}
+\doxysubsubsection{\texorpdfstring{getMonthCode()}{getMonthCode()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}} get\+Month\+Code (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00106\ \{}
+\DoxyCodeLine{00107\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ J\ \ F\ \ M\ \ \ \ A\ \ M\ \ J\ \ \ \ J\ \ A\ \ S\ \ \ \ O\ \ N\ \ D}}
+\DoxyCodeLine{00108\ \ \ \ \ \mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t}}\ code[]=\ \{1,\ 4,\ 4,\ \ \ 0,\ 2,\ 5,\ \ \ 0,\ 3,\ 6,\ \ \ 1,\ 4,\ 6\};}
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00110\ \ \ \ \ \textcolor{keywordflow}{return}(\ code[\ \mbox{\hyperlink{class_my_date_a3e00faf7fbf9805e9ec4d2edd6339050}{month}}-\/1]);}
+\DoxyCodeLine{00111\ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00022}{month}}.
+
+
+
+Referenced by \mbox{\hyperlink{l00137}{get\+Day\+Of\+Week()}}.
+
+\mbox{\Hypertarget{class_my_date_a89403698fcad339a13f4b1ed999318ed}\label{class_my_date_a89403698fcad339a13f4b1ed999318ed}} 
+\index{MyDate@{MyDate}!getStringBufferSize@{getStringBufferSize}}
+\index{getStringBufferSize@{getStringBufferSize}!MyDate@{MyDate}}
+\doxysubsubsection{\texorpdfstring{getStringBufferSize()}{getStringBufferSize()}}
+{\footnotesize\ttfamily size\+\_\+t get\+String\+Buffer\+Size (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00205\ \{}
+\DoxyCodeLine{00206\ \ \ \textcolor{keywordflow}{return}(\ strlen(\ \mbox{\hyperlink{class_my_date_abb76201adb97e3574d2ee21a8f2dcf54}{MyDate::getStringFormat}}())+1);\ \ \ \ \ \ }
+\DoxyCodeLine{00207\ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00198}{get\+String\+Format()}}.
+
+
+
+Referenced by \mbox{\hyperlink{l00246}{Timestamp\+::to\+String()}}, \mbox{\hyperlink{l00045}{OLEDDisplay\+Clock\+View\+Handler\+::update\+Time()}}, and \mbox{\hyperlink{l00023}{Time\+Zone\+DSTHandler\+::update\+Time()}}.
+
+\mbox{\Hypertarget{class_my_date_abb76201adb97e3574d2ee21a8f2dcf54}\label{class_my_date_abb76201adb97e3574d2ee21a8f2dcf54}} 
+\index{MyDate@{MyDate}!getStringFormat@{getStringFormat}}
+\index{getStringFormat@{getStringFormat}!MyDate@{MyDate}}
+\doxysubsubsection{\texorpdfstring{getStringFormat()}{getStringFormat()}}
+{\footnotesize\ttfamily const char $\ast$ get\+String\+Format (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00199\ \{}
+\DoxyCodeLine{00200\ \ \ \textcolor{keywordflow}{return}(\ \textcolor{stringliteral}{"{}\%02d/\%02d/\%04d"{}});\ \ }
+\DoxyCodeLine{00201\ \}}
+
+\end{DoxyCode}
+
+
+Referenced by \mbox{\hyperlink{l00204}{get\+String\+Buffer\+Size()}}, \mbox{\hyperlink{l00240}{Timestamp\+::get\+String\+Buffer\+Size()}}, and \mbox{\hyperlink{l00210}{to\+String()}}.
+
+\mbox{\Hypertarget{class_my_date_a189e1b766ca37529602497c6297d782a}\label{class_my_date_a189e1b766ca37529602497c6297d782a}} 
+\index{MyDate@{MyDate}!getYear@{getYear}}
+\index{getYear@{getYear}!MyDate@{MyDate}}
+\doxysubsubsection{\texorpdfstring{getYear()}{getYear()}}
+{\footnotesize\ttfamily uint16\+\_\+t get\+Year (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption}) const}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00044\ \{}
+\DoxyCodeLine{00045\ \ \ \textcolor{keywordflow}{return}(\ \mbox{\hyperlink{class_my_date_a57ca98d8f6d4baf0fe41c583c7dcb0d5}{year}});\ \ \ \ }
+\DoxyCodeLine{00046\ \}\ \ \ \ }
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00023}{year}}.
+
+
+
+Referenced by \mbox{\hyperlink{l00217}{Timestamp\+::set\+Date()}}, \mbox{\hyperlink{l00024}{Time\+Sunrise\+Sunset\+Handler\+::update\+Time()}}, and \mbox{\hyperlink{l00023}{Time\+Zone\+DSTHandler\+::update\+Time()}}.
+
+\mbox{\Hypertarget{class_my_date_ab0287ce1cb6fe971234762eb9667a0c4}\label{class_my_date_ab0287ce1cb6fe971234762eb9667a0c4}} 
+\index{MyDate@{MyDate}!getYearCode@{getYearCode}}
+\index{getYearCode@{getYearCode}!MyDate@{MyDate}}
+\doxysubsubsection{\texorpdfstring{getYearCode()}{getYearCode()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}} get\+Year\+Code (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00092\ \{}
+\DoxyCodeLine{00093\ \ \ \ \ uint16\_t\ y=\ \mbox{\hyperlink{class_my_date_a57ca98d8f6d4baf0fe41c583c7dcb0d5}{year}}\%\ 100;}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00095\ \ \ \ \ \textcolor{keywordflow}{return}(\ (y\ +\ (y\ /\ 4)));}
+\DoxyCodeLine{00096\ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00023}{year}}.
+
+
+
+Referenced by \mbox{\hyperlink{l00137}{get\+Day\+Of\+Week()}}.
+
+\mbox{\Hypertarget{class_my_date_a0abb181d1c1033623eeadd8097abdf37}\label{class_my_date_a0abb181d1c1033623eeadd8097abdf37}} 
+\index{MyDate@{MyDate}!isValidDay@{isValidDay}}
+\index{isValidDay@{isValidDay}!MyDate@{MyDate}}
+\doxysubsubsection{\texorpdfstring{isValidDay()}{isValidDay()}}
+{\footnotesize\ttfamily bool is\+Valid\+Day (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}}}]{day,  }\item[{\mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}}}]{month,  }\item[{uint16\+\_\+t}]{year }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00158\ \{}
+\DoxyCodeLine{00159\ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 1\ \ \ 2\ \ \ 3\ \ \ 4\ \ \ 5\ \ \ 6\ \ \ 7\ \ \ 8\ \ \ 9\ \ \ 10\ \ 11\ \ 12}}
+\DoxyCodeLine{00160\ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t}}\ dofm[]=\{\ 31,\ 28,\ 31,\ 30,\ 31,\ 30,\ 31,\ 31,\ 30,\ \ 31,\ 30,\ 31\};}
+\DoxyCodeLine{00161\ }
+\DoxyCodeLine{00162\ \ \ \textcolor{keywordflow}{return}(\ \mbox{\hyperlink{class_my_date_a72369a1087b2aeffe374bb054cb97c12}{day}}<=\ dofm[\ \mbox{\hyperlink{class_my_date_a3e00faf7fbf9805e9ec4d2edd6339050}{month}}\ -\/1]+\ (\ \mbox{\hyperlink{_my_date_8h_af70259e940a72ac0b3c8d34d4ce26ef6}{IS\_LEAP\_YEAR}}(\ \mbox{\hyperlink{class_my_date_a57ca98d8f6d4baf0fe41c583c7dcb0d5}{year}})?\ 1:0));\ \ }
+\DoxyCodeLine{00163\ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00021}{day}}, \mbox{\hyperlink{l00007}{IS\+\_\+\+LEAP\+\_\+\+YEAR}}, \mbox{\hyperlink{l00022}{month}}, and \mbox{\hyperlink{l00023}{year}}.
+
+\mbox{\Hypertarget{class_my_date_a6d75cc8afe6bfb61f3df241abcf5bec5}\label{class_my_date_a6d75cc8afe6bfb61f3df241abcf5bec5}} 
+\index{MyDate@{MyDate}!isValidMonth@{isValidMonth}}
+\index{isValidMonth@{isValidMonth}!MyDate@{MyDate}}
+\doxysubsubsection{\texorpdfstring{isValidMonth()}{isValidMonth()}}
+{\footnotesize\ttfamily bool is\+Valid\+Month (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}}}]{month }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00152\ \{}
+\DoxyCodeLine{00153\ \ \ \textcolor{keywordflow}{return}(\ \mbox{\hyperlink{class_my_date_a3e00faf7fbf9805e9ec4d2edd6339050}{month}}\ <=\ 13);}
+\DoxyCodeLine{00154\ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00022}{month}}.
+
+\mbox{\Hypertarget{class_my_date_a08c09c58d45f69bdc1299d9007149af2}\label{class_my_date_a08c09c58d45f69bdc1299d9007149af2}} 
+\index{MyDate@{MyDate}!isValidYear@{isValidYear}}
+\index{isValidYear@{isValidYear}!MyDate@{MyDate}}
+\doxysubsubsection{\texorpdfstring{isValidYear()}{isValidYear()}}
+{\footnotesize\ttfamily bool is\+Valid\+Year (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{year }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00146\ \{}
+\DoxyCodeLine{00147\ \ \ \textcolor{keywordflow}{return}(\ \mbox{\hyperlink{class_my_date_a57ca98d8f6d4baf0fe41c583c7dcb0d5}{year}}\ >=\ 1970);}
+\DoxyCodeLine{00148\ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00023}{year}}.
+
+\mbox{\Hypertarget{class_my_date_a9b1eb032beeba99948a18af9b8d6e248}\label{class_my_date_a9b1eb032beeba99948a18af9b8d6e248}} 
+\index{MyDate@{MyDate}!monthDec@{monthDec}}
+\index{monthDec@{monthDec}!MyDate@{MyDate}}
+\doxysubsubsection{\texorpdfstring{monthDec()}{monthDec()}}
+{\footnotesize\ttfamily void month\+Dec (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00074\ \{}
+\DoxyCodeLine{00075\ \ \ \mbox{\hyperlink{class_my_date_a3e00faf7fbf9805e9ec4d2edd6339050}{month}}\ =(\ \mbox{\hyperlink{class_my_date_a3e00faf7fbf9805e9ec4d2edd6339050}{month}}>\ 1)?\ \mbox{\hyperlink{class_my_date_a3e00faf7fbf9805e9ec4d2edd6339050}{month}}-\/1:12;\ }
+\DoxyCodeLine{00076\ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00022}{month}}.
+
+
+
+Referenced by \mbox{\hyperlink{l00038}{System\+Time\+Handler\+::adjust()}}.
+
+\mbox{\Hypertarget{class_my_date_a890cc89151d51eab1103ae31133873a0}\label{class_my_date_a890cc89151d51eab1103ae31133873a0}} 
+\index{MyDate@{MyDate}!monthInc@{monthInc}}
+\index{monthInc@{monthInc}!MyDate@{MyDate}}
+\doxysubsubsection{\texorpdfstring{monthInc()}{monthInc()}}
+{\footnotesize\ttfamily void month\+Inc (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00068\ \{}
+\DoxyCodeLine{00069\ \ \ \mbox{\hyperlink{class_my_date_a3e00faf7fbf9805e9ec4d2edd6339050}{month}}\ =(\ \mbox{\hyperlink{class_my_date_a3e00faf7fbf9805e9ec4d2edd6339050}{month}}<\ 12)?\ \mbox{\hyperlink{class_my_date_a3e00faf7fbf9805e9ec4d2edd6339050}{month}}+1:1;\ \ \ }
+\DoxyCodeLine{00070\ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00022}{month}}.
+
+
+
+Referenced by \mbox{\hyperlink{l00038}{System\+Time\+Handler\+::adjust()}}.
+
+\mbox{\Hypertarget{class_my_date_adff6fd8be5cf4476b213df3f0aec22c5}\label{class_my_date_adff6fd8be5cf4476b213df3f0aec22c5}} 
+\index{MyDate@{MyDate}!operator=@{operator=}}
+\index{operator=@{operator=}!MyDate@{MyDate}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_my_date}{My\+Date}} \& operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_my_date}{My\+Date}} \&}]{date }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00167\ \{}
+\DoxyCodeLine{00168\ \ \ \ \ \textcolor{keywordflow}{if}(\ \&date\ !=\ \textcolor{keyword}{this}\ )}
+\DoxyCodeLine{00169\ \ \ \ \ \{}
+\DoxyCodeLine{00170\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_my_date_a72369a1087b2aeffe374bb054cb97c12}{day}}=\ \ \ date.\mbox{\hyperlink{class_my_date_a72369a1087b2aeffe374bb054cb97c12}{day}};}
+\DoxyCodeLine{00171\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_my_date_a3e00faf7fbf9805e9ec4d2edd6339050}{month}}=\ date.\mbox{\hyperlink{class_my_date_a3e00faf7fbf9805e9ec4d2edd6339050}{month}};}
+\DoxyCodeLine{00172\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_my_date_a57ca98d8f6d4baf0fe41c583c7dcb0d5}{year}}=\ \ date.\mbox{\hyperlink{class_my_date_a57ca98d8f6d4baf0fe41c583c7dcb0d5}{year}};}
+\DoxyCodeLine{00173\ \ \ \ \ \}}
+\DoxyCodeLine{00174\ \ \ \ \ \textcolor{keywordflow}{return}(\ *\textcolor{keyword}{this});}
+\DoxyCodeLine{00175\ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00021}{day}}, \mbox{\hyperlink{l00022}{month}}, and \mbox{\hyperlink{l00023}{year}}.
+
+\mbox{\Hypertarget{class_my_date_ab3e28bc0a0a933b298c951a0cf5e8ea4}\label{class_my_date_ab3e28bc0a0a933b298c951a0cf5e8ea4}} 
+\index{MyDate@{MyDate}!setDay@{setDay}}
+\index{setDay@{setDay}!MyDate@{MyDate}}
+\doxysubsubsection{\texorpdfstring{setDay()}{setDay()}}
+{\footnotesize\ttfamily void set\+Day (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}}}]{day }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00025\ \{}
+\DoxyCodeLine{00026\ \ \ \ this-\/>\mbox{\hyperlink{class_my_date_a72369a1087b2aeffe374bb054cb97c12}{day}}=\ \mbox{\hyperlink{class_my_date_a72369a1087b2aeffe374bb054cb97c12}{day}};\ \ }
+\DoxyCodeLine{00027\ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00021}{day}}.
+
+
+
+Referenced by \mbox{\hyperlink{l00131}{Timestamp\+::get\+Date()}}, \mbox{\hyperlink{l00188}{get\+DSTEnd()}}, and \mbox{\hyperlink{l00178}{get\+DSTStart()}}.
+
+\mbox{\Hypertarget{class_my_date_aecbdec4ebe381e7a0d74baf2cbf770e1}\label{class_my_date_aecbdec4ebe381e7a0d74baf2cbf770e1}} 
+\index{MyDate@{MyDate}!setMonth@{setMonth}}
+\index{setMonth@{setMonth}!MyDate@{MyDate}}
+\doxysubsubsection{\texorpdfstring{setMonth()}{setMonth()}}
+{\footnotesize\ttfamily void set\+Month (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}}}]{month }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00038\ \{}
+\DoxyCodeLine{00039\ \ \ this-\/>\mbox{\hyperlink{class_my_date_a3e00faf7fbf9805e9ec4d2edd6339050}{month}}=\ \mbox{\hyperlink{class_my_date_a3e00faf7fbf9805e9ec4d2edd6339050}{month}};\ \ }
+\DoxyCodeLine{00040\ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00022}{month}}.
+
+
+
+Referenced by \mbox{\hyperlink{l00131}{Timestamp\+::get\+Date()}}.
+
+\mbox{\Hypertarget{class_my_date_aca918dc0c119b0630297d527c2c9b103}\label{class_my_date_aca918dc0c119b0630297d527c2c9b103}} 
+\index{MyDate@{MyDate}!setYear@{setYear}}
+\index{setYear@{setYear}!MyDate@{MyDate}}
+\doxysubsubsection{\texorpdfstring{setYear()}{setYear()}}
+{\footnotesize\ttfamily void set\+Year (\begin{DoxyParamCaption}\item[{const uint16\+\_\+t}]{year }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00050\ \{}
+\DoxyCodeLine{00051\ \ \ this-\/>\mbox{\hyperlink{class_my_date_a57ca98d8f6d4baf0fe41c583c7dcb0d5}{year}}=\ \mbox{\hyperlink{class_my_date_a57ca98d8f6d4baf0fe41c583c7dcb0d5}{year}};\ \ }
+\DoxyCodeLine{00052\ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00023}{year}}.
+
+
+
+Referenced by \mbox{\hyperlink{l00131}{Timestamp\+::get\+Date()}}.
+
+\mbox{\Hypertarget{class_my_date_a8c1a2aa6577c40d1afc6ba8a8c8cb627}\label{class_my_date_a8c1a2aa6577c40d1afc6ba8a8c8cb627}} 
+\index{MyDate@{MyDate}!toString@{toString}}
+\index{toString@{toString}!MyDate@{MyDate}}
+\doxysubsubsection{\texorpdfstring{toString()}{toString()}}
+{\footnotesize\ttfamily char $\ast$ to\+String (\begin{DoxyParamCaption}\item[{char $\ast$}]{buffer }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00211\ \{\ \ \ \ \ }
+\DoxyCodeLine{00212\ \ \ sprintf(buffer,\ \mbox{\hyperlink{class_my_date_abb76201adb97e3574d2ee21a8f2dcf54}{MyDate::getStringFormat}}(),\ \mbox{\hyperlink{class_my_date_a72369a1087b2aeffe374bb054cb97c12}{day}},\ \mbox{\hyperlink{class_my_date_a3e00faf7fbf9805e9ec4d2edd6339050}{month}},\ \mbox{\hyperlink{class_my_date_a57ca98d8f6d4baf0fe41c583c7dcb0d5}{year}});}
+\DoxyCodeLine{00213\ \ \ \textcolor{keywordflow}{return}(\ buffer);}
+\DoxyCodeLine{00214\ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00021}{day}}, \mbox{\hyperlink{l00198}{get\+String\+Format()}}, \mbox{\hyperlink{l00022}{month}}, and \mbox{\hyperlink{l00023}{year}}.
+
+
+
+Referenced by \mbox{\hyperlink{l00246}{Timestamp\+::to\+String()}}, \mbox{\hyperlink{l00045}{OLEDDisplay\+Clock\+View\+Handler\+::update\+Time()}}, and \mbox{\hyperlink{l00023}{Time\+Zone\+DSTHandler\+::update\+Time()}}.
+
+\mbox{\Hypertarget{class_my_date_ad2dd67353938b18f7854f5d169833366}\label{class_my_date_ad2dd67353938b18f7854f5d169833366}} 
+\index{MyDate@{MyDate}!yearDec@{yearDec}}
+\index{yearDec@{yearDec}!MyDate@{MyDate}}
+\doxysubsubsection{\texorpdfstring{yearDec()}{yearDec()}}
+{\footnotesize\ttfamily void year\+Dec (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00086\ \{}
+\DoxyCodeLine{00087\ \ \ \mbox{\hyperlink{class_my_date_a57ca98d8f6d4baf0fe41c583c7dcb0d5}{year}}\ =(\ \mbox{\hyperlink{class_my_date_a57ca98d8f6d4baf0fe41c583c7dcb0d5}{year}}>\ \mbox{\hyperlink{_my_date_8h_a9784182b131041c188da44ff2993a34e}{BASE\_YEAR}})?\ \mbox{\hyperlink{class_my_date_a57ca98d8f6d4baf0fe41c583c7dcb0d5}{year}}-\/1:\mbox{\hyperlink{_my_date_8h_a9784182b131041c188da44ff2993a34e}{BASE\_YEAR}};\ \ }
+\DoxyCodeLine{00088\ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00009}{BASE\+\_\+\+YEAR}}, and \mbox{\hyperlink{l00023}{year}}.
+
+
+
+Referenced by \mbox{\hyperlink{l00038}{System\+Time\+Handler\+::adjust()}}.
+
+\mbox{\Hypertarget{class_my_date_acc0cd27c3b99020186c57029f65bb131}\label{class_my_date_acc0cd27c3b99020186c57029f65bb131}} 
+\index{MyDate@{MyDate}!yearInc@{yearInc}}
+\index{yearInc@{yearInc}!MyDate@{MyDate}}
+\doxysubsubsection{\texorpdfstring{yearInc()}{yearInc()}}
+{\footnotesize\ttfamily void year\+Inc (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00080\ \{}
+\DoxyCodeLine{00081\ \ \ \mbox{\hyperlink{class_my_date_a57ca98d8f6d4baf0fe41c583c7dcb0d5}{year}}\ =\mbox{\hyperlink{class_my_date_a57ca98d8f6d4baf0fe41c583c7dcb0d5}{year}}+1;\ \ }
+\DoxyCodeLine{00082\ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00023}{year}}.
+
+
+
+Referenced by \mbox{\hyperlink{l00038}{System\+Time\+Handler\+::adjust()}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_my_date_a72369a1087b2aeffe374bb054cb97c12}\label{class_my_date_a72369a1087b2aeffe374bb054cb97c12}} 
+\index{MyDate@{MyDate}!day@{day}}
+\index{day@{day}!MyDate@{MyDate}}
+\doxysubsubsection{\texorpdfstring{day}{day}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}} day\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \mbox{\hyperlink{l00061}{day\+Dec()}}, \mbox{\hyperlink{l00055}{day\+Inc()}}, \mbox{\hyperlink{l00018}{get\+Day()}}, \mbox{\hyperlink{l00099}{get\+Day\+Code()}}, \mbox{\hyperlink{l00157}{is\+Valid\+Day()}}, \mbox{\hyperlink{l00166}{operator=()}}, \mbox{\hyperlink{l00024}{set\+Day()}}, and \mbox{\hyperlink{l00210}{to\+String()}}.
+
+\mbox{\Hypertarget{class_my_date_a3e00faf7fbf9805e9ec4d2edd6339050}\label{class_my_date_a3e00faf7fbf9805e9ec4d2edd6339050}} 
+\index{MyDate@{MyDate}!month@{month}}
+\index{month@{month}!MyDate@{MyDate}}
+\doxysubsubsection{\texorpdfstring{month}{month}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}} month\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \mbox{\hyperlink{l00114}{get\+Leap\+Code()}}, \mbox{\hyperlink{l00031}{get\+Month()}}, \mbox{\hyperlink{l00105}{get\+Month\+Code()}}, \mbox{\hyperlink{l00157}{is\+Valid\+Day()}}, \mbox{\hyperlink{l00151}{is\+Valid\+Month()}}, \mbox{\hyperlink{l00073}{month\+Dec()}}, \mbox{\hyperlink{l00067}{month\+Inc()}}, \mbox{\hyperlink{l00166}{operator=()}}, \mbox{\hyperlink{l00037}{set\+Month()}}, and \mbox{\hyperlink{l00210}{to\+String()}}.
+
+\mbox{\Hypertarget{class_my_date_a57ca98d8f6d4baf0fe41c583c7dcb0d5}\label{class_my_date_a57ca98d8f6d4baf0fe41c583c7dcb0d5}} 
+\index{MyDate@{MyDate}!year@{year}}
+\index{year@{year}!MyDate@{MyDate}}
+\doxysubsubsection{\texorpdfstring{year}{year}}
+{\footnotesize\ttfamily uint16\+\_\+t year\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \mbox{\hyperlink{l00127}{get\+Century\+Code()}}, \mbox{\hyperlink{l00188}{get\+DSTEnd()}}, \mbox{\hyperlink{l00178}{get\+DSTStart()}}, \mbox{\hyperlink{l00114}{get\+Leap\+Code()}}, \mbox{\hyperlink{l00043}{get\+Year()}}, \mbox{\hyperlink{l00091}{get\+Year\+Code()}}, \mbox{\hyperlink{l00157}{is\+Valid\+Day()}}, \mbox{\hyperlink{l00145}{is\+Valid\+Year()}}, \mbox{\hyperlink{l00166}{operator=()}}, \mbox{\hyperlink{l00049}{set\+Year()}}, \mbox{\hyperlink{l00210}{to\+String()}}, \mbox{\hyperlink{l00085}{year\+Dec()}}, and \mbox{\hyperlink{l00079}{year\+Inc()}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_my_date_8h}{My\+Date.\+h}}\item 
+\mbox{\hyperlink{_my_date_8cpp}{My\+Date.\+cpp}}\end{DoxyCompactItemize}

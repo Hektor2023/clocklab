@@ -1,0 +1,509 @@
+\hypertarget{class_analog_clock_view_handler}{}\doxysection{Analog\+Clock\+View\+Handler}
+\label{class_analog_clock_view_handler}\index{AnalogClockViewHandler@{AnalogClockViewHandler}}
+
+
+{\ttfamily \#include \char`\"{}Analog\+Clock\+View\+Handler.\+h\char`\"{}}
+
+Inheritance diagram for Analog\+Clock\+View\+Handler\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{d9/dd5/class_analog_clock_view_handler}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_analog_clock_view_handler_aadb5a2d735e38e695daf58d6181b86d2}{Analog\+Clock\+View\+Handler}} (\mbox{\hyperlink{class_time_handler}{Time\+Handler}} $\ast$\mbox{\hyperlink{class_time_handler_a63ad6ab8709672dbcc67dda18383dfe3}{ptr}}, const int \mbox{\hyperlink{class_analog_clock_view_handler_a56c2c9dd2b5b321c7062cb2f589bf246}{min\+L\+\_\+pin}}, const int \mbox{\hyperlink{class_analog_clock_view_handler_a6cce4da2f035e4d4e87bcc85c93f4290}{min\+R\+\_\+pin}}, const int \mbox{\hyperlink{class_analog_clock_view_handler_ac3e347530bbdaa465290ae35745ae016}{sec\+L\+\_\+pin}}, const int \mbox{\hyperlink{class_analog_clock_view_handler_a9247a4c5bcdbaf185914f49a8447c6eb}{sec\+R\+\_\+pin}})
+\item 
+virtual \mbox{\hyperlink{class_analog_clock_view_handler_a61680c20d3cb7699550a332c9a20d447}{$\sim$\+Analog\+Clock\+View\+Handler}} (void)
+\item 
+virtual const char $\ast$ \mbox{\hyperlink{class_analog_clock_view_handler_aaf53e0d3de2d6ffb42903578a4c4ec5b}{get\+Class\+Name}} (void)
+\item 
+void \mbox{\hyperlink{class_analog_clock_view_handler_a6790da362fc8b7537dd74f2f8d1fea2f}{reset\+Hands}} ()
+\item 
+virtual void \mbox{\hyperlink{class_analog_clock_view_handler_a9caf3b8852098554173231248ecffc10}{update\+Time}} (\mbox{\hyperlink{class_timestamp}{Timestamp}} \&timestamp)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_time_handler}{Time\+Handler}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_time_handler_a5e0eb1999bca334190f57ce2d633eac8}{Time\+Handler}} (\mbox{\hyperlink{class_time_handler}{Time\+Handler}} $\ast$\mbox{\hyperlink{class_time_handler_a63ad6ab8709672dbcc67dda18383dfe3}{ptr}}=nullptr)
+\item 
+virtual \mbox{\hyperlink{class_time_handler_a196abf140e55a092784a779e78f05a43}{$\sim$\+Time\+Handler}} (void)
+\item 
+virtual void \mbox{\hyperlink{class_time_handler_aa9fe17491ab4c7f708547996a47970d2}{bypass}} (bool \mbox{\hyperlink{class_time_handler_ad11dd77562d80b745b5d3f8bb7d19e8a}{bypass\+Module}})
+\item 
+virtual const char $\ast$ \mbox{\hyperlink{class_time_handler_a9f78e5d51abbc956af40d5c72c6bccf4}{get\+Class\+Name}} (void)=0
+\item 
+virtual bool \mbox{\hyperlink{class_time_handler_afb78175ac039184b6fa7513b44f98055}{is\+Valid\+Time}} (void)
+\item 
+virtual void \mbox{\hyperlink{class_time_handler_a7299a2f6b8eecfce70480cb66276b684}{set\+Valid\+Time}} (bool valid\+Flagg)
+\item 
+virtual void \mbox{\hyperlink{class_time_handler_a9caf3b8852098554173231248ecffc10}{update\+Time}} (\mbox{\hyperlink{class_timestamp}{Timestamp}} \&timestamp)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_analog_clock_view_handler_a702567d0169f8c143ffa04d1ea8b2c68}{do\+Action}} (void($\ast$fun)(void))
+\item 
+void \mbox{\hyperlink{class_analog_clock_view_handler_a19743bb5002c3763851bb3c7eed36f7b}{move\+Hands}} (void)
+\item 
+void \mbox{\hyperlink{class_analog_clock_view_handler_ad72f025fd3fa866f4d0742f693c58500}{move\+Minute\+Hand\+Step1}} (void)
+\item 
+void \mbox{\hyperlink{class_analog_clock_view_handler_a4449e3872e617d35face386d09ab8d96}{move\+Minute\+Hand\+Step2}} (void)
+\item 
+void \mbox{\hyperlink{class_analog_clock_view_handler_a2b055756398fabadc2ac4073587ce123}{move\+Only\+Minute\+Hand}} (void)
+\item 
+void \mbox{\hyperlink{class_analog_clock_view_handler_a9a9c02bc51ba5e488804f6b4f1ec8d58}{move\+Only\+Second\+Hand}} (void)
+\item 
+void \mbox{\hyperlink{class_analog_clock_view_handler_a4c3fecbce6939358c26f02a9fdfc94c3}{move\+Second\+Hand\+Step1}} (void)
+\item 
+void \mbox{\hyperlink{class_analog_clock_view_handler_a9b5797bf67a6a45961c7e566db224425}{move\+Second\+Hand\+Step2}} (void)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_my_time}{My\+Time}} \mbox{\hyperlink{class_analog_clock_view_handler_a859740104afb87bd706905b48d7a6fee}{clock\+Time\+Presented}}
+\item 
+const int \mbox{\hyperlink{class_analog_clock_view_handler_a56c2c9dd2b5b321c7062cb2f589bf246}{min\+L\+\_\+pin}}
+\item 
+const int \mbox{\hyperlink{class_analog_clock_view_handler_a6cce4da2f035e4d4e87bcc85c93f4290}{min\+R\+\_\+pin}}
+\item 
+const int \mbox{\hyperlink{class_analog_clock_view_handler_ac3e347530bbdaa465290ae35745ae016}{sec\+L\+\_\+pin}}
+\item 
+const int \mbox{\hyperlink{class_analog_clock_view_handler_a9247a4c5bcdbaf185914f49a8447c6eb}{sec\+R\+\_\+pin}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+\doxysubsubsection*{Protected Attributes inherited from \mbox{\hyperlink{class_time_handler}{Time\+Handler}}}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{class_time_handler_ad11dd77562d80b745b5d3f8bb7d19e8a}{bypass\+Module}}
+\item 
+\mbox{\hyperlink{class_time_handler}{Time\+Handler}} $\ast$ \mbox{\hyperlink{class_time_handler_a63ad6ab8709672dbcc67dda18383dfe3}{ptr}}
+\item 
+bool \mbox{\hyperlink{class_time_handler_aea16ad32369656bd8bbb7871d3eeb5f0}{valid\+Time}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_analog_clock_view_handler_aadb5a2d735e38e695daf58d6181b86d2}\label{class_analog_clock_view_handler_aadb5a2d735e38e695daf58d6181b86d2}} 
+\index{AnalogClockViewHandler@{AnalogClockViewHandler}!AnalogClockViewHandler@{AnalogClockViewHandler}}
+\index{AnalogClockViewHandler@{AnalogClockViewHandler}!AnalogClockViewHandler@{AnalogClockViewHandler}}
+\doxysubsubsection{\texorpdfstring{AnalogClockViewHandler()}{AnalogClockViewHandler()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_analog_clock_view_handler}{Analog\+Clock\+View\+Handler}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_time_handler}{Time\+Handler}} $\ast$}]{ptr,  }\item[{const int}]{min\+L\+\_\+pin,  }\item[{const int}]{min\+R\+\_\+pin,  }\item[{const int}]{sec\+L\+\_\+pin,  }\item[{const int}]{sec\+R\+\_\+pin }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00006\ \ \ :\mbox{\hyperlink{class_time_handler}{TimeHandler}}(\ \mbox{\hyperlink{class_time_handler_a63ad6ab8709672dbcc67dda18383dfe3}{ptr}}),\ \mbox{\hyperlink{class_analog_clock_view_handler_a56c2c9dd2b5b321c7062cb2f589bf246}{minL\_pin}}(\ \mbox{\hyperlink{class_analog_clock_view_handler_a56c2c9dd2b5b321c7062cb2f589bf246}{minL\_pin}}),\ \mbox{\hyperlink{class_analog_clock_view_handler_a6cce4da2f035e4d4e87bcc85c93f4290}{minR\_pin}}(\ \mbox{\hyperlink{class_analog_clock_view_handler_a6cce4da2f035e4d4e87bcc85c93f4290}{minR\_pin}}),\ \mbox{\hyperlink{class_analog_clock_view_handler_ac3e347530bbdaa465290ae35745ae016}{secL\_pin}}(\ \mbox{\hyperlink{class_analog_clock_view_handler_ac3e347530bbdaa465290ae35745ae016}{secL\_pin}}),\ \mbox{\hyperlink{class_analog_clock_view_handler_a9247a4c5bcdbaf185914f49a8447c6eb}{secR\_pin}}(\ \mbox{\hyperlink{class_analog_clock_view_handler_a9247a4c5bcdbaf185914f49a8447c6eb}{secR\_pin}})\  }
+\DoxyCodeLine{00007\ \{}
+\DoxyCodeLine{00008\ \ \ pinMode(\ \mbox{\hyperlink{class_analog_clock_view_handler_a56c2c9dd2b5b321c7062cb2f589bf246}{minL\_pin}},\ OUTPUT);\ \ \ \ \ pinMode(\ \mbox{\hyperlink{class_analog_clock_view_handler_a6cce4da2f035e4d4e87bcc85c93f4290}{minR\_pin}},\ OUTPUT);\ }
+\DoxyCodeLine{00009\ \ \ digitalWrite(\ \mbox{\hyperlink{class_analog_clock_view_handler_a56c2c9dd2b5b321c7062cb2f589bf246}{minL\_pin}},\ HIGH);\ \ \ digitalWrite(\ \mbox{\hyperlink{class_analog_clock_view_handler_a6cce4da2f035e4d4e87bcc85c93f4290}{minR\_pin}},\ HIGH);}
+\DoxyCodeLine{00010\ \ \ }
+\DoxyCodeLine{00011\ \ \ pinMode(\ \mbox{\hyperlink{class_analog_clock_view_handler_ac3e347530bbdaa465290ae35745ae016}{secL\_pin}},\ OUTPUT);\ \ \ \ \ pinMode(\ \mbox{\hyperlink{class_analog_clock_view_handler_a9247a4c5bcdbaf185914f49a8447c6eb}{secR\_pin}},\ OUTPUT);\ }
+\DoxyCodeLine{00012\ \ \ digitalWrite(\ \mbox{\hyperlink{class_analog_clock_view_handler_ac3e347530bbdaa465290ae35745ae016}{secL\_pin}},\ HIGH);\ \ \ digitalWrite(\ \mbox{\hyperlink{class_analog_clock_view_handler_a9247a4c5bcdbaf185914f49a8447c6eb}{secR\_pin}},\ HIGH);}
+\DoxyCodeLine{00013\ \};}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00019}{min\+L\+\_\+pin}}, \mbox{\hyperlink{l00019}{min\+R\+\_\+pin}}, \mbox{\hyperlink{l00020}{sec\+L\+\_\+pin}}, and \mbox{\hyperlink{l00020}{sec\+R\+\_\+pin}}.
+
+\mbox{\Hypertarget{class_analog_clock_view_handler_a61680c20d3cb7699550a332c9a20d447}\label{class_analog_clock_view_handler_a61680c20d3cb7699550a332c9a20d447}} 
+\index{AnalogClockViewHandler@{AnalogClockViewHandler}!````~AnalogClockViewHandler@{$\sim$AnalogClockViewHandler}}
+\index{````~AnalogClockViewHandler@{$\sim$AnalogClockViewHandler}!AnalogClockViewHandler@{AnalogClockViewHandler}}
+\doxysubsubsection{\texorpdfstring{$\sim$AnalogClockViewHandler()}{~AnalogClockViewHandler()}}
+{\footnotesize\ttfamily $\sim$\mbox{\hyperlink{class_analog_clock_view_handler}{Analog\+Clock\+View\+Handler}} (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00016\ \{\};}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_analog_clock_view_handler_a702567d0169f8c143ffa04d1ea8b2c68}\label{class_analog_clock_view_handler_a702567d0169f8c143ffa04d1ea8b2c68}} 
+\index{AnalogClockViewHandler@{AnalogClockViewHandler}!doAction@{doAction}}
+\index{doAction@{doAction}!AnalogClockViewHandler@{AnalogClockViewHandler}}
+\doxysubsubsection{\texorpdfstring{doAction()}{doAction()}}
+{\footnotesize\ttfamily void do\+Action (\begin{DoxyParamCaption}\item[{void($\ast$)(void)}]{fun }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00101\ \{}
+\DoxyCodeLine{00102\ \ \ (*fun)();\ \ }
+\DoxyCodeLine{00103\ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{class_analog_clock_view_handler_aaf53e0d3de2d6ffb42903578a4c4ec5b}\label{class_analog_clock_view_handler_aaf53e0d3de2d6ffb42903578a4c4ec5b}} 
+\index{AnalogClockViewHandler@{AnalogClockViewHandler}!getClassName@{getClassName}}
+\index{getClassName@{getClassName}!AnalogClockViewHandler@{AnalogClockViewHandler}}
+\doxysubsubsection{\texorpdfstring{getClassName()}{getClassName()}}
+{\footnotesize\ttfamily const char $\ast$ get\+Class\+Name (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_time_handler_a9f78e5d51abbc956af40d5c72c6bccf4}{Time\+Handler}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00020\ \{}
+\DoxyCodeLine{00021\ \ \ \textcolor{keywordflow}{return}(\textcolor{stringliteral}{"{}AnalogClockViewHandler"{}});}
+\DoxyCodeLine{00022\ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{class_analog_clock_view_handler_a19743bb5002c3763851bb3c7eed36f7b}\label{class_analog_clock_view_handler_a19743bb5002c3763851bb3c7eed36f7b}} 
+\index{AnalogClockViewHandler@{AnalogClockViewHandler}!moveHands@{moveHands}}
+\index{moveHands@{moveHands}!AnalogClockViewHandler@{AnalogClockViewHandler}}
+\doxysubsubsection{\texorpdfstring{moveHands()}{moveHands()}}
+{\footnotesize\ttfamily void move\+Hands (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00107\ \{}
+\DoxyCodeLine{00108\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ wasFirstSecondInSync=\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00109\ \ \ \ \ \ }
+\DoxyCodeLine{00110\ \ \ \textcolor{keywordflow}{if}(\ !\mbox{\hyperlink{class_time_handler_afb78175ac039184b6fa7513b44f98055}{isValidTime}}())\ \ }
+\DoxyCodeLine{00111\ \ \ \{}
+\DoxyCodeLine{00112\ \ \ \ \ wasFirstSecondInSync=\ \textcolor{keyword}{false};\ \ \ \ \ \ }
+\DoxyCodeLine{00113\ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Invalid\ time\(\backslash\)n"{}});\ \ }
+\DoxyCodeLine{00114\ \ \ \}}
+\DoxyCodeLine{00115\ }
+\DoxyCodeLine{00116\ \ \ \textcolor{keywordflow}{if}(\ \mbox{\hyperlink{class_time_handler_afb78175ac039184b6fa7513b44f98055}{isValidTime}}()\ \&\&(\ \mbox{\hyperlink{class_analog_clock_view_handler_a859740104afb87bd706905b48d7a6fee}{clockTimePresented}}.\mbox{\hyperlink{class_my_time_a7749ba89d10dd072f2b55a0f7eb9acbe}{getSecond}}()\ ==1))}
+\DoxyCodeLine{00117\ \ \ \{}
+\DoxyCodeLine{00118\ \ \ \ \ wasFirstSecondInSync=\ \textcolor{keyword}{true};\ \ \ }
+\DoxyCodeLine{00119\ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}VALID\ time\(\backslash\)n"{}});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00120\ \ \ \}}
+\DoxyCodeLine{00121\ }
+\DoxyCodeLine{00122\ \ \ \textcolor{keywordflow}{if}(\ wasFirstSecondInSync\&\&\ \mbox{\hyperlink{class_time_handler_afb78175ac039184b6fa7513b44f98055}{isValidTime}}())\ }
+\DoxyCodeLine{00123\ \ \ \{\ \ \ }
+\DoxyCodeLine{00124\ \ \ \ \ \textcolor{keywordflow}{if}(\ \mbox{\hyperlink{class_analog_clock_view_handler_a859740104afb87bd706905b48d7a6fee}{clockTimePresented}}.\mbox{\hyperlink{class_my_time_a7749ba89d10dd072f2b55a0f7eb9acbe}{getSecond}}()\ ==1)}
+\DoxyCodeLine{00125\ \ \ \ \ \{}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \mbox{\hyperlink{class_analog_clock_view_handler_ad72f025fd3fa866f4d0742f693c58500}{moveMinuteHandStep1}}();}
+\DoxyCodeLine{00128\ \ \ \ \ \}}
+\DoxyCodeLine{00129\ \ \ \ \ \mbox{\hyperlink{class_analog_clock_view_handler_a4c3fecbce6939358c26f02a9fdfc94c3}{moveSecondHandStep1}}();}
+\DoxyCodeLine{00130\ \ \ \}}
+\DoxyCodeLine{00131\ \ }
+\DoxyCodeLine{00132\ }
+\DoxyCodeLine{00133\ \ \ \mbox{\hyperlink{class_timer}{Timer}}\ t(\ \mbox{\hyperlink{_analog_clock_view_handler_8h_ad727f5fe1e32815dd9ab1a50b52f8d7a}{PULS\_LENGTH}});\ }
+\DoxyCodeLine{00134\ \ \ t.delay();}
+\DoxyCodeLine{00135\ \ \ }
+\DoxyCodeLine{00136\ \ \ \textcolor{keywordflow}{if}(\ wasFirstSecondInSync\&\&\ \mbox{\hyperlink{class_time_handler_afb78175ac039184b6fa7513b44f98055}{isValidTime}}())}
+\DoxyCodeLine{00137\ \ \ \{}
+\DoxyCodeLine{00138\ \ \ \ \ \mbox{\hyperlink{class_analog_clock_view_handler_a4449e3872e617d35face386d09ab8d96}{moveMinuteHandStep2}}();}
+\DoxyCodeLine{00139\ \ \ \ \ \mbox{\hyperlink{class_analog_clock_view_handler_a9b5797bf67a6a45961c7e566db224425}{moveSecondHandStep2}}();}
+\DoxyCodeLine{00140\ \ \ }
+\DoxyCodeLine{00141\ \ \ \ \ }
+\DoxyCodeLine{00142\ \ }
+\DoxyCodeLine{00143\ \ \ \ \ \textcolor{comment}{//\ call\ lambda\ function}}
+\DoxyCodeLine{00144\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00145\ \textcolor{comment}{\ \ \ \ doAction(\ []()\ \{ }}
+\DoxyCodeLine{00146\ \textcolor{comment}{\ \ \ \ \ \ Serial.println(\ "{}moveOnlyMinuteHand"{}); }}
+\DoxyCodeLine{00147\ \textcolor{comment}{\ \ \ \ \ \ AnalogClockViewHandler::moveOnlyMinuteHand(\ 4,\ 5); }}
+\DoxyCodeLine{00148\ \textcolor{comment}{\ \ \ \ \}); }}
+\DoxyCodeLine{00149\ \textcolor{comment}{\ \ \ \ */}}
+\DoxyCodeLine{00150\ \ \ \}}
+\DoxyCodeLine{00151\ \ \ \ \ \ \ }
+\DoxyCodeLine{00152\ \ \ \mbox{\hyperlink{class_analog_clock_view_handler_a859740104afb87bd706905b48d7a6fee}{clockTimePresented}}++;\ \ \ \ }
+\DoxyCodeLine{00153\ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00017}{clock\+Time\+Presented}}, \mbox{\hyperlink{l00091}{Timer\+::delay()}}, \mbox{\hyperlink{l00041}{My\+Time\+::get\+Second()}}, \mbox{\hyperlink{l00029}{Time\+Handler\+::is\+Valid\+Time()}}, \mbox{\hyperlink{l00063}{move\+Minute\+Hand\+Step1()}}, \mbox{\hyperlink{l00082}{move\+Minute\+Hand\+Step2()}}, \mbox{\hyperlink{l00025}{move\+Second\+Hand\+Step1()}}, \mbox{\hyperlink{l00043}{move\+Second\+Hand\+Step2()}}, and \mbox{\hyperlink{l00012}{PULS\+\_\+\+LENGTH}}.
+
+
+
+Referenced by \mbox{\hyperlink{l00171}{update\+Time()}}.
+
+\mbox{\Hypertarget{class_analog_clock_view_handler_ad72f025fd3fa866f4d0742f693c58500}\label{class_analog_clock_view_handler_ad72f025fd3fa866f4d0742f693c58500}} 
+\index{AnalogClockViewHandler@{AnalogClockViewHandler}!moveMinuteHandStep1@{moveMinuteHandStep1}}
+\index{moveMinuteHandStep1@{moveMinuteHandStep1}!AnalogClockViewHandler@{AnalogClockViewHandler}}
+\doxysubsubsection{\texorpdfstring{moveMinuteHandStep1()}{moveMinuteHandStep1()}}
+{\footnotesize\ttfamily void move\+Minute\+Hand\+Step1 (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00064\ \{}
+\DoxyCodeLine{00065\ \ }
+\DoxyCodeLine{00066\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \ tick=\ 0;}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \ \ \textcolor{keywordflow}{if}(\ tick)\ }
+\DoxyCodeLine{00069\ \ \ \{\ }
+\DoxyCodeLine{00070\ \ \ \ \ digitalWrite(\ \mbox{\hyperlink{class_analog_clock_view_handler_a56c2c9dd2b5b321c7062cb2f589bf246}{minL\_pin}},\ LOW);\ \ digitalWrite(\ \mbox{\hyperlink{class_analog_clock_view_handler_a6cce4da2f035e4d4e87bcc85c93f4290}{minR\_pin}},\ HIGH);}
+\DoxyCodeLine{00071\ \ \ \ \ tick=\ 0;\ \ \ \ \ }
+\DoxyCodeLine{00072\ \ \ \}}
+\DoxyCodeLine{00073\ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00074\ \ \ \{\ }
+\DoxyCodeLine{00075\ \ \ \ \ digitalWrite(\ \mbox{\hyperlink{class_analog_clock_view_handler_a56c2c9dd2b5b321c7062cb2f589bf246}{minL\_pin}},\ HIGH);\ \ digitalWrite(\ \mbox{\hyperlink{class_analog_clock_view_handler_a6cce4da2f035e4d4e87bcc85c93f4290}{minR\_pin}},\ LOW);\ }
+\DoxyCodeLine{00076\ \ \ \ \ tick=\ 1;\ \ \ \ \ }
+\DoxyCodeLine{00077\ \ \ \}}
+\DoxyCodeLine{00078\ \ \ }
+\DoxyCodeLine{00079\ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00019}{min\+L\+\_\+pin}}, and \mbox{\hyperlink{l00019}{min\+R\+\_\+pin}}.
+
+
+
+Referenced by \mbox{\hyperlink{l00106}{move\+Hands()}}, and \mbox{\hyperlink{l00089}{move\+Only\+Minute\+Hand()}}.
+
+\mbox{\Hypertarget{class_analog_clock_view_handler_a4449e3872e617d35face386d09ab8d96}\label{class_analog_clock_view_handler_a4449e3872e617d35face386d09ab8d96}} 
+\index{AnalogClockViewHandler@{AnalogClockViewHandler}!moveMinuteHandStep2@{moveMinuteHandStep2}}
+\index{moveMinuteHandStep2@{moveMinuteHandStep2}!AnalogClockViewHandler@{AnalogClockViewHandler}}
+\doxysubsubsection{\texorpdfstring{moveMinuteHandStep2()}{moveMinuteHandStep2()}}
+{\footnotesize\ttfamily void move\+Minute\+Hand\+Step2 (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00083\ \{}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00085\ \ \ digitalWrite(\ \mbox{\hyperlink{class_analog_clock_view_handler_a56c2c9dd2b5b321c7062cb2f589bf246}{minL\_pin}},\ HIGH);\ \ digitalWrite(\ \mbox{\hyperlink{class_analog_clock_view_handler_a6cce4da2f035e4d4e87bcc85c93f4290}{minR\_pin}},\ HIGH);\ \ }
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00019}{min\+L\+\_\+pin}}, and \mbox{\hyperlink{l00019}{min\+R\+\_\+pin}}.
+
+
+
+Referenced by \mbox{\hyperlink{l00106}{move\+Hands()}}, and \mbox{\hyperlink{l00089}{move\+Only\+Minute\+Hand()}}.
+
+\mbox{\Hypertarget{class_analog_clock_view_handler_a2b055756398fabadc2ac4073587ce123}\label{class_analog_clock_view_handler_a2b055756398fabadc2ac4073587ce123}} 
+\index{AnalogClockViewHandler@{AnalogClockViewHandler}!moveOnlyMinuteHand@{moveOnlyMinuteHand}}
+\index{moveOnlyMinuteHand@{moveOnlyMinuteHand}!AnalogClockViewHandler@{AnalogClockViewHandler}}
+\doxysubsubsection{\texorpdfstring{moveOnlyMinuteHand()}{moveOnlyMinuteHand()}}
+{\footnotesize\ttfamily void move\+Only\+Minute\+Hand (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00090\ \{}
+\DoxyCodeLine{00091\ \ \ \mbox{\hyperlink{class_analog_clock_view_handler_ad72f025fd3fa866f4d0742f693c58500}{moveMinuteHandStep1}}();}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00093\ \ \ \mbox{\hyperlink{class_timer}{Timer}}\ t(\ \mbox{\hyperlink{_analog_clock_view_handler_8h_ad727f5fe1e32815dd9ab1a50b52f8d7a}{PULS\_LENGTH}});}
+\DoxyCodeLine{00094\ \ \ t.delay();\ }
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00096\ \ \ \mbox{\hyperlink{class_analog_clock_view_handler_a4449e3872e617d35face386d09ab8d96}{moveMinuteHandStep2}}();\ }
+\DoxyCodeLine{00097\ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00091}{Timer\+::delay()}}, \mbox{\hyperlink{l00063}{move\+Minute\+Hand\+Step1()}}, \mbox{\hyperlink{l00082}{move\+Minute\+Hand\+Step2()}}, and \mbox{\hyperlink{l00012}{PULS\+\_\+\+LENGTH}}.
+
+\mbox{\Hypertarget{class_analog_clock_view_handler_a9a9c02bc51ba5e488804f6b4f1ec8d58}\label{class_analog_clock_view_handler_a9a9c02bc51ba5e488804f6b4f1ec8d58}} 
+\index{AnalogClockViewHandler@{AnalogClockViewHandler}!moveOnlySecondHand@{moveOnlySecondHand}}
+\index{moveOnlySecondHand@{moveOnlySecondHand}!AnalogClockViewHandler@{AnalogClockViewHandler}}
+\doxysubsubsection{\texorpdfstring{moveOnlySecondHand()}{moveOnlySecondHand()}}
+{\footnotesize\ttfamily void move\+Only\+Second\+Hand (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00053\ \{}
+\DoxyCodeLine{00054\ \ \ \mbox{\hyperlink{class_analog_clock_view_handler_a4c3fecbce6939358c26f02a9fdfc94c3}{moveSecondHandStep1}}();}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \ \ \mbox{\hyperlink{class_timer}{Timer}}\ t(\ \mbox{\hyperlink{_analog_clock_view_handler_8h_ad727f5fe1e32815dd9ab1a50b52f8d7a}{PULS\_LENGTH}});}
+\DoxyCodeLine{00057\ \ \ t.delay();\ }
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \ \ \mbox{\hyperlink{class_analog_clock_view_handler_a9b5797bf67a6a45961c7e566db224425}{moveSecondHandStep2}}();}
+\DoxyCodeLine{00060\ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00091}{Timer\+::delay()}}, \mbox{\hyperlink{l00025}{move\+Second\+Hand\+Step1()}}, \mbox{\hyperlink{l00043}{move\+Second\+Hand\+Step2()}}, and \mbox{\hyperlink{l00012}{PULS\+\_\+\+LENGTH}}.
+
+\mbox{\Hypertarget{class_analog_clock_view_handler_a4c3fecbce6939358c26f02a9fdfc94c3}\label{class_analog_clock_view_handler_a4c3fecbce6939358c26f02a9fdfc94c3}} 
+\index{AnalogClockViewHandler@{AnalogClockViewHandler}!moveSecondHandStep1@{moveSecondHandStep1}}
+\index{moveSecondHandStep1@{moveSecondHandStep1}!AnalogClockViewHandler@{AnalogClockViewHandler}}
+\doxysubsubsection{\texorpdfstring{moveSecondHandStep1()}{moveSecondHandStep1()}}
+{\footnotesize\ttfamily void move\+Second\+Hand\+Step1 (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00026\ \{}
+\DoxyCodeLine{00027\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \ tick=\ 0;}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \ \ \textcolor{keywordflow}{if}(\ tick)\ }
+\DoxyCodeLine{00030\ \ \ \{\ }
+\DoxyCodeLine{00031\ \ \ \ \ digitalWrite(\ \mbox{\hyperlink{class_analog_clock_view_handler_ac3e347530bbdaa465290ae35745ae016}{secL\_pin}},\ LOW);\ \ digitalWrite(\ \mbox{\hyperlink{class_analog_clock_view_handler_a9247a4c5bcdbaf185914f49a8447c6eb}{secR\_pin}},\ HIGH);}
+\DoxyCodeLine{00032\ \ \ \ \ tick=\ 0;\ \ \ \ \ }
+\DoxyCodeLine{00033\ \ \ \}}
+\DoxyCodeLine{00034\ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00035\ \ \ \{\ }
+\DoxyCodeLine{00036\ \ \ \ \ digitalWrite(\ \mbox{\hyperlink{class_analog_clock_view_handler_ac3e347530bbdaa465290ae35745ae016}{secL\_pin}},\ HIGH);\ \ digitalWrite(\ \mbox{\hyperlink{class_analog_clock_view_handler_a9247a4c5bcdbaf185914f49a8447c6eb}{secR\_pin}},\ LOW);\ }
+\DoxyCodeLine{00037\ \ \ \ \ tick=\ 1;\ \ \ \ \ }
+\DoxyCodeLine{00038\ \ \ \}}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00020}{sec\+L\+\_\+pin}}, and \mbox{\hyperlink{l00020}{sec\+R\+\_\+pin}}.
+
+
+
+Referenced by \mbox{\hyperlink{l00106}{move\+Hands()}}, and \mbox{\hyperlink{l00052}{move\+Only\+Second\+Hand()}}.
+
+\mbox{\Hypertarget{class_analog_clock_view_handler_a9b5797bf67a6a45961c7e566db224425}\label{class_analog_clock_view_handler_a9b5797bf67a6a45961c7e566db224425}} 
+\index{AnalogClockViewHandler@{AnalogClockViewHandler}!moveSecondHandStep2@{moveSecondHandStep2}}
+\index{moveSecondHandStep2@{moveSecondHandStep2}!AnalogClockViewHandler@{AnalogClockViewHandler}}
+\doxysubsubsection{\texorpdfstring{moveSecondHandStep2()}{moveSecondHandStep2()}}
+{\footnotesize\ttfamily void move\+Second\+Hand\+Step2 (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00044\ \{}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \ \ digitalWrite(\ \mbox{\hyperlink{class_analog_clock_view_handler_ac3e347530bbdaa465290ae35745ae016}{secL\_pin}},\ HIGH);\ \ digitalWrite(\ \mbox{\hyperlink{class_analog_clock_view_handler_a9247a4c5bcdbaf185914f49a8447c6eb}{secR\_pin}},\ HIGH);\ \ }
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00020}{sec\+L\+\_\+pin}}, and \mbox{\hyperlink{l00020}{sec\+R\+\_\+pin}}.
+
+
+
+Referenced by \mbox{\hyperlink{l00106}{move\+Hands()}}, and \mbox{\hyperlink{l00052}{move\+Only\+Second\+Hand()}}.
+
+\mbox{\Hypertarget{class_analog_clock_view_handler_a6790da362fc8b7537dd74f2f8d1fea2f}\label{class_analog_clock_view_handler_a6790da362fc8b7537dd74f2f8d1fea2f}} 
+\index{AnalogClockViewHandler@{AnalogClockViewHandler}!resetHands@{resetHands}}
+\index{resetHands@{resetHands}!AnalogClockViewHandler@{AnalogClockViewHandler}}
+\doxysubsubsection{\texorpdfstring{resetHands()}{resetHands()}}
+{\footnotesize\ttfamily void reset\+Hands (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00157\ \{}
+\DoxyCodeLine{00158\ \textcolor{comment}{/*\ \  }}
+\DoxyCodeLine{00159\ \textcolor{comment}{\ \ for(;;) }}
+\DoxyCodeLine{00160\ \textcolor{comment}{\ \ \{ }}
+\DoxyCodeLine{00161\ \textcolor{comment}{\ \ \ \ clockTime++; }}
+\DoxyCodeLine{00162\ \textcolor{comment}{}}
+\DoxyCodeLine{00163\ \textcolor{comment}{\ \ \ \ moveOnlySecondHand(); }}
+\DoxyCodeLine{00164\ \textcolor{comment}{\ \ \ \ char\ timeStrBuffer[\ MyTime::getStringBufferSize()]; }}
+\DoxyCodeLine{00165\ \textcolor{comment}{\ \ \ \ Serial.println(\ clockTime.toString(\ timeStrBuffer)); }}
+\DoxyCodeLine{00166\ \textcolor{comment}{\ \ \} }}
+\DoxyCodeLine{00167\ \textcolor{comment}{*/}\ \ \ \ }
+\DoxyCodeLine{00168\ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{class_analog_clock_view_handler_a9caf3b8852098554173231248ecffc10}\label{class_analog_clock_view_handler_a9caf3b8852098554173231248ecffc10}} 
+\index{AnalogClockViewHandler@{AnalogClockViewHandler}!updateTime@{updateTime}}
+\index{updateTime@{updateTime}!AnalogClockViewHandler@{AnalogClockViewHandler}}
+\doxysubsubsection{\texorpdfstring{updateTime()}{updateTime()}}
+{\footnotesize\ttfamily void update\+Time (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_timestamp}{Timestamp}} \&}]{timestamp }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{class_time_handler_a9caf3b8852098554173231248ecffc10}{Time\+Handler}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00172\ \{\ }
+\DoxyCodeLine{00173\ \ }
+\DoxyCodeLine{00174\ \ \ \mbox{\hyperlink{class_my_time}{MyTime}}\ \ \ \ requiredTime;}
+\DoxyCodeLine{00175\ \ \ }
+\DoxyCodeLine{00176\ \ \ requiredTime=\ timestamp.\mbox{\hyperlink{class_timestamp_a9ce366ef9be2ccc0e25763fbb76ecc19}{getTime}}();}
+\DoxyCodeLine{00177\ \ \ requiredTime.\mbox{\hyperlink{class_my_time_a6c3c3bc42e5c0aca01c000ccd760e601}{setHour}}(\ requiredTime.\mbox{\hyperlink{class_my_time_a315feb0809a03c14a1104f5eaccd6233}{getHour}}()\ \%\ 12);\ \ \textcolor{comment}{//\ analog\ clock\ has\ 12\ hours\ }}
+\DoxyCodeLine{00178\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00179\ \textcolor{comment}{\ \ char\ timeStrBuffer2[\ MyTime::getStringBufferSize()]; }}
+\DoxyCodeLine{00180\ \textcolor{comment}{\ \ Serial.printf(\ "{}requiredTime\ \%s\ \ |\ "{},requiredTime.toString(\ timeStrBuffer2)); }}
+\DoxyCodeLine{00181\ \textcolor{comment}{}}
+\DoxyCodeLine{00182\ \textcolor{comment}{\ \ char\ timeStrBuffer3[\ MyTime::getStringBufferSize()]; }}
+\DoxyCodeLine{00183\ \textcolor{comment}{\ \ Serial.printf(\ "{}clockTimePresented\ \%s\ \ |\ "{},clockTimePresented.toString(\ timeStrBuffer3)); }}
+\DoxyCodeLine{00184\ \textcolor{comment}{}}
+\DoxyCodeLine{00185\ \textcolor{comment}{\ \ uint16\_t\ \ \ tdiff; }}
+\DoxyCodeLine{00186\ \textcolor{comment}{\ \ tdiff=\ abs(\ requiredTime.getInSeconds()-\/\ \ clockTimePresented.getInSeconds())\ \%(3600*12); }}
+\DoxyCodeLine{00187\ \textcolor{comment}{\ \ Serial.printf(\ "{}Diff\ Time\ in\ secs\ \%d\(\backslash\)n"{},tdiff); }}
+\DoxyCodeLine{00188\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00189\ }
+\DoxyCodeLine{00190\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ flaggStart=\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00191\ \ \ \textcolor{keywordflow}{if}(\ timestamp.\mbox{\hyperlink{class_timestamp_a9ce366ef9be2ccc0e25763fbb76ecc19}{getTime}}().\mbox{\hyperlink{class_my_time_a7749ba89d10dd072f2b55a0f7eb9acbe}{getSecond}}()\ ==0)}
+\DoxyCodeLine{00192\ \ \ \{}
+\DoxyCodeLine{00193\ \ \ \ \ flaggStart\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00194\ \ \ \}}
+\DoxyCodeLine{00195\ }
+\DoxyCodeLine{00196\ \ \ \textcolor{keywordflow}{if}(\ flaggStart)\ }
+\DoxyCodeLine{00197\ \ \ \{\ \ }
+\DoxyCodeLine{00198\ \ \ \ \ \mbox{\hyperlink{class_analog_clock_view_handler_a19743bb5002c3763851bb3c7eed36f7b}{moveHands}}();}
+\DoxyCodeLine{00199\ \ \ \}}
+\DoxyCodeLine{00200\ }
+\DoxyCodeLine{00201\ \ \ \mbox{\hyperlink{class_time_handler_a9caf3b8852098554173231248ecffc10}{TimeHandler::updateTime}}(\ timestamp);}
+\DoxyCodeLine{00202\ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00017}{My\+Time\+::get\+Hour()}}, \mbox{\hyperlink{l00041}{My\+Time\+::get\+Second()}}, \mbox{\hyperlink{l00173}{Timestamp\+::get\+Time()}}, \mbox{\hyperlink{l00106}{move\+Hands()}}, \mbox{\hyperlink{l00023}{My\+Time\+::set\+Hour()}}, and \mbox{\hyperlink{l00040}{Time\+Handler\+::update\+Time()}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_analog_clock_view_handler_a859740104afb87bd706905b48d7a6fee}\label{class_analog_clock_view_handler_a859740104afb87bd706905b48d7a6fee}} 
+\index{AnalogClockViewHandler@{AnalogClockViewHandler}!clockTimePresented@{clockTimePresented}}
+\index{clockTimePresented@{clockTimePresented}!AnalogClockViewHandler@{AnalogClockViewHandler}}
+\doxysubsubsection{\texorpdfstring{clockTimePresented}{clockTimePresented}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_my_time}{My\+Time}} clock\+Time\+Presented\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \mbox{\hyperlink{l00106}{move\+Hands()}}.
+
+\mbox{\Hypertarget{class_analog_clock_view_handler_a56c2c9dd2b5b321c7062cb2f589bf246}\label{class_analog_clock_view_handler_a56c2c9dd2b5b321c7062cb2f589bf246}} 
+\index{AnalogClockViewHandler@{AnalogClockViewHandler}!minL\_pin@{minL\_pin}}
+\index{minL\_pin@{minL\_pin}!AnalogClockViewHandler@{AnalogClockViewHandler}}
+\doxysubsubsection{\texorpdfstring{minL\_pin}{minL\_pin}}
+{\footnotesize\ttfamily const int min\+L\+\_\+pin\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \mbox{\hyperlink{l00004}{Analog\+Clock\+View\+Handler()}}, \mbox{\hyperlink{l00063}{move\+Minute\+Hand\+Step1()}}, and \mbox{\hyperlink{l00082}{move\+Minute\+Hand\+Step2()}}.
+
+\mbox{\Hypertarget{class_analog_clock_view_handler_a6cce4da2f035e4d4e87bcc85c93f4290}\label{class_analog_clock_view_handler_a6cce4da2f035e4d4e87bcc85c93f4290}} 
+\index{AnalogClockViewHandler@{AnalogClockViewHandler}!minR\_pin@{minR\_pin}}
+\index{minR\_pin@{minR\_pin}!AnalogClockViewHandler@{AnalogClockViewHandler}}
+\doxysubsubsection{\texorpdfstring{minR\_pin}{minR\_pin}}
+{\footnotesize\ttfamily const int min\+R\+\_\+pin\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \mbox{\hyperlink{l00004}{Analog\+Clock\+View\+Handler()}}, \mbox{\hyperlink{l00063}{move\+Minute\+Hand\+Step1()}}, and \mbox{\hyperlink{l00082}{move\+Minute\+Hand\+Step2()}}.
+
+\mbox{\Hypertarget{class_analog_clock_view_handler_ac3e347530bbdaa465290ae35745ae016}\label{class_analog_clock_view_handler_ac3e347530bbdaa465290ae35745ae016}} 
+\index{AnalogClockViewHandler@{AnalogClockViewHandler}!secL\_pin@{secL\_pin}}
+\index{secL\_pin@{secL\_pin}!AnalogClockViewHandler@{AnalogClockViewHandler}}
+\doxysubsubsection{\texorpdfstring{secL\_pin}{secL\_pin}}
+{\footnotesize\ttfamily const int sec\+L\+\_\+pin\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \mbox{\hyperlink{l00004}{Analog\+Clock\+View\+Handler()}}, \mbox{\hyperlink{l00025}{move\+Second\+Hand\+Step1()}}, and \mbox{\hyperlink{l00043}{move\+Second\+Hand\+Step2()}}.
+
+\mbox{\Hypertarget{class_analog_clock_view_handler_a9247a4c5bcdbaf185914f49a8447c6eb}\label{class_analog_clock_view_handler_a9247a4c5bcdbaf185914f49a8447c6eb}} 
+\index{AnalogClockViewHandler@{AnalogClockViewHandler}!secR\_pin@{secR\_pin}}
+\index{secR\_pin@{secR\_pin}!AnalogClockViewHandler@{AnalogClockViewHandler}}
+\doxysubsubsection{\texorpdfstring{secR\_pin}{secR\_pin}}
+{\footnotesize\ttfamily const int sec\+R\+\_\+pin\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \mbox{\hyperlink{l00004}{Analog\+Clock\+View\+Handler()}}, \mbox{\hyperlink{l00025}{move\+Second\+Hand\+Step1()}}, and \mbox{\hyperlink{l00043}{move\+Second\+Hand\+Step2()}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_analog_clock_view_handler_8h}{Analog\+Clock\+View\+Handler.\+h}}\item 
+\mbox{\hyperlink{_analog_clock_view_handler_8cpp}{Analog\+Clock\+View\+Handler.\+cpp}}\end{DoxyCompactItemize}

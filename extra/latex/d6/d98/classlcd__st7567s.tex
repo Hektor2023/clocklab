@@ -1,0 +1,1053 @@
+\hypertarget{classlcd__st7567s}{}\doxysection{lcd\+\_\+st7567s}
+\label{classlcd__st7567s}\index{lcd\_st7567s@{lcd\_st7567s}}
+
+
+{\ttfamily \#include \char`\"{}lcd\+\_\+st7567s.\+h\char`\"{}}
+
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96}{ST7567\+A\+\_\+C}} \{ \newline
+\mbox{\hyperlink{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96a2c63cc523dc5592961b95cf2327d062f}{display\+ON}} = 0xaf
+, \mbox{\hyperlink{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96a61694000b4c579fb07017326b0692e71}{display\+OFF}} = 0xae
+, \mbox{\hyperlink{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96a24005a94e9f8580f7ea8ac579534364a}{start\+Line}} = 0x40
+, \mbox{\hyperlink{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96a5df9df21dabfd8980b5ad8c8c010fa9e}{restart}} = 0xe2
+, \newline
+\mbox{\hyperlink{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96a1abcc760b49ea2575595ba826b2cfc57}{seg}} = 0xa0
+, \mbox{\hyperlink{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96a749ce097d0d20fbf691ec6d5749da519}{INV\+\_\+normal}} = 0xa6
+, \mbox{\hyperlink{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96a2fe78d0c1da002056c216d0301b60359}{AP\+\_\+normal}} = 0xa4
+, \mbox{\hyperlink{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96adf521d7e064a03276941f0b42f337a4d}{BS}} = 0xa3
+, \newline
+\mbox{\hyperlink{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96abaee3f5e7827d2de95abc1e729a46778}{com}} = 0xc8
+, \mbox{\hyperlink{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96a49fae1cf9edddb912b5383b9b8291382}{power\+Con1}} = 0x2c
+, \mbox{\hyperlink{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96ab8dcaeebd386fc91bb7b1600952e01ea}{power\+Con2}} = 0x2e
+, \mbox{\hyperlink{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96a0f0171819b038057cd0468110a322930}{power\+Con3}} = 0x2f
+, \newline
+\mbox{\hyperlink{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96a7bc94259c28c5d54c1534cae91117dde}{reg\+Ratio}} = 0x22
+, \mbox{\hyperlink{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96aa16087cb2973785e1bb02227d629a88a}{EV1}} = 0x81
+, \mbox{\hyperlink{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96a71a3a9d7fff4bf7449e2f8a540cdfb56}{EV2}} = 0x30
+, \mbox{\hyperlink{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96a7730398d07d8a9c72cbe0ecb1e2336d2}{exit\+\_\+\+EC}} = 0xfe
+, \newline
+\mbox{\hyperlink{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96a68bfc3f4718d89e8b47f64df9be9cc67}{enter\+\_\+\+EC}} = 0xff
+, \mbox{\hyperlink{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96aa1509984931e0ab833613da2303124fc}{DSM\+\_\+\+ON}} = 0x72
+, \mbox{\hyperlink{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96a54c5b6144282afde9de4530792b30003}{DSM\+\_\+\+OFF}} = 0x70
+, \mbox{\hyperlink{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96a667796eaaf5a7fb18bd67f9f4b6f4bcb}{DT}} = 0xd6
+, \newline
+\mbox{\hyperlink{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96afeae05a406c74b20259c6d30f8e34eda}{BA}} = 0x90
+, \mbox{\hyperlink{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96ab903e5b3c0d7dde47e17f3b8848abc2c}{FR}} = 0x9d
+, \mbox{\hyperlink{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96afcdf6c2fc841d106b28519c8396300e5}{RMW}} = 0xe0
+, \mbox{\hyperlink{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96adc6f24fd6915a3f2786a1b7045406924}{END}} = 0xee
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classlcd__st7567s_aa8119e723be8ec9604b25a32e965159c}{lcd\+\_\+st7567s}} ()
+\item 
+void \mbox{\hyperlink{classlcd__st7567s_ac9950592890056a5edd002c4322bc9f7}{Clear}} (bool invcolor)
+\item 
+void \mbox{\hyperlink{classlcd__st7567s_aa52486c39ea6dfc46f78c753954f7339}{Clear\+Pixel}} (int x, int y)
+\item 
+void \mbox{\hyperlink{classlcd__st7567s_a7dd4334765ec7930dfc1c8dd1f7952d8}{Cursor}} (int x, int y)
+\item 
+void \mbox{\hyperlink{classlcd__st7567s_acbcd8071993baa71fd4284b1e21e1e50}{Display}} (char $\ast$str)
+\item 
+void \mbox{\hyperlink{classlcd__st7567s_a45bce240617e0b9682064b1c12ffe770}{Display\+Picture}} ()
+\item 
+void \mbox{\hyperlink{classlcd__st7567s_a12e1b282920da09eea61f4bb443382d6}{Display\+Pixel}} (int x, int y)
+\item 
+void \mbox{\hyperlink{classlcd__st7567s_a95e7285bad6a156df2afae860a46528d}{draw\+\_\+circle}} (int x0, int y0, int rad, int option, bool invcolor, bool solid)
+\item 
+void \mbox{\hyperlink{classlcd__st7567s_afa718226007a2023cdd9bda9a7766f50}{draw\+\_\+circle\+\_\+section}} (int x, int y, int x0, int y0, int option, bool invcolor, bool solid)
+\item 
+void \mbox{\hyperlink{classlcd__st7567s_a097e2ef3b3d19c6389ee9903f0ac1ecc}{Draw\+Line}} (int x1, int y1, int x2, int y2, bool invcolor)
+\item 
+void \mbox{\hyperlink{classlcd__st7567s_a0e6367b8c083327954cc632d816584da}{Font\+Size}} (int num)
+\item 
+void \mbox{\hyperlink{classlcd__st7567s_a1e3b6d38df0786ccf7f938d60e386aae}{Init}} ()
+\item 
+int \mbox{\hyperlink{classlcd__st7567s_ab5202c74d9953bc493f8d911dea638ba}{Read\+Byte\+\_\+dat}} (int col, int page)
+\item 
+void \mbox{\hyperlink{classlcd__st7567s_aba1a31746f8443288d65ff80707c014f}{test\+Pixel}} (int t)
+\item 
+void \mbox{\hyperlink{classlcd__st7567s_a2897cc4b772337f17c7ba2ff6a3e9cdc}{Write\+Byte\+\_\+command}} (int dat)
+\item 
+void \mbox{\hyperlink{classlcd__st7567s_a91e21faf94bd7676419ac9947bf86f10}{Write\+Byte\+\_\+dat}} (int dat)
+\item 
+void \mbox{\hyperlink{classlcd__st7567s_a2f666ce7d9d50a024e0eee2b12057054}{Write\+Cont\+\_\+command}} (int str\mbox{[}$\,$\mbox{]})
+\item 
+void \mbox{\hyperlink{classlcd__st7567s_a904c5872542a7d49eae9445359b1fae6}{Write\+Cont\+\_\+dat}} (int str\mbox{[}$\,$\mbox{]})
+\item 
+void \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{Write\+Font}} (int num)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{classlcd__st7567s_aafb8164f20f79a2dd0290502a25367d1}{addr}} = 0x3f
+\item 
+int \mbox{\hyperlink{classlcd__st7567s_a6c393df7c67b1c804c009c45d49559d0}{cursor}} \mbox{[}2\mbox{]} =\{0,0\}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+\doxysubsection{Member Enumeration Documentation}
+\mbox{\Hypertarget{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96}\label{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96}} 
+\index{lcd\_st7567s@{lcd\_st7567s}!ST7567A\_C@{ST7567A\_C}}
+\index{ST7567A\_C@{ST7567A\_C}!lcd\_st7567s@{lcd\_st7567s}}
+\doxysubsubsection{\texorpdfstring{ST7567A\_C}{ST7567A\_C}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96}{ST7567\+A\+\_\+C}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{displayON@{displayON}!lcd\_st7567s@{lcd\_st7567s}}\index{lcd\_st7567s@{lcd\_st7567s}!displayON@{displayON}}}\mbox{\Hypertarget{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96a2c63cc523dc5592961b95cf2327d062f}\label{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96a2c63cc523dc5592961b95cf2327d062f}} 
+display\+ON&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{displayOFF@{displayOFF}!lcd\_st7567s@{lcd\_st7567s}}\index{lcd\_st7567s@{lcd\_st7567s}!displayOFF@{displayOFF}}}\mbox{\Hypertarget{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96a61694000b4c579fb07017326b0692e71}\label{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96a61694000b4c579fb07017326b0692e71}} 
+display\+OFF&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{startLine@{startLine}!lcd\_st7567s@{lcd\_st7567s}}\index{lcd\_st7567s@{lcd\_st7567s}!startLine@{startLine}}}\mbox{\Hypertarget{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96a24005a94e9f8580f7ea8ac579534364a}\label{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96a24005a94e9f8580f7ea8ac579534364a}} 
+start\+Line&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{restart@{restart}!lcd\_st7567s@{lcd\_st7567s}}\index{lcd\_st7567s@{lcd\_st7567s}!restart@{restart}}}\mbox{\Hypertarget{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96a5df9df21dabfd8980b5ad8c8c010fa9e}\label{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96a5df9df21dabfd8980b5ad8c8c010fa9e}} 
+restart&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{seg@{seg}!lcd\_st7567s@{lcd\_st7567s}}\index{lcd\_st7567s@{lcd\_st7567s}!seg@{seg}}}\mbox{\Hypertarget{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96a1abcc760b49ea2575595ba826b2cfc57}\label{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96a1abcc760b49ea2575595ba826b2cfc57}} 
+seg&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{INV\_normal@{INV\_normal}!lcd\_st7567s@{lcd\_st7567s}}\index{lcd\_st7567s@{lcd\_st7567s}!INV\_normal@{INV\_normal}}}\mbox{\Hypertarget{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96a749ce097d0d20fbf691ec6d5749da519}\label{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96a749ce097d0d20fbf691ec6d5749da519}} 
+INV\+\_\+normal&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{AP\_normal@{AP\_normal}!lcd\_st7567s@{lcd\_st7567s}}\index{lcd\_st7567s@{lcd\_st7567s}!AP\_normal@{AP\_normal}}}\mbox{\Hypertarget{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96a2fe78d0c1da002056c216d0301b60359}\label{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96a2fe78d0c1da002056c216d0301b60359}} 
+AP\+\_\+normal&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{BS@{BS}!lcd\_st7567s@{lcd\_st7567s}}\index{lcd\_st7567s@{lcd\_st7567s}!BS@{BS}}}\mbox{\Hypertarget{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96adf521d7e064a03276941f0b42f337a4d}\label{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96adf521d7e064a03276941f0b42f337a4d}} 
+BS&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{com@{com}!lcd\_st7567s@{lcd\_st7567s}}\index{lcd\_st7567s@{lcd\_st7567s}!com@{com}}}\mbox{\Hypertarget{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96abaee3f5e7827d2de95abc1e729a46778}\label{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96abaee3f5e7827d2de95abc1e729a46778}} 
+com&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{powerCon1@{powerCon1}!lcd\_st7567s@{lcd\_st7567s}}\index{lcd\_st7567s@{lcd\_st7567s}!powerCon1@{powerCon1}}}\mbox{\Hypertarget{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96a49fae1cf9edddb912b5383b9b8291382}\label{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96a49fae1cf9edddb912b5383b9b8291382}} 
+power\+Con1&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{powerCon2@{powerCon2}!lcd\_st7567s@{lcd\_st7567s}}\index{lcd\_st7567s@{lcd\_st7567s}!powerCon2@{powerCon2}}}\mbox{\Hypertarget{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96ab8dcaeebd386fc91bb7b1600952e01ea}\label{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96ab8dcaeebd386fc91bb7b1600952e01ea}} 
+power\+Con2&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{powerCon3@{powerCon3}!lcd\_st7567s@{lcd\_st7567s}}\index{lcd\_st7567s@{lcd\_st7567s}!powerCon3@{powerCon3}}}\mbox{\Hypertarget{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96a0f0171819b038057cd0468110a322930}\label{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96a0f0171819b038057cd0468110a322930}} 
+power\+Con3&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{regRatio@{regRatio}!lcd\_st7567s@{lcd\_st7567s}}\index{lcd\_st7567s@{lcd\_st7567s}!regRatio@{regRatio}}}\mbox{\Hypertarget{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96a7bc94259c28c5d54c1534cae91117dde}\label{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96a7bc94259c28c5d54c1534cae91117dde}} 
+reg\+Ratio&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{EV1@{EV1}!lcd\_st7567s@{lcd\_st7567s}}\index{lcd\_st7567s@{lcd\_st7567s}!EV1@{EV1}}}\mbox{\Hypertarget{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96aa16087cb2973785e1bb02227d629a88a}\label{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96aa16087cb2973785e1bb02227d629a88a}} 
+EV1&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{EV2@{EV2}!lcd\_st7567s@{lcd\_st7567s}}\index{lcd\_st7567s@{lcd\_st7567s}!EV2@{EV2}}}\mbox{\Hypertarget{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96a71a3a9d7fff4bf7449e2f8a540cdfb56}\label{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96a71a3a9d7fff4bf7449e2f8a540cdfb56}} 
+EV2&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{exit\_EC@{exit\_EC}!lcd\_st7567s@{lcd\_st7567s}}\index{lcd\_st7567s@{lcd\_st7567s}!exit\_EC@{exit\_EC}}}\mbox{\Hypertarget{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96a7730398d07d8a9c72cbe0ecb1e2336d2}\label{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96a7730398d07d8a9c72cbe0ecb1e2336d2}} 
+exit\+\_\+\+EC&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{enter\_EC@{enter\_EC}!lcd\_st7567s@{lcd\_st7567s}}\index{lcd\_st7567s@{lcd\_st7567s}!enter\_EC@{enter\_EC}}}\mbox{\Hypertarget{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96a68bfc3f4718d89e8b47f64df9be9cc67}\label{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96a68bfc3f4718d89e8b47f64df9be9cc67}} 
+enter\+\_\+\+EC&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{DSM\_ON@{DSM\_ON}!lcd\_st7567s@{lcd\_st7567s}}\index{lcd\_st7567s@{lcd\_st7567s}!DSM\_ON@{DSM\_ON}}}\mbox{\Hypertarget{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96aa1509984931e0ab833613da2303124fc}\label{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96aa1509984931e0ab833613da2303124fc}} 
+DSM\+\_\+\+ON&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{DSM\_OFF@{DSM\_OFF}!lcd\_st7567s@{lcd\_st7567s}}\index{lcd\_st7567s@{lcd\_st7567s}!DSM\_OFF@{DSM\_OFF}}}\mbox{\Hypertarget{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96a54c5b6144282afde9de4530792b30003}\label{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96a54c5b6144282afde9de4530792b30003}} 
+DSM\+\_\+\+OFF&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{DT@{DT}!lcd\_st7567s@{lcd\_st7567s}}\index{lcd\_st7567s@{lcd\_st7567s}!DT@{DT}}}\mbox{\Hypertarget{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96a667796eaaf5a7fb18bd67f9f4b6f4bcb}\label{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96a667796eaaf5a7fb18bd67f9f4b6f4bcb}} 
+DT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{BA@{BA}!lcd\_st7567s@{lcd\_st7567s}}\index{lcd\_st7567s@{lcd\_st7567s}!BA@{BA}}}\mbox{\Hypertarget{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96afeae05a406c74b20259c6d30f8e34eda}\label{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96afeae05a406c74b20259c6d30f8e34eda}} 
+BA&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{FR@{FR}!lcd\_st7567s@{lcd\_st7567s}}\index{lcd\_st7567s@{lcd\_st7567s}!FR@{FR}}}\mbox{\Hypertarget{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96ab903e5b3c0d7dde47e17f3b8848abc2c}\label{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96ab903e5b3c0d7dde47e17f3b8848abc2c}} 
+FR&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{RMW@{RMW}!lcd\_st7567s@{lcd\_st7567s}}\index{lcd\_st7567s@{lcd\_st7567s}!RMW@{RMW}}}\mbox{\Hypertarget{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96afcdf6c2fc841d106b28519c8396300e5}\label{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96afcdf6c2fc841d106b28519c8396300e5}} 
+RMW&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{END@{END}!lcd\_st7567s@{lcd\_st7567s}}\index{lcd\_st7567s@{lcd\_st7567s}!END@{END}}}\mbox{\Hypertarget{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96adc6f24fd6915a3f2786a1b7045406924}\label{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96adc6f24fd6915a3f2786a1b7045406924}} 
+END&\\
+\hline
+
+\end{DoxyEnumFields}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \mbox{\hyperlink{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96a2c63cc523dc5592961b95cf2327d062f}{displayON}}\ \ =\ 0xaf,\ \ \textcolor{comment}{//display\ on.}}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \mbox{\hyperlink{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96a61694000b4c579fb07017326b0692e71}{displayOFF}}\ =\ 0xae,\ \ \textcolor{comment}{//display\ off.}}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ }
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \mbox{\hyperlink{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96a24005a94e9f8580f7ea8ac579534364a}{startLine}}\ \ =\ 0x40,\ \ \textcolor{comment}{//Set\ display\ start\ line.}}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \mbox{\hyperlink{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96a5df9df21dabfd8980b5ad8c8c010fa9e}{restart}}\ \ \ \ =\ 0xe2,\ \ \textcolor{comment}{//restart\ command.}}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \mbox{\hyperlink{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96a1abcc760b49ea2575595ba826b2cfc57}{seg}}\ \ \ \ \ \ \ \ =\ 0xa0,\ \ \textcolor{comment}{//Set\ scan\ direction\ of\ SEG,\ SEG\ =\ 1-\/0-\/1-\/0-\/0-\/0-\/0-\/MX;\ }}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//MX=1-\/-\/>reverse\ direction,\ MX=0-\/-\/>normal\ direction.}}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \mbox{\hyperlink{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96a749ce097d0d20fbf691ec6d5749da519}{INV\_normal}}\ =\ 0xa6,\ \ \textcolor{comment}{//normal\ display.}}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \mbox{\hyperlink{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96a2fe78d0c1da002056c216d0301b60359}{AP\_normal}}\ \ =\ 0xa4,\ \ \textcolor{comment}{//normal\ display.}}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ }
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \mbox{\hyperlink{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96adf521d7e064a03276941f0b42f337a4d}{BS}}\ \ \ \ \ \ \ \ \ =\ 0xa3,\ \ \textcolor{comment}{//select\ bias\ setting,\ bias\ =\ 1-\/0-\/1-\/0-\/0-\/0-\/1-\/BS,\ BS(0)=1/9,\ \ BS(1)=1/7(at\ 1/65\ duty).}}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \mbox{\hyperlink{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96abaee3f5e7827d2de95abc1e729a46778}{com}}\ \ \ \ \ \ \ \ =\ 0xc8,\ \ \textcolor{comment}{//Set\ output\ direction\ of\ COM,\ COM\ =\ 1-\/1-\/0-\/0-\/MY-\/X-\/X-\/X;}}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//MY=1-\/-\/>reverse\ direction,\ MY=0-\/-\/>normal\ direction.}}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \mbox{\hyperlink{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96a49fae1cf9edddb912b5383b9b8291382}{powerCon1}}\ \ =\ 0x2c,\ \ \textcolor{comment}{//Controls\ the\ built-\/in\ power\ circuits;}}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \mbox{\hyperlink{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96ab8dcaeebd386fc91bb7b1600952e01ea}{powerCon2}}\ \ =\ 0x2e,\ \ \textcolor{comment}{//Define\ instructions\ on\ page\ 43\ of\ the\ ST7567A\ data\ sheet.}}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \mbox{\hyperlink{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96a0f0171819b038057cd0468110a322930}{powerCon3}}\ \ =\ 0x2f,}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \textcolor{comment}{\ \ \ \ \ \ /********Adjust\ display\ brightness********/}}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \mbox{\hyperlink{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96a7bc94259c28c5d54c1534cae91117dde}{regRatio}}\ \ \ =\ 0x22,\ \ \textcolor{comment}{//Controls\ the\ regulation\ ratio\ of\ the\ built-\/in\ regulator;}}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Define\ instructions\ on\ page\ 43\ of\ the\ ST7567A\ data\ sheet.}}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \mbox{\hyperlink{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96aa16087cb2973785e1bb02227d629a88a}{EV1}}\ \ \ \ \ \ \ \ =\ 0x81,\ \ \textcolor{comment}{//Define\ instructions\ on\ page\ 44\ of\ the\ ST7567A\ data\ sheet.}}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \mbox{\hyperlink{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96a71a3a9d7fff4bf7449e2f8a540cdfb56}{EV2}}\ \ \ \ \ \ \ \ =\ 0x30,\ \ }
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \textcolor{comment}{\ \ \ \ \ \ /**********entension\ command\ set**********/}}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \mbox{\hyperlink{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96a7730398d07d8a9c72cbe0ecb1e2336d2}{exit\_EC}}\ \ \ \ =\ 0xfe,\ \ \textcolor{comment}{//exit\ extension\ command\ set.}}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \mbox{\hyperlink{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96a68bfc3f4718d89e8b47f64df9be9cc67}{enter\_EC}}\ \ \ =\ 0xff,\ \ \textcolor{comment}{//enter\ extension\ command\ set.}}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \mbox{\hyperlink{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96aa1509984931e0ab833613da2303124fc}{DSM\_ON}}\ \ \ \ \ =\ 0x72,\ \ \textcolor{comment}{//display\ setting\ mode\ on.}}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \mbox{\hyperlink{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96a54c5b6144282afde9de4530792b30003}{DSM\_OFF}}\ \ \ \ =\ 0x70,\ \ \textcolor{comment}{//display\ setting\ mode\ off.}}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \mbox{\hyperlink{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96a667796eaaf5a7fb18bd67f9f4b6f4bcb}{DT}}\ \ \ \ \ \ \ \ \ =\ 0xd6,\ \ \textcolor{comment}{//set\ the\ display\ duty,\ DT=33.}}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \mbox{\hyperlink{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96afeae05a406c74b20259c6d30f8e34eda}{BA}}\ \ \ \ \ \ \ \ \ =\ 0x90,\ \ \textcolor{comment}{//BA=1/9,\ selects\ LCD\ bias\ ratio\ for\ the\ internal\ voltage\ follower\ to\ drive\ the\ LCD.\ }}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//This\ command\ has\ priority\ over\ the\ Bias\ Select\ (BS).}}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \mbox{\hyperlink{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96ab903e5b3c0d7dde47e17f3b8848abc2c}{FR}}\ \ \ \ \ \ \ \ \ =\ 0x9d,\ \ \textcolor{comment}{//specifies\ the\ frame\ rate\ for\ duty.}}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \mbox{\hyperlink{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96afcdf6c2fc841d106b28519c8396300e5}{RMW}}\ \ \ \ \ \ \ \ =\ 0xe0,\ \ \textcolor{comment}{//Read-\/modify-\/Write\ command\ on\ page\ 42\ of\ ST7567A\ datasheet.}}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \mbox{\hyperlink{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96adc6f24fd6915a3f2786a1b7045406924}{END}}\ \ \ \ \ \ \ \ =\ 0xee,}
+\DoxyCodeLine{00071\ \ \ \ \ \};}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classlcd__st7567s_aa8119e723be8ec9604b25a32e965159c}\label{classlcd__st7567s_aa8119e723be8ec9604b25a32e965159c}} 
+\index{lcd\_st7567s@{lcd\_st7567s}!lcd\_st7567s@{lcd\_st7567s}}
+\index{lcd\_st7567s@{lcd\_st7567s}!lcd\_st7567s@{lcd\_st7567s}}
+\doxysubsubsection{\texorpdfstring{lcd\_st7567s()}{lcd\_st7567s()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classlcd__st7567s}{lcd\+\_\+st7567s}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00009\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00010\ \ \ }
+\DoxyCodeLine{00011\ \}}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classlcd__st7567s_ac9950592890056a5edd002c4322bc9f7}\label{classlcd__st7567s_ac9950592890056a5edd002c4322bc9f7}} 
+\index{lcd\_st7567s@{lcd\_st7567s}!Clear@{Clear}}
+\index{Clear@{Clear}!lcd\_st7567s@{lcd\_st7567s}}
+\doxysubsubsection{\texorpdfstring{Clear()}{Clear()}}
+{\footnotesize\ttfamily void Clear (\begin{DoxyParamCaption}\item[{bool}]{invcolor }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00216\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00217\ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int}\ x=0;\ x<8;\ x++)\{}
+\DoxyCodeLine{00218\ \ \ \ \ \mbox{\hyperlink{classlcd__st7567s_a2897cc4b772337f17c7ba2ff6a3e9cdc}{WriteByte\_command}}(0xb0\ +\ x);\ \ \ \textcolor{comment}{//y,\ page\ address\ y=1-\/0-\/1-\/1-\/y3-\/y2-\/y1-\/y0,\ 1-\/page\ with\ 8-\/rows}}
+\DoxyCodeLine{00219\ \ \ \ \ }
+\DoxyCodeLine{00220\ \textcolor{comment}{\ \ \ \ /*******automatically\ increased\ by\ one******/}}
+\DoxyCodeLine{00221\ \ \ \ \ \mbox{\hyperlink{classlcd__st7567s_a2897cc4b772337f17c7ba2ff6a3e9cdc}{WriteByte\_command}}(0x10);\ \ \ \ \ \ \ \textcolor{comment}{//x,\ column\ address\ x=0-\/0-\/0-\/0-\/1-\/x7-\/x6-\/x5-\/x4}}
+\DoxyCodeLine{00222\ \ \ \ \ \mbox{\hyperlink{classlcd__st7567s_a2897cc4b772337f17c7ba2ff6a3e9cdc}{WriteByte\_command}}(0x00);\ \ \ \ \ \ \ \textcolor{comment}{//x,\ column\ address\ x=0-\/0-\/0-\/0-\/0-\/x3-\/x2-\/x1-\/x0}}
+\DoxyCodeLine{00223\ \ \ \ \ }
+\DoxyCodeLine{00224\ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int}\ i=0;\ i<128;\ i++)\{}
+\DoxyCodeLine{00225\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (invcolor)\ \{}
+\DoxyCodeLine{00226\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classlcd__st7567s_a91e21faf94bd7676419ac9947bf86f10}{WriteByte\_dat}}(0xff);\ \ \ \ \ \ \ \ \ \textcolor{comment}{//row=bit0-\/-\/bit7}}
+\DoxyCodeLine{00227\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00228\ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00229\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classlcd__st7567s_a91e21faf94bd7676419ac9947bf86f10}{WriteByte\_dat}}(0x00);\ \ \ \ \ \ \ \ \ \textcolor{comment}{//row=bit0-\/-\/bit7}}
+\DoxyCodeLine{00230\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00231\ \ \ \ \ \}\ \ }
+\DoxyCodeLine{00232\ \ \ \}}
+\DoxyCodeLine{00233\ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00017}{Write\+Byte\+\_\+command()}}, and \mbox{\hyperlink{l00123}{Write\+Byte\+\_\+dat()}}.
+
+
+
+Referenced by \mbox{\hyperlink{l00021}{OLEDDisplay\+Clock\+View\+Handler\+::\+OLEDDisplay\+Clock\+View\+Handler()}}, and \mbox{\hyperlink{l00028}{Init()}}.
+
+\mbox{\Hypertarget{classlcd__st7567s_aa52486c39ea6dfc46f78c753954f7339}\label{classlcd__st7567s_aa52486c39ea6dfc46f78c753954f7339}} 
+\index{lcd\_st7567s@{lcd\_st7567s}!ClearPixel@{ClearPixel}}
+\index{ClearPixel@{ClearPixel}!lcd\_st7567s@{lcd\_st7567s}}
+\doxysubsubsection{\texorpdfstring{ClearPixel()}{ClearPixel()}}
+{\footnotesize\ttfamily void Clear\+Pixel (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00192\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00193\ \ \ \textcolor{keywordtype}{int}\ dat;}
+\DoxyCodeLine{00194\ \ \ \mbox{\hyperlink{classlcd__st7567s_a2897cc4b772337f17c7ba2ff6a3e9cdc}{WriteByte\_command}}(0xb0\ +\ y/8);\ \ \ \ \ \textcolor{comment}{//y,\ page\ address\ y=1-\/0-\/1-\/1-\/y3-\/y2-\/y1-\/y0,\ 1-\/page\ with\ 8-\/rows\ }}
+\DoxyCodeLine{00195\ \ \ \mbox{\hyperlink{classlcd__st7567s_a2897cc4b772337f17c7ba2ff6a3e9cdc}{WriteByte\_command}}(0x10\ +\ x/16);\ \ \ \ \textcolor{comment}{//x,\ column\ address\ x=0-\/0-\/0-\/0-\/1-\/x7-\/x6-\/x5-\/x4}}
+\DoxyCodeLine{00196\ \ \ \mbox{\hyperlink{classlcd__st7567s_a2897cc4b772337f17c7ba2ff6a3e9cdc}{WriteByte\_command}}(x\%16);\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//x,\ column\ address\ x=0-\/0-\/0-\/0-\/0-\/x3-\/x2-\/x1-\/x0\ }}
+\DoxyCodeLine{00197\ \ \ }
+\DoxyCodeLine{00198\ \ \ \mbox{\hyperlink{classlcd__st7567s_a2897cc4b772337f17c7ba2ff6a3e9cdc}{WriteByte\_command}}(\mbox{\hyperlink{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96afcdf6c2fc841d106b28519c8396300e5}{RMW}});\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//start\ Read-\/modify-\/Write}}
+\DoxyCodeLine{00199\ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int}\ i=0;\ i<2;\ i++)\{}
+\DoxyCodeLine{00200\ \ \ \ \ Wire.requestFrom(\mbox{\hyperlink{classlcd__st7567s_aafb8164f20f79a2dd0290502a25367d1}{addr}},\ 2);\ \ \ \ \ \ \ \textcolor{comment}{//request\ 2\ bytes\ from\ slave\ device}}
+\DoxyCodeLine{00201\ \ \ \ \ \textcolor{keywordflow}{while}(Wire.available())\{\ \ \ \ \ \ \ \ \ \textcolor{comment}{//slave\ may\ send\ less\ than\ requested}}
+\DoxyCodeLine{00202\ \ \ \ \ \ \ dat\ =\ Wire.read();\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//receive\ a\ byte\ as\ character}}
+\DoxyCodeLine{00203\ \ \ \ \ \}}
+\DoxyCodeLine{00204\ \ \ \}}
+\DoxyCodeLine{00205\ \ \ \textcolor{comment}{//Serial.println(dat);\ \ \ \ \ \ \ \ \ \ \ \ \ //\ print\ the\ data}}
+\DoxyCodeLine{00206\ \ \ \textcolor{comment}{//dat\ =\ (dat\ \&\ (0xfe<<(y\%8)));}}
+\DoxyCodeLine{00207\ \ \ dat\ \&=\ \string~(1<<(y\%8));}
+\DoxyCodeLine{00208\ \ \ \mbox{\hyperlink{classlcd__st7567s_a91e21faf94bd7676419ac9947bf86f10}{WriteByte\_dat}}(dat);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//row=bit0-\/-\/bit7}}
+\DoxyCodeLine{00209\ \ \ \mbox{\hyperlink{classlcd__st7567s_a2897cc4b772337f17c7ba2ff6a3e9cdc}{WriteByte\_command}}(\mbox{\hyperlink{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96adc6f24fd6915a3f2786a1b7045406924}{END}});\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//end\ Read-\/modify-\/Write\ }}
+\DoxyCodeLine{00210\ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00097}{addr}}, \mbox{\hyperlink{l00070}{END}}, \mbox{\hyperlink{l00069}{RMW}}, \mbox{\hyperlink{l00017}{Write\+Byte\+\_\+command()}}, and \mbox{\hyperlink{l00123}{Write\+Byte\+\_\+dat()}}.
+
+
+
+Referenced by \mbox{\hyperlink{l00446}{draw\+\_\+circle\+\_\+section()}}, and \mbox{\hyperlink{l00391}{Draw\+Line()}}.
+
+\mbox{\Hypertarget{classlcd__st7567s_a7dd4334765ec7930dfc1c8dd1f7952d8}\label{classlcd__st7567s_a7dd4334765ec7930dfc1c8dd1f7952d8}} 
+\index{lcd\_st7567s@{lcd\_st7567s}!Cursor@{Cursor}}
+\index{Cursor@{Cursor}!lcd\_st7567s@{lcd\_st7567s}}
+\doxysubsubsection{\texorpdfstring{Cursor()}{Cursor()}}
+{\footnotesize\ttfamily void Cursor (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00242\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00243\ \ \ \textcolor{keywordflow}{if}(x>17)\{x=17;\}}
+\DoxyCodeLine{00244\ \ \ \textcolor{keywordflow}{if}(y>7)\{x=7;\}}
+\DoxyCodeLine{00245\ \ \ \mbox{\hyperlink{classlcd__st7567s_a6c393df7c67b1c804c009c45d49559d0}{cursor}}[0]=y;}
+\DoxyCodeLine{00246\ \ \ \mbox{\hyperlink{classlcd__st7567s_a6c393df7c67b1c804c009c45d49559d0}{cursor}}[1]=x;}
+\DoxyCodeLine{00247\ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00098}{cursor}}.
+
+
+
+Referenced by \mbox{\hyperlink{l00045}{OLEDDisplay\+Clock\+View\+Handler\+::update\+Time()}}.
+
+\mbox{\Hypertarget{classlcd__st7567s_acbcd8071993baa71fd4284b1e21e1e50}\label{classlcd__st7567s_acbcd8071993baa71fd4284b1e21e1e50}} 
+\index{lcd\_st7567s@{lcd\_st7567s}!Display@{Display}}
+\index{Display@{Display}!lcd\_st7567s@{lcd\_st7567s}}
+\doxysubsubsection{\texorpdfstring{Display()}{Display()}}
+{\footnotesize\ttfamily void Display (\begin{DoxyParamCaption}\item[{char $\ast$}]{str }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00280\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00281\ \ \ \textcolor{keywordtype}{int}\ len\ =\ 0;}
+\DoxyCodeLine{00282\ \ \ len\ =\ strlen(str);}
+\DoxyCodeLine{00283\ \ \ }
+\DoxyCodeLine{00284\ \ \ \mbox{\hyperlink{classlcd__st7567s_a2897cc4b772337f17c7ba2ff6a3e9cdc}{WriteByte\_command}}(0xb0\ +\ \mbox{\hyperlink{classlcd__st7567s_a6c393df7c67b1c804c009c45d49559d0}{cursor}}[0]);\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//y,\ page\ address\ y=1-\/0-\/1-\/1-\/y3-\/y2-\/y1-\/y0,\ 1-\/page\ with\ 8-\/rows}}
+\DoxyCodeLine{00285\ \textcolor{comment}{\ \ /*******automatically\ increased\ by\ one******/}}
+\DoxyCodeLine{00286\ \ \ \mbox{\hyperlink{classlcd__st7567s_a2897cc4b772337f17c7ba2ff6a3e9cdc}{WriteByte\_command}}(0x10\ +\ \mbox{\hyperlink{classlcd__st7567s_a6c393df7c67b1c804c009c45d49559d0}{cursor}}[1]*7/16);\ \ \ \ \ \ \textcolor{comment}{//x,\ column\ address\ x=0-\/0-\/0-\/0-\/1-\/x7-\/x6-\/x5-\/x4}}
+\DoxyCodeLine{00287\ \ \ \mbox{\hyperlink{classlcd__st7567s_a2897cc4b772337f17c7ba2ff6a3e9cdc}{WriteByte\_command}}(0x00\ +\ \mbox{\hyperlink{classlcd__st7567s_a6c393df7c67b1c804c009c45d49559d0}{cursor}}[1]*7\%16);\ \ \ \ \ \ \textcolor{comment}{//x,\ column\ address\ x=0-\/0-\/0-\/0-\/0-\/x3-\/x2-\/x1-\/x0}}
+\DoxyCodeLine{00288\ }
+\DoxyCodeLine{00289\ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int}\ num=0;\ num<len;\ num++)\{\ }
+\DoxyCodeLine{00290\ \ \ \ \ \textcolor{keywordflow}{switch}(str[num])\{}
+\DoxyCodeLine{00291\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'0'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(0);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00292\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'1'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(1);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00293\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'2'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(2);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00294\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'3'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(3);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00295\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'4'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(4);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00296\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'5'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(5);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00297\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'6'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(6);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00298\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'7'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(7);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00299\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'8'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(8);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00300\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'9'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(9);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00301\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'a'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(10);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00302\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'b'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(11);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00303\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'c'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(12);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00304\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'d'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(13);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00305\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'e'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(14);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00306\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'f'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(15);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00307\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'g'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(16);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00308\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'h'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(17);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00309\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'i'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(18);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00310\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'j'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(19);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00311\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'k'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(20);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00312\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'l'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(21);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00313\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'m'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(22);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00314\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'n'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(23);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00315\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'o'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(24);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00316\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'p'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(25);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00317\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'q'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(26);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00318\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'r'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(27);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00319\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'s'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(28);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00320\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'t'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(29);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00321\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'u'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(30);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00322\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'v'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(31);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00323\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'w'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(32);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00324\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'x'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(33);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00325\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'y'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(34);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00326\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'z'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(35);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00327\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'A'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(36);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00328\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'B'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(37);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00329\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'C'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(38);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00330\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'D'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(39);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00331\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'E'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(40);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00332\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'F'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(41);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00333\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'G'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(42);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00334\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'H'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(43);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00335\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'I'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(44);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00336\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'J'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(45);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00337\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'K'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(46);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00338\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'L'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(47);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00339\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'M'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(48);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00340\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'N'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(49);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00341\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'O'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(50);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00342\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'P'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(51);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00343\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'Q'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(52);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00344\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'R'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(53);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00345\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'S'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(54);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00346\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'T'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(55);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00347\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'U'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(56);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00348\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'V'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(57);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00349\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'W'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(58);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00350\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'X'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(59);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00351\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'Y'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(60);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00352\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'Z'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(61);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00353\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'!'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(62);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00354\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'"{}'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(63);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00355\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'\#'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(64);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00356\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'\$'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(65);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00357\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'\%'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(66);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00358\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'\&'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(67);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00359\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'\(\backslash\)''}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(68);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00360\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'('}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(69);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00361\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{')'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(70);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00362\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'*'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(71);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00363\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'+'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(72);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00364\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{','}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(73);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00365\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'-\/'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(74);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00366\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'/'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(75);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00367\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{':'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(76);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00368\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{';'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(77);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00369\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'<'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(78);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00370\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'='}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(79);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00371\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'>'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(80);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00372\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'?'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(81);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00373\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'@'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(82);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00374\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'\{'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(83);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00375\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'|'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(84);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00376\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'\}'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(85);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00377\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'\string~'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(86);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00378\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'\ '}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(87);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00379\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'.'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(88);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00380\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'\string^'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(89);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00381\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'\_'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(90);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00382\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'`'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(91);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00383\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'['}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(92);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00384\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'\(\backslash\)\(\backslash\)'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(93);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00385\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{']'}:\ \mbox{\hyperlink{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}{WriteFont}}(94);\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00386\ \ \ \ \ \ \ \textcolor{keywordflow}{default}:\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00387\ \ \ \ \ \}\ \ }
+\DoxyCodeLine{00388\ \ \ \}}
+\DoxyCodeLine{00389\ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00098}{cursor}}, \mbox{\hyperlink{l00017}{Write\+Byte\+\_\+command()}}, and \mbox{\hyperlink{l00269}{Write\+Font()}}.
+
+
+
+Referenced by \mbox{\hyperlink{l00045}{OLEDDisplay\+Clock\+View\+Handler\+::update\+Time()}}.
+
+\mbox{\Hypertarget{classlcd__st7567s_a45bce240617e0b9682064b1c12ffe770}\label{classlcd__st7567s_a45bce240617e0b9682064b1c12ffe770}} 
+\index{lcd\_st7567s@{lcd\_st7567s}!DisplayPicture@{DisplayPicture}}
+\index{DisplayPicture@{DisplayPicture}!lcd\_st7567s@{lcd\_st7567s}}
+\doxysubsubsection{\texorpdfstring{DisplayPicture()}{DisplayPicture()}}
+{\footnotesize\ttfamily void Display\+Picture (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00252\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00253\ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int}\ x=0;\ x<9;\ x++)\{}
+\DoxyCodeLine{00254\ \ \ \ \ \mbox{\hyperlink{classlcd__st7567s_a2897cc4b772337f17c7ba2ff6a3e9cdc}{WriteByte\_command}}(0xb0\ +\ x);\ \ \ \textcolor{comment}{//y,\ page\ address\ y=1-\/0-\/1-\/1-\/y3-\/y2-\/y1-\/y0,\ 1-\/page\ with\ 8-\/rows}}
+\DoxyCodeLine{00255\ \ \ \ \ }
+\DoxyCodeLine{00256\ \textcolor{comment}{\ \ \ \ /*******automatically\ increased\ by\ one******/}}
+\DoxyCodeLine{00257\ \ \ \ \ \mbox{\hyperlink{classlcd__st7567s_a2897cc4b772337f17c7ba2ff6a3e9cdc}{WriteByte\_command}}(0x10);\ \ \ \ \ \ \ \textcolor{comment}{//x,\ column\ address\ x=0-\/0-\/0-\/0-\/1-\/x7-\/x6-\/x5-\/x4}}
+\DoxyCodeLine{00258\ \ \ \ \ \mbox{\hyperlink{classlcd__st7567s_a2897cc4b772337f17c7ba2ff6a3e9cdc}{WriteByte\_command}}(0x00);\ \ \ \ \ \ \ \textcolor{comment}{//x,\ column\ address\ x=0-\/0-\/0-\/0-\/0-\/x3-\/x2-\/x1-\/x0}}
+\DoxyCodeLine{00259\ \ \ \ \ }
+\DoxyCodeLine{00260\ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int}\ i=0;\ i<128;\ i++)\{}
+\DoxyCodeLine{00261\ \ \ \ \ \ \ \mbox{\hyperlink{classlcd__st7567s_a91e21faf94bd7676419ac9947bf86f10}{WriteByte\_dat}}(pgm\_read\_word\_near(picture+i+x*128));\ }
+\DoxyCodeLine{00262\ \ \ \ \ \ \ \}\ \ }
+\DoxyCodeLine{00263\ \ \ \}}
+\DoxyCodeLine{00264\ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00017}{Write\+Byte\+\_\+command()}}, and \mbox{\hyperlink{l00123}{Write\+Byte\+\_\+dat()}}.
+
+\mbox{\Hypertarget{classlcd__st7567s_a12e1b282920da09eea61f4bb443382d6}\label{classlcd__st7567s_a12e1b282920da09eea61f4bb443382d6}} 
+\index{lcd\_st7567s@{lcd\_st7567s}!DisplayPixel@{DisplayPixel}}
+\index{DisplayPixel@{DisplayPixel}!lcd\_st7567s@{lcd\_st7567s}}
+\doxysubsubsection{\texorpdfstring{DisplayPixel()}{DisplayPixel()}}
+{\footnotesize\ttfamily void Display\+Pixel (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00170\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00171\ \ \ \textcolor{keywordtype}{int}\ dat;}
+\DoxyCodeLine{00172\ \ \ \mbox{\hyperlink{classlcd__st7567s_a2897cc4b772337f17c7ba2ff6a3e9cdc}{WriteByte\_command}}(0xb0\ +\ y/8);\ \ \ \ \ \textcolor{comment}{//y,\ page\ address\ y=1-\/0-\/1-\/1-\/y3-\/y2-\/y1-\/y0,\ 1-\/page\ with\ 8-\/rows\ }}
+\DoxyCodeLine{00173\ \ \ \mbox{\hyperlink{classlcd__st7567s_a2897cc4b772337f17c7ba2ff6a3e9cdc}{WriteByte\_command}}(0x10\ +\ x/16);\ \ \ \ \textcolor{comment}{//x,\ column\ address\ x=0-\/0-\/0-\/0-\/1-\/x7-\/x6-\/x5-\/x4}}
+\DoxyCodeLine{00174\ \ \ \mbox{\hyperlink{classlcd__st7567s_a2897cc4b772337f17c7ba2ff6a3e9cdc}{WriteByte\_command}}(x\%16);\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//x,\ column\ address\ x=0-\/0-\/0-\/0-\/0-\/x3-\/x2-\/x1-\/x0\ }}
+\DoxyCodeLine{00175\ \ \ }
+\DoxyCodeLine{00176\ \ \ \mbox{\hyperlink{classlcd__st7567s_a2897cc4b772337f17c7ba2ff6a3e9cdc}{WriteByte\_command}}(\mbox{\hyperlink{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96afcdf6c2fc841d106b28519c8396300e5}{RMW}});\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//start\ Read-\/modify-\/Write}}
+\DoxyCodeLine{00177\ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int}\ i=0;\ i<2;\ i++)\{}
+\DoxyCodeLine{00178\ \ \ \ \ Wire.requestFrom(\mbox{\hyperlink{classlcd__st7567s_aafb8164f20f79a2dd0290502a25367d1}{addr}},\ 2);\ \ \ \ \ \ \ \textcolor{comment}{//request\ 2\ bytes\ from\ slave\ device}}
+\DoxyCodeLine{00179\ \ \ \ \ \textcolor{keywordflow}{while}(Wire.available())\{\ \ \ \ \ \ \ \ \ \textcolor{comment}{//slave\ may\ send\ less\ than\ requested}}
+\DoxyCodeLine{00180\ \ \ \ \ \ \ dat\ =\ Wire.read();\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//receive\ a\ byte\ as\ character}}
+\DoxyCodeLine{00181\ \ \ \ \ \}}
+\DoxyCodeLine{00182\ \ \ \}}
+\DoxyCodeLine{00183\ \ \ dat\ =\ (dat\ |\ (1<<(y\%8)));}
+\DoxyCodeLine{00184\ \ \ \mbox{\hyperlink{classlcd__st7567s_a91e21faf94bd7676419ac9947bf86f10}{WriteByte\_dat}}(dat);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//row=bit0-\/-\/bit7}}
+\DoxyCodeLine{00185\ \ \ \mbox{\hyperlink{classlcd__st7567s_a2897cc4b772337f17c7ba2ff6a3e9cdc}{WriteByte\_command}}(\mbox{\hyperlink{classlcd__st7567s_a8f82fc7714a417f9d7a5e3dbcd630e96adc6f24fd6915a3f2786a1b7045406924}{END}});\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//end\ Read-\/modify-\/Write}}
+\DoxyCodeLine{00186\ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00097}{addr}}, \mbox{\hyperlink{l00070}{END}}, \mbox{\hyperlink{l00069}{RMW}}, \mbox{\hyperlink{l00017}{Write\+Byte\+\_\+command()}}, and \mbox{\hyperlink{l00123}{Write\+Byte\+\_\+dat()}}.
+
+
+
+Referenced by \mbox{\hyperlink{l00446}{draw\+\_\+circle\+\_\+section()}}, and \mbox{\hyperlink{l00391}{Draw\+Line()}}.
+
+\mbox{\Hypertarget{classlcd__st7567s_a95e7285bad6a156df2afae860a46528d}\label{classlcd__st7567s_a95e7285bad6a156df2afae860a46528d}} 
+\index{lcd\_st7567s@{lcd\_st7567s}!draw\_circle@{draw\_circle}}
+\index{draw\_circle@{draw\_circle}!lcd\_st7567s@{lcd\_st7567s}}
+\doxysubsubsection{\texorpdfstring{draw\_circle()}{draw\_circle()}}
+{\footnotesize\ttfamily void draw\+\_\+circle (\begin{DoxyParamCaption}\item[{int}]{x0,  }\item[{int}]{y0,  }\item[{int}]{rad,  }\item[{int}]{option,  }\item[{bool}]{invcolor,  }\item[{bool}]{solid }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00526\ \{}
+\DoxyCodeLine{00527\ \ \ \ \ \textcolor{keywordtype}{int}\ f;}
+\DoxyCodeLine{00528\ \ \ \ \ \textcolor{keywordtype}{int}\ ddF\_x;}
+\DoxyCodeLine{00529\ \ \ \ \ \textcolor{keywordtype}{int}\ ddF\_y;}
+\DoxyCodeLine{00530\ \ \ \ \ \textcolor{keywordtype}{int}\ x;}
+\DoxyCodeLine{00531\ \ \ \ \ \textcolor{keywordtype}{int}\ y;}
+\DoxyCodeLine{00532\ }
+\DoxyCodeLine{00533\ \ \ \ \ f\ =\ 1;}
+\DoxyCodeLine{00534\ \ \ \ \ f\ -\/=\ rad;}
+\DoxyCodeLine{00535\ \ \ \ \ ddF\_x\ =\ 1;}
+\DoxyCodeLine{00536\ \ \ \ \ ddF\_y\ =\ 0;}
+\DoxyCodeLine{00537\ \ \ \ \ ddF\_y\ -\/=\ rad;}
+\DoxyCodeLine{00538\ \ \ \ \ ddF\_y\ *=\ 2;}
+\DoxyCodeLine{00539\ \ \ \ \ x\ =\ 0;}
+\DoxyCodeLine{00540\ \ \ \ \ y\ =\ rad;}
+\DoxyCodeLine{00541\ }
+\DoxyCodeLine{00542\ \ \ \ \ \mbox{\hyperlink{classlcd__st7567s_afa718226007a2023cdd9bda9a7766f50}{draw\_circle\_section}}(x,\ y,\ x0,\ y0,\ option,\ invcolor,\ solid);}
+\DoxyCodeLine{00543\ \ \ \ \ }
+\DoxyCodeLine{00544\ \ \ \ \ \textcolor{keywordflow}{while}\ (\ x\ <\ y\ )}
+\DoxyCodeLine{00545\ \ \ \ \ \{}
+\DoxyCodeLine{00546\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (f\ >=\ 0)\ }
+\DoxyCodeLine{00547\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00548\ \ \ \ \ \ \ \ \ y-\/-\/;}
+\DoxyCodeLine{00549\ \ \ \ \ \ \ \ \ ddF\_y\ +=\ 2;}
+\DoxyCodeLine{00550\ \ \ \ \ \ \ \ \ f\ +=\ ddF\_y;}
+\DoxyCodeLine{00551\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00552\ \ \ \ \ \ \ x++;}
+\DoxyCodeLine{00553\ \ \ \ \ \ \ ddF\_x\ +=\ 2;}
+\DoxyCodeLine{00554\ \ \ \ \ \ \ f\ +=\ ddF\_x;}
+\DoxyCodeLine{00555\ }
+\DoxyCodeLine{00556\ \ \ \ \ \ \ \mbox{\hyperlink{classlcd__st7567s_afa718226007a2023cdd9bda9a7766f50}{draw\_circle\_section}}(x,\ y,\ x0,\ y0,\ option,\ invcolor,\ solid);\ \ \ \ }
+\DoxyCodeLine{00557\ \ \ \ \ \}}
+\DoxyCodeLine{00558\ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00446}{draw\+\_\+circle\+\_\+section()}}.
+
+\mbox{\Hypertarget{classlcd__st7567s_afa718226007a2023cdd9bda9a7766f50}\label{classlcd__st7567s_afa718226007a2023cdd9bda9a7766f50}} 
+\index{lcd\_st7567s@{lcd\_st7567s}!draw\_circle\_section@{draw\_circle\_section}}
+\index{draw\_circle\_section@{draw\_circle\_section}!lcd\_st7567s@{lcd\_st7567s}}
+\doxysubsubsection{\texorpdfstring{draw\_circle\_section()}{draw\_circle\_section()}}
+{\footnotesize\ttfamily void draw\+\_\+circle\+\_\+section (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y,  }\item[{int}]{x0,  }\item[{int}]{y0,  }\item[{int}]{option,  }\item[{bool}]{invcolor,  }\item[{bool}]{solid }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00447\ \{}
+\DoxyCodeLine{00448\ \ \ \ \ \textcolor{comment}{/*\ upper\ right\ */}}
+\DoxyCodeLine{00449\ \ \ \ \ \textcolor{keywordflow}{if}\ (\ option\ \&\ \mbox{\hyperlink{lcd__st7567s_8h_a1283077a23f96883a4a6297928e7b777}{DRAW\_UPPER\_RIGHT}}\ )}
+\DoxyCodeLine{00450\ \ \ \ \ \{}
+\DoxyCodeLine{00451\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (solid)\ \{}
+\DoxyCodeLine{00452\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classlcd__st7567s_a097e2ef3b3d19c6389ee9903f0ac1ecc}{DrawLine}}(x0\ +\ x,\ y0\ -\/\ y,\ x0,\ y0\ -\/\ y,\ invcolor);}
+\DoxyCodeLine{00453\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classlcd__st7567s_a097e2ef3b3d19c6389ee9903f0ac1ecc}{DrawLine}}(x0\ +\ y,\ y0\ -\/\ x,\ x0,\ y0\ -\/\ x,\ invcolor);}
+\DoxyCodeLine{00454\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00455\ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00456\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (invcolor)\ \{}
+\DoxyCodeLine{00457\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classlcd__st7567s_aa52486c39ea6dfc46f78c753954f7339}{ClearPixel}}(x0\ +\ x,\ y0\ -\/\ y);}
+\DoxyCodeLine{00458\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classlcd__st7567s_aa52486c39ea6dfc46f78c753954f7339}{ClearPixel}}(x0\ +\ y,\ y0\ -\/\ x);\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00459\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00460\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00461\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classlcd__st7567s_a12e1b282920da09eea61f4bb443382d6}{DisplayPixel}}(x0\ +\ x,\ y0\ -\/\ y);}
+\DoxyCodeLine{00462\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classlcd__st7567s_a12e1b282920da09eea61f4bb443382d6}{DisplayPixel}}(x0\ +\ y,\ y0\ -\/\ x);}
+\DoxyCodeLine{00463\ \ \ \ \ \ \ \ \ \}\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00464\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00465\ \ \ \ \ \}}
+\DoxyCodeLine{00466\ \ \ \ \ }
+\DoxyCodeLine{00467\ \ \ \ \ \textcolor{comment}{/*\ upper\ left\ */}}
+\DoxyCodeLine{00468\ \ \ \ \ \textcolor{keywordflow}{if}\ (\ option\ \&\ \mbox{\hyperlink{lcd__st7567s_8h_af9f40fd033ad635689a79dc988e63559}{DRAW\_UPPER\_LEFT}}\ )}
+\DoxyCodeLine{00469\ \ \ \ \ \{}
+\DoxyCodeLine{00470\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (solid)\ \{}
+\DoxyCodeLine{00471\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classlcd__st7567s_a097e2ef3b3d19c6389ee9903f0ac1ecc}{DrawLine}}(x0\ -\/\ x,\ y0\ -\/\ y,\ x0,\ y0\ -\/\ y,\ invcolor);}
+\DoxyCodeLine{00472\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classlcd__st7567s_a097e2ef3b3d19c6389ee9903f0ac1ecc}{DrawLine}}(x0\ -\/\ y,\ y0\ -\/\ x,\ x0,\ y0\ -\/\ x,\ invcolor);}
+\DoxyCodeLine{00473\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00474\ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00475\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (invcolor)\ \{}
+\DoxyCodeLine{00476\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classlcd__st7567s_aa52486c39ea6dfc46f78c753954f7339}{ClearPixel}}(x0\ -\/\ x,\ y0\ -\/\ y);}
+\DoxyCodeLine{00477\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classlcd__st7567s_aa52486c39ea6dfc46f78c753954f7339}{ClearPixel}}(x0\ -\/\ y,\ y0\ -\/\ x);}
+\DoxyCodeLine{00478\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00479\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00480\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classlcd__st7567s_a12e1b282920da09eea61f4bb443382d6}{DisplayPixel}}(x0\ -\/\ x,\ y0\ -\/\ y);}
+\DoxyCodeLine{00481\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classlcd__st7567s_a12e1b282920da09eea61f4bb443382d6}{DisplayPixel}}(x0\ -\/\ y,\ y0\ -\/\ x);}
+\DoxyCodeLine{00482\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00483\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00484\ \ \ \ \ \}}
+\DoxyCodeLine{00485\ \ \ \ \ }
+\DoxyCodeLine{00486\ \ \ \ \ \textcolor{comment}{/*\ lower\ right\ */}}
+\DoxyCodeLine{00487\ \ \ \ \ \textcolor{keywordflow}{if}\ (\ option\ \&\ \mbox{\hyperlink{lcd__st7567s_8h_aecb0f151d6dc1aee842635a406f8da13}{DRAW\_LOWER\_RIGHT}}\ )}
+\DoxyCodeLine{00488\ \ \ \ \ \{}
+\DoxyCodeLine{00489\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (solid)\ \{}
+\DoxyCodeLine{00490\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classlcd__st7567s_a097e2ef3b3d19c6389ee9903f0ac1ecc}{DrawLine}}(x0\ +\ x,\ y0\ +\ y,\ x0,\ y0\ +\ y,\ invcolor);}
+\DoxyCodeLine{00491\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classlcd__st7567s_a097e2ef3b3d19c6389ee9903f0ac1ecc}{DrawLine}}(x0\ +\ y,\ y0\ +\ x,\ x0,\ y0\ +\ x,\ invcolor);}
+\DoxyCodeLine{00492\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00493\ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00494\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (invcolor)\ \{}
+\DoxyCodeLine{00495\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classlcd__st7567s_aa52486c39ea6dfc46f78c753954f7339}{ClearPixel}}(x0\ +\ x,\ y0\ +\ y);}
+\DoxyCodeLine{00496\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classlcd__st7567s_aa52486c39ea6dfc46f78c753954f7339}{ClearPixel}}(x0\ +\ y,\ y0\ +\ x);}
+\DoxyCodeLine{00497\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00498\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00499\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classlcd__st7567s_a12e1b282920da09eea61f4bb443382d6}{DisplayPixel}}(x0\ +\ x,\ y0\ +\ y);}
+\DoxyCodeLine{00500\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classlcd__st7567s_a12e1b282920da09eea61f4bb443382d6}{DisplayPixel}}(x0\ +\ y,\ y0\ +\ x);}
+\DoxyCodeLine{00501\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00502\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00503\ \ \ \ \ \}}
+\DoxyCodeLine{00504\ \ \ \ \ }
+\DoxyCodeLine{00505\ \ \ \ \ \textcolor{comment}{/*\ lower\ left\ */}}
+\DoxyCodeLine{00506\ \ \ \ \ \textcolor{keywordflow}{if}\ (\ option\ \&\ \mbox{\hyperlink{lcd__st7567s_8h_a6817fdd2bb7bf581f304d0488db107a2}{DRAW\_LOWER\_LEFT}}\ )}
+\DoxyCodeLine{00507\ \ \ \ \ \{}
+\DoxyCodeLine{00508\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (solid)\ \{}
+\DoxyCodeLine{00509\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classlcd__st7567s_a097e2ef3b3d19c6389ee9903f0ac1ecc}{DrawLine}}(x0\ -\/\ x,\ y0\ +\ y,\ x0,\ y0\ +\ y,\ invcolor);}
+\DoxyCodeLine{00510\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classlcd__st7567s_a097e2ef3b3d19c6389ee9903f0ac1ecc}{DrawLine}}(x0\ -\/\ y,\ y0\ +\ x,\ x0,\ y0\ +\ x,\ invcolor);}
+\DoxyCodeLine{00511\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00512\ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00513\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (invcolor)\ \{}
+\DoxyCodeLine{00514\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classlcd__st7567s_aa52486c39ea6dfc46f78c753954f7339}{ClearPixel}}(x0\ -\/\ x,\ y0\ +\ y);}
+\DoxyCodeLine{00515\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classlcd__st7567s_aa52486c39ea6dfc46f78c753954f7339}{ClearPixel}}(x0\ -\/\ y,\ y0\ +\ x);}
+\DoxyCodeLine{00516\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00517\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00518\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classlcd__st7567s_a12e1b282920da09eea61f4bb443382d6}{DisplayPixel}}(x0\ -\/\ x,\ y0\ +\ y);}
+\DoxyCodeLine{00519\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classlcd__st7567s_a12e1b282920da09eea61f4bb443382d6}{DisplayPixel}}(x0\ -\/\ y,\ y0\ +\ x);}
+\DoxyCodeLine{00520\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00521\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00522\ \ \ \ \ \}}
+\DoxyCodeLine{00523\ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00192}{Clear\+Pixel()}}, \mbox{\hyperlink{l00170}{Display\+Pixel()}}, \mbox{\hyperlink{l00024}{DRAW\+\_\+\+LOWER\+\_\+\+LEFT}}, \mbox{\hyperlink{l00025}{DRAW\+\_\+\+LOWER\+\_\+\+RIGHT}}, \mbox{\hyperlink{l00023}{DRAW\+\_\+\+UPPER\+\_\+\+LEFT}}, \mbox{\hyperlink{l00022}{DRAW\+\_\+\+UPPER\+\_\+\+RIGHT}}, and \mbox{\hyperlink{l00391}{Draw\+Line()}}.
+
+
+
+Referenced by \mbox{\hyperlink{l00525}{draw\+\_\+circle()}}.
+
+\mbox{\Hypertarget{classlcd__st7567s_a097e2ef3b3d19c6389ee9903f0ac1ecc}\label{classlcd__st7567s_a097e2ef3b3d19c6389ee9903f0ac1ecc}} 
+\index{lcd\_st7567s@{lcd\_st7567s}!DrawLine@{DrawLine}}
+\index{DrawLine@{DrawLine}!lcd\_st7567s@{lcd\_st7567s}}
+\doxysubsubsection{\texorpdfstring{DrawLine()}{DrawLine()}}
+{\footnotesize\ttfamily void Draw\+Line (\begin{DoxyParamCaption}\item[{int}]{x1,  }\item[{int}]{y1,  }\item[{int}]{x2,  }\item[{int}]{y2,  }\item[{bool}]{invcolor }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00391\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00392\ }
+\DoxyCodeLine{00393\ \ \ \textcolor{keywordtype}{int}\ tmp;}
+\DoxyCodeLine{00394\ \ \ \textcolor{keywordtype}{int}\ x,y;}
+\DoxyCodeLine{00395\ \ \ \textcolor{keywordtype}{int}\ dx,\ dy;}
+\DoxyCodeLine{00396\ \ \ \textcolor{keywordtype}{int}\ err;}
+\DoxyCodeLine{00397\ \ \ \textcolor{keywordtype}{int}\ ystep;}
+\DoxyCodeLine{00398\ }
+\DoxyCodeLine{00399\ \ \ \textcolor{keywordtype}{int}\ swapxy\ =\ 0;}
+\DoxyCodeLine{00400\ }
+\DoxyCodeLine{00401\ \ \ \textcolor{keywordflow}{if}\ (\ x1\ >\ x2\ )\ dx\ =\ x1-\/x2;\ \textcolor{keywordflow}{else}\ dx\ =\ x2-\/x1;}
+\DoxyCodeLine{00402\ \ \ \textcolor{keywordflow}{if}\ (\ y1\ >\ y2\ )\ dy\ =\ y1-\/y2;\ \textcolor{keywordflow}{else}\ dy\ =\ y2-\/y1;}
+\DoxyCodeLine{00403\ }
+\DoxyCodeLine{00404\ \ \ \textcolor{keywordflow}{if}\ (\ dy\ >\ dx\ )\ }
+\DoxyCodeLine{00405\ \ \ \{}
+\DoxyCodeLine{00406\ \ \ \ \ swapxy\ =\ 1;}
+\DoxyCodeLine{00407\ \ \ \ \ tmp\ =\ dx;\ dx\ =dy;\ dy\ =\ tmp;}
+\DoxyCodeLine{00408\ \ \ \ \ tmp\ =\ x1;\ x1\ =y1;\ y1\ =\ tmp;}
+\DoxyCodeLine{00409\ \ \ \ \ tmp\ =\ x2;\ x2\ =y2;\ y2\ =\ tmp;}
+\DoxyCodeLine{00410\ \ \ \}}
+\DoxyCodeLine{00411\ \ \ \textcolor{keywordflow}{if}\ (\ x1\ >\ x2\ )\ }
+\DoxyCodeLine{00412\ \ \ \{}
+\DoxyCodeLine{00413\ \ \ \ \ tmp\ =\ x1;\ x1\ =x2;\ x2\ =\ tmp;}
+\DoxyCodeLine{00414\ \ \ \ \ tmp\ =\ y1;\ y1\ =y2;\ y2\ =\ tmp;}
+\DoxyCodeLine{00415\ \ \ \}}
+\DoxyCodeLine{00416\ \ \ err\ =\ dx\ >>\ 1;}
+\DoxyCodeLine{00417\ \ \ \textcolor{keywordflow}{if}\ (\ y2\ >\ y1\ )\ ystep\ =\ 1;\ \textcolor{keywordflow}{else}\ ystep\ =\ -\/1;}
+\DoxyCodeLine{00418\ \ \ y\ =\ y1;}
+\DoxyCodeLine{00419\ }
+\DoxyCodeLine{00420\ \ \ \textcolor{keywordflow}{for}(\ x\ =\ x1;\ x\ <=\ x2;\ x++\ )}
+\DoxyCodeLine{00421\ \ \ \{}
+\DoxyCodeLine{00422\ \ \ \ \ \textcolor{keywordflow}{if}\ (\ swapxy\ ==\ 0\ )}
+\DoxyCodeLine{00423\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (invcolor)\ \{}
+\DoxyCodeLine{00424\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classlcd__st7567s_aa52486c39ea6dfc46f78c753954f7339}{ClearPixel}}(x,\ y);}
+\DoxyCodeLine{00425\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00426\ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00427\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classlcd__st7567s_a12e1b282920da09eea61f4bb443382d6}{DisplayPixel}}(x,\ y);}
+\DoxyCodeLine{00428\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00429\ \ \ \ \ \textcolor{keywordflow}{else}\ }
+\DoxyCodeLine{00430\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (invcolor)\ \{}
+\DoxyCodeLine{00431\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classlcd__st7567s_aa52486c39ea6dfc46f78c753954f7339}{ClearPixel}}(y,\ x);}
+\DoxyCodeLine{00432\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00433\ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00434\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classlcd__st7567s_a12e1b282920da09eea61f4bb443382d6}{DisplayPixel}}(y,\ x);\ }
+\DoxyCodeLine{00435\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00436\ \ \ \ \ err\ -\/=\ dy;}
+\DoxyCodeLine{00437\ \ \ \ \ \textcolor{keywordflow}{if}\ (\ err\ <\ 0\ )\ }
+\DoxyCodeLine{00438\ \ \ \ \ \{}
+\DoxyCodeLine{00439\ \ \ \ \ \ \ y\ +=\ ystep;}
+\DoxyCodeLine{00440\ \ \ \ \ \ \ err\ +=\ dx;}
+\DoxyCodeLine{00441\ \ \ \ \ \}}
+\DoxyCodeLine{00442\ \ \ \}\ \ }
+\DoxyCodeLine{00443\ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00192}{Clear\+Pixel()}}, and \mbox{\hyperlink{l00170}{Display\+Pixel()}}.
+
+
+
+Referenced by \mbox{\hyperlink{l00446}{draw\+\_\+circle\+\_\+section()}}.
+
+\mbox{\Hypertarget{classlcd__st7567s_a0e6367b8c083327954cc632d816584da}\label{classlcd__st7567s_a0e6367b8c083327954cc632d816584da}} 
+\index{lcd\_st7567s@{lcd\_st7567s}!FontSize@{FontSize}}
+\index{FontSize@{FontSize}!lcd\_st7567s@{lcd\_st7567s}}
+\doxysubsubsection{\texorpdfstring{FontSize()}{FontSize()}}
+{\footnotesize\ttfamily void Font\+Size (\begin{DoxyParamCaption}\item[{int}]{num }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00235\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00236\ \ \ }
+\DoxyCodeLine{00237\ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classlcd__st7567s_a1e3b6d38df0786ccf7f938d60e386aae}\label{classlcd__st7567s_a1e3b6d38df0786ccf7f938d60e386aae}} 
+\index{lcd\_st7567s@{lcd\_st7567s}!Init@{Init}}
+\index{Init@{Init}!lcd\_st7567s@{lcd\_st7567s}}
+\doxysubsubsection{\texorpdfstring{Init()}{Init()}}
+{\footnotesize\ttfamily void Init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00029\ \ \ Wire.begin();}
+\DoxyCodeLine{00030\ \ \ delay(10);}
+\DoxyCodeLine{00031\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00032\ \textcolor{comment}{\ \ //\ \ \ \ ST7567A }}
+\DoxyCodeLine{00033\ \textcolor{comment}{\ \ WriteByte\_command(restart);\ \ \ \ \ //resets\ Start\ Line\ (S[5:0]),\ Column\ Address\ (X[7:0]),\  }}
+\DoxyCodeLine{00034\ \textcolor{comment}{\ \ delay(10);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ //Page\ Address\ (Y[3:0])\ and\ COM\ Direction\ (MY)\ to\ their\ default\ setting. }}
+\DoxyCodeLine{00035\ \textcolor{comment}{\ \ WriteByte\_command(BS);\ \ \ \ \ \ \ \ \ \ //select\ bias }}
+\DoxyCodeLine{00036\ \textcolor{comment}{\ \ WriteByte\_command(seg);\ \ \ \ \ \ \ \ \ //seg\ output\ scan\ direction\ setting }}
+\DoxyCodeLine{00037\ \textcolor{comment}{\ \ WriteByte\_command(com);\ \ \ \ \ \ \ \ \ //com\ output\ scan\ direction\ setting }}
+\DoxyCodeLine{00038\ \textcolor{comment}{\ \  }}
+\DoxyCodeLine{00039\ \textcolor{comment}{\ \ //********Adjust\ display\ brightness********}}
+\DoxyCodeLine{00040\ \textcolor{comment}{\ \ WriteByte\_command(regRatio);\ \ \ \ //Controls\ the\ regulation\ ratio\ of\ the\ built-\/in\ regulator. }}
+\DoxyCodeLine{00041\ \textcolor{comment}{\ \ WriteByte\_command(EV1); }}
+\DoxyCodeLine{00042\ \textcolor{comment}{\ \ WriteByte\_command(EV2); }}
+\DoxyCodeLine{00043\ \textcolor{comment}{}}
+\DoxyCodeLine{00044\ \textcolor{comment}{\ \ WriteByte\_command(powerCon1);\ \ \ //Controls\ the\ built-\/in\ power\ circuits. }}
+\DoxyCodeLine{00045\ \textcolor{comment}{\ \ WriteByte\_command(powerCon2); }}
+\DoxyCodeLine{00046\ \textcolor{comment}{\ \ WriteByte\_command(powerCon3); }}
+\DoxyCodeLine{00047\ \textcolor{comment}{\ \ Clear();\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ //initalize\ DDRAM }}
+\DoxyCodeLine{00048\ \textcolor{comment}{\ \  }}
+\DoxyCodeLine{00049\ \textcolor{comment}{\ \ //**********display\ setting\ mode**********}}
+\DoxyCodeLine{00050\ \textcolor{comment}{\ \ WriteByte\_command(enter\_EC);\ \ \ \ //enter\ extension\ command\ set. }}
+\DoxyCodeLine{00051\ \textcolor{comment}{\ \ WriteByte\_command(DSM\_ON);\ \ \ \ \ \ //display\ settin\ mode\ on. }}
+\DoxyCodeLine{00052\ \textcolor{comment}{\ \ WriteByte\_command(exit\_EC);\ \ \ \ \ //exit\ extension\ command\ set. }}
+\DoxyCodeLine{00053\ \textcolor{comment}{\ \ WriteByte\_command(DT);\ \ \ \ \ \ \ \ \ \ //set\ the\ display\ duty,\ DT=33. }}
+\DoxyCodeLine{00054\ \textcolor{comment}{\ \ WriteByte\_command(BA);\ \ \ \ \ \ \ \ \ \ //This\ command\ has\ priority\ over\ the\ Bias\ Select\ (BS). }}
+\DoxyCodeLine{00055\ \textcolor{comment}{\ \ WriteByte\_command(FR);\ \ \ \ \ \ \ \ \ \ //specifies\ the\ frame\ rate\ for\ duty.\ duty=250. }}
+\DoxyCodeLine{00056\ \textcolor{comment}{\ \ //*}}
+\DoxyCodeLine{00057\ \textcolor{comment}{}}
+\DoxyCodeLine{00058\ \textcolor{comment}{\ \ WriteByte\_command(displayON);\ \ \ //display\ on. }}
+\DoxyCodeLine{00059\ \textcolor{comment}{\ \ WriteByte\_command(startLine);\ \ \ //Set\ display\ start\ line. }}
+\DoxyCodeLine{00060\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \ \ \ \ \mbox{\hyperlink{classlcd__st7567s_a2897cc4b772337f17c7ba2ff6a3e9cdc}{WriteByte\_command}}(0xE2);\ \ \ \ \textcolor{comment}{//Internal\ reset}}
+\DoxyCodeLine{00063\ \ \ \ \ delay(10);}
+\DoxyCodeLine{00064\ \ \ \ \ \mbox{\hyperlink{classlcd__st7567s_a2897cc4b772337f17c7ba2ff6a3e9cdc}{WriteByte\_command}}(0xA2);\ \ \ \ \textcolor{comment}{//0xa2\ LCD\ bias\ ratio\ is\ 1/9;\ 0xa3\ is\ bias\ ratio\ 1/7;\ 128X64=1/9}}
+\DoxyCodeLine{00065\ \ \ \ \ }
+\DoxyCodeLine{00067\ \ \ \ \ \mbox{\hyperlink{classlcd__st7567s_a2897cc4b772337f17c7ba2ff6a3e9cdc}{WriteByte\_command}}(0xA0);\ \ \ \ \textcolor{comment}{//(0xa0-\/0xa1\ is\ ADC\ direction\ selection)\ 0xa0\ is\ segment\ forward,\ 0xa1\ is\ segment\ reverse}}
+\DoxyCodeLine{00068\ \ \ \ \ \mbox{\hyperlink{classlcd__st7567s_a2897cc4b772337f17c7ba2ff6a3e9cdc}{WriteByte\_command}}(0xC8);\ \ \ \ \textcolor{comment}{//com\ output\ mode\ drive\ direction\ is\ reverse}}
+\DoxyCodeLine{00070\ \textcolor{comment}{}\ \ \ \ \textcolor{comment}{//WriteByte\_command(0xA1);\ \ \ \ //\ may\ be\ bug,\ loss\ first\ 4\ bits\ in\ each\ row}}
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{comment}{//WriteByte\_command(0xC0);}}
+\DoxyCodeLine{00072\ \ \ \ \ }
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{comment}{//WriteByte\_command(0xA7);\ \ \ \ //\ 0xA6\ Normal,\ 0xA7\ Inverse}}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00076\ \ \ \ \ \textcolor{comment}{//********Adjust\ display\ brightness********}}
+\DoxyCodeLine{00077\ \ \ \ \ \mbox{\hyperlink{classlcd__st7567s_a2897cc4b772337f17c7ba2ff6a3e9cdc}{WriteByte\_command}}(0x25);\ \ \ \ \textcolor{comment}{//0x20-\/0x27\ is\ the\ internal\ Rb/Ra\ resistance\ adjustment\ setting\ of\ V5\ voltage\ RR=4.5V}}
+\DoxyCodeLine{00078\ \ \ \ \ \textcolor{comment}{//WriteByte\_command(0x24);\ \ \ \ //\ only\ 0x25\ and\ 0x24\ is\ ok\ }}
+\DoxyCodeLine{00079\ \ \ \ \ \mbox{\hyperlink{classlcd__st7567s_a2897cc4b772337f17c7ba2ff6a3e9cdc}{WriteByte\_command}}(0x81);\ \ \ \ \textcolor{comment}{//Electricity\ Mode\ Settings}}
+\DoxyCodeLine{00080\ \ \ \ \ \mbox{\hyperlink{classlcd__st7567s_a2897cc4b772337f17c7ba2ff6a3e9cdc}{WriteByte\_command}}(0x20);}
+\DoxyCodeLine{00081\ \ \ \ \ }
+\DoxyCodeLine{00082\ \ \ \ \ \mbox{\hyperlink{classlcd__st7567s_a2897cc4b772337f17c7ba2ff6a3e9cdc}{WriteByte\_command}}(0x2C);\ \ \ \ \textcolor{comment}{//Internal\ Power\ Supply\ Control\ Mode}}
+\DoxyCodeLine{00083\ \ \ \ \ \mbox{\hyperlink{classlcd__st7567s_a2897cc4b772337f17c7ba2ff6a3e9cdc}{WriteByte\_command}}(0x2E);}
+\DoxyCodeLine{00084\ \ \ \ \ \mbox{\hyperlink{classlcd__st7567s_a2897cc4b772337f17c7ba2ff6a3e9cdc}{WriteByte\_command}}(0x2F);}
+\DoxyCodeLine{00085\ \ \ \ \ \mbox{\hyperlink{classlcd__st7567s_ac9950592890056a5edd002c4322bc9f7}{Clear}}(\textcolor{keyword}{false});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//initalize\ DDRAM}}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ \ \ \ \ \mbox{\hyperlink{classlcd__st7567s_a2897cc4b772337f17c7ba2ff6a3e9cdc}{WriteByte\_command}}(0xAF);\ \ \ \ }
+\DoxyCodeLine{00088\ \ \ \ \ \mbox{\hyperlink{classlcd__st7567s_a2897cc4b772337f17c7ba2ff6a3e9cdc}{WriteByte\_command}}(0x40);}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00090\ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00216}{Clear()}}, and \mbox{\hyperlink{l00017}{Write\+Byte\+\_\+command()}}.
+
+
+
+Referenced by \mbox{\hyperlink{l00021}{OLEDDisplay\+Clock\+View\+Handler\+::\+OLEDDisplay\+Clock\+View\+Handler()}}.
+
+\mbox{\Hypertarget{classlcd__st7567s_ab5202c74d9953bc493f8d911dea638ba}\label{classlcd__st7567s_ab5202c74d9953bc493f8d911dea638ba}} 
+\index{lcd\_st7567s@{lcd\_st7567s}!ReadByte\_dat@{ReadByte\_dat}}
+\index{ReadByte\_dat@{ReadByte\_dat}!lcd\_st7567s@{lcd\_st7567s}}
+\doxysubsubsection{\texorpdfstring{ReadByte\_dat()}{ReadByte\_dat()}}
+{\footnotesize\ttfamily int Read\+Byte\+\_\+dat (\begin{DoxyParamCaption}\item[{int}]{col,  }\item[{int}]{page }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00152\ \ \ \textcolor{keywordtype}{int}\ dat;}
+\DoxyCodeLine{00153\ \ \ \mbox{\hyperlink{classlcd__st7567s_a2897cc4b772337f17c7ba2ff6a3e9cdc}{WriteByte\_command}}(0xb0\ +\ page);\ \ \ \ \ \textcolor{comment}{//y,\ page\ address\ y=1-\/0-\/1-\/1-\/y3-\/y2-\/y1-\/y0,\ 1-\/page\ with\ 8-\/rows\ }}
+\DoxyCodeLine{00154\ \ \ \mbox{\hyperlink{classlcd__st7567s_a2897cc4b772337f17c7ba2ff6a3e9cdc}{WriteByte\_command}}(0x10\ +\ col/16);\ \ \ \textcolor{comment}{//x,\ column\ address\ x=0-\/0-\/0-\/0-\/1-\/x7-\/x6-\/x5-\/x4}}
+\DoxyCodeLine{00155\ \ \ \mbox{\hyperlink{classlcd__st7567s_a2897cc4b772337f17c7ba2ff6a3e9cdc}{WriteByte\_command}}(col\%16);\ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//x,\ column\ address\ x=0-\/0-\/0-\/0-\/0-\/x3-\/x2-\/x1-\/x0\ }}
+\DoxyCodeLine{00156\ }
+\DoxyCodeLine{00157\ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int}\ i=0;\ i<2;\ i++)\{}
+\DoxyCodeLine{00158\ \ \ \ \ Wire.requestFrom(\mbox{\hyperlink{classlcd__st7567s_aafb8164f20f79a2dd0290502a25367d1}{addr}},\ 2);\ \ \ \ \ \ \ \textcolor{comment}{//request\ 2\ bytes\ from\ slave\ device}}
+\DoxyCodeLine{00159\ \ \ \ \ \textcolor{keywordflow}{while}(Wire.available())\{\ \ \ \ \ \ \ \ \ \textcolor{comment}{//slave\ may\ send\ less\ than\ requested}}
+\DoxyCodeLine{00160\ \ \ \ \ \ \ dat\ =\ Wire.read();\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//receive\ a\ byte\ as\ character}}
+\DoxyCodeLine{00161\ \ \ \ \ \}}
+\DoxyCodeLine{00162\ \ \ \}}
+\DoxyCodeLine{00163\ \ \ \textcolor{keywordflow}{return}\ dat;}
+\DoxyCodeLine{00164\ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00097}{addr}}, and \mbox{\hyperlink{l00017}{Write\+Byte\+\_\+command()}}.
+
+\mbox{\Hypertarget{classlcd__st7567s_aba1a31746f8443288d65ff80707c014f}\label{classlcd__st7567s_aba1a31746f8443288d65ff80707c014f}} 
+\index{lcd\_st7567s@{lcd\_st7567s}!testPixel@{testPixel}}
+\index{testPixel@{testPixel}!lcd\_st7567s@{lcd\_st7567s}}
+\doxysubsubsection{\texorpdfstring{testPixel()}{testPixel()}}
+{\footnotesize\ttfamily void test\+Pixel (\begin{DoxyParamCaption}\item[{int}]{t }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00096\ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int}\ x=0;\ x<8;\ x++)\{}
+\DoxyCodeLine{00097\ \ \ \ \ \mbox{\hyperlink{classlcd__st7567s_a2897cc4b772337f17c7ba2ff6a3e9cdc}{WriteByte\_command}}(0xb0\ +\ x);\ \ \textcolor{comment}{//y,\ page\ address\ y=1-\/0-\/1-\/1-\/y3-\/y2-\/y1-\/y0,\ 1-\/page\ with\ 8-\/rows}}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00099\ \textcolor{comment}{\ \ \ \ /*******automatically\ increased\ by\ one******/}}
+\DoxyCodeLine{00100\ \ \ \ \ \mbox{\hyperlink{classlcd__st7567s_a2897cc4b772337f17c7ba2ff6a3e9cdc}{WriteByte\_command}}(0x10);\ \ \ \ \ \ \textcolor{comment}{//x,\ column\ address\ x=0-\/0-\/0-\/0-\/1-\/x7-\/x6-\/x5-\/x4}}
+\DoxyCodeLine{00101\ \ \ \ \ \mbox{\hyperlink{classlcd__st7567s_a2897cc4b772337f17c7ba2ff6a3e9cdc}{WriteByte\_command}}(0x00);\ \ \ \ \ \ \textcolor{comment}{//x,\ column\ address\ x=0-\/0-\/0-\/0-\/0-\/x3-\/x2-\/x1-\/x0}}
+\DoxyCodeLine{00102\ \ \ \ \ }
+\DoxyCodeLine{00103\ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int}\ i=0;\ i<128;\ i++)\{}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \mbox{\hyperlink{classlcd__st7567s_a91e21faf94bd7676419ac9947bf86f10}{WriteByte\_dat}}(0xff);\ \ \ \ \ \ \ \ \textcolor{comment}{//row=bit0-\/-\/bit7,\ display\ on}}
+\DoxyCodeLine{00105\ \ \ \ \ \ \ delay(t);}
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \}\ \ }
+\DoxyCodeLine{00107\ \ \ \}}
+\DoxyCodeLine{00108\ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int}\ x=0;\ x<8;\ x++)\{}
+\DoxyCodeLine{00109\ \ \ \ \ \mbox{\hyperlink{classlcd__st7567s_a2897cc4b772337f17c7ba2ff6a3e9cdc}{WriteByte\_command}}(0xb0\ +\ x);}
+\DoxyCodeLine{00110\ \ \ \ \ \mbox{\hyperlink{classlcd__st7567s_a2897cc4b772337f17c7ba2ff6a3e9cdc}{WriteByte\_command}}(0x00);}
+\DoxyCodeLine{00111\ \ \ \ \ \mbox{\hyperlink{classlcd__st7567s_a2897cc4b772337f17c7ba2ff6a3e9cdc}{WriteByte\_command}}(0x10);}
+\DoxyCodeLine{00112\ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int}\ i=0;\ i<128;\ i++)\{}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \mbox{\hyperlink{classlcd__st7567s_a91e21faf94bd7676419ac9947bf86f10}{WriteByte\_dat}}(0x00);\ \ \ \ \ \ \ \textcolor{comment}{//row=bit0-\/-\/bit7,\ display\ off}}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ delay(t);}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \}\ \ }
+\DoxyCodeLine{00116\ \ \ \}}
+\DoxyCodeLine{00117\ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00017}{Write\+Byte\+\_\+command()}}, and \mbox{\hyperlink{l00123}{Write\+Byte\+\_\+dat()}}.
+
+\mbox{\Hypertarget{classlcd__st7567s_a2897cc4b772337f17c7ba2ff6a3e9cdc}\label{classlcd__st7567s_a2897cc4b772337f17c7ba2ff6a3e9cdc}} 
+\index{lcd\_st7567s@{lcd\_st7567s}!WriteByte\_command@{WriteByte\_command}}
+\index{WriteByte\_command@{WriteByte\_command}!lcd\_st7567s@{lcd\_st7567s}}
+\doxysubsubsection{\texorpdfstring{WriteByte\_command()}{WriteByte\_command()}}
+{\footnotesize\ttfamily void Write\+Byte\+\_\+command (\begin{DoxyParamCaption}\item[{int}]{dat }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00018\ \ \ Wire.beginTransmission(\mbox{\hyperlink{classlcd__st7567s_aafb8164f20f79a2dd0290502a25367d1}{addr}});\ \ \ \ \ \ \textcolor{comment}{//\ transmit\ to\ device\ 0x3f}}
+\DoxyCodeLine{00019\ \ \ Wire.write(0x00);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Co=0,A0=0.\ data=\ Co-\/A0-\/0-\/0-\/0-\/0-\/0-\/0.\ }}
+\DoxyCodeLine{00020\ \ \ Wire.write(dat);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ sends\ restart\ command.\ }}
+\DoxyCodeLine{00021\ \ \ Wire.endTransmission();\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ stop\ transmitting}}
+\DoxyCodeLine{00022\ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00097}{addr}}.
+
+
+
+Referenced by \mbox{\hyperlink{l00216}{Clear()}}, \mbox{\hyperlink{l00192}{Clear\+Pixel()}}, \mbox{\hyperlink{l00280}{Display()}}, \mbox{\hyperlink{l00252}{Display\+Picture()}}, \mbox{\hyperlink{l00170}{Display\+Pixel()}}, \mbox{\hyperlink{l00028}{Init()}}, \mbox{\hyperlink{l00151}{Read\+Byte\+\_\+dat()}}, and \mbox{\hyperlink{l00095}{test\+Pixel()}}.
+
+\mbox{\Hypertarget{classlcd__st7567s_a91e21faf94bd7676419ac9947bf86f10}\label{classlcd__st7567s_a91e21faf94bd7676419ac9947bf86f10}} 
+\index{lcd\_st7567s@{lcd\_st7567s}!WriteByte\_dat@{WriteByte\_dat}}
+\index{WriteByte\_dat@{WriteByte\_dat}!lcd\_st7567s@{lcd\_st7567s}}
+\doxysubsubsection{\texorpdfstring{WriteByte\_dat()}{WriteByte\_dat()}}
+{\footnotesize\ttfamily void Write\+Byte\+\_\+dat (\begin{DoxyParamCaption}\item[{int}]{dat }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00124\ \ \ Wire.beginTransmission(\mbox{\hyperlink{classlcd__st7567s_aafb8164f20f79a2dd0290502a25367d1}{addr}});\ \ \ \ \ \ \textcolor{comment}{//\ transmit\ to\ device\ 0x7e}}
+\DoxyCodeLine{00125\ \ \ Wire.write(0x40);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Co=0,A0=1.\ data=\ Co-\/A0-\/0-\/0-\/0-\/0-\/0-\/0.\ }}
+\DoxyCodeLine{00126\ \ \ Wire.write(dat);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ sends\ data.\ }}
+\DoxyCodeLine{00127\ \ \ Wire.endTransmission();\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ stop\ transmitting}}
+\DoxyCodeLine{00128\ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00097}{addr}}.
+
+
+
+Referenced by \mbox{\hyperlink{l00216}{Clear()}}, \mbox{\hyperlink{l00192}{Clear\+Pixel()}}, \mbox{\hyperlink{l00252}{Display\+Picture()}}, \mbox{\hyperlink{l00170}{Display\+Pixel()}}, \mbox{\hyperlink{l00095}{test\+Pixel()}}, and \mbox{\hyperlink{l00269}{Write\+Font()}}.
+
+\mbox{\Hypertarget{classlcd__st7567s_a2f666ce7d9d50a024e0eee2b12057054}\label{classlcd__st7567s_a2f666ce7d9d50a024e0eee2b12057054}} 
+\index{lcd\_st7567s@{lcd\_st7567s}!WriteCont\_command@{WriteCont\_command}}
+\index{WriteCont\_command@{WriteCont\_command}!lcd\_st7567s@{lcd\_st7567s}}
+\doxysubsubsection{\texorpdfstring{WriteCont\_command()}{WriteCont\_command()}}
+{\footnotesize\ttfamily void Write\+Cont\+\_\+command (\begin{DoxyParamCaption}\item[{int}]{str\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classlcd__st7567s_a904c5872542a7d49eae9445359b1fae6}\label{classlcd__st7567s_a904c5872542a7d49eae9445359b1fae6}} 
+\index{lcd\_st7567s@{lcd\_st7567s}!WriteCont\_dat@{WriteCont\_dat}}
+\index{WriteCont\_dat@{WriteCont\_dat}!lcd\_st7567s@{lcd\_st7567s}}
+\doxysubsubsection{\texorpdfstring{WriteCont\_dat()}{WriteCont\_dat()}}
+{\footnotesize\ttfamily void Write\+Cont\+\_\+dat (\begin{DoxyParamCaption}\item[{int}]{str\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00135\ \ \ \textcolor{keywordtype}{int}\ len\ =\ 0;}
+\DoxyCodeLine{00136\ \ \ len\ =\ \textcolor{keyword}{sizeof}(str);}
+\DoxyCodeLine{00137\ \ \ Wire.beginTransmission(\mbox{\hyperlink{classlcd__st7567s_aafb8164f20f79a2dd0290502a25367d1}{addr}});\ \ \ \ \ \ \textcolor{comment}{//\ transmit\ to\ device\ 0x7e}}
+\DoxyCodeLine{00138\ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int}\ i=0;\ i<len-\/1;\ i++)\{}
+\DoxyCodeLine{00139\ \ \ \ \ Wire.write(0xc0);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Co=1,A0=1.\ data=\ Co-\/A0-\/0-\/0-\/0-\/0-\/0-\/0.\ }}
+\DoxyCodeLine{00140\ \ \ \ \ Wire.write(str[i]);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ sends\ command.}}
+\DoxyCodeLine{00141\ \ \ \}}
+\DoxyCodeLine{00142\ \ \ Wire.write(0x40);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Co=0,A0=1.\ data=\ Co-\/A0-\/0-\/0-\/0-\/0-\/0-\/0.\ }}
+\DoxyCodeLine{00143\ \ \ Wire.write(str[len-\/1]);\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ sends\ command.}}
+\DoxyCodeLine{00144\ \ \ Wire.endTransmission();\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ stop\ transmitting}}
+\DoxyCodeLine{00145\ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00097}{addr}}.
+
+\mbox{\Hypertarget{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}\label{classlcd__st7567s_ac1eab1e72f9cd48560b21649414ccda4}} 
+\index{lcd\_st7567s@{lcd\_st7567s}!WriteFont@{WriteFont}}
+\index{WriteFont@{WriteFont}!lcd\_st7567s@{lcd\_st7567s}}
+\doxysubsubsection{\texorpdfstring{WriteFont()}{WriteFont()}}
+{\footnotesize\ttfamily void Write\+Font (\begin{DoxyParamCaption}\item[{int}]{num }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00269\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00270\ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int}\ i=0;\ i<7;\ i++)\{}
+\DoxyCodeLine{00271\ \ \ \ \ \textcolor{comment}{//reference:\ https://www.arduino.cc/reference/en/language/variables/utilities/progmem/}}
+\DoxyCodeLine{00272\ \ \ \ \ \mbox{\hyperlink{classlcd__st7567s_a91e21faf94bd7676419ac9947bf86f10}{WriteByte\_dat}}(pgm\_read\_word\_near(font\_7x8[num]+i));\ \ \ }
+\DoxyCodeLine{00273\ \ \ \ \ \textcolor{comment}{//Serial.println(pgm\_read\_word\_near(font\_7x8[num]+i),HEX);\ }}
+\DoxyCodeLine{00274\ \ \ \ \ \}}
+\DoxyCodeLine{00275\ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00123}{Write\+Byte\+\_\+dat()}}.
+
+
+
+Referenced by \mbox{\hyperlink{l00280}{Display()}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classlcd__st7567s_aafb8164f20f79a2dd0290502a25367d1}\label{classlcd__st7567s_aafb8164f20f79a2dd0290502a25367d1}} 
+\index{lcd\_st7567s@{lcd\_st7567s}!addr@{addr}}
+\index{addr@{addr}!lcd\_st7567s@{lcd\_st7567s}}
+\doxysubsubsection{\texorpdfstring{addr}{addr}}
+{\footnotesize\ttfamily int addr = 0x3f\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \mbox{\hyperlink{l00192}{Clear\+Pixel()}}, \mbox{\hyperlink{l00170}{Display\+Pixel()}}, \mbox{\hyperlink{l00151}{Read\+Byte\+\_\+dat()}}, \mbox{\hyperlink{l00017}{Write\+Byte\+\_\+command()}}, \mbox{\hyperlink{l00123}{Write\+Byte\+\_\+dat()}}, and \mbox{\hyperlink{l00134}{Write\+Cont\+\_\+dat()}}.
+
+\mbox{\Hypertarget{classlcd__st7567s_a6c393df7c67b1c804c009c45d49559d0}\label{classlcd__st7567s_a6c393df7c67b1c804c009c45d49559d0}} 
+\index{lcd\_st7567s@{lcd\_st7567s}!cursor@{cursor}}
+\index{cursor@{cursor}!lcd\_st7567s@{lcd\_st7567s}}
+\doxysubsubsection{\texorpdfstring{cursor}{cursor}}
+{\footnotesize\ttfamily int cursor\mbox{[}2\mbox{]} =\{0,0\}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \mbox{\hyperlink{l00242}{Cursor()}}, and \mbox{\hyperlink{l00280}{Display()}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+extra/\+ST7567\+S\+\_\+128\+X64\+\_\+\+I2\+C/\mbox{\hyperlink{lcd__st7567s_8h}{lcd\+\_\+st7567s.\+h}}\item 
+extra/\+ST7567\+S\+\_\+128\+X64\+\_\+\+I2\+C/\mbox{\hyperlink{lcd__st7567s_8cpp}{lcd\+\_\+st7567s.\+cpp}}\end{DoxyCompactItemize}

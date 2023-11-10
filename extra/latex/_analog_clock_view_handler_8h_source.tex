@@ -1,0 +1,52 @@
+\hypertarget{_analog_clock_view_handler_8h_source}{}\doxysection{Analog\+Clock\+View\+Handler.\+h}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ analogclockviewhandler\_h}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ analogclockviewhandler\_h}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <cstddef>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}Arduino.h"{}}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}Timestamp.h"{}}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}TimeHandler.h"{}}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}Timeline.h"{}}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#define\ PULS\_LENGTH\ \ 70}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{comment}{//===================================================================================}}
+\DoxyCodeLine{00015\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_analog_clock_view_handler}{AnalogClockViewHandler}}:\textcolor{keyword}{public}\ \mbox{\hyperlink{class_time_handler}{TimeHandler}}\{}
+\DoxyCodeLine{00016\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \mbox{\hyperlink{class_my_time}{MyTime}}\ \ clockTimePresented;}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ }
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ minL\_pin,\ minR\_pin;}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ secL\_pin,\ secR\_pin;}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00023\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \mbox{\hyperlink{class_analog_clock_view_handler}{AnalogClockViewHandler}}(\ \mbox{\hyperlink{class_time_handler}{TimeHandler}}*\ ptr,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ minL\_pin,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ minR\_pin,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ secL\_pin,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ secR\_pin);}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_analog_clock_view_handler}{\string~AnalogClockViewHandler}}(\ \textcolor{keywordtype}{void});}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ resetHands();}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ updateTime(\ \mbox{\hyperlink{class_timestamp}{Timestamp}}\ \&timestamp);}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ getClassName(\ \textcolor{keywordtype}{void});}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ }
+\DoxyCodeLine{00032\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ moveSecondHandStep1(\ \textcolor{keywordtype}{void});\ \ }
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ moveSecondHandStep2(\ \textcolor{keywordtype}{void});\ }
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ moveMinuteHandStep1(\ \textcolor{keywordtype}{void});\ \ }
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ moveMinuteHandStep2(\ \textcolor{keywordtype}{void});\ \ \ \ \ \ \ }
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ moveOnlySecondHand(\ \textcolor{keywordtype}{void});}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ moveOnlyMinuteHand(\ \textcolor{keywordtype}{void});}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ moveHands(\ \textcolor{keywordtype}{void});\ }
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ doAction(\ \textcolor{keywordtype}{void}\ (*fun)(\ \textcolor{keywordtype}{void}));\ }
+\DoxyCodeLine{00044\ \};}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \textcolor{comment}{//===================================================================================}}
+\DoxyCodeLine{00047\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

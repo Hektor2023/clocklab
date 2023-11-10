@@ -1,0 +1,68 @@
+\hypertarget{_my_time_8h_source}{}\doxysection{My\+Time.\+h}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ mytime\_h}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ mytime\_h}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ \ uint8\_t;}
+\DoxyCodeLine{00006\ \ }
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <cstddef>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <stdio.h>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <arduino.h>}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{comment}{//===================================================================================}}
+\DoxyCodeLine{00014\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_my_time}{MyTime}}}
+\DoxyCodeLine{00015\ \{}
+\DoxyCodeLine{00016\ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00017\ \ \ \ \ uint8\_t\ \ hour;}
+\DoxyCodeLine{00018\ \ \ \ \ uint8\_t\ \ minute;}
+\DoxyCodeLine{00019\ \ \ \ \ uint8\_t\ \ second;}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00022\ \ \ \ \ \mbox{\hyperlink{class_my_time}{MyTime}}(\ \textcolor{keywordtype}{void});}
+\DoxyCodeLine{00023\ \ \ \ \ \mbox{\hyperlink{class_my_time}{MyTime}}(\ uint8\_t\ hour,\ uint8\_t\ minute,\ uint8\_t\ second);}
+\DoxyCodeLine{00024\ \ \ \ \ \mbox{\hyperlink{class_my_time}{MyTime}}(\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_my_time}{MyTime}}\&\ time);}
+\DoxyCodeLine{00025\ \ \ \ \ \mbox{\hyperlink{class_my_time}{\string~MyTime}}(\ \textcolor{keywordtype}{void});}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \ \ \ \ \mbox{\hyperlink{class_my_time}{MyTime}}\&\ operator\ =(\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_my_time}{MyTime}}\&\ time);}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \ \ \ \ uint8\_t\ getHour(\ \textcolor{keywordtype}{void})\ \textcolor{keyword}{const};\ }
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordtype}{void}\ setHour(\ uint8\_t\ day);}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \ \ \ \ uint8\_t\ getMinute(\ \textcolor{keywordtype}{void})\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordtype}{void}\ setMinute(\ uint8\_t\ minute);}
+\DoxyCodeLine{00034\ \ \ \ }
+\DoxyCodeLine{00035\ \ \ \ \ uint8\_t\ getSecond(\ \textcolor{keywordtype}{void})\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordtype}{void}\ setSecond(\ uint8\_t\ second);}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \ \ uint16\_t\ getInSeconds(\ \textcolor{keywordtype}{void});}
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ \ setInSeconds(\ uint16\_t\ timeInSecs);}
+\DoxyCodeLine{00040\ \ \ \ \ }
+\DoxyCodeLine{00041\ \ \ \ \ \mbox{\hyperlink{class_my_time}{MyTime}}\&\ operator++(\ \textcolor{keywordtype}{void});}
+\DoxyCodeLine{00042\ \ \ \ \ \mbox{\hyperlink{class_my_time}{MyTime}}\ \ operator++(\ \ \textcolor{keywordtype}{int});}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordtype}{void}\ hourInc(\ \textcolor{keywordtype}{void});}
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordtype}{void}\ hourDec(\ \textcolor{keywordtype}{void});}
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keywordtype}{void}\ minuteInc(\ \textcolor{keywordtype}{void});}
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{void}\ minuteDec(\ \textcolor{keywordtype}{void});}
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keywordtype}{void}\ secondInc(\ \textcolor{keywordtype}{void});}
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordtype}{void}\ secondDec(\ \textcolor{keywordtype}{void});}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \ \ \ \ }
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ getStringFormat(\ \textcolor{keywordtype}{void});}
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{size\_t}\ getStringBufferSize(\ \textcolor{keywordtype}{void});\ \ \ \ }
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keywordtype}{char}*\ \ toString(\ \textcolor{keywordtype}{char}*\ Stringbuffer);\ \ \ }
+\DoxyCodeLine{00055\ \ \ \ \ \ }
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ isValidHour(\ uint8\_t\ hour);}
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ isValidMinute(\ uint8\_t\ minute);}
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ isValidSecond(\ uint8\_t\ second);}
+\DoxyCodeLine{00059\ \};}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \textcolor{comment}{//===================================================================================}}
+\DoxyCodeLine{00063\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

@@ -1,0 +1,84 @@
+\hypertarget{class_n_t_p_wi_fi_time_handler}{}\doxysection{NTPWi\+Fi\+Time\+Handler Class Reference}
+\label{class_n_t_p_wi_fi_time_handler}\index{NTPWiFiTimeHandler@{NTPWiFiTimeHandler}}
+Inheritance diagram for NTPWi\+Fi\+Time\+Handler\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_n_t_p_wi_fi_time_handler}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_n_t_p_wi_fi_time_handler_a49db9cc7cda29adf15189409d4ece840}\label{class_n_t_p_wi_fi_time_handler_a49db9cc7cda29adf15189409d4ece840}} 
+{\bfseries NTPWi\+Fi\+Time\+Handler} (\mbox{\hyperlink{class_time_handler}{Time\+Handler}} $\ast$ptr, unsigned long update\+Interval)
+\item 
+virtual const char $\ast$ \mbox{\hyperlink{class_n_t_p_wi_fi_time_handler_ac7e4b4378b0cfc6fe53e20515a857e93}{get\+Class\+Name}} (void)
+\item 
+\mbox{\Hypertarget{class_n_t_p_wi_fi_time_handler_adc26c7cdde8e77373e1508cd9ecc59dd}\label{class_n_t_p_wi_fi_time_handler_adc26c7cdde8e77373e1508cd9ecc59dd}} 
+void {\bfseries init} (const char $\ast$host\+Name)
+\item 
+virtual void \mbox{\hyperlink{class_n_t_p_wi_fi_time_handler_afc626b2884779f736272a68674d81ff0}{update\+Time}} (\mbox{\hyperlink{class_timestamp}{Timestamp}} \&timestamp)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_time_handler}{Time\+Handler}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_time_handler_ab3034b482c6a96afe562a0c6296c4351}\label{class_time_handler_ab3034b482c6a96afe562a0c6296c4351}} 
+{\bfseries Time\+Handler} (\mbox{\hyperlink{class_time_handler}{Time\+Handler}} $\ast$ptr=nullptr)
+\item 
+\mbox{\Hypertarget{class_time_handler_a3b1794fbe2b1ca8beb25a5343884e9ac}\label{class_time_handler_a3b1794fbe2b1ca8beb25a5343884e9ac}} 
+virtual void {\bfseries bypass} (bool bypass\+Module)
+\item 
+\mbox{\Hypertarget{class_time_handler_ac0d8f7c94fc9488149a822c11427acc1}\label{class_time_handler_ac0d8f7c94fc9488149a822c11427acc1}} 
+virtual void {\bfseries set\+Valid\+Time} (bool valid\+Flagg)
+\item 
+\mbox{\Hypertarget{class_time_handler_a6aa72b07eac8b688ac817743c848bf08}\label{class_time_handler_a6aa72b07eac8b688ac817743c848bf08}} 
+virtual bool {\bfseries is\+Valid\+Time} (void)
+\item 
+\mbox{\Hypertarget{class_time_handler_a8ece7a7f39fb2ba288aaab827bba4c19}\label{class_time_handler_a8ece7a7f39fb2ba288aaab827bba4c19}} 
+virtual void {\bfseries update\+Time} (\mbox{\hyperlink{class_timestamp}{Timestamp}} \&timestamp)
+\item 
+\mbox{\Hypertarget{class_time_handler_af8593cacaca5048f9ac22ddd57d58c1a}\label{class_time_handler_af8593cacaca5048f9ac22ddd57d58c1a}} 
+virtual const char $\ast$ {\bfseries get\+Class\+Name} (void)=0
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+\doxysubsubsection*{Protected Attributes inherited from \mbox{\hyperlink{class_time_handler}{Time\+Handler}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_time_handler_a85908f188e18928da11cb676e2dd0823}\label{class_time_handler_a85908f188e18928da11cb676e2dd0823}} 
+\mbox{\hyperlink{class_time_handler}{Time\+Handler}} $\ast$ {\bfseries ptr}
+\item 
+\mbox{\Hypertarget{class_time_handler_a6d3b169b793070508966dbb870393431}\label{class_time_handler_a6d3b169b793070508966dbb870393431}} 
+bool {\bfseries bypass\+Module}
+\item 
+\mbox{\Hypertarget{class_time_handler_a91679ba9b2c29528ff78584ffce0195c}\label{class_time_handler_a91679ba9b2c29528ff78584ffce0195c}} 
+bool {\bfseries valid\+Time}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_n_t_p_wi_fi_time_handler_ac7e4b4378b0cfc6fe53e20515a857e93}\label{class_n_t_p_wi_fi_time_handler_ac7e4b4378b0cfc6fe53e20515a857e93}} 
+\index{NTPWiFiTimeHandler@{NTPWiFiTimeHandler}!getClassName@{getClassName}}
+\index{getClassName@{getClassName}!NTPWiFiTimeHandler@{NTPWiFiTimeHandler}}
+\doxysubsubsection{\texorpdfstring{getClassName()}{getClassName()}}
+{\footnotesize\ttfamily const char $\ast$ NTPWi\+Fi\+Time\+Handler\+::get\+Class\+Name (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_time_handler}{Time\+Handler}}.
+
+\mbox{\Hypertarget{class_n_t_p_wi_fi_time_handler_afc626b2884779f736272a68674d81ff0}\label{class_n_t_p_wi_fi_time_handler_afc626b2884779f736272a68674d81ff0}} 
+\index{NTPWiFiTimeHandler@{NTPWiFiTimeHandler}!updateTime@{updateTime}}
+\index{updateTime@{updateTime}!NTPWiFiTimeHandler@{NTPWiFiTimeHandler}}
+\doxysubsubsection{\texorpdfstring{updateTime()}{updateTime()}}
+{\footnotesize\ttfamily void NTPWi\+Fi\+Time\+Handler\+::update\+Time (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_timestamp}{Timestamp}} \&}]{timestamp }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{class_time_handler}{Time\+Handler}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+NTPWi\+Fi\+Time\+Handler.\+h\item 
+NTPWi\+Fi\+Time\+Handler.\+cpp\end{DoxyCompactItemize}

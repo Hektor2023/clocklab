@@ -1,0 +1,146 @@
+\hypertarget{class_controller}{}\doxysection{Controller}
+\label{class_controller}\index{Controller@{Controller}}
+
+
+{\ttfamily \#include \char`\"{}Controller.\+h\char`\"{}}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_controller_ac0d935146a94614dd0e036bf063f21d9}{Controller}} (\mbox{\hyperlink{class_system_time_handler}{System\+Time\+Handler}} $\ast$\mbox{\hyperlink{clock2_01_8cpp_ab1bc055d3f9534b1b1479e908feec00e}{system\+Time\+Handler}})
+\item 
+\mbox{\hyperlink{class_controller_aae731eac81483c07a2d46865977cc567}{$\sim$\+Controller}} (void)=default
+\item 
+const std\+::string \mbox{\hyperlink{class_controller_a1082c9a03b7135fecf0fc9e1cec12cb2}{execute}} (const std\+::string command)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_system_time_handler}{System\+Time\+Handler}} \& \mbox{\hyperlink{class_controller_afdde9a29388ec2b54909236a08be0bfb}{system\+Clock}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_controller_ac0d935146a94614dd0e036bf063f21d9}\label{class_controller_ac0d935146a94614dd0e036bf063f21d9}} 
+\index{Controller@{Controller}!Controller@{Controller}}
+\index{Controller@{Controller}!Controller@{Controller}}
+\doxysubsubsection{\texorpdfstring{Controller()}{Controller()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_controller}{Controller}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_system_time_handler}{System\+Time\+Handler}} $\ast$}]{system\+Time\+Handler }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00007\ \ \ :\mbox{\hyperlink{class_controller_afdde9a29388ec2b54909236a08be0bfb}{systemClock}}(\ *\mbox{\hyperlink{clock2_01_8cpp_ab1bc055d3f9534b1b1479e908feec00e}{systemTimeHandler}})\ \{\};}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{class_controller_aae731eac81483c07a2d46865977cc567}\label{class_controller_aae731eac81483c07a2d46865977cc567}} 
+\index{Controller@{Controller}!````~Controller@{$\sim$Controller}}
+\index{````~Controller@{$\sim$Controller}!Controller@{Controller}}
+\doxysubsubsection{\texorpdfstring{$\sim$Controller()}{~Controller()}}
+{\footnotesize\ttfamily $\sim$\mbox{\hyperlink{class_controller}{Controller}} (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_controller_a1082c9a03b7135fecf0fc9e1cec12cb2}\label{class_controller_a1082c9a03b7135fecf0fc9e1cec12cb2}} 
+\index{Controller@{Controller}!execute@{execute}}
+\index{execute@{execute}!Controller@{Controller}}
+\doxysubsubsection{\texorpdfstring{execute()}{execute()}}
+{\footnotesize\ttfamily const std\+::string execute (\begin{DoxyParamCaption}\item[{const std\+::string}]{command }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00011\ \{}
+\DoxyCodeLine{00012\ \ \ }
+\DoxyCodeLine{00013\ \ \ \textcolor{keywordflow}{if}((\ command.find(\textcolor{stringliteral}{"{}stop"{}})\ ==0)\ ||(\ command.find(\textcolor{stringliteral}{"{}enter"{}})\ ==0))}
+\DoxyCodeLine{00014\ \ \ \{}
+\DoxyCodeLine{00015\ \ \ \ \ \mbox{\hyperlink{class_controller_afdde9a29388ec2b54909236a08be0bfb}{systemClock}}.\mbox{\hyperlink{class_system_time_handler_a84af1a6e51e2c6a5b64ea7ae7ea3663b}{manualMode}}(\ \textcolor{keyword}{true});}
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keywordflow}{return}(\textcolor{stringliteral}{"{}Enter\ manual\ mode"{}});}
+\DoxyCodeLine{00017\ \ \ \}}
+\DoxyCodeLine{00018\ \ \ \ \ }
+\DoxyCodeLine{00019\ \ \ \textcolor{keywordflow}{if}((\ command.find(\textcolor{stringliteral}{"{}start"{}})\ ==0)\ ||(\ command.find(\textcolor{stringliteral}{"{}exit"{}})\ ==0))}
+\DoxyCodeLine{00020\ \ \ \{}
+\DoxyCodeLine{00021\ \ \ \ \ \mbox{\hyperlink{class_controller_afdde9a29388ec2b54909236a08be0bfb}{systemClock}}.\mbox{\hyperlink{class_system_time_handler_a84af1a6e51e2c6a5b64ea7ae7ea3663b}{manualMode}}(\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keywordflow}{return}(\textcolor{stringliteral}{"{}Exit\ from\ manual\ mode"{}});}
+\DoxyCodeLine{00023\ \ \ \}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \ \ }
+\DoxyCodeLine{00026\ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_system_time_handler_a9cd756653e5b34f63d5cf5c342143cb5}{SystemTimeHandler::variable}}\ \ var;}
+\DoxyCodeLine{00027\ \ \ \textcolor{keywordflow}{if}(\ command.find(\textcolor{stringliteral}{"{}hour"{}})==0)}
+\DoxyCodeLine{00028\ \ \ \{}
+\DoxyCodeLine{00029\ \ \ \ \ var=\ \mbox{\hyperlink{class_system_time_handler_a9cd756653e5b34f63d5cf5c342143cb5ab55e509c697e4cca0e1d160a7806698f}{SystemTimeHandler::variable::Hour}};\ \ \ }
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordflow}{return}(\textcolor{stringliteral}{"{}Adjust\ hour"{}});\ \ \ \ \ \ }
+\DoxyCodeLine{00031\ \ \ \}\ }
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \ \ \textcolor{keywordflow}{if}(\ command.find(\textcolor{stringliteral}{"{}minute"{}})==0)}
+\DoxyCodeLine{00034\ \ \ \{}
+\DoxyCodeLine{00035\ \ \ \ \ var=\ \mbox{\hyperlink{class_system_time_handler_a9cd756653e5b34f63d5cf5c342143cb5a62902641c38f3a4a8eb3212454360e24}{SystemTimeHandler::variable::Minute}};}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordflow}{return}(\textcolor{stringliteral}{"{}Adjust\ minute"{}});\ }
+\DoxyCodeLine{00037\ \ \ \}\ }
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00039\ \ \ \textcolor{keywordflow}{if}(\ command.find(\textcolor{stringliteral}{"{}second"{}})==0)}
+\DoxyCodeLine{00040\ \ \ \{}
+\DoxyCodeLine{00041\ \ \ \ \ var=\ \mbox{\hyperlink{class_system_time_handler_a9cd756653e5b34f63d5cf5c342143cb5ac22cf8376b1893dcfcef0649fe1a7d87}{SystemTimeHandler::variable::Second}};}
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordflow}{return}(\textcolor{stringliteral}{"{}Adjust\ second"{}});\ }
+\DoxyCodeLine{00043\ \ \ \}\ }
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \ \ \textcolor{keywordflow}{if}(\ command.find(\textcolor{stringliteral}{"{}day"{}})==0)}
+\DoxyCodeLine{00046\ \ \ \{}
+\DoxyCodeLine{00047\ \ \ \ \ var=\ \mbox{\hyperlink{class_system_time_handler_a9cd756653e5b34f63d5cf5c342143cb5a03727ac48595a24daed975559c944a44}{SystemTimeHandler::variable::Day}};}
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keywordflow}{return}(\textcolor{stringliteral}{"{}Adjust\ day"{}});\ \ \ \ }
+\DoxyCodeLine{00049\ \ \ \}}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00051\ \ \ \textcolor{keywordflow}{if}(\ command.find(\textcolor{stringliteral}{"{}month"{}})==0)}
+\DoxyCodeLine{00052\ \ \ \{}
+\DoxyCodeLine{00053\ \ \ \ \ var=\ \mbox{\hyperlink{class_system_time_handler_a9cd756653e5b34f63d5cf5c342143cb5a7cbb885aa1164b390a0bc050a64e1812}{SystemTimeHandler::variable::Month}};}
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keywordflow}{return}(\textcolor{stringliteral}{"{}Adjust\ month"{}});\ \ \ \ }
+\DoxyCodeLine{00055\ \ \ \}\ }
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00057\ \ \ \textcolor{keywordflow}{if}(\ command.find(\textcolor{stringliteral}{"{}year"{}})==0)}
+\DoxyCodeLine{00058\ \ \ \{}
+\DoxyCodeLine{00059\ \ \ \ \ var=\ \mbox{\hyperlink{class_system_time_handler_a9cd756653e5b34f63d5cf5c342143cb5a537c66b24ef5c83b7382cdc3f34885f2}{SystemTimeHandler::variable::Year}};}
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keywordflow}{return}(\textcolor{stringliteral}{"{}Adjust\ year"{}});\ \ \ \ }
+\DoxyCodeLine{00061\ \ \ \}\ \ \ \ }
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \ \ \textcolor{keywordflow}{if}(\ command.find(\textcolor{stringliteral}{"{}+"{}})==0)}
+\DoxyCodeLine{00064\ \ \ \{}
+\DoxyCodeLine{00065\ \ \ \ \ \mbox{\hyperlink{class_controller_afdde9a29388ec2b54909236a08be0bfb}{systemClock}}.\mbox{\hyperlink{class_system_time_handler_a339f74a465eefa375d6b360135800938}{adjust}}(\ var,\ \mbox{\hyperlink{class_system_time_handler_a99f26e6ee9fcd62f75203b5402df8098a32ba78fe43257d3e7f88e3935a8ea0d4}{SystemTimeHandler::direction::Plus}});}
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keywordflow}{return}(\textcolor{stringliteral}{"{}Adjusted"{}});\ \ \ }
+\DoxyCodeLine{00067\ \ \ \}}
+\DoxyCodeLine{00068\ \ \ \textcolor{keywordflow}{else}\ \ }
+\DoxyCodeLine{00069\ \ \ \textcolor{keywordflow}{if}(\ command.find(\textcolor{stringliteral}{"{}-\/"{}})==0)}
+\DoxyCodeLine{00070\ \ \ \{}
+\DoxyCodeLine{00071\ \ \ \ \ \mbox{\hyperlink{class_controller_afdde9a29388ec2b54909236a08be0bfb}{systemClock}}.\mbox{\hyperlink{class_system_time_handler_a339f74a465eefa375d6b360135800938}{adjust}}(\ var,\ \mbox{\hyperlink{class_system_time_handler_a99f26e6ee9fcd62f75203b5402df8098a453fb623e752c5993f65bc410fd74fe5}{SystemTimeHandler::direction::Minus}});}
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keywordflow}{return}(\textcolor{stringliteral}{"{}Adjusted"{}});\ }
+\DoxyCodeLine{00073\ \ \ \}}
+\DoxyCodeLine{00074\ \ \ }
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00076\ \ \ \textcolor{keywordflow}{return}(\ \textcolor{stringliteral}{"{}Error"{}});\ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00077\ \};\ }
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00038}{System\+Time\+Handler\+::adjust()}}, \mbox{\hyperlink{class_system_time_handler_a9cd756653e5b34f63d5cf5c342143cb5a03727ac48595a24daed975559c944a44}{System\+Time\+Handler\+::\+Day}}, \mbox{\hyperlink{class_system_time_handler_a9cd756653e5b34f63d5cf5c342143cb5ab55e509c697e4cca0e1d160a7806698f}{System\+Time\+Handler\+::\+Hour}}, \mbox{\hyperlink{l00017}{System\+Time\+Handler\+::manual\+Mode()}}, \mbox{\hyperlink{class_system_time_handler_a99f26e6ee9fcd62f75203b5402df8098a453fb623e752c5993f65bc410fd74fe5}{System\+Time\+Handler\+::\+Minus}}, \mbox{\hyperlink{class_system_time_handler_a9cd756653e5b34f63d5cf5c342143cb5a62902641c38f3a4a8eb3212454360e24}{System\+Time\+Handler\+::\+Minute}}, \mbox{\hyperlink{class_system_time_handler_a9cd756653e5b34f63d5cf5c342143cb5a7cbb885aa1164b390a0bc050a64e1812}{System\+Time\+Handler\+::\+Month}}, \mbox{\hyperlink{class_system_time_handler_a99f26e6ee9fcd62f75203b5402df8098a32ba78fe43257d3e7f88e3935a8ea0d4}{System\+Time\+Handler\+::\+Plus}}, \mbox{\hyperlink{class_system_time_handler_a9cd756653e5b34f63d5cf5c342143cb5ac22cf8376b1893dcfcef0649fe1a7d87}{System\+Time\+Handler\+::\+Second}}, \mbox{\hyperlink{l00018}{system\+Clock}}, and \mbox{\hyperlink{class_system_time_handler_a9cd756653e5b34f63d5cf5c342143cb5a537c66b24ef5c83b7382cdc3f34885f2}{System\+Time\+Handler\+::\+Year}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_controller_afdde9a29388ec2b54909236a08be0bfb}\label{class_controller_afdde9a29388ec2b54909236a08be0bfb}} 
+\index{Controller@{Controller}!systemClock@{systemClock}}
+\index{systemClock@{systemClock}!Controller@{Controller}}
+\doxysubsubsection{\texorpdfstring{systemClock}{systemClock}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_system_time_handler}{System\+Time\+Handler}}\& system\+Clock\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \mbox{\hyperlink{l00010}{execute()}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_controller_8h}{Controller.\+h}}\item 
+\mbox{\hyperlink{_controller_8cpp}{Controller.\+cpp}}\end{DoxyCompactItemize}

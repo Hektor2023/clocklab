@@ -1,0 +1,560 @@
+\hypertarget{class_t_m1638plus___model2}{}\doxysection{TM1638plus\+\_\+\+Model2}
+\label{class_t_m1638plus___model2}\index{TM1638plus\_Model2@{TM1638plus\_Model2}}
+
+
+{\ttfamily \#include \char`\"{}TM1638plus\+\_\+\+Model2.\+h\char`\"{}}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_t_m1638plus___model2_a268b99edfa9ca4685abccf5594c3dca5}{TM1638plus\+\_\+\+Model2}} (\mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}} strobe, \mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}} clock, \mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}} data, bool swap\+\_\+nibbles=false, bool high\+\_\+freq=false)
+\item 
+void \mbox{\hyperlink{class_t_m1638plus___model2_a1dabcab03140c38db087a6ed49acc13d}{ASCIIto\+Segment}} (const byte values\mbox{[}$\,$\mbox{]})
+\item 
+void \mbox{\hyperlink{class_t_m1638plus___model2_abec4db072207dae1701846ddd68f02fa}{brightness}} (\mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}} brightness)
+\item 
+void \mbox{\hyperlink{class_t_m1638plus___model2_a3e8aedff0e8ea60b8c4cebbb6881f7a2}{display\+Begin}} (void)
+\item 
+void \mbox{\hyperlink{class_t_m1638plus___model2_a6c734c0624f3a77f60ee507603f01c3b}{Display\+Dec\+Num}} (unsigned long number, byte dots, boolean leading\+Zeros=true, \mbox{\hyperlink{_t_m1638plus__common_8h_aa4b29d2b08e135b6f82f59ef281b52c9}{Align\+Text\+Type\+\_\+e}}=\mbox{\hyperlink{_t_m1638plus__common_8h_aa4b29d2b08e135b6f82f59ef281b52c9a1e1b3ae513ee71f19af2e74d63cb26d3}{TMAlign\+Text\+Left}})
+\item 
+void \mbox{\hyperlink{class_t_m1638plus___model2_aa009ec5f98a846579f09e21d7948472f}{Display\+Dec\+Num\+Nibble}} (uint16\+\_\+t number\+Upper, uint16\+\_\+t number\+Lower, byte dots, boolean leading\+Zeros=true, \mbox{\hyperlink{_t_m1638plus__common_8h_aa4b29d2b08e135b6f82f59ef281b52c9}{Align\+Text\+Type\+\_\+e}}=\mbox{\hyperlink{_t_m1638plus__common_8h_aa4b29d2b08e135b6f82f59ef281b52c9a1e1b3ae513ee71f19af2e74d63cb26d3}{TMAlign\+Text\+Left}})
+\item 
+void \mbox{\hyperlink{class_t_m1638plus___model2_adc038a778bb3cc88245f96b8c4adf537}{Display\+Hex\+Num}} (uint16\+\_\+t number\+Upper, uint16\+\_\+t number\+Lower, byte dots, boolean leading\+Zeros=true, \mbox{\hyperlink{_t_m1638plus__common_8h_aa4b29d2b08e135b6f82f59ef281b52c9}{Align\+Text\+Type\+\_\+e}}=\mbox{\hyperlink{_t_m1638plus__common_8h_aa4b29d2b08e135b6f82f59ef281b52c9a1e1b3ae513ee71f19af2e74d63cb26d3}{TMAlign\+Text\+Left}})
+\item 
+void \mbox{\hyperlink{class_t_m1638plus___model2_a517d87abc6360594711289fe25782342}{Display\+Segments}} (\mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}} segment, \mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}} segment\+Value)
+\item 
+void \mbox{\hyperlink{class_t_m1638plus___model2_a9bb12182e733d70e079b2290d98e0f2b}{Display\+Str}} (const char $\ast$string, const word dots=0)
+\item 
+\mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}} \mbox{\hyperlink{class_t_m1638plus___model2_a738f18d171b30a0a2d93a34b93084cab}{Read\+Key16}} (void)
+\item 
+uint16\+\_\+t \mbox{\hyperlink{class_t_m1638plus___model2_a1dc4f4b7eddc16ea7e52c56be9f22164}{Read\+Key16\+Two}} (void)
+\item 
+void \mbox{\hyperlink{class_t_m1638plus___model2_a3aea9deb2a0bfea9ff05a898f4822e31}{reset}} (void)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_t_m1638plus___model2_a15513e52f3b72429bec4cdccc995d25e}{send\+Command}} (\mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}} value)
+\item 
+void \mbox{\hyperlink{class_t_m1638plus___model2_a5a18286d5a8b9cb3a7149987b595fc03}{send\+Data}} (\mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}} data)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}} \mbox{\hyperlink{class_t_m1638plus___model2_af216e300635be0fcc86497fa60f312e9}{\+\_\+\+CLOCK\+\_\+\+IO}}
+\item 
+\mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}} \mbox{\hyperlink{class_t_m1638plus___model2_a0dbbebd07a64be4c8f93e745e82a87cb}{\+\_\+\+DATA\+\_\+\+IO}}
+\item 
+bool \mbox{\hyperlink{class_t_m1638plus___model2_ade44ddbf1dadc740bc6330dbe54620fb}{\+\_\+\+HIGH\+\_\+\+FREQ}} = false
+\item 
+\mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}} \mbox{\hyperlink{class_t_m1638plus___model2_abd442cf8a1b379c82bc82acbbd3faa5a}{\+\_\+\+STROBE\+\_\+\+IO}}
+\item 
+bool \mbox{\hyperlink{class_t_m1638plus___model2_a6108ed9636878aa79b7eaf46ee536076}{\+\_\+\+SWAP\+\_\+\+NIBBLES}} = false
+\item 
+\mbox{\hyperlink{class_t_m1638plus__common}{TM1638plus\+\_\+common}} \mbox{\hyperlink{class_t_m1638plus___model2_ac311b1ea85b33bd42e67bd5409c1ef0e}{TM\+\_\+common}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_t_m1638plus___model2_a268b99edfa9ca4685abccf5594c3dca5}\label{class_t_m1638plus___model2_a268b99edfa9ca4685abccf5594c3dca5}} 
+\index{TM1638plus\_Model2@{TM1638plus\_Model2}!TM1638plus\_Model2@{TM1638plus\_Model2}}
+\index{TM1638plus\_Model2@{TM1638plus\_Model2}!TM1638plus\_Model2@{TM1638plus\_Model2}}
+\doxysubsubsection{\texorpdfstring{TM1638plus\_Model2()}{TM1638plus\_Model2()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_t_m1638plus___model2}{TM1638plus\+\_\+\+Model2}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}}}]{strobe,  }\item[{\mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}}}]{clock,  }\item[{\mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}}}]{data,  }\item[{bool}]{swap\+\_\+nibbles = {\ttfamily false},  }\item[{bool}]{high\+\_\+freq = {\ttfamily false} }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00012\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00013\ \ \ \mbox{\hyperlink{class_t_m1638plus___model2_abd442cf8a1b379c82bc82acbbd3faa5a}{\_STROBE\_IO}}\ =\ strobe;}
+\DoxyCodeLine{00014\ \ \ \mbox{\hyperlink{class_t_m1638plus___model2_a0dbbebd07a64be4c8f93e745e82a87cb}{\_DATA\_IO}}\ =\ data;}
+\DoxyCodeLine{00015\ \ \ \mbox{\hyperlink{class_t_m1638plus___model2_af216e300635be0fcc86497fa60f312e9}{\_CLOCK\_IO}}\ =\ clock;}
+\DoxyCodeLine{00016\ \ \ \mbox{\hyperlink{class_t_m1638plus___model2_a6108ed9636878aa79b7eaf46ee536076}{\_SWAP\_NIBBLES}}\ =\ swap\_nibbles;}
+\DoxyCodeLine{00017\ \ \ \mbox{\hyperlink{class_t_m1638plus___model2_ade44ddbf1dadc740bc6330dbe54620fb}{\_HIGH\_FREQ}}\ =\ high\_freq;}
+\DoxyCodeLine{00018\ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00125}{\+\_\+\+CLOCK\+\_\+\+IO}}, \mbox{\hyperlink{l00124}{\+\_\+\+DATA\+\_\+\+IO}}, \mbox{\hyperlink{l00128}{\+\_\+\+HIGH\+\_\+\+FREQ}}, \mbox{\hyperlink{l00123}{\+\_\+\+STROBE\+\_\+\+IO}}, and \mbox{\hyperlink{l00126}{\+\_\+\+SWAP\+\_\+\+NIBBLES}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_t_m1638plus___model2_a1dabcab03140c38db087a6ed49acc13d}\label{class_t_m1638plus___model2_a1dabcab03140c38db087a6ed49acc13d}} 
+\index{TM1638plus\_Model2@{TM1638plus\_Model2}!ASCIItoSegment@{ASCIItoSegment}}
+\index{ASCIItoSegment@{ASCIItoSegment}!TM1638plus\_Model2@{TM1638plus\_Model2}}
+\doxysubsubsection{\texorpdfstring{ASCIItoSegment()}{ASCIItoSegment()}}
+{\footnotesize\ttfamily void ASCIIto\+Segment (\begin{DoxyParamCaption}\item[{const byte}]{values\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00171\ \{}
+\DoxyCodeLine{00172\ \ \ \textcolor{keywordflow}{for}\ (\mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t}}\ \ segment\ =\ 0;\ segment\ <\ \mbox{\hyperlink{_t_m1638plus__common_8h_a317ccb34e4346f0dffdc4cb6d7085d2c}{TM\_DISPLAY\_SIZE}};\ segment++)\ \{}
+\DoxyCodeLine{00173\ \ \ \mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t}}\ \ SegmentValue\ =\ 0;}
+\DoxyCodeLine{00174\ \ \ \textcolor{keywordflow}{for}\ (\mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t}}\ \ j\ =\ 0;\ j\ <\ \mbox{\hyperlink{_t_m1638plus__common_8h_a317ccb34e4346f0dffdc4cb6d7085d2c}{TM\_DISPLAY\_SIZE}};\ j++)\ \{}
+\DoxyCodeLine{00175\ \ \ \ \ SegmentValue\ |=\ ((values[j]\ >>\ segment)\ \&\ 1)\ <<\ (\mbox{\hyperlink{_t_m1638plus__common_8h_a317ccb34e4346f0dffdc4cb6d7085d2c}{TM\_DISPLAY\_SIZE}}\ -\/\ j\ -\/\ 1);}
+\DoxyCodeLine{00176\ \ \ \}}
+\DoxyCodeLine{00177\ \ \ \mbox{\hyperlink{class_t_m1638plus___model2_a517d87abc6360594711289fe25782342}{DisplaySegments}}(segment\ ,\ SegmentValue);}
+\DoxyCodeLine{00178\ \ \ \}}
+\DoxyCodeLine{00179\ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00056}{Display\+Segments()}}, and \mbox{\hyperlink{l00028}{TM\+\_\+\+DISPLAY\+\_\+\+SIZE}}.
+
+
+
+Referenced by \mbox{\hyperlink{l00144}{Display\+Str()}}.
+
+\mbox{\Hypertarget{class_t_m1638plus___model2_abec4db072207dae1701846ddd68f02fa}\label{class_t_m1638plus___model2_abec4db072207dae1701846ddd68f02fa}} 
+\index{TM1638plus\_Model2@{TM1638plus\_Model2}!brightness@{brightness}}
+\index{brightness@{brightness}!TM1638plus\_Model2@{TM1638plus\_Model2}}
+\doxysubsubsection{\texorpdfstring{brightness()}{brightness()}}
+{\footnotesize\ttfamily void brightness (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}}}]{brightness }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00075\ \{}
+\DoxyCodeLine{00076\ \ \ \ \ \mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t}}\ \ value\ =\ 0;}
+\DoxyCodeLine{00077\ \ \ \ \ value\ =\ \mbox{\hyperlink{_t_m1638plus__common_8h_a7b3189b6a5920f007bb018f55c6e5c5b}{TM\_BRIGHT\_ADR}}\ +\ (\mbox{\hyperlink{_t_m1638plus__common_8h_a990af39713054793ad4fb9148197684d}{TM\_BRIGHT\_MASK}}\ \&\ \mbox{\hyperlink{class_t_m1638plus___model2_abec4db072207dae1701846ddd68f02fa}{brightness}});}
+\DoxyCodeLine{00078\ \ \ \ \ \mbox{\hyperlink{class_t_m1638plus___model2_a15513e52f3b72429bec4cdccc995d25e}{sendCommand}}(value);}
+\DoxyCodeLine{00079\ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00074}{brightness()}}, \mbox{\hyperlink{l00030}{send\+Command()}}, \mbox{\hyperlink{l00025}{TM\+\_\+\+BRIGHT\+\_\+\+ADR}}, and \mbox{\hyperlink{l00026}{TM\+\_\+\+BRIGHT\+\_\+\+MASK}}.
+
+
+
+Referenced by \mbox{\hyperlink{l00074}{brightness()}}, and \mbox{\hyperlink{l00020}{display\+Begin()}}.
+
+\mbox{\Hypertarget{class_t_m1638plus___model2_a3e8aedff0e8ea60b8c4cebbb6881f7a2}\label{class_t_m1638plus___model2_a3e8aedff0e8ea60b8c4cebbb6881f7a2}} 
+\index{TM1638plus\_Model2@{TM1638plus\_Model2}!displayBegin@{displayBegin}}
+\index{displayBegin@{displayBegin}!TM1638plus\_Model2@{TM1638plus\_Model2}}
+\doxysubsubsection{\texorpdfstring{displayBegin()}{displayBegin()}}
+{\footnotesize\ttfamily void display\+Begin (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00021\ \{}
+\DoxyCodeLine{00022\ \ \ pinMode(\mbox{\hyperlink{class_t_m1638plus___model2_abd442cf8a1b379c82bc82acbbd3faa5a}{\_STROBE\_IO}},\ OUTPUT);}
+\DoxyCodeLine{00023\ \ \ pinMode(\mbox{\hyperlink{class_t_m1638plus___model2_a0dbbebd07a64be4c8f93e745e82a87cb}{\_DATA\_IO}},\ OUTPUT);}
+\DoxyCodeLine{00024\ \ \ pinMode(\mbox{\hyperlink{class_t_m1638plus___model2_af216e300635be0fcc86497fa60f312e9}{\_CLOCK\_IO}},\ OUTPUT);}
+\DoxyCodeLine{00025\ \ \ \mbox{\hyperlink{class_t_m1638plus___model2_a15513e52f3b72429bec4cdccc995d25e}{sendCommand}}(\mbox{\hyperlink{_t_m1638plus__common_8h_a2520a4f25e33b20ef4913deaabba54ce}{TM\_ACTIVATE}});}
+\DoxyCodeLine{00026\ \ \ \mbox{\hyperlink{class_t_m1638plus___model2_abec4db072207dae1701846ddd68f02fa}{brightness}}(\mbox{\hyperlink{_t_m1638plus__common_8h_a1fcda79323ec00c5ff322a35def8118d}{TM\_DEFAULT\_BRIGHTNESS}});}
+\DoxyCodeLine{00027\ \ \ \mbox{\hyperlink{class_t_m1638plus___model2_a3aea9deb2a0bfea9ff05a898f4822e31}{reset}}();}
+\DoxyCodeLine{00028\ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00125}{\+\_\+\+CLOCK\+\_\+\+IO}}, \mbox{\hyperlink{l00124}{\+\_\+\+DATA\+\_\+\+IO}}, \mbox{\hyperlink{l00123}{\+\_\+\+STROBE\+\_\+\+IO}}, \mbox{\hyperlink{l00074}{brightness()}}, \mbox{\hyperlink{l00045}{reset()}}, \mbox{\hyperlink{l00030}{send\+Command()}}, \mbox{\hyperlink{l00019}{TM\+\_\+\+ACTIVATE}}, and \mbox{\hyperlink{l00027}{TM\+\_\+\+DEFAULT\+\_\+\+BRIGHTNESS}}.
+
+\mbox{\Hypertarget{class_t_m1638plus___model2_a6c734c0624f3a77f60ee507603f01c3b}\label{class_t_m1638plus___model2_a6c734c0624f3a77f60ee507603f01c3b}} 
+\index{TM1638plus\_Model2@{TM1638plus\_Model2}!DisplayDecNum@{DisplayDecNum}}
+\index{DisplayDecNum@{DisplayDecNum}!TM1638plus\_Model2@{TM1638plus\_Model2}}
+\doxysubsubsection{\texorpdfstring{DisplayDecNum()}{DisplayDecNum()}}
+{\footnotesize\ttfamily void Display\+Dec\+Num (\begin{DoxyParamCaption}\item[{unsigned long}]{number,  }\item[{byte}]{dots,  }\item[{boolean}]{leading\+Zeros = {\ttfamily true},  }\item[{\mbox{\hyperlink{_t_m1638plus__common_8h_aa4b29d2b08e135b6f82f59ef281b52c9}{Align\+Text\+Type\+\_\+e}}}]{Text\+Alignment = {\ttfamily \mbox{\hyperlink{_t_m1638plus__common_8h_aa4b29d2b08e135b6f82f59ef281b52c9a1e1b3ae513ee71f19af2e74d63cb26d3}{TMAlign\+Text\+Left}}} }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00104\ \{}
+\DoxyCodeLine{00105\ \ \ \textcolor{keywordtype}{char}\ values[\mbox{\hyperlink{_t_m1638plus__common_8h_a317ccb34e4346f0dffdc4cb6d7085d2c}{TM\_DISPLAY\_SIZE}}\ +\ 1];}
+\DoxyCodeLine{00106\ \ \ \textcolor{keywordtype}{char}\ TextDisplay[5]\ =\ \textcolor{stringliteral}{"{}\%"{}};}
+\DoxyCodeLine{00107\ \ \ \textcolor{keywordtype}{char}\ TextLeft[3]\ =\ \textcolor{stringliteral}{"{}ld"{}};}
+\DoxyCodeLine{00108\ \ \ \textcolor{keywordtype}{char}\ TextRight[4]\ =\ \textcolor{stringliteral}{"{}8ld"{}};}
+\DoxyCodeLine{00109\ \ \ }
+\DoxyCodeLine{00110\ \ \ \ \ \textcolor{keywordflow}{if}\ (TextAlignment\ ==\ \mbox{\hyperlink{_t_m1638plus__common_8h_aa4b29d2b08e135b6f82f59ef281b52c9a1e1b3ae513ee71f19af2e74d63cb26d3}{TMAlignTextLeft}})}
+\DoxyCodeLine{00111\ \ \ \ \ \{}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ strcat(TextDisplay\ ,TextLeft);\ \ \textcolor{comment}{//\ \%ld}}
+\DoxyCodeLine{00113\ \ \ \ \ \}\textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (\ TextAlignment\ ==\ \mbox{\hyperlink{_t_m1638plus__common_8h_aa4b29d2b08e135b6f82f59ef281b52c9a011c88102d8305d9f0de3a356630a15b}{TMAlignTextRight}})}
+\DoxyCodeLine{00114\ \ \ \ \ \{}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ strcat(TextDisplay\ ,TextRight);\ \textcolor{comment}{//\ \%8ld}}
+\DoxyCodeLine{00116\ \ \ \ \ \}}
+\DoxyCodeLine{00117\ \ \ \ \ }
+\DoxyCodeLine{00118\ \ \ snprintf(values,\ \mbox{\hyperlink{_t_m1638plus__common_8h_a317ccb34e4346f0dffdc4cb6d7085d2c}{TM\_DISPLAY\_SIZE}}\ +\ 1,\ leadingZeros\ ?\ \textcolor{stringliteral}{"{}\%08ld"{}}\ :\ TextDisplay,\ number);\ }
+\DoxyCodeLine{00119\ \ \ \mbox{\hyperlink{class_t_m1638plus___model2_a9bb12182e733d70e079b2290d98e0f2b}{DisplayStr}}(values,\ dots);}
+\DoxyCodeLine{00120\ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00144}{Display\+Str()}}, \mbox{\hyperlink{l00028}{TM\+\_\+\+DISPLAY\+\_\+\+SIZE}}, \mbox{\hyperlink{l00044}{TMAlign\+Text\+Left}}, and \mbox{\hyperlink{l00043}{TMAlign\+Text\+Right}}.
+
+\mbox{\Hypertarget{class_t_m1638plus___model2_aa009ec5f98a846579f09e21d7948472f}\label{class_t_m1638plus___model2_aa009ec5f98a846579f09e21d7948472f}} 
+\index{TM1638plus\_Model2@{TM1638plus\_Model2}!DisplayDecNumNibble@{DisplayDecNumNibble}}
+\index{DisplayDecNumNibble@{DisplayDecNumNibble}!TM1638plus\_Model2@{TM1638plus\_Model2}}
+\doxysubsubsection{\texorpdfstring{DisplayDecNumNibble()}{DisplayDecNumNibble()}}
+{\footnotesize\ttfamily void Display\+Dec\+Num\+Nibble (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{number\+Upper,  }\item[{uint16\+\_\+t}]{number\+Lower,  }\item[{byte}]{dots,  }\item[{boolean}]{leading\+Zeros = {\ttfamily true},  }\item[{\mbox{\hyperlink{_t_m1638plus__common_8h_aa4b29d2b08e135b6f82f59ef281b52c9}{Align\+Text\+Type\+\_\+e}}}]{Text\+Alignment = {\ttfamily \mbox{\hyperlink{_t_m1638plus__common_8h_aa4b29d2b08e135b6f82f59ef281b52c9a1e1b3ae513ee71f19af2e74d63cb26d3}{TMAlign\+Text\+Left}}} }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00123\ \{}
+\DoxyCodeLine{00124\ \ \ \textcolor{keywordtype}{char}\ valuesUpper[\mbox{\hyperlink{_t_m1638plus__common_8h_a317ccb34e4346f0dffdc4cb6d7085d2c}{TM\_DISPLAY\_SIZE}}\ +\ 1];}
+\DoxyCodeLine{00125\ \ \ \textcolor{keywordtype}{char}\ valuesLower[\mbox{\hyperlink{_t_m1638plus__common_8h_a317ccb34e4346f0dffdc4cb6d7085d2c}{TM\_DISPLAY\_SIZE}}/2\ +\ 1];}
+\DoxyCodeLine{00126\ \ \ \textcolor{keywordtype}{char}\ TextDisplay[5]\ =\ \textcolor{stringliteral}{"{}\%"{}};}
+\DoxyCodeLine{00127\ \ \ \textcolor{keywordtype}{char}\ TextLeft[4]\ =\ \textcolor{stringliteral}{"{}-\/4d"{}};}
+\DoxyCodeLine{00128\ \ \ \textcolor{keywordtype}{char}\ TextRight[3]\ =\ \textcolor{stringliteral}{"{}4d"{}};}
+\DoxyCodeLine{00129\ \ \ }
+\DoxyCodeLine{00130\ \ \ \ \ \ \textcolor{keywordflow}{if}\ (TextAlignment\ ==\ \mbox{\hyperlink{_t_m1638plus__common_8h_aa4b29d2b08e135b6f82f59ef281b52c9a1e1b3ae513ee71f19af2e74d63cb26d3}{TMAlignTextLeft}})}
+\DoxyCodeLine{00131\ \ \ \ \ \{}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ strcat(TextDisplay\ ,TextLeft);\ \ \textcolor{comment}{//\ \%-\/4d}}
+\DoxyCodeLine{00133\ \ \ \ \ \}\textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (\ TextAlignment\ ==\ \mbox{\hyperlink{_t_m1638plus__common_8h_aa4b29d2b08e135b6f82f59ef281b52c9a011c88102d8305d9f0de3a356630a15b}{TMAlignTextRight}})}
+\DoxyCodeLine{00134\ \ \ \ \ \{}
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ strcat(TextDisplay\ ,TextRight);\ \textcolor{comment}{//\ \%4d}}
+\DoxyCodeLine{00136\ \ \ \ \ \}\ \ }
+\DoxyCodeLine{00137\ \ \ \ \ }
+\DoxyCodeLine{00138\ \ \ snprintf(valuesUpper,\ \mbox{\hyperlink{_t_m1638plus__common_8h_a317ccb34e4346f0dffdc4cb6d7085d2c}{TM\_DISPLAY\_SIZE}}/2\ +\ 1,\ leadingZeros\ ?\ \textcolor{stringliteral}{"{}\%04d"{}}\ :\ TextDisplay,\ numberUpper);}
+\DoxyCodeLine{00139\ \ \ snprintf(valuesLower,\ \mbox{\hyperlink{_t_m1638plus__common_8h_a317ccb34e4346f0dffdc4cb6d7085d2c}{TM\_DISPLAY\_SIZE}}/2\ +\ 1,\ leadingZeros\ ?\ \textcolor{stringliteral}{"{}\%04d"{}}\ :\ TextDisplay,\ numberLower);\ }
+\DoxyCodeLine{00140\ \ \ strcat(valuesUpper\ ,valuesLower);}
+\DoxyCodeLine{00141\ \ \ \mbox{\hyperlink{class_t_m1638plus___model2_a9bb12182e733d70e079b2290d98e0f2b}{DisplayStr}}(valuesUpper,\ dots);}
+\DoxyCodeLine{00142\ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00144}{Display\+Str()}}, \mbox{\hyperlink{l00028}{TM\+\_\+\+DISPLAY\+\_\+\+SIZE}}, \mbox{\hyperlink{l00044}{TMAlign\+Text\+Left}}, and \mbox{\hyperlink{l00043}{TMAlign\+Text\+Right}}.
+
+\mbox{\Hypertarget{class_t_m1638plus___model2_adc038a778bb3cc88245f96b8c4adf537}\label{class_t_m1638plus___model2_adc038a778bb3cc88245f96b8c4adf537}} 
+\index{TM1638plus\_Model2@{TM1638plus\_Model2}!DisplayHexNum@{DisplayHexNum}}
+\index{DisplayHexNum@{DisplayHexNum}!TM1638plus\_Model2@{TM1638plus\_Model2}}
+\doxysubsubsection{\texorpdfstring{DisplayHexNum()}{DisplayHexNum()}}
+{\footnotesize\ttfamily void Display\+Hex\+Num (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{number\+Upper,  }\item[{uint16\+\_\+t}]{number\+Lower,  }\item[{byte}]{dots,  }\item[{boolean}]{leading\+Zeros = {\ttfamily true},  }\item[{\mbox{\hyperlink{_t_m1638plus__common_8h_aa4b29d2b08e135b6f82f59ef281b52c9}{Align\+Text\+Type\+\_\+e}}}]{Text\+Alignment = {\ttfamily \mbox{\hyperlink{_t_m1638plus__common_8h_aa4b29d2b08e135b6f82f59ef281b52c9a1e1b3ae513ee71f19af2e74d63cb26d3}{TMAlign\+Text\+Left}}} }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00082\ \{}
+\DoxyCodeLine{00083\ \ \ \textcolor{keywordtype}{char}\ valuesUpper[\mbox{\hyperlink{_t_m1638plus__common_8h_a317ccb34e4346f0dffdc4cb6d7085d2c}{TM\_DISPLAY\_SIZE}}\ +\ 1];}
+\DoxyCodeLine{00084\ \ \ \textcolor{keywordtype}{char}\ valuesLower[\mbox{\hyperlink{_t_m1638plus__common_8h_a317ccb34e4346f0dffdc4cb6d7085d2c}{TM\_DISPLAY\_SIZE}}/2\ +\ 1];}
+\DoxyCodeLine{00085\ \ \ \textcolor{keywordtype}{char}\ TextDisplay[5]\ =\ \textcolor{stringliteral}{"{}\%"{}};}
+\DoxyCodeLine{00086\ \ \ \textcolor{keywordtype}{char}\ TextLeft[4]\ =\ \textcolor{stringliteral}{"{}-\/4X"{}};}
+\DoxyCodeLine{00087\ \ \ \textcolor{keywordtype}{char}\ TextRight[3]\ =\ \textcolor{stringliteral}{"{}4X"{}};}
+\DoxyCodeLine{00088\ \ \ }
+\DoxyCodeLine{00089\ \ \ \ \ \ \textcolor{keywordflow}{if}\ (TextAlignment\ ==\ \mbox{\hyperlink{_t_m1638plus__common_8h_aa4b29d2b08e135b6f82f59ef281b52c9a1e1b3ae513ee71f19af2e74d63cb26d3}{TMAlignTextLeft}})}
+\DoxyCodeLine{00090\ \ \ \ \ \{}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ strcat(TextDisplay\ ,TextLeft);\ \ \textcolor{comment}{//\ \%-\/4X}}
+\DoxyCodeLine{00092\ \ \ \ \ \}\textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (\ TextAlignment\ =\ \mbox{\hyperlink{_t_m1638plus__common_8h_aa4b29d2b08e135b6f82f59ef281b52c9a011c88102d8305d9f0de3a356630a15b}{TMAlignTextRight}})}
+\DoxyCodeLine{00093\ \ \ \ \ \{}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ strcat(TextDisplay\ ,TextRight);\ \textcolor{comment}{//\ \%4X}}
+\DoxyCodeLine{00095\ \ \ \ \ \}\ \ }
+\DoxyCodeLine{00096\ \ \ \ \ }
+\DoxyCodeLine{00097\ \ \ snprintf(valuesUpper,\ \mbox{\hyperlink{_t_m1638plus__common_8h_a317ccb34e4346f0dffdc4cb6d7085d2c}{TM\_DISPLAY\_SIZE}}/2\ +\ 1,\ leadingZeros\ ?\ \textcolor{stringliteral}{"{}\%04X"{}}\ :\ TextDisplay,\ numberUpper);}
+\DoxyCodeLine{00098\ \ \ snprintf(valuesLower,\ \mbox{\hyperlink{_t_m1638plus__common_8h_a317ccb34e4346f0dffdc4cb6d7085d2c}{TM\_DISPLAY\_SIZE}}/2\ +\ 1,\ leadingZeros\ ?\ \textcolor{stringliteral}{"{}\%04X"{}}\ :\ TextDisplay,\ numberLower);\ }
+\DoxyCodeLine{00099\ \ \ strcat(valuesUpper\ ,valuesLower);}
+\DoxyCodeLine{00100\ \ \ \mbox{\hyperlink{class_t_m1638plus___model2_a9bb12182e733d70e079b2290d98e0f2b}{DisplayStr}}(valuesUpper,\ dots);}
+\DoxyCodeLine{00101\ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00144}{Display\+Str()}}, \mbox{\hyperlink{l00028}{TM\+\_\+\+DISPLAY\+\_\+\+SIZE}}, \mbox{\hyperlink{l00044}{TMAlign\+Text\+Left}}, and \mbox{\hyperlink{l00043}{TMAlign\+Text\+Right}}.
+
+\mbox{\Hypertarget{class_t_m1638plus___model2_a517d87abc6360594711289fe25782342}\label{class_t_m1638plus___model2_a517d87abc6360594711289fe25782342}} 
+\index{TM1638plus\_Model2@{TM1638plus\_Model2}!DisplaySegments@{DisplaySegments}}
+\index{DisplaySegments@{DisplaySegments}!TM1638plus\_Model2@{TM1638plus\_Model2}}
+\doxysubsubsection{\texorpdfstring{DisplaySegments()}{DisplaySegments()}}
+{\footnotesize\ttfamily void Display\+Segments (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}}}]{segment,  }\item[{\mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}}}]{segment\+Value }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00057\ \{}
+\DoxyCodeLine{00058\ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_t_m1638plus___model2_a6108ed9636878aa79b7eaf46ee536076}{\_SWAP\_NIBBLES}}\ ==\ \textcolor{keyword}{true})}
+\DoxyCodeLine{00059\ \ \ \ \{}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t}}\ upper\ ,\ lower\ =\ 0;}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ lower\ =\ (digit)\ \&\ 0x0F;\ \ \textcolor{comment}{//\ select\ lower\ nibble}}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ upper\ =\ \ (digit\ >>\ 4)\ \&\ 0X0F;\ \textcolor{comment}{//select\ upper\ nibble}}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ digit\ =\ lower\ <<\ 4\ |\ upper;}
+\DoxyCodeLine{00064\ \ \ \ \}}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ \ \ segment\ =\ (segment<<1);}
+\DoxyCodeLine{00067\ \ \ \mbox{\hyperlink{class_t_m1638plus___model2_a15513e52f3b72429bec4cdccc995d25e}{sendCommand}}(\mbox{\hyperlink{_t_m1638plus__common_8h_a4948890dbec8da83621abcf93b99b522}{TM\_WRITE\_LOC}});}
+\DoxyCodeLine{00068\ \ \ digitalWrite(\mbox{\hyperlink{class_t_m1638plus___model2_abd442cf8a1b379c82bc82acbbd3faa5a}{\_STROBE\_IO}},\ LOW);}
+\DoxyCodeLine{00069\ \ \ \mbox{\hyperlink{class_t_m1638plus___model2_a5a18286d5a8b9cb3a7149987b595fc03}{sendData}}(\mbox{\hyperlink{_t_m1638plus__common_8h_a3f0be03700c29d00cad35216c9907d65}{TM\_SEG\_ADR}}\ |\ segment);}
+\DoxyCodeLine{00070\ \ \ \mbox{\hyperlink{class_t_m1638plus___model2_a5a18286d5a8b9cb3a7149987b595fc03}{sendData}}(digit);}
+\DoxyCodeLine{00071\ \ \ digitalWrite(\mbox{\hyperlink{class_t_m1638plus___model2_abd442cf8a1b379c82bc82acbbd3faa5a}{\_STROBE\_IO}},\ HIGH);}
+\DoxyCodeLine{00072\ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00123}{\+\_\+\+STROBE\+\_\+\+IO}}, \mbox{\hyperlink{l00126}{\+\_\+\+SWAP\+\_\+\+NIBBLES}}, \mbox{\hyperlink{l00030}{send\+Command()}}, \mbox{\hyperlink{l00037}{send\+Data()}}, \mbox{\hyperlink{l00023}{TM\+\_\+\+SEG\+\_\+\+ADR}}, and \mbox{\hyperlink{l00021}{TM\+\_\+\+WRITE\+\_\+\+LOC}}.
+
+
+
+Referenced by \mbox{\hyperlink{l00170}{ASCIIto\+Segment()}}.
+
+\mbox{\Hypertarget{class_t_m1638plus___model2_a9bb12182e733d70e079b2290d98e0f2b}\label{class_t_m1638plus___model2_a9bb12182e733d70e079b2290d98e0f2b}} 
+\index{TM1638plus\_Model2@{TM1638plus\_Model2}!DisplayStr@{DisplayStr}}
+\index{DisplayStr@{DisplayStr}!TM1638plus\_Model2@{TM1638plus\_Model2}}
+\doxysubsubsection{\texorpdfstring{DisplayStr()}{DisplayStr()}}
+{\footnotesize\ttfamily void Display\+Str (\begin{DoxyParamCaption}\item[{const char $\ast$}]{string,  }\item[{const word}]{dots = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00145\ \{}
+\DoxyCodeLine{00146\ \ \ \textcolor{keywordtype}{byte}\ values[\mbox{\hyperlink{_t_m1638plus__common_8h_a317ccb34e4346f0dffdc4cb6d7085d2c}{TM\_DISPLAY\_SIZE}}];}
+\DoxyCodeLine{00147\ \ \ \textcolor{keywordtype}{boolean}\ done\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00148\ \ \ \mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t}}\ Result\ \ =\ 0;\ }
+\DoxyCodeLine{00149\ \ \ memset(values,\ 0,\ \mbox{\hyperlink{_t_m1638plus__common_8h_a317ccb34e4346f0dffdc4cb6d7085d2c}{TM\_DISPLAY\_SIZE}}\ *\ \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{byte}));}
+\DoxyCodeLine{00150\ }
+\DoxyCodeLine{00151\ \ \ \textcolor{keywordflow}{for}\ (\mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t}}\ \ i\ =\ 0;\ i\ <\ \mbox{\hyperlink{_t_m1638plus__common_8h_a317ccb34e4346f0dffdc4cb6d7085d2c}{TM\_DISPLAY\_SIZE}};\ i++)\ }
+\DoxyCodeLine{00152\ \ \ \{}
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!done\ \&\&\ \textcolor{keywordtype}{string}[i]\ !=\ \textcolor{charliteral}{'\(\backslash\)0'})\ \{}
+\DoxyCodeLine{00154\ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (dots\ >>\ (7-\/i)\ \&\ 1)\{\ \ \textcolor{comment}{//if\ dots\ bit\ is\ set\ for\ that\ position\ apply\ the\ mask\ to\ turn\ on\ dot(0x80).}}
+\DoxyCodeLine{00155\ \ \ \ \ \ \ \ \ \ \ \ \ Result\ =\ pgm\_read\_byte(\&\mbox{\hyperlink{_t_m1638plus__common_8h_aca17ede0296ed441b6329c7ec46a0922}{SevenSeg}}[\textcolor{keywordtype}{string}[i]\ -\/\ \mbox{\hyperlink{_t_m1638plus__common_8h_a7893c34708614832e838ecf88a06d8b8}{TM\_ASCII\_OFFSET}}]);}
+\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ \ \ \ \ values[i]\ =\ (Result\ |\ \mbox{\hyperlink{_t_m1638plus__common_8h_accf3388a889abc4f947bbceb037174a2}{TM\_DOT\_MASK\_DEC}});\ \textcolor{comment}{//apply\ the\ Dot\ bitmask\ to\ value\ extracted\ from\ ASCII\ table}}
+\DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ }
+\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ \ \ \ \ values[i]\ =\ pgm\_read\_byte(\&\mbox{\hyperlink{_t_m1638plus__common_8h_aca17ede0296ed441b6329c7ec46a0922}{SevenSeg}}[\textcolor{keywordtype}{string}[i]\ -\/\ \mbox{\hyperlink{_t_m1638plus__common_8h_a7893c34708614832e838ecf88a06d8b8}{TM\_ASCII\_OFFSET}}])\ ;}
+\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00161\ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00162\ \ \ \ \ \ \ \ \ done\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00163\ \ \ \ \ \ \ \ \ values[i]\ =\ (((dots\ >>\ (7\ -\/\ i))\ \&\ 1)\ <<\ 7);}
+\DoxyCodeLine{00164\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00165\ \ \ \ \ \ \ }
+\DoxyCodeLine{00166\ \ \ \}}
+\DoxyCodeLine{00167\ \ \mbox{\hyperlink{class_t_m1638plus___model2_a1dabcab03140c38db087a6ed49acc13d}{ASCIItoSegment}}(values);}
+\DoxyCodeLine{00168\ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00170}{ASCIIto\+Segment()}}, \mbox{\hyperlink{l00048}{Seven\+Seg}}, \mbox{\hyperlink{l00030}{TM\+\_\+\+ASCII\+\_\+\+OFFSET}}, \mbox{\hyperlink{l00028}{TM\+\_\+\+DISPLAY\+\_\+\+SIZE}}, and \mbox{\hyperlink{l00032}{TM\+\_\+\+DOT\+\_\+\+MASK\+\_\+\+DEC}}.
+
+
+
+Referenced by \mbox{\hyperlink{l00103}{Display\+Dec\+Num()}}, \mbox{\hyperlink{l00122}{Display\+Dec\+Num\+Nibble()}}, and \mbox{\hyperlink{l00081}{Display\+Hex\+Num()}}.
+
+\mbox{\Hypertarget{class_t_m1638plus___model2_a738f18d171b30a0a2d93a34b93084cab}\label{class_t_m1638plus___model2_a738f18d171b30a0a2d93a34b93084cab}} 
+\index{TM1638plus\_Model2@{TM1638plus\_Model2}!ReadKey16@{ReadKey16}}
+\index{ReadKey16@{ReadKey16}!TM1638plus\_Model2@{TM1638plus\_Model2}}
+\doxysubsubsection{\texorpdfstring{ReadKey16()}{ReadKey16()}}
+{\footnotesize\ttfamily unsigned char Read\+Key16 (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00182\ \{}
+\DoxyCodeLine{00183\ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ c[4],\ i,\ key\_value=0;}
+\DoxyCodeLine{00184\ \ \ digitalWrite(\mbox{\hyperlink{class_t_m1638plus___model2_abd442cf8a1b379c82bc82acbbd3faa5a}{\_STROBE\_IO}},\ LOW);}
+\DoxyCodeLine{00185\ \ \ \mbox{\hyperlink{class_t_m1638plus___model2_a5a18286d5a8b9cb3a7149987b595fc03}{sendData}}(\mbox{\hyperlink{_t_m1638plus__common_8h_a1b9917a7b37d88bb6d76397b4467b4f9}{TM\_BUTTONS\_MODE}});}
+\DoxyCodeLine{00186\ \ \ pinMode(\mbox{\hyperlink{class_t_m1638plus___model2_a0dbbebd07a64be4c8f93e745e82a87cb}{\_DATA\_IO}},\ INPUT);}
+\DoxyCodeLine{00187\ \ \ \textcolor{keywordflow}{for}\ (i\ =\ 0;\ i\ <\ 4;\ i++)}
+\DoxyCodeLine{00188\ \ \ \{}
+\DoxyCodeLine{00189\ \ \ \ \ \ }
+\DoxyCodeLine{00190\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \ (\mbox{\hyperlink{class_t_m1638plus___model2_ade44ddbf1dadc740bc6330dbe54620fb}{\_HIGH\_FREQ}}\ ==\ \textcolor{keyword}{false})}
+\DoxyCodeLine{00191\ \ \ \ \ \ \ \ \ c[i]\ =\ shiftIn(\mbox{\hyperlink{class_t_m1638plus___model2_a0dbbebd07a64be4c8f93e745e82a87cb}{\_DATA\_IO}},\ \mbox{\hyperlink{class_t_m1638plus___model2_af216e300635be0fcc86497fa60f312e9}{\_CLOCK\_IO}},\ LSBFIRST);}
+\DoxyCodeLine{00192\ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00193\ \ \ \ \ \ \ \ \ c[i]\ =\ \ \mbox{\hyperlink{class_t_m1638plus___model2_ac311b1ea85b33bd42e67bd5409c1ef0e}{TM\_common}}.\mbox{\hyperlink{class_t_m1638plus__common_ac4730a4de4f7023d27ba1acfe874131c}{HighFreqshiftin}}(\mbox{\hyperlink{class_t_m1638plus___model2_a0dbbebd07a64be4c8f93e745e82a87cb}{\_DATA\_IO}},\ \mbox{\hyperlink{class_t_m1638plus___model2_af216e300635be0fcc86497fa60f312e9}{\_CLOCK\_IO}},\ LSBFIRST);}
+\DoxyCodeLine{00194\ \ \ \ \ \ }
+\DoxyCodeLine{00195\ \ \ \ \ \ \textcolor{keywordflow}{if}\ (c[i]\ ==\ 0x04)\ key\_value\ =\ 1\ +\ (2*i);\ \textcolor{comment}{//00000100\ 4\ 0x04}}
+\DoxyCodeLine{00196\ \ \ \ \ \ \textcolor{keywordflow}{if}\ (c[i]\ ==\ 0x40)\ key\_value\ =\ 2\ +\ (2*i);\ \textcolor{comment}{//01000000\ 64\ 0x40}}
+\DoxyCodeLine{00197\ \ \ \ \ \ \textcolor{keywordflow}{if}\ (c[i]\ ==\ 0x02)\ key\_value\ =\ 9\ +\ (2*i);\ \textcolor{comment}{//00000010\ 2\ 0x02}}
+\DoxyCodeLine{00198\ \ \ \ \ \ \textcolor{keywordflow}{if}\ (c[i]\ ==\ 0x20)\ key\_value\ =\ 10\ +\ (2*i);\ \ \textcolor{comment}{//00100000\ 32\ 0x20}}
+\DoxyCodeLine{00199\ \ \ \}}
+\DoxyCodeLine{00200\ \ \ pinMode(\mbox{\hyperlink{class_t_m1638plus___model2_a0dbbebd07a64be4c8f93e745e82a87cb}{\_DATA\_IO}},\ OUTPUT);}
+\DoxyCodeLine{00201\ \ \ digitalWrite(\mbox{\hyperlink{class_t_m1638plus___model2_abd442cf8a1b379c82bc82acbbd3faa5a}{\_STROBE\_IO}},\ HIGH);\ }
+\DoxyCodeLine{00202\ \ \ \textcolor{keywordflow}{return}\ (key\_value);}
+\DoxyCodeLine{00203\ \ \ \textcolor{comment}{//\ Data\ matrix\ for\ read\ key\_value.\ }}
+\DoxyCodeLine{00204\ \ \ \textcolor{comment}{//\ c3\ 0110\ 0110\ \ c2\ 0110\ 0110\ \ c1\ 0110\ 0110\ \ c0\ 0110\ 0110\ :bytes\ read\ }}
+\DoxyCodeLine{00205\ \ \ \textcolor{comment}{//\ \ \ \ 8,16\ 7,15\ \ \ \ \ 6,14\ 5,13\ \ \ \ \ 4,12\ 3,11\ \ \ \ \ 2,10\ \ 1,9\ :button\ value}}
+\DoxyCodeLine{00206\ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00125}{\+\_\+\+CLOCK\+\_\+\+IO}}, \mbox{\hyperlink{l00124}{\+\_\+\+DATA\+\_\+\+IO}}, \mbox{\hyperlink{l00128}{\+\_\+\+HIGH\+\_\+\+FREQ}}, \mbox{\hyperlink{l00123}{\+\_\+\+STROBE\+\_\+\+IO}}, \mbox{\hyperlink{l00018}{TM1638plus\+\_\+common\+::\+High\+Freqshiftin()}}, \mbox{\hyperlink{l00037}{send\+Data()}}, \mbox{\hyperlink{l00020}{TM\+\_\+\+BUTTONS\+\_\+\+MODE}}, and \mbox{\hyperlink{l00129}{TM\+\_\+common}}.
+
+\mbox{\Hypertarget{class_t_m1638plus___model2_a1dc4f4b7eddc16ea7e52c56be9f22164}\label{class_t_m1638plus___model2_a1dc4f4b7eddc16ea7e52c56be9f22164}} 
+\index{TM1638plus\_Model2@{TM1638plus\_Model2}!ReadKey16Two@{ReadKey16Two}}
+\index{ReadKey16Two@{ReadKey16Two}!TM1638plus\_Model2@{TM1638plus\_Model2}}
+\doxysubsubsection{\texorpdfstring{ReadKey16Two()}{ReadKey16Two()}}
+{\footnotesize\ttfamily uint16\+\_\+t Read\+Key16\+Two (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00209\ \{}
+\DoxyCodeLine{00210\ \ \ \ \ }
+\DoxyCodeLine{00211\ \ \ uint16\_t\ key\_value\ =\ 0;}
+\DoxyCodeLine{00212\ \ \ \mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t}}\ Datain\ ,i\ =\ 0;}
+\DoxyCodeLine{00213\ \ \ digitalWrite(\mbox{\hyperlink{class_t_m1638plus___model2_abd442cf8a1b379c82bc82acbbd3faa5a}{\_STROBE\_IO}},\ LOW);}
+\DoxyCodeLine{00214\ \ \ \mbox{\hyperlink{class_t_m1638plus___model2_a5a18286d5a8b9cb3a7149987b595fc03}{sendData}}(\mbox{\hyperlink{_t_m1638plus__common_8h_a1b9917a7b37d88bb6d76397b4467b4f9}{TM\_BUTTONS\_MODE}});}
+\DoxyCodeLine{00215\ \ \ pinMode(\mbox{\hyperlink{class_t_m1638plus___model2_a0dbbebd07a64be4c8f93e745e82a87cb}{\_DATA\_IO}},\ INPUT);}
+\DoxyCodeLine{00216\ \ \ \textcolor{keywordflow}{for}\ (i\ =\ 0;\ i\ <\ 4;\ i++)}
+\DoxyCodeLine{00217\ \ \ \{}
+\DoxyCodeLine{00218\ \ \ \ \ \ }
+\DoxyCodeLine{00219\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \ (\mbox{\hyperlink{class_t_m1638plus___model2_ade44ddbf1dadc740bc6330dbe54620fb}{\_HIGH\_FREQ}}\ ==\ \textcolor{keyword}{false})}
+\DoxyCodeLine{00220\ \ \ \ \ \ \ \ \ Datain\ =\ shiftIn(\mbox{\hyperlink{class_t_m1638plus___model2_a0dbbebd07a64be4c8f93e745e82a87cb}{\_DATA\_IO}},\ \mbox{\hyperlink{class_t_m1638plus___model2_af216e300635be0fcc86497fa60f312e9}{\_CLOCK\_IO}},\ LSBFIRST);}
+\DoxyCodeLine{00221\ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00222\ \ \ \ \ \ \ \ \ Datain\ =\ \ \mbox{\hyperlink{class_t_m1638plus___model2_ac311b1ea85b33bd42e67bd5409c1ef0e}{TM\_common}}.\mbox{\hyperlink{class_t_m1638plus__common_ac4730a4de4f7023d27ba1acfe874131c}{HighFreqshiftin}}(\mbox{\hyperlink{class_t_m1638plus___model2_a0dbbebd07a64be4c8f93e745e82a87cb}{\_DATA\_IO}},\ \mbox{\hyperlink{class_t_m1638plus___model2_af216e300635be0fcc86497fa60f312e9}{\_CLOCK\_IO}},\ LSBFIRST);}
+\DoxyCodeLine{00223\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00224\ \ \ \ \ \ \ \textcolor{comment}{//\ turn\ Datain\ ABCDEFGI\ =\ 0BC00FG0\ \ into\ 00CG00BF\ see\ matrix\ below}}
+\DoxyCodeLine{00225\ \ \ \ \ \ \ Datain\ =\ (((Datain\ \&\ 0x40)\ >>\ 3\ |\ (Datain\ \&\ 0x04))\ >>\ 2)\ |\ (Datain\ \&\ 0x20)\ |\ (Datain\ \&\ 0x02)\ <<\ 3;}
+\DoxyCodeLine{00226\ \ \ \ \ \ \textcolor{comment}{//\ i\ =\ 0\ Datain\ =\ \ 00,10,9,0021\ //\ i\ =\ 1\ Datain\ \ =\ 00,12,11,0043}}
+\DoxyCodeLine{00227\ \ \ \ \ \ \textcolor{comment}{//\ i\ =\ 2\ Datain\ =\ \ 00\ ,14,13,0065\ //\ i\ =\ 3\ Datain\ =\ \ 00,16,15,0087}}
+\DoxyCodeLine{00228\ \ \ \ \ \ \textcolor{comment}{//\ key\_value\ =\ \ 16,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1.\ }}
+\DoxyCodeLine{00229\ \ \ \ \ \ \ key\_value\ |=\ ((Datain\ \&\ 0x000F)\ <<\ (2*i))\ |\ (((Datain\ \&\ 0x00F0)\ <<\ 4)\ <<\ (2*i));}
+\DoxyCodeLine{00230\ \ \ \}}
+\DoxyCodeLine{00231\ \ \ pinMode(\mbox{\hyperlink{class_t_m1638plus___model2_a0dbbebd07a64be4c8f93e745e82a87cb}{\_DATA\_IO}},\ OUTPUT);}
+\DoxyCodeLine{00232\ \ \ digitalWrite(\mbox{\hyperlink{class_t_m1638plus___model2_abd442cf8a1b379c82bc82acbbd3faa5a}{\_STROBE\_IO}},\ HIGH);}
+\DoxyCodeLine{00233\ \ \ \ }
+\DoxyCodeLine{00234\ \ \ \textcolor{keywordflow}{return}\ (key\_value);}
+\DoxyCodeLine{00235\ \ \ }
+\DoxyCodeLine{00236\ \ \ \textcolor{comment}{//\ \ Data\ matrix\ for\ read\ key\_value.\ c\ =\ datain}}
+\DoxyCodeLine{00237\ \ \ \textcolor{comment}{//\ \ \ c3\ 0110\ 0110\ \ c2\ 0110\ 0110\ \ c1\ 0110\ 0110\ \ c0\ 0110\ 0110\ :bytes\ read\ }}
+\DoxyCodeLine{00238\ \ \ \textcolor{comment}{//\ \ \ \ 8,16\ 7,15\ \ \ \ \ 6,14\ 5,13\ \ \ \ \ 4,12\ 3,11\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 2,10\ \ 1,9\ :button\ value}}
+\DoxyCodeLine{00239\ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00125}{\+\_\+\+CLOCK\+\_\+\+IO}}, \mbox{\hyperlink{l00124}{\+\_\+\+DATA\+\_\+\+IO}}, \mbox{\hyperlink{l00128}{\+\_\+\+HIGH\+\_\+\+FREQ}}, \mbox{\hyperlink{l00123}{\+\_\+\+STROBE\+\_\+\+IO}}, \mbox{\hyperlink{l00018}{TM1638plus\+\_\+common\+::\+High\+Freqshiftin()}}, \mbox{\hyperlink{l00037}{send\+Data()}}, \mbox{\hyperlink{l00020}{TM\+\_\+\+BUTTONS\+\_\+\+MODE}}, and \mbox{\hyperlink{l00129}{TM\+\_\+common}}.
+
+\mbox{\Hypertarget{class_t_m1638plus___model2_a3aea9deb2a0bfea9ff05a898f4822e31}\label{class_t_m1638plus___model2_a3aea9deb2a0bfea9ff05a898f4822e31}} 
+\index{TM1638plus\_Model2@{TM1638plus\_Model2}!reset@{reset}}
+\index{reset@{reset}!TM1638plus\_Model2@{TM1638plus\_Model2}}
+\doxysubsubsection{\texorpdfstring{reset()}{reset()}}
+{\footnotesize\ttfamily void reset (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00046\ \ \ \mbox{\hyperlink{class_t_m1638plus___model2_a15513e52f3b72429bec4cdccc995d25e}{sendCommand}}(\mbox{\hyperlink{_t_m1638plus__common_8h_ab276d358c766eee529947956e11704d1}{TM\_WRITE\_INC}});\ \textcolor{comment}{//\ set\ auto\ increment\ mode}}
+\DoxyCodeLine{00047\ \ \ digitalWrite(\mbox{\hyperlink{class_t_m1638plus___model2_abd442cf8a1b379c82bc82acbbd3faa5a}{\_STROBE\_IO}},\ LOW);}
+\DoxyCodeLine{00048\ \ \ \mbox{\hyperlink{class_t_m1638plus___model2_a5a18286d5a8b9cb3a7149987b595fc03}{sendData}}(\mbox{\hyperlink{_t_m1638plus__common_8h_a3f0be03700c29d00cad35216c9907d65}{TM\_SEG\_ADR}});\ \ \ \textcolor{comment}{//\ set\ starting\ address\ to\ 0}}
+\DoxyCodeLine{00049\ \ \ \textcolor{keywordflow}{for}\ (\mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\_t}}\ position\ =\ 0;\ position\ <\ 16;\ position++)}
+\DoxyCodeLine{00050\ \ \ \{}
+\DoxyCodeLine{00051\ \ \ \ \ \mbox{\hyperlink{class_t_m1638plus___model2_a5a18286d5a8b9cb3a7149987b595fc03}{sendData}}(0x00);\ \textcolor{comment}{//clear\ all\ segments}}
+\DoxyCodeLine{00052\ \ \ \}}
+\DoxyCodeLine{00053\ \ \ \ digitalWrite(\mbox{\hyperlink{class_t_m1638plus___model2_abd442cf8a1b379c82bc82acbbd3faa5a}{\_STROBE\_IO}},\ HIGH);}
+\DoxyCodeLine{00054\ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00123}{\+\_\+\+STROBE\+\_\+\+IO}}, \mbox{\hyperlink{l00030}{send\+Command()}}, \mbox{\hyperlink{l00037}{send\+Data()}}, \mbox{\hyperlink{l00023}{TM\+\_\+\+SEG\+\_\+\+ADR}}, and \mbox{\hyperlink{l00022}{TM\+\_\+\+WRITE\+\_\+\+INC}}.
+
+
+
+Referenced by \mbox{\hyperlink{l00020}{display\+Begin()}}.
+
+\mbox{\Hypertarget{class_t_m1638plus___model2_a15513e52f3b72429bec4cdccc995d25e}\label{class_t_m1638plus___model2_a15513e52f3b72429bec4cdccc995d25e}} 
+\index{TM1638plus\_Model2@{TM1638plus\_Model2}!sendCommand@{sendCommand}}
+\index{sendCommand@{sendCommand}!TM1638plus\_Model2@{TM1638plus\_Model2}}
+\doxysubsubsection{\texorpdfstring{sendCommand()}{sendCommand()}}
+{\footnotesize\ttfamily void send\+Command (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}}}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00031\ \{}
+\DoxyCodeLine{00032\ \ \ digitalWrite(\mbox{\hyperlink{class_t_m1638plus___model2_abd442cf8a1b379c82bc82acbbd3faa5a}{\_STROBE\_IO}},\ LOW);}
+\DoxyCodeLine{00033\ \ \ \mbox{\hyperlink{class_t_m1638plus___model2_a5a18286d5a8b9cb3a7149987b595fc03}{sendData}}(value);}
+\DoxyCodeLine{00034\ \ \ digitalWrite(\mbox{\hyperlink{class_t_m1638plus___model2_abd442cf8a1b379c82bc82acbbd3faa5a}{\_STROBE\_IO}},\ HIGH);}
+\DoxyCodeLine{00035\ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00123}{\+\_\+\+STROBE\+\_\+\+IO}}, and \mbox{\hyperlink{l00037}{send\+Data()}}.
+
+
+
+Referenced by \mbox{\hyperlink{l00074}{brightness()}}, \mbox{\hyperlink{l00020}{display\+Begin()}}, \mbox{\hyperlink{l00056}{Display\+Segments()}}, and \mbox{\hyperlink{l00045}{reset()}}.
+
+\mbox{\Hypertarget{class_t_m1638plus___model2_a5a18286d5a8b9cb3a7149987b595fc03}\label{class_t_m1638plus___model2_a5a18286d5a8b9cb3a7149987b595fc03}} 
+\index{TM1638plus\_Model2@{TM1638plus\_Model2}!sendData@{sendData}}
+\index{sendData@{sendData}!TM1638plus\_Model2@{TM1638plus\_Model2}}
+\doxysubsubsection{\texorpdfstring{sendData()}{sendData()}}
+{\footnotesize\ttfamily void send\+Data (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}}}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00038\ \{}
+\DoxyCodeLine{00039\ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_t_m1638plus___model2_ade44ddbf1dadc740bc6330dbe54620fb}{\_HIGH\_FREQ}}\ ==\ \textcolor{keyword}{false})}
+\DoxyCodeLine{00040\ \ \ \ \ shiftOut(\mbox{\hyperlink{class_t_m1638plus___model2_a0dbbebd07a64be4c8f93e745e82a87cb}{\_DATA\_IO}},\ \mbox{\hyperlink{class_t_m1638plus___model2_af216e300635be0fcc86497fa60f312e9}{\_CLOCK\_IO}},\ LSBFIRST,\ data);}
+\DoxyCodeLine{00041\ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00042\ \ \ \ \ \ \mbox{\hyperlink{class_t_m1638plus___model2_ac311b1ea85b33bd42e67bd5409c1ef0e}{TM\_common}}.\mbox{\hyperlink{class_t_m1638plus__common_a29b06cf808b08fc4f226d1b73fe48dcf}{HighFreqshiftOut}}(\mbox{\hyperlink{class_t_m1638plus___model2_a0dbbebd07a64be4c8f93e745e82a87cb}{\_DATA\_IO}},\ \mbox{\hyperlink{class_t_m1638plus___model2_af216e300635be0fcc86497fa60f312e9}{\_CLOCK\_IO}},\ LSBFIRST,\ data);}
+\DoxyCodeLine{00043\ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00125}{\+\_\+\+CLOCK\+\_\+\+IO}}, \mbox{\hyperlink{l00124}{\+\_\+\+DATA\+\_\+\+IO}}, \mbox{\hyperlink{l00128}{\+\_\+\+HIGH\+\_\+\+FREQ}}, \mbox{\hyperlink{l00039}{TM1638plus\+\_\+common\+::\+High\+Freqshift\+Out()}}, and \mbox{\hyperlink{l00129}{TM\+\_\+common}}.
+
+
+
+Referenced by \mbox{\hyperlink{l00056}{Display\+Segments()}}, \mbox{\hyperlink{l00181}{Read\+Key16()}}, \mbox{\hyperlink{l00208}{Read\+Key16\+Two()}}, \mbox{\hyperlink{l00045}{reset()}}, and \mbox{\hyperlink{l00030}{send\+Command()}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_t_m1638plus___model2_af216e300635be0fcc86497fa60f312e9}\label{class_t_m1638plus___model2_af216e300635be0fcc86497fa60f312e9}} 
+\index{TM1638plus\_Model2@{TM1638plus\_Model2}!\_CLOCK\_IO@{\_CLOCK\_IO}}
+\index{\_CLOCK\_IO@{\_CLOCK\_IO}!TM1638plus\_Model2@{TM1638plus\_Model2}}
+\doxysubsubsection{\texorpdfstring{\_CLOCK\_IO}{\_CLOCK\_IO}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}} \+\_\+\+CLOCK\+\_\+\+IO\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \mbox{\hyperlink{l00012}{TM1638plus\+\_\+\+Model2()}}, \mbox{\hyperlink{l00020}{display\+Begin()}}, \mbox{\hyperlink{l00181}{Read\+Key16()}}, \mbox{\hyperlink{l00208}{Read\+Key16\+Two()}}, and \mbox{\hyperlink{l00037}{send\+Data()}}.
+
+\mbox{\Hypertarget{class_t_m1638plus___model2_a0dbbebd07a64be4c8f93e745e82a87cb}\label{class_t_m1638plus___model2_a0dbbebd07a64be4c8f93e745e82a87cb}} 
+\index{TM1638plus\_Model2@{TM1638plus\_Model2}!\_DATA\_IO@{\_DATA\_IO}}
+\index{\_DATA\_IO@{\_DATA\_IO}!TM1638plus\_Model2@{TM1638plus\_Model2}}
+\doxysubsubsection{\texorpdfstring{\_DATA\_IO}{\_DATA\_IO}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}} \+\_\+\+DATA\+\_\+\+IO\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \mbox{\hyperlink{l00012}{TM1638plus\+\_\+\+Model2()}}, \mbox{\hyperlink{l00020}{display\+Begin()}}, \mbox{\hyperlink{l00181}{Read\+Key16()}}, \mbox{\hyperlink{l00208}{Read\+Key16\+Two()}}, and \mbox{\hyperlink{l00037}{send\+Data()}}.
+
+\mbox{\Hypertarget{class_t_m1638plus___model2_ade44ddbf1dadc740bc6330dbe54620fb}\label{class_t_m1638plus___model2_ade44ddbf1dadc740bc6330dbe54620fb}} 
+\index{TM1638plus\_Model2@{TM1638plus\_Model2}!\_HIGH\_FREQ@{\_HIGH\_FREQ}}
+\index{\_HIGH\_FREQ@{\_HIGH\_FREQ}!TM1638plus\_Model2@{TM1638plus\_Model2}}
+\doxysubsubsection{\texorpdfstring{\_HIGH\_FREQ}{\_HIGH\_FREQ}}
+{\footnotesize\ttfamily bool \+\_\+\+HIGH\+\_\+\+FREQ = false\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \mbox{\hyperlink{l00012}{TM1638plus\+\_\+\+Model2()}}, \mbox{\hyperlink{l00181}{Read\+Key16()}}, \mbox{\hyperlink{l00208}{Read\+Key16\+Two()}}, and \mbox{\hyperlink{l00037}{send\+Data()}}.
+
+\mbox{\Hypertarget{class_t_m1638plus___model2_abd442cf8a1b379c82bc82acbbd3faa5a}\label{class_t_m1638plus___model2_abd442cf8a1b379c82bc82acbbd3faa5a}} 
+\index{TM1638plus\_Model2@{TM1638plus\_Model2}!\_STROBE\_IO@{\_STROBE\_IO}}
+\index{\_STROBE\_IO@{\_STROBE\_IO}!TM1638plus\_Model2@{TM1638plus\_Model2}}
+\doxysubsubsection{\texorpdfstring{\_STROBE\_IO}{\_STROBE\_IO}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_my_date_8h_aba7bc1797add20fe3efdf37ced1182c5}{uint8\+\_\+t}} \+\_\+\+STROBE\+\_\+\+IO\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \mbox{\hyperlink{l00012}{TM1638plus\+\_\+\+Model2()}}, \mbox{\hyperlink{l00020}{display\+Begin()}}, \mbox{\hyperlink{l00056}{Display\+Segments()}}, \mbox{\hyperlink{l00181}{Read\+Key16()}}, \mbox{\hyperlink{l00208}{Read\+Key16\+Two()}}, \mbox{\hyperlink{l00045}{reset()}}, and \mbox{\hyperlink{l00030}{send\+Command()}}.
+
+\mbox{\Hypertarget{class_t_m1638plus___model2_a6108ed9636878aa79b7eaf46ee536076}\label{class_t_m1638plus___model2_a6108ed9636878aa79b7eaf46ee536076}} 
+\index{TM1638plus\_Model2@{TM1638plus\_Model2}!\_SWAP\_NIBBLES@{\_SWAP\_NIBBLES}}
+\index{\_SWAP\_NIBBLES@{\_SWAP\_NIBBLES}!TM1638plus\_Model2@{TM1638plus\_Model2}}
+\doxysubsubsection{\texorpdfstring{\_SWAP\_NIBBLES}{\_SWAP\_NIBBLES}}
+{\footnotesize\ttfamily bool \+\_\+\+SWAP\+\_\+\+NIBBLES = false\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \mbox{\hyperlink{l00012}{TM1638plus\+\_\+\+Model2()}}, and \mbox{\hyperlink{l00056}{Display\+Segments()}}.
+
+\mbox{\Hypertarget{class_t_m1638plus___model2_ac311b1ea85b33bd42e67bd5409c1ef0e}\label{class_t_m1638plus___model2_ac311b1ea85b33bd42e67bd5409c1ef0e}} 
+\index{TM1638plus\_Model2@{TM1638plus\_Model2}!TM\_common@{TM\_common}}
+\index{TM\_common@{TM\_common}!TM1638plus\_Model2@{TM1638plus\_Model2}}
+\doxysubsubsection{\texorpdfstring{TM\_common}{TM\_common}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_t_m1638plus__common}{TM1638plus\+\_\+common}} TM\+\_\+common\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \mbox{\hyperlink{l00181}{Read\+Key16()}}, \mbox{\hyperlink{l00208}{Read\+Key16\+Two()}}, and \mbox{\hyperlink{l00037}{send\+Data()}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+extra/\+TM1638plus-\/master/\+TM1638plus-\/master/src/\mbox{\hyperlink{_t_m1638plus___model2_8h}{TM1638plus\+\_\+\+Model2.\+h}}\item 
+extra/\+TM1638plus-\/master/\+TM1638plus-\/master/src/\mbox{\hyperlink{_t_m1638plus___model2_8cpp}{TM1638plus\+\_\+\+Model2.\+cpp}}\end{DoxyCompactItemize}

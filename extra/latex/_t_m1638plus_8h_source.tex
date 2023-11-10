@@ -1,0 +1,118 @@
+\hypertarget{_t_m1638plus_8h_source}{}\doxysection{TM1638plus.\+h}
+\label{_t_m1638plus_8h_source}\index{extra/TM1638plus-\/master/TM1638plus-\/master/src/TM1638plus.h@{extra/TM1638plus-\/master/TM1638plus-\/master/src/TM1638plus.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{*\ Project\ Name:\ TM1638plus\ }}
+\DoxyCodeLine{00003\ \textcolor{comment}{*\ File:\ TM1638plus.h}}
+\DoxyCodeLine{00004\ \textcolor{comment}{*\ Description:\ TM1638plus.h\ header\ file\ arduino\ library\ for\ TM1638\ module(LED\ \&\ KEY).\ Model\ 1\ \&\ Model\ 3}}
+\DoxyCodeLine{00005\ \textcolor{comment}{*\ Author:\ Gavin\ Lyons.}}
+\DoxyCodeLine{00006\ \textcolor{comment}{*\ Created\ May\ 2019}}
+\DoxyCodeLine{00007\ \textcolor{comment}{*\ URL:\ https://github.com/gavinlyonsrepo/TM1638plus}}
+\DoxyCodeLine{00008\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#ifndef\ TM1638PLUS\_H}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#define\ TM1638PLUS\_H}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#if\ (ARDUINO\ >=100)}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\ \ \#include\ "{}Arduino.h"{}}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\ \ \#include\ "{}WProgram.h"{}}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#include\ "{}TM1638plus\_common.h"{}}}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_t_m1638plus}{TM1638plus}}\ \ \{}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{comment}{//\ Constructor\ }}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{comment}{//Parameters\ }}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{comment}{//\ 1.\ strobe\ =\ GPIO\ STB\ pin}}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{comment}{//\ 2.\ clock\ =\ GPIO\ CLK\ \ pin}}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{comment}{//\ 3.\ data\ =\ GPIO\ DIO\ pin}}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{comment}{//\ 4.\ higfreq\ Changes\ the\ value\ of\ parameter\ \_HIGH\_FREQ\ which\ is\ default\ false}}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{comment}{//\ This\ is\ used\ when\ running\ high\ freq\ MCU\ CPU\ (\string~>100Mhz)\ because\ of\ issues\ with\ button\ function.}}
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{comment}{//\ Pass\ true\ when\ running\ high\ freq\ MCU\ CPU\ (\string~>100Mhz).}}
+\DoxyCodeLine{00034\ \ \ \ \ \mbox{\hyperlink{class_t_m1638plus}{TM1638plus}}(uint8\_t\ strobe,\ uint8\_t\ clock,\ uint8\_t\ data,\ \textcolor{keywordtype}{bool}\ highfreq\ =\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00035\ \ \ \ \ }
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{comment}{//\ Methods}}
+\DoxyCodeLine{00037\ \ \ \ \ }
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{void}\ displayBegin();\ \ \ \ \ \textcolor{comment}{//\ Begin\ method\ ,\ sets\ pinmodes\ ,\ Call\ in\ setup}}
+\DoxyCodeLine{00039\ \ \ \ \ }
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordtype}{void}\ reset(\textcolor{keywordtype}{void});\ \ \textcolor{comment}{//\ Reset\ /\ Clear\ module\ }}
+\DoxyCodeLine{00041\ \ \ \ \ }
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{comment}{//Sets\ the\ brightness\ level\ on\ a\ scale\ of\ brightness\ =\ 0\ to\ 7.}}
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{comment}{//0\ is\ not\ turned\ off,\ it's\ just\ the\ lowest\ brightness.}}
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{comment}{//If\ user\ wishes\ to\ change\ the\ default\ brightness\ at\ start-\/up\ change.}}
+\DoxyCodeLine{00045\ \ \ \ \ \ \textcolor{comment}{//The\ DEFAULT\_BRIGHTNESS\ define\ in\ header\ file.}}
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keywordtype}{void}\ brightness(uint8\_t\ brightness);}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{comment}{//Read\ buttons\ returns\ a\ byte\ with\ value\ of\ buttons\ 1-\/8\ b7b6b5b4b3b2b1b0}}
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{comment}{//\ 1\ pressed,\ zero\ not\ pressed.\ }}
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{comment}{//User\ may\ have\ to\ debounce\ buttons\ depending\ on\ application.}}
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{comment}{//See\ [URL\ LINK](https://github.com/gavinlyonsrepo/Arduino\_Clock\_3)\ }}
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{comment}{//\ for\ de-\/bonce\ example.}}
+\DoxyCodeLine{00053\ \ \ \ \ uint8\_t\ readButtons(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{comment}{//\ Send\ Text\ to\ Seven\ segments,\ passed\ char\ array\ pointer}}
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{comment}{//\ dots\ are\ removed\ from\ string\ and\ dot\ on\ preceding\ digit\ switched\ on}}
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{comment}{//\ "{}abc.def"{}\ will\ be\ shown\ as\ "{}abcdef"{}\ with\ c\ decimal\ point\ turned\ on.}}
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keywordtype}{void}\ displayText(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *text);}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{comment}{//\ Send\ ASCII\ value\ to\ seven\ segment,\ pass\ position\ 0-\/7\ and\ ASCII\ value\ byte}}
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordtype}{void}\ displayASCII(uint8\_t\ position,\ uint8\_t\ ascii);}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{comment}{//\ Same\ as\ displayASCII\ function\ but\ turns\ on\ dot/decimal\ point\ \ as\ well\ }}
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keywordtype}{void}\ displayASCIIwDot(uint8\_t\ position,\ uint8\_t\ ascii)\ ;}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{comment}{//\ Send\ HEX\ value\ to\ seven\ segment,\ pass\ position\ 0-\/7\ and\ hex\ value(DEC)\ 0-\/15}}
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keywordtype}{void}\ displayHex(uint8\_t\ position,\ uint8\_t\ hex);}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{comment}{//\ Send\ seven\ segment\ value\ to\ seven\ segment}}
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{comment}{//\ \ pass\ position\ 0-\/7\ byte\ of\ data\ corresponding\ to\ segments\ (dp)gfedcba}}
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{comment}{//\ i.e\ 0b01000001\ will\ set\ g\ and\ a\ on.\ }}
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keywordtype}{void}\ display7Seg(uint8\_t\ position,\ uint8\_t\ value);}
+\DoxyCodeLine{00073\ \ \ \ \ }
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{comment}{//\ Display\ an\ integer\ and\ leading\ zeros\ optional}}
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{comment}{//\ Param\ 1\ ::\ integer\ to\ display\ 2\string^32\ }}
+\DoxyCodeLine{00076\ \ \ \ \ \textcolor{comment}{//\ Param\ 2\ ::\ bool\ leading\ zeros\ ,\ true\ on\ ,\ false\ off}}
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{comment}{//\ Param\ 3\ ::\ enum\ text\ alignment\ ,\ left\ or\ right\ alignment}}
+\DoxyCodeLine{00078\ \ \ \ \ \textcolor{keywordtype}{void}\ displayIntNum(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ number,\ \textcolor{keywordtype}{boolean}\ leadingZeros\ =\ \textcolor{keyword}{true},\ AlignTextType\_e\ =\ TMAlignTextLeft);}
+\DoxyCodeLine{00079\ \ \ \ \ }
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{comment}{//\ Divides\ the\ display\ into\ two\ nibbles\ and\ displays\ a\ Decimal\ number\ in\ each.}}
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{comment}{//\ takes\ in\ two\ numbers\ 0-\/9999\ for\ each\ nibble\ ,}}
+\DoxyCodeLine{00082\ \ \ \ \ \textcolor{comment}{//\ and\ leading\ zeros\ optional}}
+\DoxyCodeLine{00083\ \ \ \ \ \textcolor{comment}{//\ Param\ 1\ ::\ upper\ nibble\ integer\ 2\string^16\ }}
+\DoxyCodeLine{00084\ \ \ \ \ \textcolor{comment}{//\ Param\ 2\ ::\ lower\ nibble\ integer\ 2\string^16\ }}
+\DoxyCodeLine{00085\ \ \ \ \ \textcolor{comment}{//\ Param\ 3\ ::\ bool\ leading\ zeros\ ,\ true\ on\ ,\ false\ off}}
+\DoxyCodeLine{00086\ \ \ \ \ \textcolor{comment}{//\ Param\ 4\ ::\ enum\ text\ alignment\ ,\ left\ or\ right\ alignment}}
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keywordtype}{void}\ DisplayDecNumNibble(uint16\_t\ numberUpper,\ uint16\_t\ numberLower,\ \textcolor{keywordtype}{boolean}\ leadingZeros\ =\ \textcolor{keyword}{true},\ AlignTextType\_e\ =\ TMAlignTextLeft);}
+\DoxyCodeLine{00088\ \ \ \ \ }
+\DoxyCodeLine{00089\ \ \ \ \ \textcolor{comment}{//\ Set\ the\ LEDs.\ passed\ one\ \ 16bit\ integer.}}
+\DoxyCodeLine{00090\ \ \ \ \ \textcolor{comment}{//\ MODEL\ 3:}}
+\DoxyCodeLine{00091\ \ \ \ \ \textcolor{comment}{//MSB\ byte\ for\ the\ green\ LEDs,\ LS\ byte\ for\ the\ red\ LEDs\ (0xgreenred)\ }}
+\DoxyCodeLine{00092\ \ \ \ \ \textcolor{comment}{//ie.\ 0xE007\ \ \ 1110\ 0000\ 0000\ 0111\ \ \ results\ in\ L8-\/L0\ \ GGGX\ XRRR,\ NOTE\ L8\ is\ RHS\ on\ display}}
+\DoxyCodeLine{00093\ \ \ \ \ \textcolor{comment}{//\ MODEL\ 1:}}
+\DoxyCodeLine{00094\ \ \ \ \ \textcolor{comment}{//\ MSB\ byte\ 1\ for\ \ red\ LED\ ,\ LSB\ byte\ n/a\ set\ to\ 0x00\ (0xleds,\ 0xXX)}}
+\DoxyCodeLine{00095\ \ \ \ \ \textcolor{comment}{//i.e\ 0xF100\ \ 1111\ 0000\ L8-\/L0\ RRRRXXX0\ NOTE\ \ L8\ is\ RHS\ on\ display}}
+\DoxyCodeLine{00096\ \ \ \ \ \textcolor{keywordtype}{void}\ setLEDs(uint16\_t\ greenred);}
+\DoxyCodeLine{00097\ \ }
+\DoxyCodeLine{00098\ \ \ \ \ \textcolor{comment}{//\ Set\ an\ LED,\ pass\ it\ LED\ position\ 0-\/7\ and\ value\ 0\ or\ 1\ ,\ L1-\/L8}}
+\DoxyCodeLine{00099\ \ \ \ \ \textcolor{keywordtype}{void}\ setLED(uint8\_t\ position,\ uint8\_t\ value);}
+\DoxyCodeLine{00100\ \ \ \ \ }
+\DoxyCodeLine{00101\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ uint8\_t\ \_STROBE\_IO;}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ uint8\_t\ \_DATA\_IO;}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ uint8\_t\ \_CLOCK\_IO;}
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ sendCommand(uint8\_t\ value);}
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ sendData(uint8\_t\ \ data);}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \textcolor{comment}{//This\ is\ used\ when\ running\ high\ freq\ CPU\ }}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \_HIGH\_FREQ\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_t_m1638plus__common}{TM1638plus\_common}}\ \ TM\_common;}
+\DoxyCodeLine{00110\ \};}
+\DoxyCodeLine{00111\ }
+\DoxyCodeLine{00112\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

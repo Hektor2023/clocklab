@@ -1,0 +1,190 @@
+\hypertarget{class_o_l_e_d_display_clock_view_handler}{}\doxysection{OLEDDisplay\+Clock\+View\+Handler}
+\label{class_o_l_e_d_display_clock_view_handler}\index{OLEDDisplayClockViewHandler@{OLEDDisplayClockViewHandler}}
+
+
+{\ttfamily \#include \char`\"{}OLEDDisplay\+Clock\+View\+Handler.\+h\char`\"{}}
+
+Inheritance diagram for OLEDDisplay\+Clock\+View\+Handler\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{d9/d4d/class_o_l_e_d_display_clock_view_handler}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_o_l_e_d_display_clock_view_handler_a83001e0ed3192dffc3dec789c4725ac6}{OLEDDisplay\+Clock\+View\+Handler}} (\mbox{\hyperlink{class_time_handler}{Time\+Handler}} $\ast$\mbox{\hyperlink{class_time_handler_a63ad6ab8709672dbcc67dda18383dfe3}{ptr}})
+\item 
+virtual \mbox{\hyperlink{class_o_l_e_d_display_clock_view_handler_ad3613c8bf7df2ecd3d8be1bded0ea0c0}{$\sim$\+OLEDDisplay\+Clock\+View\+Handler}} (void)
+\item 
+virtual const char $\ast$ \mbox{\hyperlink{class_o_l_e_d_display_clock_view_handler_aaf53e0d3de2d6ffb42903578a4c4ec5b}{get\+Class\+Name}} (void)
+\item 
+virtual void \mbox{\hyperlink{class_o_l_e_d_display_clock_view_handler_a9caf3b8852098554173231248ecffc10}{update\+Time}} (\mbox{\hyperlink{class_timestamp}{Timestamp}} \&timestamp)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_time_handler}{Time\+Handler}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_time_handler_a5e0eb1999bca334190f57ce2d633eac8}{Time\+Handler}} (\mbox{\hyperlink{class_time_handler}{Time\+Handler}} $\ast$\mbox{\hyperlink{class_time_handler_a63ad6ab8709672dbcc67dda18383dfe3}{ptr}}=nullptr)
+\item 
+virtual \mbox{\hyperlink{class_time_handler_a196abf140e55a092784a779e78f05a43}{$\sim$\+Time\+Handler}} (void)
+\item 
+virtual void \mbox{\hyperlink{class_time_handler_aa9fe17491ab4c7f708547996a47970d2}{bypass}} (bool \mbox{\hyperlink{class_time_handler_ad11dd77562d80b745b5d3f8bb7d19e8a}{bypass\+Module}})
+\item 
+virtual const char $\ast$ \mbox{\hyperlink{class_time_handler_a9f78e5d51abbc956af40d5c72c6bccf4}{get\+Class\+Name}} (void)=0
+\item 
+virtual bool \mbox{\hyperlink{class_time_handler_afb78175ac039184b6fa7513b44f98055}{is\+Valid\+Time}} (void)
+\item 
+virtual void \mbox{\hyperlink{class_time_handler_a7299a2f6b8eecfce70480cb66276b684}{set\+Valid\+Time}} (bool valid\+Flagg)
+\item 
+virtual void \mbox{\hyperlink{class_time_handler_a9caf3b8852098554173231248ecffc10}{update\+Time}} (\mbox{\hyperlink{class_timestamp}{Timestamp}} \&timestamp)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_o_l_e_d_display_clock_view_handler_a702567d0169f8c143ffa04d1ea8b2c68}{do\+Action}} (void($\ast$fun)(void))
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classlcd__st7567s}{lcd\+\_\+st7567s}} \mbox{\hyperlink{class_o_l_e_d_display_clock_view_handler_acd84c6af3bec950a8686f1ab7d8d96a6}{Lcd}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+\doxysubsubsection*{Protected Attributes inherited from \mbox{\hyperlink{class_time_handler}{Time\+Handler}}}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{class_time_handler_ad11dd77562d80b745b5d3f8bb7d19e8a}{bypass\+Module}}
+\item 
+\mbox{\hyperlink{class_time_handler}{Time\+Handler}} $\ast$ \mbox{\hyperlink{class_time_handler_a63ad6ab8709672dbcc67dda18383dfe3}{ptr}}
+\item 
+bool \mbox{\hyperlink{class_time_handler_aea16ad32369656bd8bbb7871d3eeb5f0}{valid\+Time}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_o_l_e_d_display_clock_view_handler_a83001e0ed3192dffc3dec789c4725ac6}\label{class_o_l_e_d_display_clock_view_handler_a83001e0ed3192dffc3dec789c4725ac6}} 
+\index{OLEDDisplayClockViewHandler@{OLEDDisplayClockViewHandler}!OLEDDisplayClockViewHandler@{OLEDDisplayClockViewHandler}}
+\index{OLEDDisplayClockViewHandler@{OLEDDisplayClockViewHandler}!OLEDDisplayClockViewHandler@{OLEDDisplayClockViewHandler}}
+\doxysubsubsection{\texorpdfstring{OLEDDisplayClockViewHandler()}{OLEDDisplayClockViewHandler()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_o_l_e_d_display_clock_view_handler}{OLEDDisplay\+Clock\+View\+Handler}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_time_handler}{Time\+Handler}} $\ast$}]{ptr }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00022\ \ \ :\mbox{\hyperlink{class_time_handler}{TimeHandler}}(\ \mbox{\hyperlink{class_time_handler_a63ad6ab8709672dbcc67dda18383dfe3}{ptr}}) }
+\DoxyCodeLine{00023\ \{}
+\DoxyCodeLine{00024\ \ \ \mbox{\hyperlink{class_o_l_e_d_display_clock_view_handler_acd84c6af3bec950a8686f1ab7d8d96a6}{Lcd}}.\mbox{\hyperlink{classlcd__st7567s_a1e3b6d38df0786ccf7f938d60e386aae}{Init}}();}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ \mbox{\hyperlink{class_o_l_e_d_display_clock_view_handler_acd84c6af3bec950a8686f1ab7d8d96a6}{Lcd}}.\mbox{\hyperlink{classlcd__st7567s_ac9950592890056a5edd002c4322bc9f7}{Clear}}(\textcolor{keyword}{false});\ }
+\DoxyCodeLine{00027\ \};}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00216}{lcd\+\_\+st7567s\+::\+Clear()}}, \mbox{\hyperlink{l00028}{lcd\+\_\+st7567s\+::\+Init()}}, and \mbox{\hyperlink{l00019}{Lcd}}.
+
+\mbox{\Hypertarget{class_o_l_e_d_display_clock_view_handler_ad3613c8bf7df2ecd3d8be1bded0ea0c0}\label{class_o_l_e_d_display_clock_view_handler_ad3613c8bf7df2ecd3d8be1bded0ea0c0}} 
+\index{OLEDDisplayClockViewHandler@{OLEDDisplayClockViewHandler}!````~OLEDDisplayClockViewHandler@{$\sim$OLEDDisplayClockViewHandler}}
+\index{````~OLEDDisplayClockViewHandler@{$\sim$OLEDDisplayClockViewHandler}!OLEDDisplayClockViewHandler@{OLEDDisplayClockViewHandler}}
+\doxysubsubsection{\texorpdfstring{$\sim$OLEDDisplayClockViewHandler()}{~OLEDDisplayClockViewHandler()}}
+{\footnotesize\ttfamily $\sim$\mbox{\hyperlink{class_o_l_e_d_display_clock_view_handler}{OLEDDisplay\+Clock\+View\+Handler}} (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00030\ \{\};}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_o_l_e_d_display_clock_view_handler_a702567d0169f8c143ffa04d1ea8b2c68}\label{class_o_l_e_d_display_clock_view_handler_a702567d0169f8c143ffa04d1ea8b2c68}} 
+\index{OLEDDisplayClockViewHandler@{OLEDDisplayClockViewHandler}!doAction@{doAction}}
+\index{doAction@{doAction}!OLEDDisplayClockViewHandler@{OLEDDisplayClockViewHandler}}
+\doxysubsubsection{\texorpdfstring{doAction()}{doAction()}}
+{\footnotesize\ttfamily void do\+Action (\begin{DoxyParamCaption}\item[{void($\ast$)(void)}]{fun }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00040\ \{}
+\DoxyCodeLine{00041\ \ \ (*fun)();\ \ }
+\DoxyCodeLine{00042\ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{class_o_l_e_d_display_clock_view_handler_aaf53e0d3de2d6ffb42903578a4c4ec5b}\label{class_o_l_e_d_display_clock_view_handler_aaf53e0d3de2d6ffb42903578a4c4ec5b}} 
+\index{OLEDDisplayClockViewHandler@{OLEDDisplayClockViewHandler}!getClassName@{getClassName}}
+\index{getClassName@{getClassName}!OLEDDisplayClockViewHandler@{OLEDDisplayClockViewHandler}}
+\doxysubsubsection{\texorpdfstring{getClassName()}{getClassName()}}
+{\footnotesize\ttfamily const char $\ast$ get\+Class\+Name (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_time_handler_a9f78e5d51abbc956af40d5c72c6bccf4}{Time\+Handler}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00034\ \{}
+\DoxyCodeLine{00035\ \ \ \textcolor{keywordflow}{return}(\textcolor{stringliteral}{"{}OLEDDisplayClockViewHandler"{}});}
+\DoxyCodeLine{00036\ \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{class_o_l_e_d_display_clock_view_handler_a9caf3b8852098554173231248ecffc10}\label{class_o_l_e_d_display_clock_view_handler_a9caf3b8852098554173231248ecffc10}} 
+\index{OLEDDisplayClockViewHandler@{OLEDDisplayClockViewHandler}!updateTime@{updateTime}}
+\index{updateTime@{updateTime}!OLEDDisplayClockViewHandler@{OLEDDisplayClockViewHandler}}
+\doxysubsubsection{\texorpdfstring{updateTime()}{updateTime()}}
+{\footnotesize\ttfamily void update\+Time (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_timestamp}{Timestamp}} \&}]{timestamp }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{class_time_handler_a9caf3b8852098554173231248ecffc10}{Time\+Handler}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00046\ \{\ }
+\DoxyCodeLine{00047\ \ \ \textcolor{keyword}{const}\ String\ dayOfWeekAsString[]=\{\ \textcolor{stringliteral}{"{}Sunday"{}},\ \textcolor{stringliteral}{"{}Monday"{}},\ \textcolor{stringliteral}{"{}Tuesday"{}},\ \textcolor{stringliteral}{"{}Wednesday"{}},\ \textcolor{stringliteral}{"{}Thursday"{}},\ \textcolor{stringliteral}{"{}Friday"{}},\ \textcolor{stringliteral}{"{}Saturday"{}}\};}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \ \ \textcolor{keywordtype}{char}\ dateStrBuffer[\mbox{\hyperlink{class_my_date_a89403698fcad339a13f4b1ed999318ed}{MyDate::getStringBufferSize}}()];}
+\DoxyCodeLine{00050\ \ \ std::string\ date=\ timestamp.\mbox{\hyperlink{class_timestamp_a5ccbcc11205465afe0e47cf20ab91fac}{getDate}}().\mbox{\hyperlink{class_my_date_a8c1a2aa6577c40d1afc6ba8a8c8cb627}{toString}}(\ dateStrBuffer);}
+\DoxyCodeLine{00051\ \ \ }
+\DoxyCodeLine{00052\ \ \ \textcolor{keywordtype}{char}\ timeStrBuffer[\mbox{\hyperlink{class_my_date_a89403698fcad339a13f4b1ed999318ed}{MyDate::getStringBufferSize}}()];}
+\DoxyCodeLine{00053\ \ \ std::string\ time=\ timestamp.\mbox{\hyperlink{class_timestamp_a9ce366ef9be2ccc0e25763fbb76ecc19}{getTime}}().\mbox{\hyperlink{class_my_time_a296755c77ffde8699bbb2b1e8a94a9a2}{toString}}(\ timeStrBuffer);}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \ \ \mbox{\hyperlink{class_o_l_e_d_display_clock_view_handler_acd84c6af3bec950a8686f1ab7d8d96a6}{Lcd}}.\mbox{\hyperlink{classlcd__st7567s_a7dd4334765ec7930dfc1c8dd1f7952d8}{Cursor}}(0,\ 0);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Character\ display\ position.\ y=0-\/3,\ x=0-\/17}}
+\DoxyCodeLine{00056\ \ \ \mbox{\hyperlink{class_o_l_e_d_display_clock_view_handler_acd84c6af3bec950a8686f1ab7d8d96a6}{Lcd}}.\mbox{\hyperlink{classlcd__st7567s_acbcd8071993baa71fd4284b1e21e1e50}{Display}}((\textcolor{keywordtype}{char}*)\textcolor{stringliteral}{"{}Current\ time:"{}});}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \ \ \mbox{\hyperlink{class_o_l_e_d_display_clock_view_handler_acd84c6af3bec950a8686f1ab7d8d96a6}{Lcd}}.\mbox{\hyperlink{classlcd__st7567s_a7dd4334765ec7930dfc1c8dd1f7952d8}{Cursor}}(0,\ 2);}
+\DoxyCodeLine{00059\ \ \ \mbox{\hyperlink{class_o_l_e_d_display_clock_view_handler_acd84c6af3bec950a8686f1ab7d8d96a6}{Lcd}}.\mbox{\hyperlink{classlcd__st7567s_acbcd8071993baa71fd4284b1e21e1e50}{Display}}((\textcolor{keywordtype}{char}*)dayOfWeekAsString[\ (\ timestamp.\mbox{\hyperlink{class_timestamp_a5ccbcc11205465afe0e47cf20ab91fac}{getDate}}()).getDayOfWeek()].c\_str());\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Maximun\ 18\ characters.}}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \ \ \mbox{\hyperlink{class_o_l_e_d_display_clock_view_handler_acd84c6af3bec950a8686f1ab7d8d96a6}{Lcd}}.\mbox{\hyperlink{classlcd__st7567s_a7dd4334765ec7930dfc1c8dd1f7952d8}{Cursor}}(0,\ 4);}
+\DoxyCodeLine{00062\ \ \ \mbox{\hyperlink{class_o_l_e_d_display_clock_view_handler_acd84c6af3bec950a8686f1ab7d8d96a6}{Lcd}}.\mbox{\hyperlink{classlcd__st7567s_acbcd8071993baa71fd4284b1e21e1e50}{Display}}((\textcolor{keywordtype}{char}*)date.c\_str());\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Maximun\ 18\ characters.}}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ \ \ \mbox{\hyperlink{class_o_l_e_d_display_clock_view_handler_acd84c6af3bec950a8686f1ab7d8d96a6}{Lcd}}.\mbox{\hyperlink{classlcd__st7567s_a7dd4334765ec7930dfc1c8dd1f7952d8}{Cursor}}(0,\ 6);}
+\DoxyCodeLine{00065\ \ \ \mbox{\hyperlink{class_o_l_e_d_display_clock_view_handler_acd84c6af3bec950a8686f1ab7d8d96a6}{Lcd}}.\mbox{\hyperlink{classlcd__st7567s_acbcd8071993baa71fd4284b1e21e1e50}{Display}}((\textcolor{keywordtype}{char}*)time.c\_str());\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Maximun\ 18\ characters.}}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \ \ \mbox{\hyperlink{class_time_handler_a9caf3b8852098554173231248ecffc10}{TimeHandler::updateTime}}(\ timestamp);}
+\DoxyCodeLine{00068\ \}}
+
+\end{DoxyCode}
+
+
+References \mbox{\hyperlink{l00242}{lcd\+\_\+st7567s\+::\+Cursor()}}, \mbox{\hyperlink{l00280}{lcd\+\_\+st7567s\+::\+Display()}}, \mbox{\hyperlink{l00131}{Timestamp\+::get\+Date()}}, \mbox{\hyperlink{l00204}{My\+Date\+::get\+String\+Buffer\+Size()}}, \mbox{\hyperlink{l00173}{Timestamp\+::get\+Time()}}, \mbox{\hyperlink{l00019}{Lcd}}, \mbox{\hyperlink{l00210}{My\+Date\+::to\+String()}}, \mbox{\hyperlink{l00179}{My\+Time\+::to\+String()}}, and \mbox{\hyperlink{l00040}{Time\+Handler\+::update\+Time()}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_o_l_e_d_display_clock_view_handler_acd84c6af3bec950a8686f1ab7d8d96a6}\label{class_o_l_e_d_display_clock_view_handler_acd84c6af3bec950a8686f1ab7d8d96a6}} 
+\index{OLEDDisplayClockViewHandler@{OLEDDisplayClockViewHandler}!Lcd@{Lcd}}
+\index{Lcd@{Lcd}!OLEDDisplayClockViewHandler@{OLEDDisplayClockViewHandler}}
+\doxysubsubsection{\texorpdfstring{Lcd}{Lcd}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classlcd__st7567s}{lcd\+\_\+st7567s}} Lcd\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by \mbox{\hyperlink{l00021}{OLEDDisplay\+Clock\+View\+Handler()}}, and \mbox{\hyperlink{l00045}{update\+Time()}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_o_l_e_d_display_clock_view_handler_8h}{OLEDDisplay\+Clock\+View\+Handler.\+h}}\item 
+\mbox{\hyperlink{_o_l_e_d_display_clock_view_handler_8cpp}{OLEDDisplay\+Clock\+View\+Handler.\+cpp}}\end{DoxyCompactItemize}
