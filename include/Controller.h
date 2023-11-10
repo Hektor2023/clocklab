@@ -19,6 +19,7 @@ class Controller
       enum class direction{ Plus, Minus};
  
       RTCSystemTimeHandler&  systemTimeHandler;
+      bool adjustMode;
 
    private:
       void adjust( Controller::variable var, Controller::direction dir);
@@ -27,6 +28,7 @@ class Controller
       Controller( RTCSystemTimeHandler* systemTimeHandler);
       ~Controller( void)= default;
       
+      bool isAdjustMode( void);
       const std::string execute( const std::string command);
 };
 

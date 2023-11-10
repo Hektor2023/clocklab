@@ -1,15 +1,20 @@
 #include "LEDClockViewHandler.h"
 
+
 //===================================================================================
 LEDClockViewHandler::LEDClockViewHandler( TimeHandler* ptr, 
   const int STB_pin, const int CLK_pin, const int DIO_pin)
-  :TimeHandler( ptr), tm( STB_pin, CLK_pin ,DIO_pin, false) 
+  :TimeHandler( ptr), tm( STB_pin, CLK_pin ,DIO_pin, true) 
 {
   pinMode( STB_pin, OUTPUT);    
   pinMode( CLK_pin, OUTPUT); 
   pinMode( DIO_pin, OUTPUT);   
 
+  xSemaphoreTM1638plus = xSemaphoreCreateMutex();
   tm.displayBegin();  
+  
+  tm.setLEDs( 0);
+
 };
 
 //===================================================================================
@@ -32,6 +37,35 @@ void LEDClockViewHandler::doAction( void (*fun)( void))
 }
 
 //===================================================================================
+ uint8_t LEDClockViewHandler::buttonsRead( void)
+ {
+    static uint8_t lastKeys= -1;
+    uint8_t keys;
+
+    if( xSemaphoreTake( xSemaphoreTM1638plus,( TickType_t ) 0) == pdTRUE)
+    {
+      keys= tm.readButtons();
+      xSemaphoreGive( xSemaphoreTM1638plus);
+
+      if( keys!= lastKeys)
+      {
+        lastKeys= keys;
+        return( keys);
+      } 
+      
+    }
+
+    return( 0);  
+ }
+
+//===================================================================================
+void LEDClockViewHandler::modeAdjust( bool flagg)
+{
+  adjustMode= flagg;
+  
+}
+
+//===================================================================================
 void LEDClockViewHandler::updateTime( Timestamp &timestamp)
 { 
  
@@ -45,12 +79,17 @@ void LEDClockViewHandler::updateTime( Timestamp &timestamp)
   //  Serial.printf( "->%s\n",s);
 
   std::replace( s.begin(), s.end(), ':', '-');
-  tm.displayText( s.c_str());
+  if( xSemaphoreTake( xSemaphoreTM1638plus,( TickType_t ) 0) == pdTRUE)
+  {
+    tm.displayText( s.c_str());
 
-  //  Serial.printf( "=>%s\n",s);
-
-  tm.setLEDs(0x0000);
-  tm.setLED( timestamp.getDayOfWeek(), 1);
+    //  Serial.printf( "=>%s\n",s);
+    tm.setLEDs( 0);
+    tm.setLED( timestamp.getDayOfWeek(), 1);
+    tm.setLED( 7, adjustMode? 1:0); 
+    xSemaphoreGive( xSemaphoreTM1638plus);
+  }
+  
   
   TimeHandler::updateTime( timestamp);
 }
