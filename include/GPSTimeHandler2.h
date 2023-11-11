@@ -4,7 +4,7 @@
 #include <stdint.h>
 #include "TimeHandler.h"
 #include "Timestamp.h"
-#include <TinyGPSPlus.h>
+
 
 constexpr unsigned char delimeterSizeMap=  20;
 constexpr unsigned char bufferSize=  100;
