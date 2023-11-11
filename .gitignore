@@ -10,4 +10,4 @@ lib/README
 test/README
 .gitignore
 WifiCred.h
-extra/*
+
