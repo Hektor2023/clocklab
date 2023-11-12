@@ -10,13 +10,6 @@ ConsoleViewHandler::~ConsoleViewHandler( void) {};
 void ConsoleViewHandler::updateTime( Timestamp &timestamp)
 {
  
-/*
-  char timestampStrBuffer[ Timestamp::getStringBufferSize()];
-  Serial.printf("(%10s) %s\n",
-                 timestamp.getDayOfWeekAsString(), 
-                 timestamp.toString( timestampStrBuffer));
-*/  
-
   switch( displayMode)
   {
     case eTime:
