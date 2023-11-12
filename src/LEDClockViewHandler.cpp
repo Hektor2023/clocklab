@@ -1,6 +1,5 @@
 #include "LEDClockViewHandler.h"
 
-
 //===================================================================================
 LEDClockViewHandler::LEDClockViewHandler( TimeDisplayHandler* ptr, 
   const int STB_pin, const int CLK_pin, const int DIO_pin)
