@@ -5,20 +5,21 @@
 
 #include "Arduino.h"
 #include "Timestamp.h"
-#include "TimeHandler.h"
+#include "TimeDisplayHandler.h"
+
 
 //===================================================================================
-class ConsoleViewHandler:public TimeHandler
+class ConsoleViewHandler:public TimeDisplayHandler
 {
    private:
       Timestamp  lastTimestamp;
-      
+
    public:
-      ConsoleViewHandler( TimeHandler* ptr= nullptr);
+      ConsoleViewHandler( TimeDisplayHandler* ptr= nullptr);
       virtual ~ConsoleViewHandler( void);
       
       virtual void updateTime( Timestamp &timestamp);
-      virtual const char* getClassName( void);      
+      virtual const char* getClassName( void);    
 ;};
 
 //===================================================================================

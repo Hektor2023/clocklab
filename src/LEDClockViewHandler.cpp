@@ -2,9 +2,9 @@
 
 
 //===================================================================================
-LEDClockViewHandler::LEDClockViewHandler( TimeHandler* ptr, 
+LEDClockViewHandler::LEDClockViewHandler( TimeDisplayHandler* ptr, 
   const int STB_pin, const int CLK_pin, const int DIO_pin)
-  :TimeHandler( ptr), tm( STB_pin, CLK_pin ,DIO_pin, true) 
+  :TimeDisplayHandler( ptr), tm( STB_pin, CLK_pin ,DIO_pin, true) 
 {
   pinMode( STB_pin, OUTPUT);    
   pinMode( CLK_pin, OUTPUT); 
@@ -69,16 +69,37 @@ void LEDClockViewHandler::modeAdjust( bool flagg)
 void LEDClockViewHandler::updateTime( Timestamp &timestamp)
 { 
  
-  MyTime    requiredTime;
-  
-  requiredTime= timestamp.getTime();
-  
+  std::string s;
+  switch( displayMode)
+  {
+    case eTime:
+      {
+          MyTime    requiredTime;
+          requiredTime= timestamp.getTime();
 
-  char timeStrBuffer2[ MyTime::getStringBufferSize()];
-  std::string s= requiredTime.toString( timeStrBuffer2);
-  //  Serial.printf( "->%s\n",s);
+          char timeStrBuffer2[ MyTime::getStringBufferSize()];
+          s= requiredTime.toString( timeStrBuffer2);
+          //  Serial.printf( "->%s\n",s);
 
-  std::replace( s.begin(), s.end(), ':', '-');
+          std::replace( s.begin(), s.end(), ':', '-');
+      }
+      break;
+
+    case eDate:
+      {
+        MyDate    requiredDate;
+        requiredDate= timestamp.getDate();
+
+          char dateStrBuffer2[ MyDate::getStringBufferSize()];
+          s= requiredDate.toString( dateStrBuffer2);
+
+          std::replace( s.begin(), s.end(), '/', '.');
+      }
+      break;
+
+    default:;
+  }
+
   if( xSemaphoreTake( xSemaphoreTM1638plus,( TickType_t ) 0) == pdTRUE)
   {
     tm.displayText( s.c_str());
@@ -91,7 +112,7 @@ void LEDClockViewHandler::updateTime( Timestamp &timestamp)
   }
   
   
-  TimeHandler::updateTime( timestamp);
+  TimeDisplayHandler::updateTime( timestamp);
 }
 
 //===================================================================================

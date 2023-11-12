@@ -29,7 +29,7 @@ class SystemTimeHandler:public TimeHandler
       virtual const char* getClassName( void);
 
       void forceUpdateTime( void);
-      virtual void updateTime( void);
+      void updateTime( void);
 };
 
 //===================================================================================

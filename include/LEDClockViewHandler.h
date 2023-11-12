@@ -6,13 +6,13 @@
 #include "Arduino.h"
 
 #include "Timestamp.h"
-#include "TimeHandler.h"
+#include "TimeDisplayHandler.h"
 
 #include <TM1638plus.h>
 #include "freertos/FreeRTOS.h"
 
 //===================================================================================
-class LEDClockViewHandler:public TimeHandler
+class LEDClockViewHandler:public TimeDisplayHandler
 {
    private:
       MyTime  clockTimePresented;
@@ -24,7 +24,7 @@ class LEDClockViewHandler:public TimeHandler
 
 
    public:
-      LEDClockViewHandler( TimeHandler* ptr, const int STB_pin, const int CLK_pin, const int DIO_pin);
+      LEDClockViewHandler( TimeDisplayHandler* ptr, const int STB_pin, const int CLK_pin, const int DIO_pin);
       virtual ~LEDClockViewHandler( void);
 
       uint8_t  buttonsRead( void);
