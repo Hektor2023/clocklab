@@ -6,22 +6,20 @@
 #include "Arduino.h"
 
 #include "Timestamp.h"
-#include "TimeHandler.h"
+#include "TimeDisplayHandler.h"
 
-#include <U8g2lib.h>
+#include <TFT_eSPI.h>
 #include <string.h>
 
-// uses I2C pins
+// uses SPI pins
 //===================================================================================
-class OLEDDisplayClockViewHandler:public TimeHandler
+class OLEDDisplayClockViewHandler:public TimeDisplayHandler
 {
    private:
-   //   U8G2_ST7567_HEM6432_F_HW_I2C u8g2;
-   //   U8G2_ST7567_ENH_DG128064_F_SW_I2C u8g2;
-      U8G2_ST7567_OS12864_F_HW_I2C u8g2;
+      TFT_eSPI tft;
       
    public:
-      OLEDDisplayClockViewHandler( TimeHandler* ptr, const uint8_t sda_pin, const uint8_t scl_pin);
+      OLEDDisplayClockViewHandler( TimeDisplayHandler* ptr);
       virtual ~OLEDDisplayClockViewHandler( void);
 
       void init( void);

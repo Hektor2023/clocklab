@@ -7,7 +7,6 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
   
-
 #include <NTPClient.h>   // https://github.com/arduino-libraries/NTPClient
 
 #include "Timestamp.h"
@@ -23,6 +22,7 @@
 #include "GPSTimeHandler2.h"
 
 #include "WifiCred.h"
+
 
 const  char*   gc_Ssid { SSID };
 const  char*   gc_Password{ PASSWD };
@@ -74,9 +74,9 @@ MyTime      g_SunriseTime, g_SunsetTime;
 Timestamp   g_LocalTimestamp;
 
 
-//OLEDDisplayClockViewHandler OLEDViewHandler( nullptr, sda_pin2, scl_pin2);
+OLEDDisplayClockViewHandler g_OLEDViewHandler( nullptr);
 
-LEDClockViewHandler         g_LEDViewHandler( nullptr, gc_STB_pin, gc_CLK_pin, gc_DIO_pin);
+LEDClockViewHandler         g_LEDViewHandler( &g_OLEDViewHandler, gc_STB_pin, gc_CLK_pin, gc_DIO_pin);
 ConsoleViewHandler          g_ConsoleViewHandler( &g_LEDViewHandler);
 
 SplitterTimeHandler         g_SplitterHandler(nullptr, g_LocalTimestamp);  
@@ -368,14 +368,11 @@ void setup()
   Serial.print("setup: start ======================\n"); 
 
   xTaskCreate( &gps_task,       "gps_task",       4048, nullptr, 5, nullptr);
-  xTaskCreate( &ntp_task,       "ntp_task",       3048, nullptr, 5, nullptr);
+  xTaskCreate( &ntp_task,       "ntp_task",       4048, nullptr, 5, nullptr);
   xTaskCreate( &rtc_write_task, "rtc_write_task", 2048, nullptr, 5, nullptr);
   
   xTaskCreate( &rtc_read_task,  "rtc_read_task",  2048, nullptr, 5, nullptr);
   xTaskCreate( &console_task,   "console_task",   3048, nullptr, 5, nullptr);
-
-//  OLEDViewHandler.init();
-
 }
 
 typedef 
