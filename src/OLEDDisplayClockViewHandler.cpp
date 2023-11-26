@@ -5,7 +5,7 @@
 OLEDDisplayClockViewHandler::OLEDDisplayClockViewHandler(TimeDisplayHandler* ptr) 
   :TimeDisplayHandler( ptr), tft( TFT_eSPI())
 {
-    init();
+   
 }
 
 //===================================================================================
@@ -24,6 +24,8 @@ void OLEDDisplayClockViewHandler::init( void)
 
   tft.begin();
   tft.setRotation(90);
+  // Clear the screen
+  tft.fillScreen(TFT_BLACK);
 }
 
 //===================================================================================
