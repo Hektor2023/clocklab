@@ -47,7 +47,7 @@ void OLEDDisplayClockViewHandler::updateTime( Timestamp &timestamp)
   std::string timeAsString= timestamp.getTime().toString( timeStrBuffer);
 
     // Set the font size and color
-  tft.setTextSize(4); // choose a suitable font
+  tft.setTextSize(5); // choose a suitable font
   tft.setTextColor(TFT_GREEN);
   
   // Clear the screen
@@ -55,6 +55,9 @@ void OLEDDisplayClockViewHandler::updateTime( Timestamp &timestamp)
 
   tft.setCursor(0, 0);
   tft.println( timeAsString.c_str());
+  tft.println( "");
+
+  tft.setTextSize(4); // choose a suitable font
   tft.println( dateAsString.c_str());
   tft.println( dayOfWeekAsString[ date.getDayOfWeek()].c_str());
  
