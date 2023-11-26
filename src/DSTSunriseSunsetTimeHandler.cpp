@@ -20,7 +20,10 @@ DSTSunriseSunsetTimeHandler::~DSTSunriseSunsetTimeHandler( void)
       
 void DSTSunriseSunsetTimeHandler::updateTime( Timestamp &timestamp)
 {
+  uint16_t  currentTimeOffset= getOffset( timestamp);
+
   static  uint16_t  lastYear=0;
+// compare timestamps
 
   MyDate  date= timestamp.getDate();
   if( date.getYear() != lastYear)
@@ -36,8 +39,7 @@ void DSTSunriseSunsetTimeHandler::updateTime( Timestamp &timestamp)
     calculateSunriseSunset( timestamp);
   }
 
-// compare timestamps
-  uint16_t  currentTimeOffset= getOffset( timestamp);
+
 
 //  Serial.printf("\n currentTimeOffset= %d\n", currentTimeOffset);
   localTimestamp= timestamp +currentTimeOffset;

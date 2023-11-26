@@ -41,7 +41,7 @@ constexpr int gc_XCoreId_1{ 1};
 
 constexpr uint8_t   gc_irqIn_pin{ 15}; // D8 - don't use D4
 
-constexpr uint8_t   gc_rxd2_pin{17};
+//constexpr uint8_t   gc_rxd2_pin{17};
 constexpr uint8_t   gc_txd2_pin{16};
 
 constexpr uint8_t   gc_sda_pin{21};
@@ -75,7 +75,7 @@ Timestamp   g_LocalTimestamp;
 
 
 OLEDDisplayClockViewHandler g_OLEDViewHandler( nullptr);
-
+//LEDClockViewHandler         g_LEDViewHandler(  nullptr, gc_STB_pin, gc_CLK_pin, gc_DIO_pin);
 LEDClockViewHandler         g_LEDViewHandler( &g_OLEDViewHandler, gc_STB_pin, gc_CLK_pin, gc_DIO_pin);
 ConsoleViewHandler          g_ConsoleViewHandler( &g_LEDViewHandler);
 
@@ -115,6 +115,8 @@ void console_task(void *pvParameter)
       printTick();  Serial.print( "  console_task  ");  Serial.printf( "-> %s   ", rcvMsg.src);
       displayTimestamp.setEpochTime( rcvMsg.epoch);
 
+      g_ConsoleViewHandler.updateLocation( g_Longitude, g_Latitude);
+      g_ConsoleViewHandler.updateSunriseSunset( g_SunriseTime, g_SunsetTime);
       g_ConsoleViewHandler.updateTime( displayTimestamp);
       {
         static uint8_t lastDay=0;
@@ -237,7 +239,8 @@ void ntp_task(void *pvParameter)
     WiFi.begin( gc_Ssid, gc_Password);
     while ( !WiFi.isConnected())
     {
-      taskYIELD();
+      Serial.printf("#");
+      vTaskDelay( 3*1000 / portTICK_RATE_MS);
     };
     
     Serial.printf("| NTP... |");
@@ -252,7 +255,7 @@ void ntp_task(void *pvParameter)
     Timestamp timestamp;
     timestamp.setEpochTime( ntp_msg.epoch); 
     char timestampAsString[  timestamp.getStringBufferSize()];
-    Serial.printf( "\nNTP TimestampAsString= %s  \n",timestamp.toString( timestampAsString ));
+    Serial.printf( "\nNTP Timestamp= %s  \n",timestamp.toString( timestampAsString ));
 
     while ( xQueueSend( g_queueTimePattern, (void *)&ntp_msg, 10) != pdTRUE) 
     {
@@ -283,7 +286,7 @@ void gps_task(void *pvParameter)
 
   for(;;)
   {
-//    Serial.printf("| GPS...|");
+    Serial.printf("| GPS...|");
 
     bool next= true;
     while( next)
@@ -291,7 +294,8 @@ void gps_task(void *pvParameter)
       if( !Serial2.available())  
       {
 //        Serial.printf( "GPS: !Serial2.available\n");
-        vTaskDelay( 20 / portTICK_RATE_MS);
+        Serial.printf( "*");
+        vTaskDelay( 40 / portTICK_RATE_MS);
         continue;
       }
 
@@ -363,6 +367,8 @@ void setup()
   // put your setup code here, to run once:
   Serial.begin(19200);
   Serial.flush();
+
+  g_ConsoleViewHandler.init();
 
   vTaskDelay( 3000 / portTICK_RATE_MS);
   Serial.print("setup: start ======================\n"); 

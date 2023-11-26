@@ -20,6 +20,10 @@ class TimeDisplayHandler
    protected:
       TimeDisplayHandler*  ptr;
       displayMode_t     displayMode;
+      double            longitude;
+      double            latitude;
+      MyTime            sunrise;
+      MyTime            sunset;
 
    protected:
       void baseUpdateTime( Timestamp &timestamp);
@@ -28,7 +32,10 @@ class TimeDisplayHandler
       TimeDisplayHandler( TimeDisplayHandler* ptr);
       virtual ~TimeDisplayHandler( void)= default;
       
+      virtual void init( void);
       virtual void updateTime( Timestamp &timestamp);
+      void updateLocation( double longitude, double latitude);
+      void updateSunriseSunset( MyTime sunrise, MyTime sunset);
 
       virtual const char* getClassName( void)=0;
 

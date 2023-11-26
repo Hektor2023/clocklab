@@ -5,7 +5,7 @@
 OLEDDisplayClockViewHandler::OLEDDisplayClockViewHandler(TimeDisplayHandler* ptr) 
   :TimeDisplayHandler( ptr), tft( TFT_eSPI())
 {
-  init();
+    init();
 }
 
 //===================================================================================
@@ -21,6 +21,7 @@ const char* OLEDDisplayClockViewHandler::getClassName( void)
 void OLEDDisplayClockViewHandler::init( void)
 {
   // Initialize TFT LCD
+
   tft.begin();
   tft.setRotation(90);
 }
@@ -55,6 +56,12 @@ void OLEDDisplayClockViewHandler::updateTime( Timestamp &timestamp)
   tft.println( dateAsString.c_str());
   tft.println( dayOfWeekAsString[ date.getDayOfWeek()].c_str());
  
+  std::string sunriseAsString= sunrise.toString( timeStrBuffer);
+  tft.println(  sunriseAsString.c_str());
+
+  std::string sunsetAsString= sunset.toString( timeStrBuffer);
+  tft.println(  sunsetAsString.c_str());
+
   baseUpdateTime( timestamp);
 }
 
