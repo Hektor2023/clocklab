@@ -160,7 +160,7 @@ void MyTime::setInSeconds( uint16_t timeInSecs)
    
   setHour(   ( uint8_t)(tdiff / 3600));  tdiff %= 3600;
   setMinute( ( uint8_t)(tdiff /   60));
-  setSecond(    ( uint8_t)(tdiff %   60));              
+  setSecond( ( uint8_t)(tdiff %   60));              
 }
     
 //===================================================================================
@@ -170,18 +170,35 @@ const char* MyTime::getStringFormat( void)
 }
 
 //===================================================================================
+const char* MyTime::getStringShortFormat( void)
+{
+  return( "%02d:%02d"); 
+}
+
+//===================================================================================
 size_t MyTime::getStringBufferSize( void)
 {
   return( strlen( MyTime::getStringFormat())+1);
 }
 
 //===================================================================================
+size_t MyTime::getStringShortBufferSize( void)
+{
+  return( strlen( MyTime::getStringShortFormat())+1);
+}  
+
+//===================================================================================
 char* MyTime::toString( char* ptr) 
 {  
-  
   sprintf( ptr, MyTime::getStringFormat(), hour, minute, second);
   return( ptr);
 }  
     
-
+//===================================================================================
+char* MyTime::toShortString( char* ptr) 
+{  
+  sprintf( ptr, MyTime::getStringShortFormat(), hour, minute);
+  return( ptr);
+}  
+   
 //===================================================================================

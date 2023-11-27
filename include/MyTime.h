@@ -50,9 +50,14 @@ class MyTime
 
     
     static const char* getStringFormat( void);
-    static size_t getStringBufferSize( void);    
+    static size_t getStringBufferSize( void);   
+
+    static const char* getStringShortFormat( void);
+    static size_t getStringShortBufferSize( void);  
+
     char*  toString( char* Stringbuffer);   
-     
+    char*  toShortString( char* Stringbuffer);
+
     static bool isValidHour( uint8_t hour);
     static bool isValidMinute( uint8_t minute);
     static bool isValidSecond( uint8_t second);
