@@ -100,7 +100,9 @@ void DSTSunriseSunsetTimeHandler::calculateSunriseSunset( Timestamp &timestamp)
     double P15 = ( acos(N16/O16)*57.29577951)/15;
 
     // Z-1 in Summer, Z in Winter 
-    Z= (( dSTStartTimestamp <= timestamp) && ( timestamp < dSTEndTimestamp))? Z+1: Z; 
+    constexpr  uint8_t oneHour= 1;
+
+    Z= (( dSTStartTimestamp <= timestamp) && ( timestamp < dSTEndTimestamp))? Z+ oneHour: Z; 
     double P17 = Z-P15; //- godzina wschodu Słońca
     double Q17 = Z+P15; //- godzina zachodu Słońca        
 
