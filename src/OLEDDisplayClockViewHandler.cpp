@@ -43,9 +43,12 @@ void OLEDDisplayClockViewHandler::updateTime( Timestamp &timestamp)
   MyDate date= timestamp.getDate();
   std::string dateAsString= date.toString( dateStrBuffer);
   
-  char timeStrBuffer[MyDate::getStringBufferSize()];
+  char timeStrBuffer[MyTime::getStringBufferSize()];
   std::string timeAsString= timestamp.getTime().toString( timeStrBuffer);
 
+  char timeShortStrBuffer[MyTime::getStringShortBufferSize()];
+  std::string timeAsShortString= timestamp.getTime().toShortString( timeShortStrBuffer);
+  
     // Set the font size and color
   tft.setTextSize(5); // choose a suitable font
   tft.setTextColor(TFT_GREEN);
@@ -61,10 +64,10 @@ void OLEDDisplayClockViewHandler::updateTime( Timestamp &timestamp)
   tft.println( dateAsString.c_str());
   tft.println( dayOfWeekAsString[ date.getDayOfWeek()].c_str());
  
-  std::string sunriseAsString= sunrise.toString( timeStrBuffer);
+  std::string sunriseAsString= sunrise.toShortString( timeShortStrBuffer);
   tft.println(  sunriseAsString.c_str());
 
-  std::string sunsetAsString= sunset.toString( timeStrBuffer);
+  std::string sunsetAsString= sunset.toShortString( timeShortStrBuffer);
   tft.println(  sunsetAsString.c_str());
 
   baseUpdateTime( timestamp);
