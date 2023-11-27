@@ -6,7 +6,7 @@
 
 #define IS_LEAP_YEAR( _year) (((_year % 400 == 0) || ( _year % 100 == 0)) || (( _year % 4 ==0) && ( _year % 100 != 0)))
 
-#define BASE_YEAR  1970
+#define BASE_YEAR     1970
 #define BASE_MONTH    1
 #define BASE_DAY      1
 #define BASE_DAY_OF_WEEK  4

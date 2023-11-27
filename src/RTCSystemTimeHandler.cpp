@@ -54,7 +54,7 @@ void RTCSystemTimeHandler::init( void)
   rtc.sqwgSetMode( URTCLIB_SQWG_1H);
 
 // for test
-  rtc.set(0, 0, 0, 0, 1, 1, 0);
+  rtc.set(0, 0, 0, 0, 5, 6, 0);
 	//  RTCLib::set(byte second, byte minute, byte hour, byte dayOfWeek, byte dayOfMonth, byte month, byte year)
 }
 
