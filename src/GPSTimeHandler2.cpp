@@ -162,21 +162,18 @@ unsigned char  GPSTimeHandler2::calculateChecksum( void)
 //=============================================================================================================
 bool GPSTimeHandler2::isValidRecord( void)
 {
-    constexpr char validRecordchar= 'N';
+    char field[1];
+    getField( 2, field, buffer);
 
-    char*Ptr2chkSumMarker= strchr( buffer, checkSumMarker);
-    assert( (Ptr2chkSumMarker!= NULL) &&"Missing checksum marker");
-
-    return( *(Ptr2chkSumMarker-1)!= validRecordchar);
+    return( field[0]== 'A');
 }
 
 //=============================================================================================================
 bool GPSTimeHandler2::isValidCheckSum( void)
 {
-    char*Ptr2chkSumMarker= strchr( buffer, checkSumMarker);
-    assert( (Ptr2chkSumMarker!= NULL) &&"Missing checksum marker");
+    char  *Ptr2chkSumMarker= strchr( buffer, checkSumMarker);
 
-    if(  !isValidRecord())
+    if(  !isValidRecord() || (Ptr2chkSumMarker== NULL))
     {
       return( false);
     }
@@ -199,15 +196,14 @@ bool GPSTimeHandler2::isValidCheckSum( void)
 bool GPSTimeHandler2::updateTime( void)
 {
     bool updated= false;
+    unsigned char fieldNo;
+    char field[20]; 
 
+    fillDelimeterMap( buffer);
     if( strstr( buffer, "GPRMC") && isValidCheckSum())
     {
 //        Serial.printf("| GPS... |");
 //        Serial.printf( "GPS: %s\n", buffer);
-        fillDelimeterMap( buffer);
-
-        char field[20]; 
-        unsigned char fieldNo;
 
         fieldNo= 1;
         getField( fieldNo, field, buffer);
