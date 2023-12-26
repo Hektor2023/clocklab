@@ -28,6 +28,7 @@ const  char*   gc_Ssid { SSID };
 const  char*   gc_Password{ PASSWD };
 
 typedef uint32_t  epoch_t;
+
 typedef enum
         { 
           NONE= 0,
@@ -44,6 +45,61 @@ typedef struct {
   uint32_t    epochMillis;
   uint32_t    rtcMillis;
 } MessageTime_t;
+
+//=============================================================================================================
+class AdjustmentAdvisor
+{
+  public:
+    AdjustmentAdvisor() {};
+    ~AdjustmentAdvisor() {};
+
+    bool getMessageFromBestSource( MessageTime_t &bestSrc_msg, const MessageTime_t &new_msg);
+};
+
+//=============================================================================================================
+bool AdjustmentAdvisor::getMessageFromBestSource( MessageTime_t &bestSrc_msg, const MessageTime_t &new_msg)
+{
+  static bool afterPowerUp= true;
+  bool success= true;
+  
+  if( afterPowerUp) 
+  {
+    afterPowerUp= false;
+    Serial.print( "\nRTC_WRITE_task:  setTimestamp\n");
+    bestSrc_msg= new_msg;
+    return success;
+  }
+
+  switch ( new_msg.type)
+  {
+    case src_type_t::NONE:
+      bestSrc_msg= new_msg;
+      Serial.print( "->NON\n");
+      break;
+
+    case src_type_t::GPS:
+      bestSrc_msg= new_msg;
+      Serial.print( "->GPS\n");
+      break;
+
+    case src_type_t::NTP:
+      if( bestSrc_msg.type != src_type_t::GPS)
+      {
+        bestSrc_msg= new_msg;
+        Serial.print( "->NTP\n");
+      }
+      break;
+
+    default:
+      Serial.print( "->Default");
+      success= false;
+  }
+
+  return success;
+}
+
+//=============================================================================================================
+
 
 constexpr int gc_XCoreId_0{ 0};
 constexpr int gc_XCoreId_1{ 1};
@@ -74,8 +130,6 @@ constexpr uint8_t   gc_NSCLR_pin{14};
 constexpr auto       gc_GMT_Plus_2h{ 2* 3600};
 constexpr auto       gc_period_1000_Millis{ 1000};
 
-bool afterPowerUp= true;
-
 // Location Nowy Dworm Mazowiecki
 double  g_Latitude{  52.4465078};  // 52.2507628, 020.4409067
 double  g_Longitude{ 20.6925219};  // 
@@ -102,6 +156,8 @@ static xQueueHandle       g_queueTimePattern= xQueueCreate( 10, sizeof( MessageT
 static xQueueHandle       g_queueDisplay=     xQueueCreate( 10, sizeof( MessageTime_t));
 static SemaphoreHandle_t  g_xSemaphoreRtc;
 
+AdjustmentAdvisor advisor;
+
 //=============================================================================================================
 void printTick(void)
 {
@@ -121,36 +177,38 @@ void console_task(void *pvParameter)
   for(;;)
   {
     vTaskDelay( 10 / portTICK_RATE_MS);                    // wait for a second
-    if (xQueueReceive( g_queueDisplay, (void *)&rcvMsg, 0) == pdTRUE) 
+    if (xQueueReceive( g_queueDisplay, (void *)&rcvMsg, 0) == pdFALSE)
     {
-      printTick();  Serial.print( "  console_task  ");  Serial.printf( "-> %d   ", rcvMsg.type);
-      displayTimestamp.setEpochTime( rcvMsg.epoch);
+      continue;
+    } 
+    
+    printTick();  Serial.print( "  console_task  ");  Serial.printf( "-> %d   ", rcvMsg.type);
+    displayTimestamp.setEpochTime( rcvMsg.epoch);
 
-      g_ConsoleViewHandler.updateLocation( g_Longitude, g_Latitude);
-      g_ConsoleViewHandler.updateSunriseSunset( g_SunriseTime, g_SunsetTime);
-      g_ConsoleViewHandler.updateTime( displayTimestamp);
+    g_ConsoleViewHandler.updateLocation( g_Longitude, g_Latitude);
+    g_ConsoleViewHandler.updateSunriseSunset( g_SunriseTime, g_SunsetTime);
+    g_ConsoleViewHandler.updateTime( displayTimestamp);
+    {
+      static uint8_t lastDay=0;
+      uint8_t currentDay= displayTimestamp.getDate().getDay();
+      if( currentDay> lastDay)
       {
-        static uint8_t lastDay=0;
-        uint8_t currentDay= displayTimestamp.getDate().getDay();
-        if( currentDay> lastDay)
-        {
           lastDay= currentDay;
 
           char timeStrBuffer[ MyTime::getStringBufferSize()];
           Serial.printf("\t  => Sunrise: %s  ",   g_SunriseTime.toString( timeStrBuffer));
           Serial.printf("/      Sunset:  %s  \n", g_SunsetTime.toString( timeStrBuffer));  
-        }
-      }  
+      }
 
-    }
-   
+    }  
+
   }
 
   vTaskDelete(nullptr);
 }
 
 //=============================================================================================================
-void rtc_read_task(void *pvParameter)  // for Display
+void rtc_read_task(void *pvParameter)  
 {
   Timestamp       rtcTimestamp;
   MessageTime_t   rtcReadMsg;
@@ -162,80 +220,46 @@ void rtc_read_task(void *pvParameter)  // for Display
   for(;;)
   { 
       vTaskDelay( 2 / portTICK_RATE_MS);
-      if( xSemaphoreTake( g_xSemaphoreRtc,0) == pdTRUE)
-      { 
-        g_SystemTimeHandler.updateTime();
-        xSemaphoreGive(  g_xSemaphoreRtc);
-
-        if(( !afterPowerUp) && (rtcReadMsg.epoch!= g_LocalTimestamp.getEpochTime()))
-        {
-          rtcReadMsg.epoch= g_LocalTimestamp.getEpochTime();
-          rtcReadMsg.epochMillis= 0;
-          rtcReadMsg.rtcMillis= millis();
-
-          while( xQueueSend( g_queueDisplay, (void *)&rtcReadMsg, 10) != pdTRUE) 
-          {
-            Serial.println("ERROR: Could not put RTC read time to queue.");  
-          }
-
-//          Serial.print( "\nRTC_READ_task: AFTER SEND systemTimeHandler.updateTime()\n");
-        }  
-
+      if( xSemaphoreTake( g_xSemaphoreRtc,0) == pdFALSE)
+      {
+        continue;
       }
+       
+      if( !g_SystemTimeHandler.updateTime())
+      {
+        // between entire seconds
+        
+        xSemaphoreGive(  g_xSemaphoreRtc);
+        continue;
+      } 
 
-    
+      // new rtc second 
+      xSemaphoreGive(  g_xSemaphoreRtc);
+
+      // set time for Display
+      rtcReadMsg.epoch= g_LocalTimestamp.getEpochTime();
+      rtcReadMsg.epochMillis= 0;
+      rtcReadMsg.rtcMillis= millis();
+
+      while( xQueueSend( g_queueDisplay, (void *)&rtcReadMsg, 10) != pdTRUE) 
+      {
+        Serial.println("ERROR: Could not put RTC read time to queue.");  
+      }
+//          Serial.print( "\nRTC_READ_task: AFTER SEND systemTimeHandler.updateTime()\n");
+  
   }
   
   vTaskDelete(nullptr);
 }
 
-//=============================================================================================================
-bool getMessageFromBestSource( MessageTime_t &lastMsg, const MessageTime_t &new_msg)
-{
-  bool success= true;
 
-  if( afterPowerUp) 
-  {
-    afterPowerUp= false;
-    Serial.print( "\nRTC_WRITE_task:  setTimestamp\n");
-    lastMsg= new_msg;
-    return success;
-  }
-
-  switch (  lastMsg.type)
-  {
-    case src_type_t::NONE:
-      lastMsg= new_msg;
-      Serial.print( "->NON\n");
-      break;
-
-    case src_type_t::GPS:
-      lastMsg= new_msg;
-      Serial.print( "->GPS\n");
-      break;
-
-    case src_type_t::NTP:
-      if( lastMsg.type != src_type_t::GPS)
-      {
-        lastMsg= new_msg;
-        Serial.print( "->NTP\n");
-      }
-      break;
-
-    default:
-      Serial.print( "->Default");
-      success= false;
-  }
-
-  return success;
-}
 
 //=============================================================================================================
-void rtc_write_task(void *pvParameter)  // from Time Source
+void rtc_write_task(void *pvParameter)  
 {
   Timestamp       rtcTimestamp;
   MessageTime_t   rtcWriteMsg;
-  MessageTime_t   bestMsg;
+  MessageTime_t   bestSrcMsg;
 
 
   printTick();  Serial.print( "\nRTC_WRITE_task:  start\n");
@@ -243,24 +267,35 @@ void rtc_write_task(void *pvParameter)  // from Time Source
   for(;;)
   { 
     vTaskDelay( 10 / portTICK_RATE_MS);
-    if (xQueueReceive( g_queueTimePattern, (void *)&rtcWriteMsg, 10) == pdTRUE) 
-    {
-    
-      if( xSemaphoreTake(  g_xSemaphoreRtc,0) == pdTRUE)
-      {
-        if( !getMessageFromBestSource( bestMsg, rtcWriteMsg))
-        {
-          continue;
-        }
-          
-        bestMsg= rtcWriteMsg;
-        rtcTimestamp.setEpochTime( rtcWriteMsg.epoch);
-        g_SystemTimeHandler.setTimestamp( rtcTimestamp);
-        xSemaphoreGive(  g_xSemaphoreRtc);
-      }
 
+    if (xQueueReceive( g_queueTimePattern, (void *)&rtcWriteMsg, 10) == pdFALSE) 
+    {
+      continue;
     }
-    
+  
+    // rtc got from Time Source
+    if( !advisor.getMessageFromBestSource( bestSrcMsg, rtcWriteMsg))
+    {
+      continue;
+    }
+
+    if( xSemaphoreTake(  g_xSemaphoreRtc,0) == pdTRUE)
+    {    
+//        Serial.printf("BEST Epochmillis= %u,  RTCmillis => %u    |  %u\n", 
+//                      bestSrcMsg.epochMillis+( millis()- bestSrcMsg.rtcMillis), 
+//                      bestSrcMsg.rtcMillis,  ( millis()- bestSrcMsg.rtcMillis)); 
+//
+//        Timestamp timestamp1;
+//        timestamp1.setEpochTime( bestSrcMsg.epoch);
+//        MyTime currentTime= timestamp1.getTime();
+//        char timeStrBuffer[ MyTime::getStringBufferSize()];
+//        Serial.printf("%s\n", currentTime.toString( timeStrBuffer));
+//
+      rtcTimestamp.setEpochTime( bestSrcMsg.epoch);
+      g_SystemTimeHandler.setTimestamp( rtcTimestamp);
+      xSemaphoreGive(  g_xSemaphoreRtc);
+    }
+
   }
   
   vTaskDelete(nullptr);
@@ -300,12 +335,13 @@ void ntp_task(void *pvParameter)
     ntp_msg.epoch= timeClient.getEpochTime(); 
     ntp_msg.epochMillis= (uint32_t)((1000.0f* timeClient.getMillis())/UINT32_MAX);  //  Serial.printf("millis => %u\n", epochMillis);
     ntp_msg.rtcMillis= millis();
-
-    Timestamp timestamp;
-    timestamp.setEpochTime( ntp_msg.epoch); 
-    char timestampAsString[  timestamp.getStringBufferSize()];
-    Serial.printf( "\nNTP Timestamp= %s  \n",timestamp.toString( timestampAsString ));
-
+//
+//    Serial.printf("NTP  EpochMillis => %u || RTCmillis => %u\n",  ntp_msg.epochMillis, ntp_msg.rtcMillis);  
+//    Timestamp timestamp;
+//    timestamp.setEpochTime( ntp_msg.epoch); 
+//    char timestampAsString[  timestamp.getStringBufferSize()];
+//    Serial.printf( "\nNTP Timestamp= %s  \n",timestamp.toString( timestampAsString ));
+//
     while ( xQueueSend( g_queueTimePattern, (void *)&ntp_msg, 10) != pdTRUE) 
     {
       Serial.println("ERROR: Could not put NTP time to queue.");  
@@ -354,21 +390,24 @@ void gps_task(void *pvParameter)
       next= g_GPSHandler.collectRecord( c);
     };
 
-    if( g_GPSHandler.updateTime())
+    if( !g_GPSHandler.updateTime())
     {
-      Serial.printf( "GPS: encoded\n");
-      gps_msg.epoch=  g_GPSHandler.getTimestamp().getEpochTime(); 
-      gps_msg.epochMillis= (uint32_t) g_GPSHandler.getMilliSecond();  //  Serial.printf("millis => %u\n", epochMillis);
-      gps_msg.rtcMillis= millis();
-      while ( xQueueSend( g_queueTimePattern, (void *)&gps_msg, 0) != pdTRUE) 
-      {
-        Serial.println("ERROR: Could not put GPS time to queue."); 
-        vTaskDelay( 2 / portTICK_RATE_MS); 
-      }
+      continue;
     }
-
     
+    Serial.printf( "GPS: encoded\n");
+    gps_msg.epoch=  g_GPSHandler.getTimestamp().getEpochTime(); 
+    gps_msg.epochMillis= (uint32_t) g_GPSHandler.getMilliSecond();
+    gps_msg.rtcMillis= millis();
+
+//    Serial.printf("GPS EpochMillis => %u || RTCmillis => %u\n",  gps_msg.epochMillis, gps_msg.rtcMillis);
+    while ( xQueueSend( g_queueTimePattern, (void *)&gps_msg, 0) != pdTRUE) 
+    {
+      Serial.println("ERROR: Could not put GPS time to queue."); 
+      vTaskDelay( 2 / portTICK_RATE_MS); 
+    }
 //    Serial.printf("| GPS...!!!!|\n");
+
   }
 
   vTaskDelete(nullptr);

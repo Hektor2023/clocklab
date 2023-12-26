@@ -233,7 +233,7 @@ bool GPSTimeHandler2::updateTime( void)
         unsigned int minute= timeAsNumber %100;
         timeAsNumber /=100;
         unsigned int hour=   timeAsNumber %100;
-//        Serial.printf( "\nTimeAsString= %00d.%00d.%00d.%00d  \n",hour, minute, second, milliSecond);
+        Serial.printf( "\nTimeAsString= %00d.%00d.%00d.%00d  \n",hour, minute, second, milliSecond);
 
         MyTime time;
         time.setHour( hour);
