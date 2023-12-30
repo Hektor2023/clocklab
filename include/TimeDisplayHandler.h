@@ -3,7 +3,7 @@
 #include <cstddef>
 
 #include "Timestamp.h"
-#include "gps.h"
+#include "clocklab_types.h"
 
 typedef 
 enum

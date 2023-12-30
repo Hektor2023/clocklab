@@ -8,7 +8,7 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "Tools.h"
-  
+
 #include <NTPClient.h>   // https://github.com/arduino-libraries/NTPClient
 
 #include "Timestamp.h"
@@ -56,6 +56,8 @@ constexpr uint8_t   gc_RCK_pin{26};
 constexpr uint8_t   gc_SCK_pin{27};
 constexpr uint8_t   gc_NSCLR_pin{14};
 
+constexpr uint8_t   gc_PULS_pin{4};
+
 // Set offset time in seconds to adjust for your timezone, for example:
 // GMT +1 = 3600
 // GMT +8 = 28800
@@ -99,6 +101,8 @@ void consoleInTask(void *pvParameter)
 {
   uint8_t buttons = 0;
 
+  Serial.print( "\nCONSOLE_IN_task:  start\n");
+
   for(;;)
   {
     vTaskDelay( 100 / portTICK_RATE_MS);
@@ -119,7 +123,8 @@ void consoleOutTask(void *pvParameter)
   Timestamp       displayTimestamp;
   MessageTime_t   rcvMsg;
 
-  printTick();  Serial.print( "\nCONSOLE_task:  start\n");
+  printTick();  
+  Serial.print( "\nCONSOLE_OUT_task:  start\n");
 
   for(;;)
   {
@@ -187,7 +192,7 @@ void ntpTask(void *pvParameter)
       Serial.println("ERROR: Could not put NTP time to queue.");  
     }
 
-     timeClient.end();
+    timeClient.end();
 
   //  Serial.printf("\nDisconnect...\n");
     WiFi.disconnect();
@@ -294,7 +299,6 @@ void keyboard_task(void *pvParameter)
   pinMode( gc_RCK_pin, OUTPUT);
   pinMode( gc_SCK_pin, OUTPUT);
 
-
   digitalWrite( gc_NSCLR_pin, HIGH);
   digitalWrite( gc_RCK_pin, LOW);
   digitalWrite( gc_SCK_pin, LOW);
@@ -344,6 +348,8 @@ void rtcReadTask(void *pvParameter)
       {
         Serial.print( "RTC: UPDATE\n");
       
+        digitalWrite( gc_PULS_pin,  gc_PULS_pin? LOW:HIGH); 
+
         // set time for Display
         rtcReadMsg.epoch= g_LocalTimestamp.getEpochTime();
         rtcReadMsg.epochMillis= 0;
@@ -419,6 +425,8 @@ void setup()
   Serial.flush();
 
   g_ConsoleViewHandler.init();
+
+  pinMode( gc_PULS_pin, OUTPUT);
 
   vTaskDelay( 3000 / portTICK_RATE_MS);
   Serial.print("setup: start ======================\n"); 

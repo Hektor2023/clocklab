@@ -3,7 +3,7 @@
 #include <stdint.h>
 #include "Timehandler.h"
 #include "Timestamp.h"
-#include "gps.h"
+#include "clocklab_types.h"
 
 constexpr  auto RadToGrad= 180.0/PI;
 constexpr  auto GradToRad= PI/180.0;

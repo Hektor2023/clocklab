@@ -23,13 +23,14 @@
 
 
 // uRTCLib rtc;
-volatile  uint8_t state = 1;
+// volatile  uint8_t state = 1;
 
-
-void ICACHE_RAM_ATTR isr_extern_rtc() {
+/*
+void ICACHE_RAM_ATTR isr_extern_rtc() 
+{
     state = 1;    
 }
-
+*/
 //===================================================================================
 RTCSystemTimeHandler::RTCSystemTimeHandler( TimeHandler* ptr2timeHandler, const uint8_t sda_pin, const uint8_t scl_pin, const uint8_t irqIn_pin):
   TimeHandler( ptr2timeHandler),systemTimestamp( 0L)
@@ -41,7 +42,6 @@ RTCSystemTimeHandler::RTCSystemTimeHandler( TimeHandler* ptr2timeHandler, const 
 //  pinMode(  irqIn_pin, INPUT);
  // digitalWrite( irqIn_pin, HIGH); // RTC SQWG output is open drain we need pullup build-in resistor
 //  attachInterrupt(  irqIn_pin, isr_extern_rtc,FALLING);    
-
 } 
 
 //===================================================================================
@@ -112,7 +112,7 @@ bool RTCSystemTimeHandler::updateTime( void)
   rtc.refresh();
   if(  lastSec2!= rtc.second())
   {
-    state=0; // for irq handling
+//    state=0; // for irq handling
 
     lastSec2= rtc.second();
 	  forceUpdateTime();

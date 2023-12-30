@@ -11,11 +11,12 @@ Controller::Controller( void)
 void Controller::handle( Buttons_t buttons)
 {
 
+/*
   if( buttons!= 0)  
   {
     Serial.printf("| Button..|  %x\n", buttons);
   }
-
+*/
   switch( buttons)
     {
       case  Buttons_t:: eButton1:

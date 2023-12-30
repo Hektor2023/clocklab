@@ -5,6 +5,11 @@
 
 typedef uint32_t  epoch_t;
 
+typedef struct {
+  double  longitude;
+  double  latitude;
+} Coordinates_t;
+
 typedef enum
 { 
     NONE= 0,
