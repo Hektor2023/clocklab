@@ -1,5 +1,4 @@
-#ifndef controller_h
-#define controller_h
+#pragma once
 
 
 #include <cstddef>
@@ -39,4 +38,4 @@ class Controller
 };
 
 //===================================================================================
-#endif
+

@@ -1,6 +1,4 @@
-#ifndef systemtimehandler_h
-#define systemtimehandler_h
-
+#pragma once
 
 #include <cstddef>
 
@@ -33,4 +31,4 @@ class SystemTimeHandler:public TimeHandler
 };
 
 //===================================================================================
-#endif
+

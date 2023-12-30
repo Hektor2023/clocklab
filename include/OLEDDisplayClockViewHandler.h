@@ -1,5 +1,4 @@
-#ifndef oleddisplayclockviewhandler_h
-#define oleddisplayclockviewhandler_h
+#pragma once
 
 #include <cstddef>
 #include <string>
@@ -31,4 +30,4 @@ class OLEDDisplayClockViewHandler:public TimeDisplayHandler
 };
 
 //===================================================================================
-#endif
+

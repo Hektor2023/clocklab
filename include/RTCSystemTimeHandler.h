@@ -20,8 +20,7 @@
  * @email naguissa@foroelectro.net
  */
 
-#ifndef rtcsystemtimehandler_h
-#define rtcsystemtimehandler_h
+#pragma once
 
 #include "Arduino.h"
 #include "uRTCLib.h"
@@ -56,4 +55,3 @@ class RTCSystemTimeHandler:public TimeHandler
 };
 
 //===================================================================================
-#endif

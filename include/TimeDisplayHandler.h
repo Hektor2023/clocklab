@@ -1,6 +1,4 @@
-#ifndef timeviewhandler_h
-#define timeviewhandler_h
-
+#pragma once
 
 #include <cstddef>
 
@@ -48,4 +46,4 @@ class TimeDisplayHandler
 };
 
 //===================================================================================
-#endif
+

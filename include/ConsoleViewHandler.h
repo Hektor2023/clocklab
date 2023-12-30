@@ -1,5 +1,4 @@
-#ifndef consoleviewhandler_h
-#define consoleviewhandler_h
+#pragma once
 
 #include <cstddef>
 
@@ -23,4 +22,4 @@ class ConsoleViewHandler:public TimeDisplayHandler
 ;};
 
 //===================================================================================
-#endif
+

@@ -1,11 +1,7 @@
-#ifndef mytime_h
-#define mytime_h
-
+#pragma once
 
 typedef unsigned char  uint8_t;
  
-
-
 #include <cstddef>
 #include <stdio.h>
 #include <arduino.h>
@@ -65,4 +61,4 @@ class MyTime
 
 
 //===================================================================================
-#endif
+

@@ -7,6 +7,7 @@
 
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
+#include "Tools.h"
   
 #include <NTPClient.h>   // https://github.com/arduino-libraries/NTPClient
 
@@ -94,21 +95,6 @@ static SemaphoreHandle_t  g_xSemaphoreRtc;
 AdjustmentAdvisor advisor;
 
 //=============================================================================================================
-void printTick(void)
-{
-  Serial.print( xTaskGetTickCount());
-  Serial.print( ":\t");
-}
-
-//=============================================================================================================
-void displayTimestamp( const char *srcName, Timestamp timestamp)
-{
-  char timestampAsString[ timestamp.getStringBufferSize()];
-
-  Serial.printf( "\n%s Timestamp= %s\n",srcName, timestamp.toString( timestampAsString ));
-} 
-
-//=============================================================================================================
 void consoleInTask(void *pvParameter) 
 {
   uint8_t buttons = 0;
@@ -146,8 +132,6 @@ void consoleOutTask(void *pvParameter)
     printTick();  Serial.print( "  console_task  ");  Serial.printf( "-> %d   ", rcvMsg.type);
     displayTimestamp.setEpochTime( rcvMsg.epoch);
 
-    g_ConsoleViewHandler.updateLocation( g_coordinates);
-    g_ConsoleViewHandler.updateSunriseSunset( g_SunriseTime, g_SunsetTime);
     g_ConsoleViewHandler.updateTime( displayTimestamp);
     
   }
@@ -393,7 +377,7 @@ void rtcWriteTask(void *pvParameter)
   for(;;)
   { 
     vTaskDelay( 10 / portTICK_RATE_MS);
-    advisor.setSelectedSource( src_type_t::GPS);
+//    advisor.setSelectedSource( src_type_t::GPS);
 
     if (xQueueReceive( g_queueTimePattern, (void *)&rtcWriteMsg, 10) == pdTRUE) 
     {

@@ -1,5 +1,4 @@
-#ifndef mydate_h
-#define mydate_h
+#pragma once
 
 #include <cstddef>
 #include "Arduino.h"
@@ -67,4 +66,4 @@ class MyDate
 }; 
 
 //===================================================================================
-#endif
+

@@ -1,5 +1,4 @@
-#ifndef ledclockviewhandler_h
-#define ledclockviewhandler_h
+#pragma once
 
 #include <cstddef>
 #include <string>
@@ -38,4 +37,3 @@ class LEDClockViewHandler:public TimeDisplayHandler
 };
 
 //===================================================================================
-#endif

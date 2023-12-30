@@ -1,5 +1,4 @@
-#ifndef GPSTimeHandler_h
-#define  GPSTimeHandler_h
+#pragma once
 
 #include <stdint.h>
 #include "TimeHandler.h"
@@ -48,6 +47,4 @@ class GPSTimeHandler2:public TimeHandler
 
 };
 
-
 //===================================================================================
-#endif 

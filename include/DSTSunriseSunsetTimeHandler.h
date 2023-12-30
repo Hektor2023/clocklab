@@ -1,5 +1,4 @@
-#ifndef DSTSunriseSunsetTimeHandler_h
-#define  DSTSunriseSunsetTimeHandler_h
+#pragma once
 
 #include <stdint.h>
 #include "Timehandler.h"
@@ -41,6 +40,3 @@ class DSTSunriseSunsetTimeHandler:public TimeHandler
 };
 
 //===================================================================================
-
-
-#endif

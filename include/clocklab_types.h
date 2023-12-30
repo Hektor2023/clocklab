@@ -1,5 +1,4 @@
-#ifndef clocklab_types_h
-#define clocklab_types_h
+#pragma once
 
 
 #include <Arduino.h>
@@ -21,5 +20,3 @@ typedef struct {
   uint32_t    epochMillis;
   uint32_t    rtcMillis;
 } MessageTime_t;
-
-#endif

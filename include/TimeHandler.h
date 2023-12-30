@@ -1,7 +1,4 @@
-#ifndef timehandler_h
-#define timehandler_h
-
-
+#pragma once
 #include <cstddef>
 
 #include "Timestamp.h"
@@ -31,4 +28,4 @@ class TimeHandler
 };
 
 //===================================================================================
-#endif
+

@@ -1,5 +1,4 @@
-#ifndef splitterhandler_h
-#define splitterhandler_h
+#pragma once
 
 #include "TimeHandler.h"
 
@@ -18,4 +17,4 @@ class SplitterTimeHandler:public TimeHandler
 };
 
 //===================================================================================
-#endif
+

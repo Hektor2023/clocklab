@@ -1,6 +1,4 @@
-#ifndef ManualTimeHandler_h
-#define ManualTimeHandler_h
-
+#pragma once
 
 #include <cstddef>
 #include <string>
@@ -32,4 +30,3 @@ class ManualTimeHandler
 };
 
 //===================================================================================
-#endif // ManualTimeHandler

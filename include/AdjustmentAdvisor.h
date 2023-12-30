@@ -1,5 +1,4 @@
-#ifndef AdjustmentAdvisor_h
-#define AdjustmentAdvisor_h
+#pragma once
 
 #include "clocklab_types.h" 
 
@@ -18,5 +17,3 @@ class AdjustmentAdvisor
 };
 
 //=============================================================================================================
-
-#endif // AdjustmentAdvisor

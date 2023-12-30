@@ -1,5 +1,4 @@
-#ifndef timer_h
-#define timer_h
+#pragma once
 
 #include <cstddef>
 #include "Arduino.h"
@@ -40,4 +39,3 @@ class Timer
 
 //===================================================================================
 
-#endif
