@@ -3,6 +3,7 @@
 #include <WiFiUdp.h>
 #include <SPI.h>
 #include <string.h>
+#include "clocklab_types.h"
 
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
@@ -11,36 +12,25 @@
 
 #include "Timestamp.h"
 #include "ConsoleViewHandler.h"
-#include "RTCSystemTimeHandler.h"
+
 #include "SplitterTimeHandler.h"
 
 #include "DSTSunriseSunsetTimeHandler.h"
-#include "Controller.h"
-#include "LEDClockViewHandler.h"
 
+#include "LEDClockViewHandler.h"
 #include "OLEDDisplayClockViewHandler.h"
+
+#include "RTCSystemTimeHandler.h"
 #include "GPSTimeHandler2.h"
+#include "ManualTimeHandler.h"
+
 #include "AdjustmentAdvisor.h"
 #include "WifiCred.h"
-#include "clocklab_types.h"
+
+#include "Controller.h"
 
 const  char*   gc_Ssid { SSID };
 const  char*   gc_Password{ PASSWD };
-
-typedef enum
-{ 
-  eMode     =  0x01,
-
-  eYear     =  0x02,
-  eMonth    =  0x04,
-  eDay      =  0x08,
-
-  eHour     =  0x10,
-  eMinute   =  0x20,
-
-  ePlus     =  0x40,
-  eMinus    =  0x80,
-}  t_Buttons;
 
 //=============================================================================================================
 
@@ -93,8 +83,9 @@ RTCSystemTimeHandler        g_SystemTimeHandler(  &g_TimeZoneDSTHandler, gc_sda_
  
 
 GPSTimeHandler2             g_GPSHandler( nullptr, g_coordinates);
+ManualTimeHandler           g_ManualAdjHandler;
 
-Controller                  g_Controller( &g_SystemTimeHandler);
+Controller                  g_Controller;
 
 static xQueueHandle       g_queueTimePattern= xQueueCreate( 10, sizeof( MessageTime_t));
 static xQueueHandle       g_queueDisplay=     xQueueCreate( 10, sizeof( MessageTime_t));
@@ -122,47 +113,14 @@ void consoleInTask(void *pvParameter)
 {
   uint8_t buttons = 0;
 
-
   for(;;)
   {
     vTaskDelay( 100 / portTICK_RATE_MS);
 
     buttons= g_LEDViewHandler.buttonsRead();
-    if( buttons!= 0)  
-    {
-      Serial.printf("| Button..|  %x\n", buttons);
-    }
+    g_Controller.handle( ( Buttons_t)buttons);
 
-    switch( (t_Buttons)buttons)
-    {
-      case  eMode:     
-          if( !g_Controller.isAdjustMode())
-          {
-            Serial.printf("| ADJUST|\n");
-            g_Controller.execute( "stop");
-            g_LEDViewHandler.modeAdjust( true);
-          }
-          else
-          {
-            Serial.printf("| COUNTING|\n");
-            g_Controller.execute( "start");
-            g_LEDViewHandler.modeAdjust( false);
-          }
-          break;
-
-//    case  eYear:      controller.execute("year");   break;
-//    case  eMonth:     controller.execute("month");  break;
-//    case  eDay:       controller.execute("day");    break;
-      case  eHour:      g_Controller.execute("hour");   break;
-      case  eMinute:    g_Controller.execute("minute"); break;
-
-      case  ePlus:      g_Controller.execute("+");      break;
-      case  eMinus:     g_Controller.execute("-");      break;
-
-      default:
-        break;
-    }
-
+    // g_Controller.getState();
   }
 
   vTaskDelete(nullptr);  
@@ -315,6 +273,34 @@ void gpsTask(void *pvParameter)
 }
 
 //=============================================================================================================
+void manualAdjustmentTask(void *pvParameter)
+{
+  MessageTime_t   adj_msg;
+  adj_msg.type=   src_type_t::MANUAL;
+
+  vTaskDelay( 800 / portTICK_RATE_MS);
+  printTick();  Serial.print( "\n manualAdjustmentTask:  start\n");  
+
+  for(;;)
+  {
+    vTaskDelay(  100 / portTICK_RATE_MS);
+
+    Timestamp timeStamp= g_ManualAdjHandler.getTimestamp();
+    adj_msg.epoch = timeStamp.getEpochTime();
+    adj_msg.rtcMillis= millis();
+    while ( xQueueSend( g_queueTimePattern, (void *)&adj_msg, 0) != pdTRUE) 
+    {
+      Serial.println("ERROR: Could not put MAN ADJ time to queue."); 
+      vTaskDelay( 2 / portTICK_RATE_MS); 
+    }
+//    Serial.printf("| MANUAL ADJ...!!!!|\n");
+
+  }
+
+  vTaskDelete(nullptr);
+}
+
+//=============================================================================================================
 void keyboard_task(void *pvParameter)
 {
   vTaskDelay( 20000 / portTICK_RATE_MS);
@@ -453,12 +439,14 @@ void setup()
   vTaskDelay( 3000 / portTICK_RATE_MS);
   Serial.print("setup: start ======================\n"); 
 
-  xTaskCreate( &gpsTask,        "gps_task",         4048, nullptr, 5, nullptr);
-  xTaskCreate( &ntpTask,        "ntp_task",         4048, nullptr, 5, nullptr);
-  xTaskCreate( &rtcWriteTask,   "rtc_write_task",   2048, nullptr, 5, nullptr);
-  xTaskCreate( &rtcReadTask,    "rtc_read_task",    2048, nullptr, 5, nullptr);
-  xTaskCreate( &consoleInTask,  "console_in_task",  3048, nullptr, 5, nullptr);
-  xTaskCreate( &consoleOutTask, "console_out_task",  3048, nullptr, 5, nullptr);
+  xTaskCreate( &gpsTask,              "gps_task",         4048, nullptr, 5, nullptr);
+  xTaskCreate( &ntpTask,              "ntp_task",         4048, nullptr, 5, nullptr);
+  xTaskCreate( &manualAdjustmentTask, "manual_adj_task",  2048, nullptr, 5, nullptr);
+  xTaskCreate( &rtcWriteTask,         "rtc_write_task",   2048, nullptr, 5, nullptr);
+  xTaskCreate( &rtcReadTask,          "rtc_read_task",    2048, nullptr, 5, nullptr);
+  xTaskCreate( &consoleInTask,        "console_in_task",  3048, nullptr, 5, nullptr);
+  xTaskCreate( &consoleOutTask,       "console_out_task", 3048, nullptr, 5, nullptr);
+
 }
 
 //=============================================================================================================

@@ -4,32 +4,38 @@
 
 #include <cstddef>
 #include <string>
-#include "MyDate.h"
-#include "Timestamp.h"
-#include "TimeHandler.h"
-#include "RTCSystemTimeHandler.h"
 
+typedef enum  // counting from the left
+{ 
+  eButton1 = 0x01,
+  eButton2 = 0x02,
+  eButton3 = 0x04,
+  eButton4 = 0x08,
+
+  eButton5 = 0x10,
+  eButton6 = 0x20,
+  eButton7 = 0x40,
+  eButton8 = 0x80,
+}  Buttons_t;
+
+typedef enum
+{
+   eNOP,
+}  State_t;
 
 //===================================================================================
 class Controller
 {
-  
-   private: 
-      enum class variable{ Hour, Minute, Second, Day, Month, Year};
-      enum class direction{ Plus, Minus};
- 
-      RTCSystemTimeHandler&  systemTimeHandler;
-      bool adjustMode;
-
    private:
-      void adjust( Controller::variable var, Controller::direction dir);
+      State_t  state;
 
    public:
-      Controller( RTCSystemTimeHandler* systemTimeHandler);
+      Controller( void);
       ~Controller( void)= default;
-      
-      bool isAdjustMode( void);
-      const std::string execute( const std::string command);
+
+      void handle( Buttons_t button);
+
+      State_t getState( void);
 };
 
 //===================================================================================

@@ -3,155 +3,54 @@
 #include "Arduino.h"
 
 //===================================================================================
-Controller::Controller( RTCSystemTimeHandler* systemTimeHandler)
-  :systemTimeHandler( *systemTimeHandler), adjustMode( false) {};
+Controller::Controller( void)
+  :state( State_t::eNOP)
+{};
   
-
 //===================================================================================
-void Controller::adjust( Controller::variable var, Controller::direction dir)
+void Controller::handle( Buttons_t buttons)
 {
-  Timestamp& systemTimestamp= systemTimeHandler.getTimestamp();
+  if( buttons!= 0)  
+  {
+    Serial.printf("| Button..|  %x\n", buttons);
+  }
 
-  switch( var)
-   {  
-      case variable::Hour:
-          {
-            MyTime my_time( systemTimestamp.getTime());      
-            (dir== direction::Plus)?  my_time.hourInc(): my_time.hourDec();
-            systemTimestamp.setTime( my_time);
-            
-          }
+  switch( buttons)
+    {
+      case  Buttons_t:: eButton1:
           break;
 
-      case variable::Minute:
-          {
-            MyTime my_time( systemTimestamp.getTime());
-            (dir== direction::Plus)?  my_time.minuteInc(): my_time.minuteDec();
-            systemTimestamp.setTime( my_time);
-          }
-          break;
-          
-      case variable::Second:
-          {
-            MyTime my_time( systemTimestamp.getTime());
-            (dir== direction::Plus)?  my_time.secondInc(): my_time.secondDec();
-            systemTimestamp.setTime( my_time);
-          }      
+      case  Buttons_t:: eButton2:
           break;
 
-      case variable::Day:
-          {
-            MyDate my_date( systemTimestamp.getDate());
-            (dir== direction::Plus)?  my_date.dayInc(): my_date.dayDec();
-            systemTimestamp.setDate( my_date);           
-          }
+      case  Buttons_t:: eButton3:
           break;
 
-      case variable::Month:
-          {
-            MyDate my_date( systemTimestamp.getDate());
-            (dir== direction::Plus)?  my_date.monthInc(): my_date.monthDec();
-            systemTimestamp.setDate( my_date); 
-          }
+      case  Buttons_t:: eButton4:
           break;
 
-      case variable::Year:
-          {
-            MyDate my_date( systemTimestamp.getDate());
-            (dir== direction::Plus)?  my_date.yearInc(): my_date.yearDec();
-            systemTimestamp.setDate( my_date); 
-          }
+      case  Buttons_t:: eButton5:
           break;
 
-      default: 
-          return;
-    };
-   
-  systemTimeHandler.setTimestamp( systemTimestamp);
-  systemTimeHandler.forceUpdateTime();
+      case  Buttons_t:: eButton6:
+          break;
+
+      case  Buttons_t:: eButton7:
+          break;
+
+      case  Buttons_t:: eButton8:
+          break;
+
+      default:
+        break;
+    }
+
 }
 
 //===================================================================================
-bool Controller::isAdjustMode( void)
+State_t Controller::getState( void)
 {
-  return( adjustMode);
+  return state;
 }
-
-//===================================================================================
-const std::string Controller::execute( const std::string command) 
-{
-  
-  if(( command.find("stop") ==0) ||( command.find("enter") ==0))
-  {
-    adjustMode= true;
-//    systemTimeHandler.manualMode( true);
-    return("Enter manual mode");
-  }
-    
-  if( !isAdjustMode())
-  {
-     return( "Error");
-  }
-
-  if(( command.find("start") ==0) ||( command.find("exit") ==0))
-  {
-    adjustMode= false;
- //   systemTimeHandler.manualMode( false);
-    return("Exit from manual mode");
-  }
-
-  static Controller::variable  var;
-
-  if( command.find("hour")==0)
-  {
-    var= Controller::variable::Hour;   
-    return("Adjust hour");      
-  } 
-
-  if( command.find("minute")==0)
-  {
-    var= Controller::variable::Minute;
-    return("Adjust minute"); 
-  } 
-        
-  if( command.find("second")==0)
-  {
-    var= Controller::variable::Second;
-    return("Adjust second"); 
-  } 
-
-  if( command.find("day")==0)
-  {
-    var= Controller::variable::Day;
-    return("Adjust day");    
-  }
-         
-  if( command.find("month")==0)
-  {
-    var=Controller::variable::Month;
-    return("Adjust month");    
-  } 
-        
-  if( command.find("year")==0)
-  {
-    var= Controller::variable::Year;
-    return("Adjust year");    
-  }    
-
-  if( command.find("+")==0)
-  {
-    adjust( var, Controller::direction::Plus);
-    return("Adjusted");   
-  }
-  else  
-  if( command.find("-")==0)
-  {
-    adjust( var, Controller::direction::Minus);
-    return("Adjusted"); 
-  }
-  
-
-  return( "Error");           
-}; 
 
 //===================================================================================
