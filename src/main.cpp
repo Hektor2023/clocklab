@@ -20,79 +20,29 @@
 
 #include "OLEDDisplayClockViewHandler.h"
 #include "GPSTimeHandler2.h"
-
+#include "AdjustmentAdvisor.h"
 #include "WifiCred.h"
-
+#include "clocklab_types.h"
 
 const  char*   gc_Ssid { SSID };
 const  char*   gc_Password{ PASSWD };
 
-typedef uint32_t  epoch_t;
-
 typedef enum
-        { 
-          NONE= 0,
-          MANUAL,
-          RTC,
-          NTP,
-          GPS
-        } src_type_t;
+{ 
+  eMode     =  0x01,
 
+  eYear     =  0x02,
+  eMonth    =  0x04,
+  eDay      =  0x08,
 
-typedef struct {
-  src_type_t  type= src_type_t::NONE;
-  epoch_t     epoch;
-  uint32_t    epochMillis;
-  uint32_t    rtcMillis;
-} MessageTime_t;
+  eHour     =  0x10,
+  eMinute   =  0x20,
+
+  ePlus     =  0x40,
+  eMinus    =  0x80,
+}  t_Buttons;
 
 //=============================================================================================================
-class AdjustmentAdvisor
-{
-  private:
-    src_type_t selectedSource;
-
-  public:
-    AdjustmentAdvisor( void);
-    ~AdjustmentAdvisor() {};
-
-    void setSelectedSource( src_type_t src);
-    bool routeSource( MessageTime_t &bestSrc_msg, const MessageTime_t &new_msg);
-};
-
-//=============================================================================================================
-AdjustmentAdvisor::AdjustmentAdvisor( void)
-  :selectedSource( src_type_t::NTP)
-{
-
-}
-
-//=============================================================================================================
-void AdjustmentAdvisor::setSelectedSource( src_type_t src)
-{
-  selectedSource= src;
-}
-
-//=============================================================================================================
-bool AdjustmentAdvisor::routeSource( MessageTime_t &bestSrc_msg, const MessageTime_t &new_msg)
-{
-  const char* srcName[] { "NONE","MANUAL","RTC","NTP","GPS"}; 
-  bool success= false;
-
-  if( new_msg.type== selectedSource)
-  {
-    bestSrc_msg= new_msg;
-
-    Serial.printf( "Selected src: %s\n", srcName[ ( int)bestSrc_msg.type]);
-    success= true;
-  }
-
-  return success;
-}
-
-//=============================================================================================================
-
-
 
 constexpr int gc_XCoreId_0{ 0};
 constexpr int gc_XCoreId_1{ 1};
@@ -160,7 +110,66 @@ void printTick(void)
 }
 
 //=============================================================================================================
-void console_task(void *pvParameter)
+void displayTimestamp( const char *srcName, Timestamp timestamp)
+{
+  char timestampAsString[ timestamp.getStringBufferSize()];
+
+  Serial.printf( "\n%s Timestamp= %s\n",srcName, timestamp.toString( timestampAsString ));
+} 
+
+//=============================================================================================================
+void consoleInTask(void *pvParameter) 
+{
+  uint8_t buttons = 0;
+
+
+  for(;;)
+  {
+    vTaskDelay( 100 / portTICK_RATE_MS);
+
+    buttons= g_LEDViewHandler.buttonsRead();
+    if( buttons!= 0)  
+    {
+      Serial.printf("| Button..|  %x\n", buttons);
+    }
+
+    switch( (t_Buttons)buttons)
+    {
+      case  eMode:     
+          if( !g_Controller.isAdjustMode())
+          {
+            Serial.printf("| ADJUST|\n");
+            g_Controller.execute( "stop");
+            g_LEDViewHandler.modeAdjust( true);
+          }
+          else
+          {
+            Serial.printf("| COUNTING|\n");
+            g_Controller.execute( "start");
+            g_LEDViewHandler.modeAdjust( false);
+          }
+          break;
+
+//    case  eYear:      controller.execute("year");   break;
+//    case  eMonth:     controller.execute("month");  break;
+//    case  eDay:       controller.execute("day");    break;
+      case  eHour:      g_Controller.execute("hour");   break;
+      case  eMinute:    g_Controller.execute("minute"); break;
+
+      case  ePlus:      g_Controller.execute("+");      break;
+      case  eMinus:     g_Controller.execute("-");      break;
+
+      default:
+        break;
+    }
+
+  }
+
+  vTaskDelete(nullptr);  
+}
+
+//=============================================================================================================
+void consoleOutTask(void *pvParameter)
 {
   // initialize digital pin LED_BUILTIN as an output.
   Timestamp       displayTimestamp;
@@ -189,7 +198,7 @@ void console_task(void *pvParameter)
 }
 
 //=============================================================================================================
-void ntp_task(void *pvParameter)
+void ntpTask(void *pvParameter)
 {
   WiFiUDP     udp;
   NTPClient   timeClient( udp);
@@ -224,10 +233,12 @@ void ntp_task(void *pvParameter)
     ntp_msg.rtcMillis= millis();
 //
 //    Serial.printf("NTP  EpochMillis => %u || RTCmillis => %u\n",  ntp_msg.epochMillis, ntp_msg.rtcMillis);  
+
     Timestamp timestamp;
-    timestamp.setEpochTime( ntp_msg.epoch); 
-    char timestampAsString[ timestamp.getStringBufferSize()];
-    Serial.printf( "\nNTP Timestamp= %s. %u ||%u \n",timestamp.toString( timestampAsString ),  ntp_msg.epochMillis, ntp_msg.rtcMillis);
+    timestamp.setEpochTime( ntp_msg.epoch);
+
+    displayTimestamp( "NTP", timestamp); 
+    
 //
     while ( xQueueSend( g_queueTimePattern, (void *)&ntp_msg, 10) != pdTRUE) 
     {
@@ -244,7 +255,7 @@ void ntp_task(void *pvParameter)
 }
 
 //=============================================================================================================
-void gps_task(void *pvParameter)
+void gpsTask(void *pvParameter)
 {
   char c;
   MessageTime_t   gps_msg;
@@ -289,9 +300,8 @@ void gps_task(void *pvParameter)
 
     Timestamp timestamp;
     timestamp.setEpochTime( gps_msg.epoch); 
-    char timestampAsString[ timestamp.getStringBufferSize()];
-    Serial.printf( "\nGPS Timestamp= %s. %u ||%u \n",timestamp.toString( timestampAsString ),  gps_msg.epochMillis, gps_msg.rtcMillis);
-//    Serial.printf("GPS EpochMillis => %u || RTCmillis => %u\n",  gps_msg.epochMillis, gps_msg.rtcMillis);
+    displayTimestamp( "GPS", timestamp);
+     
     while ( xQueueSend( g_queueTimePattern, (void *)&gps_msg, 0) != pdTRUE) 
     {
       Serial.println("ERROR: Could not put GPS time to queue."); 
@@ -341,7 +351,7 @@ void keyboard_task(void *pvParameter)
 }
 
 //=============================================================================================================
-void rtc_read_task(void *pvParameter)  
+void rtcReadTask(void *pvParameter)  
 {
   Timestamp       rtcTimestamp;
   MessageTime_t   rtcReadMsg;
@@ -385,7 +395,7 @@ void rtc_read_task(void *pvParameter)
 }
 
 //=============================================================================================================
-void rtc_write_task(void *pvParameter)
+void rtcWriteTask(void *pvParameter)
 {
   Timestamp       rtcTimestamp;
   MessageTime_t   rtcWriteMsg;
@@ -411,8 +421,7 @@ void rtc_write_task(void *pvParameter)
       {
         Timestamp timestamp;
         timestamp.setEpochTime( bestSrcMsg.epoch); 
-        char timestampAsString[ timestamp.getStringBufferSize()];
-        Serial.printf( "\nRTCs Timestamp= %s. %u ||%u \n",timestamp.toString( timestampAsString ),  bestSrcMsg.epochMillis, millis()- bestSrcMsg.rtcMillis);
+        displayTimestamp( "RTC", timestamp); 
       }      
       if( xSemaphoreTake(  g_xSemaphoreRtc,0) == pdTRUE)
       {
@@ -444,73 +453,17 @@ void setup()
   vTaskDelay( 3000 / portTICK_RATE_MS);
   Serial.print("setup: start ======================\n"); 
 
-  xTaskCreate( &gps_task,       "gps_task",       4048, nullptr, 5, nullptr);
-  xTaskCreate( &ntp_task,       "ntp_task",       4048, nullptr, 5, nullptr);
-  xTaskCreate( &rtc_write_task, "rtc_write_task", 2048, nullptr, 5, nullptr);
-  xTaskCreate( &rtc_read_task,  "rtc_read_task",  2048, nullptr, 5, nullptr);
-  xTaskCreate( &console_task,   "console_task",   3048, nullptr, 5, nullptr);
+  xTaskCreate( &gpsTask,        "gps_task",         4048, nullptr, 5, nullptr);
+  xTaskCreate( &ntpTask,        "ntp_task",         4048, nullptr, 5, nullptr);
+  xTaskCreate( &rtcWriteTask,   "rtc_write_task",   2048, nullptr, 5, nullptr);
+  xTaskCreate( &rtcReadTask,    "rtc_read_task",    2048, nullptr, 5, nullptr);
+  xTaskCreate( &consoleInTask,  "console_in_task",  3048, nullptr, 5, nullptr);
+  xTaskCreate( &consoleOutTask, "console_out_task",  3048, nullptr, 5, nullptr);
 }
-
-//=============================================================================================================
-
-typedef 
-enum
-{ 
-  eMode     =  0x01,
-
-  eYear     =  0x02,
-  eMonth    =  0x04,
-  eDay      =  0x08,
-
-  eHour     =  0x10,
-  eMinute   =  0x20,
-
-  ePlus     =  0x40,
-  eMinus    =  0x80,
-}  t_Buttons;
-
-uint8_t buttons=0;
 
 //=============================================================================================================
 void loop() 
 {
-  vTaskDelay( 100 / portTICK_RATE_MS);
-
-  buttons= g_LEDViewHandler.buttonsRead();
-  if( buttons!= 0)  
-  {
-    Serial.printf("| Button..|  %x\n", buttons);
-  }
-
-  switch( (t_Buttons)buttons)
-  {
-    case  eMode:     
-          if( !g_Controller.isAdjustMode())
-          {
-            Serial.printf("| ADJUST|\n");
-            g_Controller.execute( "stop");
-            g_LEDViewHandler.modeAdjust( true);
-          }
-          else
-          {
-            Serial.printf("| COUNTING|\n");
-            g_Controller.execute( "start");
-            g_LEDViewHandler.modeAdjust( false);
-          }
-          break;
-
-//    case  eYear:      controller.execute("year");   break;
-//    case  eMonth:     controller.execute("month");  break;
-//    case  eDay:       controller.execute("day");    break;
-    case  eHour:      g_Controller.execute("hour");   break;
-    case  eMinute:    g_Controller.execute("minute"); break;
-
-    case  ePlus:      g_Controller.execute("+");      break;
-    case  eMinus:     g_Controller.execute("-");      break;
-
-    default:
-        break;
-  }
 
 }
 
