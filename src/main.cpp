@@ -182,79 +182,9 @@ void console_task(void *pvParameter)
     g_ConsoleViewHandler.updateLocation( g_coordinates);
     g_ConsoleViewHandler.updateSunriseSunset( g_SunriseTime, g_SunsetTime);
     g_ConsoleViewHandler.updateTime( displayTimestamp);
-    {
-      static uint8_t lastDay=0;
-      uint8_t currentDay= displayTimestamp.getDate().getDay();
-      if( currentDay> lastDay)
-      {
-          lastDay= currentDay;
-
-          char timeStrBuffer[ MyTime::getStringBufferSize()];
-          Serial.printf("\t  => Sunrise: %s  ",   g_SunriseTime.toString( timeStrBuffer));
-          Serial.printf("/      Sunset:  %s  \n", g_SunsetTime.toString( timeStrBuffer));  
-      }
-
-    }  
-
-  }
-
-  vTaskDelete(nullptr);
-}
-
-//=============================================================================================================
-void rtc_read_task(void *pvParameter)  
-{
-  Timestamp       rtcTimestamp;
-  MessageTime_t   rtcReadMsg;
-  MessageTime_t   rtcWriteMsg;
-  MessageTime_t   bestSrcMsg;
-  rtcReadMsg.type= src_type_t::RTC;
-
-  printTick();  Serial.print( "\nRTC_READ_task:  start\n");
-  g_SystemTimeHandler.init();
-
-  advisor.setSelectedSource( src_type_t::GPS);
-  for(;;)
-  { 
-    vTaskDelay( 10 / portTICK_RATE_MS);
-
-    if( g_SystemTimeHandler.updateTime())
-    {
-        Serial.print( "RTC: UPDATE\n");
-      
-        if( xQueueReceive( g_queueTimePattern, (void *)&rtcWriteMsg, 0) == pdTRUE) 
-        {
-          if( advisor.routeSource( bestSrcMsg, rtcWriteMsg))
-          {
-            rtcTimestamp.setEpochTime( bestSrcMsg.epoch);
-
-//            Timestamp timestamp;
-//            timestamp.setEpochTime( bestSrcMsg.epoch); 
-//            char timestampAsString[ timestamp.getStringBufferSize()];
-//                Serial.printf( "\nRTCs Timestamp= %s. %u ||%u \n",timestamp.toString( timestampAsString ),  bestSrcMsg.epochMillis, millis()- bestSrcMsg.rtcMillis);
-                
-            g_SystemTimeHandler.setTimestamp( rtcTimestamp);
-          }
-                
-        }
-
-        // new rtc second 
-        // set time for Display
-        rtcReadMsg.epoch= g_LocalTimestamp.getEpochTime();
-        rtcReadMsg.epochMillis= 0;
-        rtcReadMsg.rtcMillis= millis();
-
-        while( xQueueSend( g_queueDisplay, (void *)&rtcReadMsg, 0) != pdTRUE) 
-        {
-          Serial.println("ERROR: Could not put RTC read time to queue.");  
-        }
-//          Serial.print( "\nRTC_READ_task: AFTER SEND systemTimeHandler.updateTime()\n");   
-        
-    } 
     
-
   }
-  
+
   vTaskDelete(nullptr);
 }
 
@@ -318,7 +248,7 @@ void gps_task(void *pvParameter)
 {
   char c;
   MessageTime_t   gps_msg;
-  gps_msg.type= src_type_t::GPS;
+  gps_msg.type=   src_type_t::GPS;
 
   Serial2.begin(9600);
   Serial2.flush();
@@ -411,6 +341,97 @@ void keyboard_task(void *pvParameter)
 }
 
 //=============================================================================================================
+void rtc_read_task(void *pvParameter)  
+{
+  Timestamp       rtcTimestamp;
+  MessageTime_t   rtcReadMsg;
+
+  printTick();  Serial.print( "\nRTC_READ_task:  start\n");
+  g_SystemTimeHandler.init();
+  
+  for(;;)
+  { 
+    vTaskDelay( 10 / portTICK_RATE_MS);
+
+    if( xSemaphoreTake( g_xSemaphoreRtc,0) == pdTRUE)
+    {
+      
+      bool timeUpdated = g_SystemTimeHandler.updateTime(); 
+      xSemaphoreGive(  g_xSemaphoreRtc);
+
+      // g_LocalTimestamp updated by g_SystemTimeHandler
+      if( timeUpdated)
+      {
+        Serial.print( "RTC: UPDATE\n");
+      
+        // set time for Display
+        rtcReadMsg.epoch= g_LocalTimestamp.getEpochTime();
+        rtcReadMsg.epochMillis= 0;
+        rtcReadMsg.rtcMillis= millis();
+
+        while( xQueueSend( g_queueDisplay, (void *)&rtcReadMsg, 0) != pdTRUE) 
+        {
+          Serial.println("ERROR: Could not put RTC read time to queue.");  
+        }
+//          Serial.print( "\nRTC_READ_task: AFTER SEND systemTimeHandler.updateTime()\n");   
+        
+      } 
+      
+    }
+
+  }
+  
+  vTaskDelete(nullptr);
+}
+
+//=============================================================================================================
+void rtc_write_task(void *pvParameter)
+{
+  Timestamp       rtcTimestamp;
+  MessageTime_t   rtcWriteMsg;
+  MessageTime_t   bestSrcMsg;
+
+
+  printTick();  Serial.print( "\nRTC_WRITE_task:  start\n");
+
+  for(;;)
+  { 
+    vTaskDelay( 10 / portTICK_RATE_MS);
+    advisor.setSelectedSource( src_type_t::GPS);
+
+    if (xQueueReceive( g_queueTimePattern, (void *)&rtcWriteMsg, 10) == pdTRUE) 
+    {
+      if( !advisor.routeSource( bestSrcMsg, rtcWriteMsg))
+      {
+        continue;
+      }
+
+      // set time for RTC
+      rtcTimestamp.setEpochTime(  bestSrcMsg.epoch);
+      {
+        Timestamp timestamp;
+        timestamp.setEpochTime( bestSrcMsg.epoch); 
+        char timestampAsString[ timestamp.getStringBufferSize()];
+        Serial.printf( "\nRTCs Timestamp= %s. %u ||%u \n",timestamp.toString( timestampAsString ),  bestSrcMsg.epochMillis, millis()- bestSrcMsg.rtcMillis);
+      }      
+      if( xSemaphoreTake(  g_xSemaphoreRtc,0) == pdTRUE)
+      {
+//          Serial.print( "\nRTC_WRITE_task:  setTimestamp\n");
+        g_SystemTimeHandler.setTimestamp( rtcTimestamp);
+
+//        lastTimestamp= g_SystemTimeHandler.getTimestamp();
+        xSemaphoreGive(  g_xSemaphoreRtc);
+      }
+
+    }
+
+    
+  }
+  
+  vTaskDelete(nullptr);
+}  
+
+//=============================================================================================================
 void setup() 
 {
   g_xSemaphoreRtc = xSemaphoreCreateMutex();
@@ -425,10 +446,12 @@ void setup()
 
   xTaskCreate( &gps_task,       "gps_task",       4048, nullptr, 5, nullptr);
   xTaskCreate( &ntp_task,       "ntp_task",       4048, nullptr, 5, nullptr);
-
+  xTaskCreate( &rtc_write_task, "rtc_write_task", 2048, nullptr, 5, nullptr);
   xTaskCreate( &rtc_read_task,  "rtc_read_task",  2048, nullptr, 5, nullptr);
   xTaskCreate( &console_task,   "console_task",   3048, nullptr, 5, nullptr);
 }
+
+//=============================================================================================================
 
 typedef 
 enum
@@ -448,9 +471,12 @@ enum
 
 uint8_t buttons=0;
 
-void loop() {
-  buttons= g_LEDViewHandler.buttonsRead();
+//=============================================================================================================
+void loop() 
+{
+  vTaskDelay( 100 / portTICK_RATE_MS);
 
+  buttons= g_LEDViewHandler.buttonsRead();
   if( buttons!= 0)  
   {
     Serial.printf("| Button..|  %x\n", buttons);
@@ -485,8 +511,6 @@ void loop() {
     default:
         break;
   }
-
-  vTaskDelay( 100 / portTICK_RATE_MS);
 
 }
 
