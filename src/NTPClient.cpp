@@ -87,20 +87,26 @@ bool NTPClient::forceUpdate() {
   #endif
 
   // flush any existing packets
-  while(this->_udp->parsePacket() != 0)
+  while(this->_udp->parsePacket() != 0) 
+  {
     this->_udp->flush();
+  }
 
   this->sendNTPPacket();
 
   // Wait till data is there or timeout...
   byte timeout = 0;
   int cb = 0;
-  do {
+  do 
+  {
     delay ( 10 );
     cb = this->_udp->parsePacket();
-    if (timeout > 100) return false; // timeout after 1000 ms
+    if (timeout > 100) 
+    {
+      return false; // timeout after 1000 ms
+    }
     timeout++;
-  } while (cb == 0);
+  }while (cb == 0);
 
   this->_lastUpdate = millis() - (10 * (timeout + 1)); // Account for delay in reading the time
 
@@ -122,9 +128,12 @@ bool NTPClient::forceUpdate() {
 }
 
 bool NTPClient::update() {
-  if ((millis() - this->_lastUpdate >= this->_updateInterval)     // Update after _updateInterval
-    || this->_lastUpdate == 0) {                                // Update if there was no update yet.
-    if (!this->_udpSetup || this->_port != NTP_DEFAULT_LOCAL_PORT) this->begin(this->_port); // setup the UDP client if needed
+  if ((millis() - this->_lastUpdate >= this->_updateInterval) || this->_lastUpdate == 0) 
+  {                                // Update if there was no update yet.
+    if (!this->_udpSetup || this->_port != NTP_DEFAULT_LOCAL_PORT) 
+    {
+      this->begin(this->_port); // setup the UDP client if needed
+    }
     return this->forceUpdate();
   }
   return false;   // return false if update does not occur
@@ -147,12 +156,15 @@ unsigned long NTPClient::getMillis() const {
 int NTPClient::getDay() const {
   return (((this->getEpochTime()  / 86400L) + 4 ) % 7); //0 is Sunday
 }
+
 int NTPClient::getHours() const {
   return ((this->getEpochTime()  % 86400L) / 3600);
 }
+
 int NTPClient::getMinutes() const {
   return ((this->getEpochTime() % 3600) / 60);
 }
+
 int NTPClient::getSeconds() const {
   return (this->getEpochTime() % 60);
 }

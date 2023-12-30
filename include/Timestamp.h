@@ -13,9 +13,6 @@
 #define SECS_PER_HOUR ((uint32_t)(3600UL))
 #define SECS_PER_DAY  ((uint32_t)(SECS_PER_HOUR * 24UL))
 
-
-#define DAYS_IN_YEAR( _year) ( IS_LEAP_YEAR( _year)? 366:365)
-
 #define BASE_YEAR  1970
 #define BASE_MONTH    1
 #define BASE_DAY      1
@@ -35,11 +32,8 @@ class Timestamp
       uint32_t  getEpochTime( void) const;
       void      setEpochTime( const uint32_t newEpochTime);
 
-    
       int getDayOfWeek( void);
-      const char* getDayOfWeekAsString( void);
 
-      
       Timestamp& operator=(const Timestamp& t);
       Timestamp& operator++( void);
       Timestamp  operator++(  int);

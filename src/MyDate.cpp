@@ -2,6 +2,13 @@
 
 #include <cstddef>
 
+
+#define BASE_YEAR     1970
+#define BASE_MONTH    1
+#define BASE_DAY      1
+#define BASE_DAY_OF_WEEK  4
+
+
 //===================================================================================
 MyDate::MyDate( void):day( BASE_DAY), month( BASE_MONTH), year( BASE_YEAR) {}
 
@@ -13,6 +20,18 @@ MyDate::MyDate( const MyDate& date):day( date.day), month( date.month), year( da
 
 //===================================================================================
 MyDate::~MyDate( void) {};
+
+//===================================================================================
+bool MyDate::isLapYear( uint16_t _year)
+{
+  return(((_year % 400 == 0) || ( _year % 100 == 0)) || (( _year % 4 ==0) && ( _year % 100 != 0)));
+}
+
+//===================================================================================
+uint16_t MyDate::daysInYear( uint16_t _year)
+{
+  return MyDate::isLapYear( _year)? 366:365;
+}
 
 //===================================================================================
 uint8_t MyDate::getDay( void) const 
@@ -115,7 +134,7 @@ uint8_t MyDate::getLeapCode( void) const
 {
     uint8_t  result=0;
 
-    if( IS_LEAP_YEAR( year) && ( month <3))
+    if(  MyDate::isLapYear( year) && ( month <3))
     {
         result= 1;
     }
@@ -143,6 +162,14 @@ uint8_t MyDate::getDayOfWeek() const
 }
 
 //===================================================================================
+const char* MyDate::getDayOfWeekAsString( void)
+{
+  const char* dayOfWeekAsString[]={ "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
+
+  return( dayOfWeekAsString[ getDayOfWeek()]);
+}
+
+//===================================================================================
 bool MyDate::isValidYear( uint16_t year)
 {
   return( year >= 1970);
@@ -160,7 +187,7 @@ bool MyDate::isValidDay( uint8_t day, uint8_t month, uint16_t year )
    //                      1   2   3   4   5   6   7   8   9   10  11  12
    const uint8_t dofm[]={ 31, 28, 31, 30, 31, 30, 31, 31, 30,  31, 30, 31};
 
-  return( day<= dofm[ month -1]+ ( IS_LEAP_YEAR( year)? 1:0));  
+  return( day<= dofm[ month -1]+ ( MyDate::isLapYear( year)? 1:0));  
 }
 
 //===================================================================================

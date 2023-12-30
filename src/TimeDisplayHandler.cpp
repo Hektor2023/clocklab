@@ -1,8 +1,8 @@
 #include "TimeDisplayHandler.h"
 
 //===================================================================================
-TimeDisplayHandler::TimeDisplayHandler( TimeDisplayHandler* ptr):ptr( ptr), displayMode( eTime),
-      longitude( 0),latitude(0){}
+TimeDisplayHandler::TimeDisplayHandler( TimeDisplayHandler* ptr):ptr( ptr), displayMode( eTime)
+  {}
 
 //===================================================================================
 void TimeDisplayHandler::baseUpdateTime( Timestamp &timestamp)
@@ -13,7 +13,7 @@ void TimeDisplayHandler::baseUpdateTime( Timestamp &timestamp)
     ptr->updateTime( timestamp);
 
  //   Serial.println( ptr->getClassName());
-    ptr->updateLocation( longitude, latitude);
+    ptr->updateLocation( coordinates);
     ptr->updateSunriseSunset( sunrise, sunset);
   }
             
@@ -30,10 +30,10 @@ void TimeDisplayHandler::init( void)
 }
 
 //===================================================================================
-void TimeDisplayHandler::updateLocation( double longitude, double latitude)
+void TimeDisplayHandler::updateLocation( Coordinates_t coordinates)
 {
-  this->longitude= longitude;
-  this->latitude= latitude;
+  this->coordinates= coordinates;
+
 }
 
 //===================================================================================

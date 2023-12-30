@@ -40,14 +40,6 @@ int Timestamp::getDayOfWeek( void)
 }
 
 //===================================================================================
-const char*  Timestamp::getDayOfWeekAsString( void)
-{
-  const char* dayOfWeekAsString[]={ "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
-
-  return( dayOfWeekAsString[ getDayOfWeek()]);
-}
-
-//===================================================================================
 Timestamp& Timestamp::operator++( void)       // Prefix increment operator.
 {
   epoch++;
@@ -135,12 +127,12 @@ MyDate Timestamp::getDate( void) const
 
     
     // calucate year and rest of days
-    uint32_t days= this->epoch/ SECS_PER_DAY;
+    uint32_t days = this->epoch/ SECS_PER_DAY;
 
-    uint16_t year= BASE_YEAR;
-    while( days >= DAYS_IN_YEAR( year))
+    uint16_t year = BASE_YEAR;
+    while( days >= MyDate::daysInYear( year))
     {
-        days-= DAYS_IN_YEAR( year);
+        days-= MyDate::daysInYear( year);
         year++;
     };
 
@@ -148,7 +140,7 @@ MyDate Timestamp::getDate( void) const
     uint8_t month;
     for( month= BASE_MONTH; month <=12; month++)
     {
-        if(( month== 2) && IS_LEAP_YEAR( year))
+        if(( month== 2) && MyDate::isLapYear( year))
         {
           days--;
         }
@@ -191,7 +183,7 @@ uint32_t Timestamp::sumDaysOfFullYearsSinceBase( uint32_t year) const
 
   for( uint16_t y= BASE_YEAR; y< year; y++)
   {
-    sum += DAYS_IN_YEAR( y);
+    sum += MyDate::daysInYear( y);
   }
 
   return( sum);

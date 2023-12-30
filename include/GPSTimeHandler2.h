@@ -4,7 +4,7 @@
 #include <stdint.h>
 #include "TimeHandler.h"
 #include "Timestamp.h"
-
+#include "gps.h"
 
 constexpr unsigned char delimeterSizeMap=  20;
 constexpr unsigned char bufferSize=  100;
@@ -20,10 +20,8 @@ class GPSTimeHandler2:public TimeHandler
 
       signed char   delimeterMap[  delimeterSizeMap]; // map of delimeter positions
       char          buffer[ bufferSize];  
-      double&       longitude;
-      double&       latitude;
+      Coordinates_t &coordinates;
    
-
    private:
       void updateTime( Timestamp &timestamp);
       void getField( const unsigned char fieldNo, char* field, const char* text);
@@ -35,7 +33,7 @@ class GPSTimeHandler2:public TimeHandler
 
       
    public:
-      GPSTimeHandler2( TimeHandler* ptr2timeHandler, double& longitude, double& latitude);
+      GPSTimeHandler2( TimeHandler* ptr2timeHandler, Coordinates_t &coordinates);
       virtual ~GPSTimeHandler2( void)= default;
 
       uint8_t getCentiSecond( void);   

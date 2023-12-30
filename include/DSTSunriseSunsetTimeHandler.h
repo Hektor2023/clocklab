@@ -4,6 +4,7 @@
 #include <stdint.h>
 #include "Timehandler.h"
 #include "Timestamp.h"
+#include "gps.h"
 
 constexpr  auto RadToGrad= 180.0/PI;
 constexpr  auto GradToRad= PI/180.0;
@@ -19,14 +20,13 @@ class DSTSunriseSunsetTimeHandler:public TimeHandler
       MyTime &sunriseTime;
       MyTime &sunsetTime;
 
-      double &longitude; 
-      double &latitude;
-      const uint16_t    standardTimeOffset;
+      Coordinates_t   &coordinates;
+      const uint16_t  standardTimeOffset;
 
 
     public:
        DSTSunriseSunsetTimeHandler( TimeHandler* ptr, uint16_t standardTimeOffset, \
-                                      double& longitude, double& latitude, MyTime& sunrise, MyTime& sunset);
+                                     Coordinates_t &coordinates, MyTime& sunrise, MyTime& sunset);
        virtual ~DSTSunriseSunsetTimeHandler( void);
       
       virtual void updateTime( Timestamp &timestamp);

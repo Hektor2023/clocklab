@@ -2,10 +2,10 @@
 
                             
 DSTSunriseSunsetTimeHandler::DSTSunriseSunsetTimeHandler( TimeHandler* ptr, uint16_t standardTimeOffset, \
-            double& longitude, double& latitude, MyTime& sunrise, MyTime& sunset)
+            Coordinates_t &coordinates, MyTime& sunrise, MyTime& sunset)
     :TimeHandler( ptr), standardTimeOffset(standardTimeOffset), dSTStartTimestamp( 0), dSTEndTimestamp( 0),\
       localTimestamp( 0),
-      longitude( longitude), latitude( latitude), sunriseTime( sunrise), sunsetTime( sunset)
+      coordinates( coordinates), sunriseTime( sunrise), sunsetTime( sunset)
 {
     MyTime  time( 1,0,0); // 1:0:0  change time on 1st am universal time
   
@@ -93,10 +93,10 @@ void DSTSunriseSunsetTimeHandler::calculateSunriseSunset( Timestamp &timestamp)
 
     double N11 = asin( sin( M11*GradToRad)*sin(N10*GradToRad));
 
-    double N16 = -0.01483-sin( N11)*sin( latitude*GradToRad);
-    double O16 =          cos( N11)*cos( latitude*GradToRad);
+    double N16 = -0.01483-sin( N11)*sin( coordinates.latitude*GradToRad);
+    double O16 =          cos( N11)*cos( coordinates.latitude*GradToRad);
 
-    double Z=    13-longitude/15+ (7.7*sin((O4+78)*GradToRad)-9.5*sin(2*O4*GradToRad))/60;
+    double Z=    13-coordinates.longitude/15+ (7.7*sin((O4+78)*GradToRad)-9.5*sin(2*O4*GradToRad))/60;
     double P15 = ( acos(N16/O16)*57.29577951)/15;
 
     // Z-1 in Summer, Z in Winter 

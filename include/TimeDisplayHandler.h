@@ -5,6 +5,7 @@
 #include <cstddef>
 
 #include "Timestamp.h"
+#include "gps.h"
 
 typedef 
 enum
@@ -20,8 +21,7 @@ class TimeDisplayHandler
    protected:
       TimeDisplayHandler*  ptr;
       displayMode_t     displayMode;
-      double            longitude;
-      double            latitude;
+      Coordinates_t     coordinates;
       MyTime            sunrise;
       MyTime            sunset;
 
@@ -34,7 +34,7 @@ class TimeDisplayHandler
       
       virtual void init( void);
       virtual void updateTime( Timestamp &timestamp);
-      void updateLocation( double longitude, double latitude);
+      void updateLocation( Coordinates_t coordinates);
       void updateSunriseSunset( MyTime sunrise, MyTime sunset);
 
       virtual const char* getClassName( void)=0;

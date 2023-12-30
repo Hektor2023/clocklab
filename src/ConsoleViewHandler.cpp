@@ -26,7 +26,7 @@ void ConsoleViewHandler::updateTime( Timestamp &timestamp)
         MyDate currentDate= timestamp.getDate();
         char dateStrBuffer[ MyDate::getStringBufferSize()];
 
-         Serial.printf("(%10s) %s\n", timestamp.getDayOfWeekAsString(), currentDate.toString( dateStrBuffer));          
+         Serial.printf("(%10s) %s\n", currentDate.getDayOfWeekAsString(), currentDate.toString( dateStrBuffer));          
       }
       break;
 

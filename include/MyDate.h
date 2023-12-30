@@ -4,15 +4,7 @@
 #include <cstddef>
 #include "Arduino.h"
 
-#define IS_LEAP_YEAR( _year) (((_year % 400 == 0) || ( _year % 100 == 0)) || (( _year % 4 ==0) && ( _year % 100 != 0)))
-
-#define BASE_YEAR     1970
-#define BASE_MONTH    1
-#define BASE_DAY      1
-#define BASE_DAY_OF_WEEK  4
-
 typedef  unsigned char  uint8_t; 
-
 
 //===================================================================================
 class MyDate
@@ -28,6 +20,9 @@ class MyDate
     MyDate( uint8_t  day, uint8_t  month, uint16_t year);
     MyDate( const MyDate& date);
     ~MyDate( void);
+
+    static bool     isLapYear( uint16_t _year);
+    static uint16_t daysInYear( uint16_t _year);
 
     MyDate& operator =( const MyDate& date);
 
@@ -50,7 +45,8 @@ class MyDate
     
     // 0 = Sunday, 1 = Monday ... 7 = Unknown
     uint8_t getDayOfWeek( void) const;
-     
+    const char* getDayOfWeekAsString( void);
+
     static MyDate getDSTStart( uint16_t year);
     static MyDate getDSTEnd(   uint16_t year);
     
