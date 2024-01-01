@@ -3,6 +3,7 @@
 
 #include <cstddef>
 #include <string>
+#include "Menu.h"
 
 typedef enum  // counting from the left
 { 
@@ -17,18 +18,12 @@ typedef enum  // counting from the left
   eButton8 = 0x80,
 }  Buttons_t;
 
-typedef enum
-{
-   eNOP,
-}  State_t;
-
-
-
 //===================================================================================
 class Controller
 {
    private:
       State_t  state;
+      Menu     menuView;
 
    public:
       Controller( void);

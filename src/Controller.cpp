@@ -4,8 +4,11 @@
 
 //===================================================================================
 Controller::Controller( void)
-  :state( State_t::eNOP)
-{};
+  :state( State_t::eNOP),menuView( nullptr)
+{
+  menuView.addItem( State_t::eShow_Time);
+  menuView.addItem( State_t::eShow_Date);
+};
   
 //===================================================================================
 void Controller::handle( Buttons_t buttons)
@@ -20,38 +23,41 @@ void Controller::handle( Buttons_t buttons)
   switch( buttons)
     {
       case  Buttons_t:: eButton1:
-          Serial.print("Button_1\n");
-          break;
+        Serial.print("Button_1\n");
+        menuView.nextItem();
+        state= menuView.getState();
+        break;
 
       case  Buttons_t:: eButton2:
-          Serial.print("Button_2\n");
-          break;
+        Serial.print("Button_2\n");
+        break;
 
       case  Buttons_t:: eButton3:
-          Serial.print("Button_3\n");
-          break;
+        Serial.print("Button_3\n");
+        break;
 
       case  Buttons_t:: eButton4:
-          Serial.print("Button_4\n");
-          break;
+        Serial.print("Button_4\n");
+        break;
 
       case  Buttons_t:: eButton5:
-          Serial.print("Button_5\n");
-          break;
+        Serial.print("Button_5\n");
+        break;
 
       case  Buttons_t:: eButton6:
-          Serial.print("Button_6\n");
-          break;
+        Serial.print("Button_6\n");
+        break;
 
       case  Buttons_t:: eButton7:
-          Serial.print("Button_7\n");
-          break;
+        Serial.print("Button_7\n");
+        break;
 
       case  Buttons_t:: eButton8:
-          Serial.print("Button_8\n");
-          break;
+        Serial.print("Button_8\n");
+        break;
 
       default:
+        state= State_t::eNOP;
         break;
     }
 

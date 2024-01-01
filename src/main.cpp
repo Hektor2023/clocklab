@@ -25,7 +25,9 @@
 #include "Converter/DSTSunriseSunsetTimeHandler.h"
 
 #include "AdjustmentAdvisor.h"
+
 #include "Controller.h"
+
 
 #include "WifiCred.h"
 
@@ -96,14 +98,14 @@ static xQueueHandle       g_queueDisplay=     xQueueCreate( 10, sizeof( MessageT
 static SemaphoreHandle_t  g_xSemaphoreRtc;
 
 AdjustmentAdvisor advisor;
-
 //=============================================================================================================
 void consoleInTask(void *pvParameter) 
 {
-  uint8_t buttons = 0;
+
 
   Serial.print( "\nCONSOLE_IN_task:  start\n");
 
+  uint8_t buttons = 0;
   for(;;)
   {
     vTaskDelay( 100 / portTICK_RATE_MS);
@@ -111,7 +113,21 @@ void consoleInTask(void *pvParameter)
     buttons= g_LEDViewHandler.buttonsRead();
     g_Controller.handle( ( Buttons_t)buttons);
 
-    // g_Controller.getState();
+    switch( g_Controller.getState())
+    {
+      case eShow_Time:
+        Serial.print( "Show TIME\n");
+        g_ConsoleViewHandler.setDisplayMode( displayMode_t::eTime);
+        break;
+
+      case eShow_Date:
+        Serial.print( "Show DATE\n");
+        g_ConsoleViewHandler.setDisplayMode( displayMode_t::eDate);
+        break;
+
+      default:;
+    };
+
   }
 
   vTaskDelete(nullptr);  
