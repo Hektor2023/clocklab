@@ -2,8 +2,8 @@
 
 
 //===================================================================================
-OLEDDisplayClockViewHandler::OLEDDisplayClockViewHandler(TimeDisplayHandler* ptr) 
-  :TimeDisplayHandler( ptr), tft( TFT_eSPI())
+OLEDDisplayClockViewHandler::OLEDDisplayClockViewHandler(TimeDisplayHandler* ptr, MyTime& sunrise, MyTime& sunset)
+  :TimeDisplayHandler( ptr), tft( TFT_eSPI()),sunrise( sunrise), sunset( sunset)
 {
    
 }

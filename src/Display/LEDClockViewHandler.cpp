@@ -1,9 +1,9 @@
 #include "Display/LEDClockViewHandler.h"
 
 //===================================================================================
-LEDClockViewHandler::LEDClockViewHandler( TimeDisplayHandler* ptr, 
+LEDClockViewHandler::LEDClockViewHandler( TimeDisplayHandler* ptr, MyTime& sunrise, MyTime& sunset,
   const int STB_pin, const int CLK_pin, const int DIO_pin)
-  :TimeDisplayHandler( ptr), tm( STB_pin, CLK_pin ,DIO_pin, true) 
+  :TimeDisplayHandler( ptr), tm( STB_pin, CLK_pin ,DIO_pin, true), sunrise( sunrise), sunset( sunset) 
 {
   pinMode( STB_pin, OUTPUT);    
   pinMode( CLK_pin, OUTPUT); 

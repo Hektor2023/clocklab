@@ -19,11 +19,13 @@ class LEDClockViewHandler:public TimeDisplayHandler
       TM1638plus  tm;
       bool        adjustMode;
 
+      MyTime& sunrise;
+      MyTime& sunset;
       SemaphoreHandle_t  xSemaphoreTM1638plus;
 
 
    public:
-      LEDClockViewHandler( TimeDisplayHandler* ptr, const int STB_pin, const int CLK_pin, const int DIO_pin);
+      LEDClockViewHandler( TimeDisplayHandler* ptr, MyTime& sunrise, MyTime& sunset, const int STB_pin, const int CLK_pin, const int DIO_pin);
       virtual ~LEDClockViewHandler( void);
 
       uint8_t  buttonsRead( void);

@@ -76,9 +76,9 @@ MyTime      g_SunriseTime, g_SunsetTime;
 Timestamp   g_LocalTimestamp;
 
 
-OLEDDisplayClockViewHandler g_OLEDViewHandler( nullptr);
-//LEDClockViewHandler         g_LEDViewHandler(  nullptr, gc_STB_pin, gc_CLK_pin, gc_DIO_pin);
-LEDClockViewHandler         g_LEDViewHandler( &g_OLEDViewHandler, gc_STB_pin, gc_CLK_pin, gc_DIO_pin);
+OLEDDisplayClockViewHandler g_OLEDViewHandler( nullptr, g_SunriseTime, g_SunsetTime);
+//LEDClockViewHandler         g_LEDViewHandler(  nullptr, g_SunriseTime, g_SunsetTime, gc_STB_pin, gc_CLK_pin, gc_DIO_pin);
+LEDClockViewHandler         g_LEDViewHandler( &g_OLEDViewHandler, g_SunriseTime, g_SunsetTime, gc_STB_pin, gc_CLK_pin, gc_DIO_pin);
 ConsoleViewHandler          g_ConsoleViewHandler( &g_LEDViewHandler);
 
 SplitterTimeHandler         g_SplitterHandler(nullptr, g_LocalTimestamp);  

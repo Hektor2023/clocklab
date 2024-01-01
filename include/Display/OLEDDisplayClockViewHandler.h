@@ -16,9 +16,11 @@ class OLEDDisplayClockViewHandler:public TimeDisplayHandler
 {
    private:
       TFT_eSPI tft;
-      
+      MyTime& sunrise;
+      MyTime& sunset;
+
    public:
-      OLEDDisplayClockViewHandler( TimeDisplayHandler* ptr);
+      OLEDDisplayClockViewHandler( TimeDisplayHandler* ptr, MyTime& sunrise, MyTime& sunset);
       virtual ~OLEDDisplayClockViewHandler( void);
 
       void init( void);
