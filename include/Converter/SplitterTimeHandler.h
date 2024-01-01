@@ -1,6 +1,6 @@
 #pragma once
 
-#include "TimeHandler.h"
+#include "TimeType/TimeHandler.h"
 
 //===================================================================================
 class SplitterTimeHandler:public TimeHandler

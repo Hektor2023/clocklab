@@ -1,8 +1,8 @@
 #pragma once
 
 #include <stdint.h>
-#include "Timehandler.h"
-#include "Timestamp.h"
+#include "TimeType/Timehandler.h"
+#include "TimeType/Timestamp.h"
 #include "clocklab_types.h"
 
 constexpr  auto RadToGrad= 180.0/PI;

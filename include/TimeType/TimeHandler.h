@@ -1,7 +1,7 @@
 #pragma once
 #include <cstddef>
 
-#include "Timestamp.h"
+#include "TimeType/Timestamp.h"
 
 //===================================================================================
 class TimeHandler

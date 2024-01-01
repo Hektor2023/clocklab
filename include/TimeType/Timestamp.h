@@ -3,8 +3,8 @@
 #include <cstddef>
 #include <string.h>
 
-#include "MyDate.h"
-#include "MyTime.h"
+#include "TimeType/MyDate.h"
+#include "TimeType/MyTime.h"
 
 //===================================================================================
 /* Useful Constants */

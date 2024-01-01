@@ -4,8 +4,8 @@
 #include <string>
 #include "Arduino.h"
 
-#include "Timestamp.h"
-#include "TimeDisplayHandler.h"
+#include "TimeType/Timestamp.h"
+#include "Display/TimeDisplayHandler.h"
 
 #include <TFT_eSPI.h>
 #include <string.h>

@@ -4,8 +4,8 @@
 #include <string>
 #include "Arduino.h"
 
-#include "Timestamp.h"
-#include "TimeDisplayHandler.h"
+#include "TimeType/Timestamp.h"
+#include "Display/TimeDisplayHandler.h"
 
 #include <TM1638plus.h>
 #include "freertos/FreeRTOS.h"

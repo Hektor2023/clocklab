@@ -1,8 +1,8 @@
 #pragma once
 
 #include <stdint.h>
-#include "TimeHandler.h"
-#include "Timestamp.h"
+#include "TimeType/TimeHandler.h"
+#include "TimeType/Timestamp.h"
 #include "clocklab_types.h"
 
 constexpr unsigned char delimeterSizeMap=  20;

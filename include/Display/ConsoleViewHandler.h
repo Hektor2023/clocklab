@@ -3,8 +3,8 @@
 #include <cstddef>
 
 #include "Arduino.h"
-#include "Timestamp.h"
-#include "TimeDisplayHandler.h"
+#include "TimeType/Timestamp.h"
+#include "Display/TimeDisplayHandler.h"
 
 
 //===================================================================================

@@ -2,10 +2,10 @@
 
 #include <cstddef>
 #include <string>
-#include "MyDate.h"
-#include "Timestamp.h"
-#include "TimeHandler.h"
-#include "RTCSystemTimeHandler.h"
+#include "TimeType/MyDate.h"
+#include "TimeType/Timestamp.h"
+#include "TimeType/TimeHandler.h"
+
 
 
 //===================================================================================

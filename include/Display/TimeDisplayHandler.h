@@ -2,7 +2,7 @@
 
 #include <cstddef>
 
-#include "Timestamp.h"
+#include "TimeType/Timestamp.h"
 #include "clocklab_types.h"
 
 typedef 

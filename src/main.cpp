@@ -11,7 +11,7 @@
 
 #include <NTPClient.h>   // https://github.com/arduino-libraries/NTPClient
 
-#include "Timestamp.h"
+#include "TimeType/Timestamp.h"
 
 #include "Source/RTCSystemTimeHandler.h"
 #include "Source/GPSTimeHandler2.h"
