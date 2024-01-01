@@ -1,4 +1,4 @@
-#include "TimeDisplayHandler.h"
+#include "Display/TimeDisplayHandler.h"
 
 //===================================================================================
 TimeDisplayHandler::TimeDisplayHandler( TimeDisplayHandler* ptr):ptr( ptr), displayMode( eTime)

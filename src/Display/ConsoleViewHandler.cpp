@@ -1,4 +1,4 @@
-#include "ConsoleViewHandler.h"
+#include "Display/ConsoleViewHandler.h"
 
 //===================================================================================
 ConsoleViewHandler::ConsoleViewHandler( TimeDisplayHandler* ptr):TimeDisplayHandler( ptr) {};

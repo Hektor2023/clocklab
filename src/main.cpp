@@ -12,23 +12,24 @@
 #include <NTPClient.h>   // https://github.com/arduino-libraries/NTPClient
 
 #include "Timestamp.h"
-#include "ConsoleViewHandler.h"
 
-#include "SplitterTimeHandler.h"
+#include "Source/RTCSystemTimeHandler.h"
+#include "Source/GPSTimeHandler2.h"
+#include "Source/ManualTimeHandler.h"
 
-#include "DSTSunriseSunsetTimeHandler.h"
+#include "Display/ConsoleViewHandler.h"
+#include "Display/LEDClockViewHandler.h"
+#include "Display/OLEDDisplayClockViewHandler.h"
 
-#include "LEDClockViewHandler.h"
-#include "OLEDDisplayClockViewHandler.h"
-
-#include "RTCSystemTimeHandler.h"
-#include "GPSTimeHandler2.h"
-#include "ManualTimeHandler.h"
+#include "Converter/SplitterTimeHandler.h"
+#include "Converter/DSTSunriseSunsetTimeHandler.h"
 
 #include "AdjustmentAdvisor.h"
+#include "Controller.h"
+
 #include "WifiCred.h"
 
-#include "Controller.h"
+
 
 const  char*   gc_Ssid { SSID };
 const  char*   gc_Password{ PASSWD };
