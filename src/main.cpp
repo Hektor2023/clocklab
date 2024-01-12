@@ -194,6 +194,11 @@ void ntpTask(void *pvParameter)
     
     ntp_msg.epoch= timeClient.getEpochTime(); 
     ntp_msg.epochMillis= (uint32_t)((1000.0f* timeClient.getMillis())/UINT32_MAX);  //  Serial.printf("millis => %u\n", ntp_msg.epochMillis);
+
+    // set next entire second
+    vTaskDelay( ( 1000 - ntp_msg.epochMillis)/ portTICK_RATE_MS);
+    ntp_msg.epoch++;
+
     ntp_msg.rtcMillis= millis();
 //
 //    Serial.printf("NTP  EpochMillis => %u || RTCmillis => %u\n",  ntp_msg.epochMillis, ntp_msg.rtcMillis);  
@@ -261,6 +266,10 @@ void gpsTask(void *pvParameter)
     gps_msg.epoch=  g_GPSHandler.getTimestamp().getEpochTime(); 
     gps_msg.epochMillis= (uint32_t) g_GPSHandler.getMilliSecond();
     gps_msg.rtcMillis= millis();
+
+    // set next entire second
+    vTaskDelay( ( 1000 -  gps_msg.epochMillis)/ portTICK_RATE_MS);
+    gps_msg.epoch++;
 
     Timestamp timestamp;
     timestamp.setEpochTime( gps_msg.epoch); 
