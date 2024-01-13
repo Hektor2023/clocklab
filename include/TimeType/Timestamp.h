@@ -8,13 +8,9 @@
 
 //===================================================================================
 /* Useful Constants */
-#define SECS_PER_MIN  ((uint32_t)(60UL))
-#define SECS_PER_HOUR ((uint32_t)(3600UL))
-#define SECS_PER_DAY  ((uint32_t)(SECS_PER_HOUR * 24UL))
-
-#define BASE_YEAR  1970
-#define BASE_MONTH    1
-#define BASE_DAY      1
+constexpr uint32_t   SECS_PER_MIN = 60UL;
+constexpr uint32_t   SECS_PER_HOUR = 3600UL;
+constexpr uint32_t   SECS_PER_DAY = SECS_PER_HOUR * 24UL;
 
 //===================================================================================
 class Timestamp
@@ -24,7 +20,7 @@ class Timestamp
  
 
    public:
-      Timestamp( uint32_t epoch=0L);
+      Timestamp( uint32_t epoch = 0L);
       Timestamp( const Timestamp& t);
       ~Timestamp( void);
       

@@ -2,6 +2,12 @@
 #include "TimeType/Timestamp.h"
 #include "Arduino.h"
 
+
+constexpr uint16_t  BASE_YEAR = 1970;
+constexpr uint8_t   BASE_MONTH = 1;
+constexpr uint8_t   BASE_DAY = 1;
+
+
 //===================================================================================
 Timestamp::Timestamp( uint32_t epoch):epoch( epoch) {};
       

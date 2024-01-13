@@ -1,7 +1,8 @@
 #include "Display/TimeDisplayHandler.h"
 
 //===================================================================================
-TimeDisplayHandler::TimeDisplayHandler( TimeDisplayHandler* ptr):ptr( ptr), displayMode( eTime)
+TimeDisplayHandler::TimeDisplayHandler( TimeDisplayHandler* ptr)
+  :ptr( ptr), displayMode( eTime)
   {}
 
 //===================================================================================

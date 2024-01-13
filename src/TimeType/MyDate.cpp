@@ -3,11 +3,10 @@
 #include <cstddef>
 
 
-#define BASE_YEAR     1970
-#define BASE_MONTH    1
-#define BASE_DAY      1
-#define BASE_DAY_OF_WEEK  4
-
+constexpr uint16_t BASE_YEAR = 1970;
+constexpr uint8_t BASE_MONTH =1;
+constexpr uint8_t BASE_DAY = 1;
+constexpr uint8_t BASE_DAY_OF_WEEK = 4;
 
 //===================================================================================
 MyDate::MyDate( void):day( BASE_DAY), month( BASE_MONTH), year( BASE_YEAR) {}

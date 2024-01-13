@@ -93,15 +93,14 @@ ManualTimeHandler           g_ManualAdjHandler;
 
 Controller                  g_Controller;
 
-static xQueueHandle       g_queueTimePattern= xQueueCreate( 10, sizeof( MessageTime_t));
-static xQueueHandle       g_queueDisplay=     xQueueCreate( 10, sizeof( MessageTime_t));
+static xQueueHandle       g_queueTimePattern= xQueueCreate( 5, sizeof( MessageTime_t));
+static xQueueHandle       g_queueDisplay=     xQueueCreate( 15, sizeof( MessageTime_t));
 static SemaphoreHandle_t  g_xSemaphoreRtc;
 
 AdjustmentAdvisor advisor;
 //=============================================================================================================
 void consoleInTask(void *pvParameter) 
 {
-
 
   Serial.print( "\nCONSOLE_IN_task:  start\n");
 
@@ -177,14 +176,14 @@ void ntpTask(void *pvParameter)
   
   for(;;)
   { 
-    vTaskDelay( 10*1000 / portTICK_RATE_MS);
+    vTaskDelay( 20*(1000 / portTICK_RATE_MS));
 
   //  Serial.printf("\nTrying to connect...\n");  
     WiFi.begin( gc_Ssid, gc_Password);
     while ( !WiFi.isConnected())
     {
       Serial.printf("#");
-      vTaskDelay( 3*1000 / portTICK_RATE_MS);
+      vTaskDelay( 3*(1000 / portTICK_RATE_MS));
     };
     
     Serial.printf("| NTP... |");
@@ -193,7 +192,7 @@ void ntpTask(void *pvParameter)
     timeClient.forceUpdate();
     
     ntp_msg.epoch= timeClient.getEpochTime(); 
-    ntp_msg.epochMillis= (uint32_t)((1000.0f* timeClient.getMillis())/UINT32_MAX);  //  Serial.printf("millis => %u\n", ntp_msg.epochMillis);
+    ntp_msg.epochMillis= (uint32_t)((1000.0f* timeClient.getMillis())/UINT32_MAX);    Serial.printf("millis => %u\n", ntp_msg.epochMillis);
 
     // set next entire second
     vTaskDelay( ( 1000 - ntp_msg.epochMillis)/ portTICK_RATE_MS);
@@ -209,7 +208,7 @@ void ntpTask(void *pvParameter)
     displayTimestamp( "NTP", timestamp); 
     
 //
-    while ( xQueueSend( g_queueTimePattern, (void *)&ntp_msg, 10) != pdTRUE) 
+    while ( xQueueSend( g_queueTimePattern, (void *)&ntp_msg, 0) != pdTRUE) 
     {
       Serial.println("ERROR: Could not put NTP time to queue.");  
     }
@@ -229,6 +228,8 @@ void gpsTask(void *pvParameter)
   char c;
   MessageTime_t   gps_msg;
   gps_msg.type=   src_type_t::GPS;
+
+  Timestamp lastGpsTime;
 
   Serial2.begin(9600);
   Serial2.flush();
@@ -261,7 +262,16 @@ void gpsTask(void *pvParameter)
     {
       continue;
     }
-    
+
+    Timestamp diffTime= g_GPSHandler.getTimestamp() - lastGpsTime;
+    displayTimestamp( "diffTime", diffTime);
+    if( diffTime.getEpochTime() < (1 * 60))
+    {
+      continue;
+    }
+
+    lastGpsTime = g_GPSHandler.getTimestamp();
+
 //    Serial.printf( "GPS: encoded\n");
     gps_msg.epoch=  g_GPSHandler.getTimestamp().getEpochTime(); 
     gps_msg.epochMillis= (uint32_t) g_GPSHandler.getMilliSecond();
@@ -269,6 +279,7 @@ void gpsTask(void *pvParameter)
 
     // set next entire second
     vTaskDelay( ( 1000 -  gps_msg.epochMillis)/ portTICK_RATE_MS);
+    gps_msg.epoch++;
     gps_msg.epoch++;
 
     Timestamp timestamp;
@@ -409,7 +420,7 @@ void rtcWriteTask(void *pvParameter)
   for(;;)
   { 
     vTaskDelay( 10 / portTICK_RATE_MS);
-//    advisor.setSelectedSource( src_type_t::GPS);
+    advisor.setSelectedSource( src_type_t::GPS);
 
     if (xQueueReceive( g_queueTimePattern, (void *)&rtcWriteMsg, 10) == pdTRUE) 
     {
