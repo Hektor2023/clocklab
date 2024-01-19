@@ -97,7 +97,8 @@ static xQueueHandle       g_queueTimePattern= xQueueCreate( 5, sizeof( MessageTi
 static xQueueHandle       g_queueDisplay=     xQueueCreate( 15, sizeof( MessageTime_t));
 static SemaphoreHandle_t  g_xSemaphoreRtc;
 
-AdjustmentAdvisor advisor;
+AdjustmentAdvisor         g_advisor;
+
 //=============================================================================================================
 void consoleInTask(void *pvParameter) 
 {
@@ -192,15 +193,14 @@ void ntpTask(void *pvParameter)
     timeClient.forceUpdate();
     
     ntp_msg.epoch= timeClient.getEpochTime(); 
-    ntp_msg.epochMillis= (uint32_t)((1000.0f* timeClient.getMillis())/UINT32_MAX);    Serial.printf("millis => %u\n", ntp_msg.epochMillis);
+    uint32_t epochMillis= (uint32_t)((1000.0f* timeClient.getMillis())/UINT32_MAX);    Serial.printf("millis => %u\n", epochMillis);
 
     // set next entire second
-    vTaskDelay( ( 1000 - ntp_msg.epochMillis)/ portTICK_RATE_MS);
+    vTaskDelay( ( 1000 - epochMillis)/ portTICK_RATE_MS);
     ntp_msg.epoch++;
 
-    ntp_msg.rtcMillis= millis();
 //
-//    Serial.printf("NTP  EpochMillis => %u || RTCmillis => %u\n",  ntp_msg.epochMillis, ntp_msg.rtcMillis);  
+//    Serial.printf("NTP  EpochMillis => %u \n",  epochMillis);  
 
     Timestamp timestamp;
     timestamp.setEpochTime( ntp_msg.epoch);
@@ -274,13 +274,11 @@ void gpsTask(void *pvParameter)
 
 //    Serial.printf( "GPS: encoded\n");
     gps_msg.epoch=  g_GPSHandler.getTimestamp().getEpochTime(); 
-    gps_msg.epochMillis= (uint32_t) g_GPSHandler.getMilliSecond();
-    gps_msg.rtcMillis= millis();
-
+    uint32_t  epochMillis= (uint32_t) g_GPSHandler.getMilliSecond();
+   
     // set next entire second
-    vTaskDelay( ( 1000 -  gps_msg.epochMillis)/ portTICK_RATE_MS);
-    gps_msg.epoch++;
-    gps_msg.epoch++;
+    vTaskDelay( ( 1000 -  epochMillis)/ portTICK_RATE_MS);
+  
 
     Timestamp timestamp;
     timestamp.setEpochTime( gps_msg.epoch); 
@@ -313,7 +311,6 @@ void manualAdjustmentTask(void *pvParameter)
 
     Timestamp timeStamp= g_ManualAdjHandler.getTimestamp();
     adj_msg.epoch = timeStamp.getEpochTime();
-    adj_msg.rtcMillis= millis();
     while ( xQueueSend( g_queueTimePattern, (void *)&adj_msg, 0) != pdTRUE) 
     {
       Serial.println("ERROR: Could not put MAN ADJ time to queue."); 
@@ -389,9 +386,7 @@ void rtcReadTask(void *pvParameter)
 
         // set time for Display
         rtcReadMsg.epoch= g_LocalTimestamp.getEpochTime();
-        rtcReadMsg.epochMillis= 0;
-        rtcReadMsg.rtcMillis= millis();
-
+       
         while( xQueueSend( g_queueDisplay, (void *)&rtcReadMsg, 0) != pdTRUE) 
         {
           Serial.println("ERROR: Could not put RTC read time to queue.");  
@@ -420,11 +415,11 @@ void rtcWriteTask(void *pvParameter)
   for(;;)
   { 
     vTaskDelay( 10 / portTICK_RATE_MS);
-    advisor.setSelectedSource( src_type_t::GPS);
+    g_advisor.setSelectedSource( src_type_t::GPS);
 
     if (xQueueReceive( g_queueTimePattern, (void *)&rtcWriteMsg, 10) == pdTRUE) 
     {
-      if( !advisor.routeSource( bestSrcMsg, rtcWriteMsg))
+      if( !g_advisor.routeSource( bestSrcMsg, rtcWriteMsg))
       {
         continue;
       }
