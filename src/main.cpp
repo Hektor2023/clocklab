@@ -17,10 +17,6 @@
 #include "Source/GPSTimeHandler2.h"
 #include "Source/ManualTimeHandler.h"
 
-#include "Display/ConsoleViewHandler.h"
-#include "Display/LEDClockViewHandler.h"
-#include "Display/OLEDDisplayClockViewHandler.h"
-
 #include "Converter/SplitterTimeHandler.h"
 #include "Converter/DSTSunriseSunsetTimeHandler.h"
 
@@ -28,6 +24,10 @@
 
 #include "Controller.h"
 
+#include "Display/OLEDClockDisplayHandler.h"
+#include "Display/LEDClockDisplayHandler.h"
+#include "Display/ConsoleDisplayHandler.h"
+#include "Display/TimestampObserver.h"
 
 #include "WifiCred.h"
 
@@ -77,13 +77,12 @@ Coordinates_t g_coordinates{  52.4465078, 20.6925219};
 MyTime      g_SunriseTime, g_SunsetTime;
 Timestamp   g_LocalTimestamp;
 
+OLEDClockDisplayHandler     g_OLEDClockDisplayHandler;
+LEDClockDisplayHandler      g_LEDDisplayHandler( gc_STB_pin, gc_CLK_pin, gc_DIO_pin);
+ConsoleDisplayHandler       g_ConsoleDisplayHandler;
+TimestampObserver           g_TimestampObserver;
 
-OLEDDisplayClockViewHandler g_OLEDViewHandler( nullptr, g_SunriseTime, g_SunsetTime);
-//LEDClockViewHandler         g_LEDViewHandler(  nullptr, g_SunriseTime, g_SunsetTime, gc_STB_pin, gc_CLK_pin, gc_DIO_pin);
-LEDClockViewHandler         g_LEDViewHandler( &g_OLEDViewHandler, g_SunriseTime, g_SunsetTime, gc_STB_pin, gc_CLK_pin, gc_DIO_pin);
-ConsoleViewHandler          g_ConsoleViewHandler( &g_LEDViewHandler);
-
-SplitterTimeHandler         g_SplitterHandler(nullptr, g_LocalTimestamp);  
+SplitterTimeHandler         g_SplitterHandler( nullptr, g_LocalTimestamp);  
 DSTSunriseSunsetTimeHandler g_TimeZoneDSTHandler( &g_SplitterHandler, gc_GMT_Plus_2h, g_coordinates, g_SunriseTime, g_SunsetTime);
 RTCSystemTimeHandler        g_SystemTimeHandler(  &g_TimeZoneDSTHandler, gc_sda_pin, gc_scl_pin, gc_irqIn_pin);
  
@@ -100,6 +99,7 @@ static SemaphoreHandle_t  g_xSemaphoreRtc;
 AdjustmentAdvisor         g_advisor;
 
 //=============================================================================================================
+/*
 void consoleInTask(void *pvParameter) 
 {
 
@@ -132,6 +132,7 @@ void consoleInTask(void *pvParameter)
 
   vTaskDelete(nullptr);  
 }
+*/
 
 //=============================================================================================================
 void consoleOutTask(void *pvParameter)
@@ -154,8 +155,7 @@ void consoleOutTask(void *pvParameter)
     printTick();  Serial.print( "  console_task  ");  Serial.printf( "-> %d   ", rcvMsg.type);
     displayTimestamp.setEpochTime( rcvMsg.epoch);
 
-    g_ConsoleViewHandler.updateTime( displayTimestamp);
-    
+    g_TimestampObserver.update( displayTimestamp);
   }
 
   vTaskDelete(nullptr);
@@ -456,19 +456,23 @@ void setup()
   Serial.begin(19200);
   Serial.flush();
 
-  g_ConsoleViewHandler.init();
+  g_OLEDClockDisplayHandler.init();
+  g_TimestampObserver.addListener( &g_ConsoleDisplayHandler);
+  g_TimestampObserver.addListener( &g_LEDDisplayHandler);
+  g_TimestampObserver.addListener( &g_OLEDClockDisplayHandler);
 
   pinMode( gc_PULS_pin, OUTPUT);
 
   vTaskDelay( 3000 / portTICK_RATE_MS);
   Serial.print("setup: start ======================\n"); 
 
+
   xTaskCreate( &gpsTask,              "gps_task",         4048, nullptr, 5, nullptr);
   xTaskCreate( &ntpTask,              "ntp_task",         4048, nullptr, 5, nullptr);
   xTaskCreate( &manualAdjustmentTask, "manual_adj_task",  2048, nullptr, 5, nullptr);
   xTaskCreate( &rtcWriteTask,         "rtc_write_task",   2048, nullptr, 5, nullptr);
   xTaskCreate( &rtcReadTask,          "rtc_read_task",    2048, nullptr, 5, nullptr);
-  xTaskCreate( &consoleInTask,        "console_in_task",  3048, nullptr, 5, nullptr);
+//  xTaskCreate( &consoleInTask,        "console_in_task",  3048, nullptr, 5, nullptr);
   xTaskCreate( &consoleOutTask,       "console_out_task", 3048, nullptr, 5, nullptr);
 
 }

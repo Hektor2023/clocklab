@@ -1,24 +1,23 @@
-#include "Display/OLEDDisplayClockViewHandler.h"
-
-
+#include "Display/OLEDClockDisplayHandler.h"
+ 
 //===================================================================================
-OLEDDisplayClockViewHandler::OLEDDisplayClockViewHandler(TimeDisplayHandler* ptr, MyTime& sunrise, MyTime& sunset)
-  :TimeDisplayHandler( ptr), tft( TFT_eSPI()),sunrise( sunrise), sunset( sunset)
+OLEDClockDisplayHandler::OLEDClockDisplayHandler( void)
+  :tft( TFT_eSPI())
 {
    
 }
 
 //===================================================================================
-OLEDDisplayClockViewHandler::~OLEDDisplayClockViewHandler( void) {};
+OLEDClockDisplayHandler::~OLEDClockDisplayHandler( void) {};
 
 //===================================================================================
-const char* OLEDDisplayClockViewHandler::getClassName( void)
+const char* OLEDClockDisplayHandler::getClassName( void)
 {
-  return("OLEDDisplayClockViewHandler");
+  return("OLEDClockDisplayHandler");
 }
 
 //===================================================================================
-void OLEDDisplayClockViewHandler::init( void)
+void OLEDClockDisplayHandler::init( void)
 {
   // Initialize TFT LCD
 
@@ -29,15 +28,11 @@ void OLEDDisplayClockViewHandler::init( void)
 }
 
 //===================================================================================
-void OLEDDisplayClockViewHandler::doAction( void (*fun)( void))
-{
-  (*fun)();  
-}
-
-//===================================================================================
-void OLEDDisplayClockViewHandler::updateTime( Timestamp &timestamp)
+void OLEDClockDisplayHandler::update( TimestampObserver* observer)
 { 
   const String dayOfWeekAsString[]={ "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday","Sunday"};
+
+  Timestamp timestamp = observer->getTimestamp();
 
   char dateStrBuffer[MyDate::getStringBufferSize()];
   MyDate date= timestamp.getDate();
@@ -64,13 +59,12 @@ void OLEDDisplayClockViewHandler::updateTime( Timestamp &timestamp)
   tft.println( dateAsString.c_str());
   tft.println( dayOfWeekAsString[ date.getDayOfWeek()].c_str());
  
-  std::string sunriseAsString= sunrise.toShortString( timeShortStrBuffer);
-  tft.println(  sunriseAsString.c_str());
+//  std::string sunriseAsString= sunrise.toShortString( timeShortStrBuffer);
+//  tft.println(  sunriseAsString.c_str());
 
-  std::string sunsetAsString= sunset.toShortString( timeShortStrBuffer);
-  tft.println(  sunsetAsString.c_str());
+//  std::string sunsetAsString= sunset.toShortString( timeShortStrBuffer);
+//  tft.println(  sunsetAsString.c_str());
 
-  baseUpdateTime( timestamp);
 }
 
 //===================================================================================
