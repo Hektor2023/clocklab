@@ -145,18 +145,18 @@ MyDate Timestamp::getDate( void) const
     // calculate months and day
     uint8_t month;
     for( month= BASE_MONTH; month <=12; month++)
-    {
-        if(( month== 2) && MyDate::isLapYear( year))
-        {
-          days--;
-        }
-        
-        if( days < dofm[ month -1]) 
-        {
-          break;
-        }
-        
-        days -=  dofm[ month -1];
+    {        
+      if( days < dofm[ month -1]) 
+      {
+        break;
+      }
+
+      if(( month== 2) && MyDate::isLapYear( year))
+      {
+        days--;
+      }
+
+      days -=  dofm[ month -1];
     }
 
     MyDate  date;

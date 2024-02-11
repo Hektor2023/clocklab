@@ -165,7 +165,7 @@ void consoleOutTask(void *pvParameter)
 void ntpTask(void *pvParameter)
 {
   WiFiUDP     udp;
-  NTPClient   timeClient( udp);
+  NTPClient   timeClient( udp, IPAddress( 80,50,231,226));
 
 
   MessageTime_t   ntp_msg;
@@ -193,6 +193,10 @@ void ntpTask(void *pvParameter)
     timeClient.forceUpdate();
     
     ntp_msg.epoch= timeClient.getEpochTime(); 
+
+    Serial.printf("epoch ->%u\n", ntp_msg.epoch); 
+    
+
     uint32_t epochMillis= (uint32_t)((1000.0f* timeClient.getMillis())/UINT32_MAX);    Serial.printf("millis => %u\n", epochMillis);
 
     // set next entire second
@@ -415,7 +419,7 @@ void rtcWriteTask(void *pvParameter)
   for(;;)
   { 
     vTaskDelay( 10 / portTICK_RATE_MS);
-    g_advisor.setSelectedSource( src_type_t::GPS);
+//    g_advisor.setSelectedSource( src_type_t::GPS);
 
     if (xQueueReceive( g_queueTimePattern, (void *)&rtcWriteMsg, 10) == pdTRUE) 
     {
@@ -467,9 +471,9 @@ void setup()
   Serial.print("setup: start ======================\n"); 
 
 
-  xTaskCreate( &gpsTask,              "gps_task",         4048, nullptr, 5, nullptr);
+//  xTaskCreate( &gpsTask,              "gps_task",         4048, nullptr, 5, nullptr);
   xTaskCreate( &ntpTask,              "ntp_task",         4048, nullptr, 5, nullptr);
-  xTaskCreate( &manualAdjustmentTask, "manual_adj_task",  2048, nullptr, 5, nullptr);
+//  xTaskCreate( &manualAdjustmentTask, "manual_adj_task",  2048, nullptr, 5, nullptr);
   xTaskCreate( &rtcWriteTask,         "rtc_write_task",   2048, nullptr, 5, nullptr);
   xTaskCreate( &rtcReadTask,          "rtc_read_task",    2048, nullptr, 5, nullptr);
 //  xTaskCreate( &consoleInTask,        "console_in_task",  3048, nullptr, 5, nullptr);
