@@ -1,5 +1,5 @@
 
-#include "Source/GPSTimeHandler2.h"
+#include "Source/GPS/GPSTimeHandler2.h"
 
 const signed char endOfValidPosition= -1;
 const char delimeter=',';

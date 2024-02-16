@@ -1,6 +1,5 @@
 #include <Arduino.h>
-#include <WiFi.h>
-#include <WiFiUdp.h>
+
 #include <SPI.h>
 #include <string.h>
 #include "clocklab_types.h"
@@ -9,12 +8,11 @@
 #include "freertos/task.h"
 #include "Tools.h"
 
-#include <NTPClient.h>   // https://github.com/arduino-libraries/NTPClient
-
 #include "TimeType/Timestamp.h"
 
+#include "Source/NTP/NTPTask.h"
 #include "Source/RTCSystemTimeHandler.h"
-#include "Source/GPSTimeHandler2.h"
+#include "Source/GPS/GPSTimeHandler2.h"
 #include "Source/ManualTimeHandler.h"
 
 #include "Converter/SplitterTimeHandler.h"
@@ -31,15 +29,7 @@
 
 #include "WifiCred.h"
 
-
-
-const  char*   gc_Ssid { SSID };
-const  char*   gc_Password{ PASSWD };
-
 //=============================================================================================================
-
-constexpr int gc_XCoreId_0{ 0};
-constexpr int gc_XCoreId_1{ 1};
 
 constexpr uint8_t   gc_irqIn_pin{ 15}; // D8 - don't use D4
 
@@ -75,24 +65,22 @@ constexpr auto       gc_period_1000_Millis{ 1000};
 Coordinates_t g_coordinates{  52.4465078, 20.6925219};
 
 MyTime      g_SunriseTime, g_SunsetTime;
-Timestamp   g_LocalTimestamp;
+
 
 OLEDClockDisplayHandler     g_OLEDClockDisplayHandler;
 LEDClockDisplayHandler      g_LEDDisplayHandler( gc_STB_pin, gc_CLK_pin, gc_DIO_pin);
 ConsoleDisplayHandler       g_ConsoleDisplayHandler;
-TimestampObserver           g_TimestampObserver;
 
+Timestamp                   g_LocalTimestamp;
 SplitterTimeHandler         g_SplitterHandler( nullptr, g_LocalTimestamp);  
 DSTSunriseSunsetTimeHandler g_TimeZoneDSTHandler( &g_SplitterHandler, gc_GMT_Plus_2h, g_coordinates, g_SunriseTime, g_SunsetTime);
 RTCSystemTimeHandler        g_SystemTimeHandler(  &g_TimeZoneDSTHandler, gc_sda_pin, gc_scl_pin, gc_irqIn_pin);
  
-
-GPSTimeHandler2             g_GPSHandler( nullptr, g_coordinates);
 ManualTimeHandler           g_ManualAdjHandler;
-
+TimestampObserver           g_TimestampObserver;
 Controller                  g_Controller;
 
-static xQueueHandle       g_queueTimePattern= xQueueCreate( 5, sizeof( MessageTime_t));
+static xQueueHandle       g_queueSourceTime= xQueueCreate( 5, sizeof( MessageTime_t));
 static xQueueHandle       g_queueDisplay=     xQueueCreate( 15, sizeof( MessageTime_t));
 static SemaphoreHandle_t  g_xSemaphoreRtc;
 
@@ -144,6 +132,8 @@ void consoleOutTask(void *pvParameter)
   printTick();  
   Serial.print( "\nCONSOLE_OUT_task:  start\n");
 
+
+
   for(;;)
   {
     vTaskDelay( 10 / portTICK_RATE_MS);                    // wait for a second
@@ -162,79 +152,14 @@ void consoleOutTask(void *pvParameter)
 }
 
 //=============================================================================================================
-void ntpTask(void *pvParameter)
-{
-  WiFiUDP     udp;
-  NTPClient   timeClient( udp, IPAddress( 80,50,231,226));
-
-
-  MessageTime_t   ntp_msg;
-  ntp_msg.type= src_type_t::NTP;
-
-  printTick();  Serial.print( "\nNTP_task:  start\n"); 
-
-  WiFi.mode(WIFI_STA); 
-  
-  for(;;)
-  { 
-    vTaskDelay( 20*(1000 / portTICK_RATE_MS));
-
-  //  Serial.printf("\nTrying to connect...\n");  
-    WiFi.begin( gc_Ssid, gc_Password);
-    while ( !WiFi.isConnected())
-    {
-      Serial.printf("#");
-      vTaskDelay( 3*(1000 / portTICK_RATE_MS));
-    };
-    
-    Serial.printf("| NTP... |");
-
-    timeClient.begin(); 
-    timeClient.forceUpdate();
-    
-    ntp_msg.epoch= timeClient.getEpochTime(); 
-
-    Serial.printf("epoch ->%u\n", ntp_msg.epoch); 
-    
-
-    uint32_t epochMillis= (uint32_t)((1000.0f* timeClient.getMillis())/UINT32_MAX);    Serial.printf("millis => %u\n", epochMillis);
-
-    // set next entire second
-    vTaskDelay( ( 1000 - epochMillis)/ portTICK_RATE_MS);
-    ntp_msg.epoch++;
-
-//
-//    Serial.printf("NTP  EpochMillis => %u \n",  epochMillis);  
-
-    Timestamp timestamp;
-    timestamp.setEpochTime( ntp_msg.epoch);
-
-    displayTimestamp( "NTP", timestamp); 
-    
-//
-    while ( xQueueSend( g_queueTimePattern, (void *)&ntp_msg, 0) != pdTRUE) 
-    {
-      Serial.println("ERROR: Could not put NTP time to queue.");  
-    }
-
-    timeClient.end();
-
-  //  Serial.printf("\nDisconnect...\n");
-    WiFi.disconnect();
-  }
-
-  vTaskDelete(nullptr);
-}
-
-//=============================================================================================================
 void gpsTask(void *pvParameter)
 {
-  char c;
+  GPSTimeHandler2  g_GPSHandler( nullptr, g_coordinates);  
+
   MessageTime_t   gps_msg;
   gps_msg.type=   src_type_t::GPS;
 
-  Timestamp lastGpsTime;
-
+  Timestamp   lastGpsTime;
   Serial2.begin(9600);
   Serial2.flush();
 
@@ -258,7 +183,7 @@ void gpsTask(void *pvParameter)
         continue;
       }
 
-      c= Serial2.read();
+      char c = Serial2.read();
       next= g_GPSHandler.collectRecord( c);
     };
 
@@ -288,7 +213,7 @@ void gpsTask(void *pvParameter)
     timestamp.setEpochTime( gps_msg.epoch); 
     displayTimestamp( "GPS", timestamp);
      
-    while ( xQueueSend( g_queueTimePattern, (void *)&gps_msg, 0) != pdTRUE) 
+    while ( xQueueSend( g_queueSourceTime, (void *)&gps_msg, 0) != pdTRUE) 
     {
       Serial.println("ERROR: Could not put GPS time to queue."); 
       vTaskDelay( 2 / portTICK_RATE_MS); 
@@ -315,7 +240,7 @@ void manualAdjustmentTask(void *pvParameter)
 
     Timestamp timeStamp= g_ManualAdjHandler.getTimestamp();
     adj_msg.epoch = timeStamp.getEpochTime();
-    while ( xQueueSend( g_queueTimePattern, (void *)&adj_msg, 0) != pdTRUE) 
+    while ( xQueueSend( g_queueSourceTime, (void *)&adj_msg, 0) != pdTRUE) 
     {
       Serial.println("ERROR: Could not put MAN ADJ time to queue."); 
       vTaskDelay( 2 / portTICK_RATE_MS); 
@@ -328,6 +253,7 @@ void manualAdjustmentTask(void *pvParameter)
 }
 
 //=============================================================================================================
+/*
 void keyboard_task(void *pvParameter)
 {
   vTaskDelay( 20000 / portTICK_RATE_MS);
@@ -361,7 +287,7 @@ void keyboard_task(void *pvParameter)
 
   vTaskDelete(nullptr);
 }
-
+*/
 //=============================================================================================================
 void rtcReadTask(void *pvParameter)  
 {
@@ -421,7 +347,7 @@ void rtcWriteTask(void *pvParameter)
     vTaskDelay( 10 / portTICK_RATE_MS);
 //    g_advisor.setSelectedSource( src_type_t::GPS);
 
-    if (xQueueReceive( g_queueTimePattern, (void *)&rtcWriteMsg, 10) == pdTRUE) 
+    if (xQueueReceive( g_queueSourceTime, (void *)&rtcWriteMsg, 10) == pdTRUE) 
     {
       if( !g_advisor.routeSource( bestSrcMsg, rtcWriteMsg))
       {
@@ -461,18 +387,20 @@ void setup()
   Serial.flush();
 
   g_OLEDClockDisplayHandler.init();
+
+  vTaskDelay( 3000 / portTICK_RATE_MS);
   g_TimestampObserver.addListener( &g_ConsoleDisplayHandler);
-  g_TimestampObserver.addListener( &g_LEDDisplayHandler);
   g_TimestampObserver.addListener( &g_OLEDClockDisplayHandler);
+  g_TimestampObserver.addListener( &g_LEDDisplayHandler);
+
 
   pinMode( gc_PULS_pin, OUTPUT);
 
-  vTaskDelay( 3000 / portTICK_RATE_MS);
+
   Serial.print("setup: start ======================\n"); 
 
-
 //  xTaskCreate( &gpsTask,              "gps_task",         4048, nullptr, 5, nullptr);
-  xTaskCreate( &ntpTask,              "ntp_task",         4048, nullptr, 5, nullptr);
+  xTaskCreate( &ntpTask,              "ntp_task",         4048, (void*)&g_queueSourceTime, 5, nullptr);
 //  xTaskCreate( &manualAdjustmentTask, "manual_adj_task",  2048, nullptr, 5, nullptr);
   xTaskCreate( &rtcWriteTask,         "rtc_write_task",   2048, nullptr, 5, nullptr);
   xTaskCreate( &rtcReadTask,          "rtc_read_task",    2048, nullptr, 5, nullptr);

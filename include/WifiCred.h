@@ -1,2 +1,2 @@
 #define SSID    "ocean"
-#define PASSWD  "p^$kudn3!"
+#define PASSWD   "p^$kudn3!"
