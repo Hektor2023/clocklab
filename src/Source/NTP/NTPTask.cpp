@@ -4,10 +4,10 @@
 //=============================================================================================================
 void ntpTask(void *pvParameter)
 {
-//  ntpTaskParams_t *pparams= reinterpret_cast< ntpTaskParams_t*>( pvParameter);
+  ntpTaskParams_t *pparams= reinterpret_cast< ntpTaskParams_t*>( pvParameter);
   t_credentials             credentials;
-  credentials.gc_Ssid =     SSID; //pparams->ssid;
-  credentials.gc_Password = PASSWD;//pparams->passwd;
+  credentials.gc_Ssid =     pparams->ssid;
+  credentials.gc_Password = pparams->passwd;
   NTPSourceTime   ntpSource( credentials);
   MessageTime_t   ntp_msg;
 
@@ -21,7 +21,8 @@ void ntpTask(void *pvParameter)
     Timestamp  timestamp( ntp_msg.epoch);
     displayTimestamp( "NTP", timestamp);
 
-    while ( xQueueSend( *( reinterpret_cast<QueueHandle_t*>( pvParameter)), (void *)&ntp_msg, 0) != pdTRUE) 
+    QueueHandle_t* ptr= pparams->srcQueue; 
+    while ( xQueueSend( *ptr, (void *)&ntp_msg, 0) != pdTRUE) 
     {
       Serial.println("ERROR: Could not put NTP time to queue.");  
     }
