@@ -209,8 +209,7 @@ void gpsTask(void *pvParameter)
     vTaskDelay( ( 1000 -  epochMillis)/ portTICK_RATE_MS);
   
 
-    Timestamp timestamp;
-    timestamp.setEpochTime( gps_msg.epoch); 
+    Timestamp timestamp( gps_msg.epoch); 
     displayTimestamp( "GPS", timestamp);
      
     while ( xQueueSend( g_queueSourceTime, (void *)&gps_msg, 0) != pdTRUE) 
@@ -357,8 +356,7 @@ void rtcWriteTask(void *pvParameter)
       // set time for RTC
       rtcTimestamp.setEpochTime(  bestSrcMsg.epoch);
       {
-        Timestamp timestamp;
-        timestamp.setEpochTime( bestSrcMsg.epoch); 
+        Timestamp timestamp( bestSrcMsg.epoch);
         displayTimestamp( "RTC", timestamp); 
       }      
       if( xSemaphoreTake(  g_xSemaphoreRtc,0) == pdTRUE)
@@ -393,14 +391,20 @@ void setup()
   g_TimestampObserver.addListener( &g_OLEDClockDisplayHandler);
   g_TimestampObserver.addListener( &g_LEDDisplayHandler);
 
-
+  
   pinMode( gc_PULS_pin, OUTPUT);
 
 
   Serial.print("setup: start ======================\n"); 
 
+  ntpTaskParams_t  ntpParams;
+  ntpParams.ssid = SSID;
+  ntpParams.passwd = PASSWD;
+  ntpParams.srcQueue = &g_queueSourceTime;
+
 //  xTaskCreate( &gpsTask,              "gps_task",         4048, nullptr, 5, nullptr);
-  xTaskCreate( &ntpTask,              "ntp_task",         4048, (void*)&g_queueSourceTime, 5, nullptr);
+//  xTaskCreate( &ntpTask,              "ntp_task",         4048, (void*)&g_queueSourceTime, 5, nullptr);
+  xTaskCreate( &ntpTask,              "ntp_task",         4048, reinterpret_cast< void*>( &ntpParams), 5, nullptr);
 //  xTaskCreate( &manualAdjustmentTask, "manual_adj_task",  2048, nullptr, 5, nullptr);
   xTaskCreate( &rtcWriteTask,         "rtc_write_task",   2048, nullptr, 5, nullptr);
   xTaskCreate( &rtcReadTask,          "rtc_read_task",    2048, nullptr, 5, nullptr);
