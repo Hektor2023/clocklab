@@ -134,7 +134,8 @@ MyDate Timestamp::getDate( void) const
     
     // calucate year and rest of days
     uint32_t days = this->epoch/ SECS_PER_DAY;
-
+    days += BASE_DAY;
+    
     uint16_t year = BASE_YEAR;
     while( days >= MyDate::daysInYear( year))
     {
