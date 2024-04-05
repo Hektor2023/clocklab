@@ -21,7 +21,9 @@ void ManualTimeHandler::adjust( ManualTimeHandler::variable var, ManualTimeHandl
    {  
       case variable::Hour:
           {
-            MyTime my_time(  adjTimestamp.getTime());      
+            MyTime my_time;
+            
+            adjTimestamp.getTime( my_time);      
             (dir== direction::Plus)?  my_time.hourInc(): my_time.hourDec();
             adjTimestamp.setTime( my_time);
           }
@@ -29,7 +31,9 @@ void ManualTimeHandler::adjust( ManualTimeHandler::variable var, ManualTimeHandl
 
       case variable::Minute:
           {
-            MyTime my_time(  adjTimestamp.getTime());
+            MyTime my_time;
+            
+            adjTimestamp.getTime( my_time);
             (dir== direction::Plus)?  my_time.minuteInc(): my_time.minuteDec();
             adjTimestamp.setTime( my_time);
           }
@@ -37,7 +41,9 @@ void ManualTimeHandler::adjust( ManualTimeHandler::variable var, ManualTimeHandl
           
       case variable::Second:
           {
-            MyTime my_time(  adjTimestamp.getTime());
+            MyTime my_time;
+            
+            adjTimestamp.getTime( my_time);
             (dir== direction::Plus)?  my_time.secondInc(): my_time.secondDec();
             adjTimestamp.setTime( my_time);
           }      
@@ -45,7 +51,9 @@ void ManualTimeHandler::adjust( ManualTimeHandler::variable var, ManualTimeHandl
 
       case variable::Day:
           {
-            MyDate my_date( adjTimestamp.getDate());
+            MyDate my_date;
+            
+            adjTimestamp.getDate( my_date);
             (dir== direction::Plus)?  my_date.dayInc(): my_date.dayDec();
             adjTimestamp.setDate( my_date);           
           }
@@ -53,7 +61,9 @@ void ManualTimeHandler::adjust( ManualTimeHandler::variable var, ManualTimeHandl
 
       case variable::Month:
           {
-            MyDate my_date( adjTimestamp.getDate());
+            MyDate my_date;
+            
+            adjTimestamp.getDate( my_date);
             (dir== direction::Plus)?  my_date.monthInc(): my_date.monthDec();
             adjTimestamp.setDate( my_date); 
           }
@@ -61,7 +71,9 @@ void ManualTimeHandler::adjust( ManualTimeHandler::variable var, ManualTimeHandl
 
       case variable::Year:
           {
-            MyDate my_date( adjTimestamp.getDate());
+            MyDate my_date;
+            
+            adjTimestamp.getDate( my_date);
             (dir== direction::Plus)?  my_date.yearInc(): my_date.yearDec();
             adjTimestamp.setDate( my_date); 
           }

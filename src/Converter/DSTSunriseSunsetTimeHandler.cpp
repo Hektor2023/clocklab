@@ -25,7 +25,8 @@ void DSTSunriseSunsetTimeHandler::updateTime( Timestamp &timestamp)
   static  uint16_t  lastYear=0;
 // compare timestamps
 
-  MyDate  date= timestamp.getDate();
+  MyDate  date;
+  timestamp.getDate( date);
   if( date.getYear() != lastYear)
   {
     lastYear= date.getYear();
@@ -39,8 +40,6 @@ void DSTSunriseSunsetTimeHandler::updateTime( Timestamp &timestamp)
     calculateSunriseSunset( timestamp);
   }
 
-
-
 //  Serial.printf("\n currentTimeOffset= %d\n", currentTimeOffset);
   localTimestamp= timestamp +currentTimeOffset;
   baseUpdateTime( localTimestamp);  
@@ -49,23 +48,26 @@ void DSTSunriseSunsetTimeHandler::updateTime( Timestamp &timestamp)
 
 void DSTSunriseSunsetTimeHandler::calculateDST( MyDate &date)
 {
-    MyDate dSTdate;
+    MyDate dSTdateStart;
+    MyDate dSTdateEnd;
+
+    dSTdateStart= MyDate::getDSTStart( date.getYear());
+    dSTStartTimestamp.setDate( dSTdateStart);
     
-    dSTdate= MyDate::getDSTStart( date.getYear());
-    dSTStartTimestamp.setDate( dSTdate);
-    
-    dSTdate= MyDate::getDSTEnd( date.getYear());
-    dSTEndTimestamp.setDate( dSTdate);
+    dSTdateEnd= MyDate::getDSTEnd( date.getYear());
+    dSTEndTimestamp.setDate( dSTdateEnd);
 
     char dateStrBuffer[ MyDate::getStringBufferSize()]; 
-    Serial.printf("\nNew DSTstart:  %s ", dSTStartTimestamp.getDate().toString( dateStrBuffer));
-    Serial.printf("-  New DSTend: %s\n",  dSTEndTimestamp.getDate().toString( dateStrBuffer));
+    Serial.printf("\nNew DSTstart:  %s ", dSTdateStart.toString( dateStrBuffer));
+    Serial.printf("-  New DSTend: %s\n",  dSTdateEnd.toString( dateStrBuffer));
 }
 
 
 void DSTSunriseSunsetTimeHandler::calculateSunriseSunset( Timestamp &timestamp)
 {
-    MyDate  date= timestamp.getDate();
+    MyDate  date; 
+    
+    timestamp.getDate( date);
     uint8_t day=   date.getDay();
     uint8_t month= date.getMonth();
     uint16_t year= date.getYear();

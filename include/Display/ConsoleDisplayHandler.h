@@ -4,18 +4,17 @@
 
 #include "Arduino.h"
 
-#include "Display/TimestampObserver.h"
+#include "TimeType/TimeData.h"
 
 //===================================================================================
-class ConsoleDisplayHandler:public TimestampListener  
+class ConsoleDisplayHandler 
 {
-
    public:
       ConsoleDisplayHandler( void);
-      virtual ~ConsoleDisplayHandler( void);
+      ~ConsoleDisplayHandler( void);
       
-      virtual void update( TimestampObserver* observer);
-      virtual const char* getClassName( void);    
+      void update( const TimeData &data);
+      const char* getClassName( void);    
 ;};
 
 //===================================================================================

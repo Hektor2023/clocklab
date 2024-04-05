@@ -22,6 +22,9 @@ class MyTime
 
     MyTime& operator =( const MyTime& time);
 
+    friend bool operator==(MyTime const & time1, MyTime const & time2);
+    friend bool operator!=(MyTime const & time1, MyTime const & time2);
+
     uint8_t getHour( void) const; 
     void setHour( uint8_t day);
 

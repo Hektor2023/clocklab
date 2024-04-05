@@ -14,6 +14,18 @@ MyTime::MyTime( const MyTime &time):hour( time.hour), minute( time.minute), seco
 MyTime::~MyTime( void) {}
 
 //===================================================================================
+bool operator ==(MyTime const & time1, MyTime const & time2)
+{
+  return( (time1.hour == time2.hour) && (time1.minute == time2.minute) && (time1.second == time2.second));
+}
+
+//===================================================================================
+bool operator !=(MyTime const & time1, MyTime const & time2)
+{
+  return( !( time1 == time2));
+}
+
+//===================================================================================
 uint8_t MyTime::getHour( void) const
 {
   return( hour);

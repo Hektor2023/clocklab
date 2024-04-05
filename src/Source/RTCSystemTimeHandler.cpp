@@ -74,8 +74,10 @@ Timestamp& RTCSystemTimeHandler::getTimestamp( void)
 //===================================================================================
 void RTCSystemTimeHandler::setTimestamp( const Timestamp& newTimestamp)
 {
-  MyTime newTime= newTimestamp.getTime();
-  MyDate newDate= newTimestamp.getDate();
+  MyTime newTime;
+  newTimestamp.getTime( newTime);
+  MyDate newDate;
+  newTimestamp.getDate( newDate);
 
   rtc.set( newTime.getSecond(), newTime.getMinute(), newTime.getHour(), newDate.getDayOfWeek(), newDate.getDay(), newDate.getMonth(), newDate.getYear()-2000); 
   systemTimestamp.setEpochTime( newTimestamp.getEpochTime());

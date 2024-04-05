@@ -9,6 +9,7 @@
 #include "Tools.h"
 
 #include "TimeType/Timestamp.h"
+#include "TimeType/TimeData.h"
 
 #include "Source/NTP/NTPTask.h"
 #include "Source/RTCSystemTimeHandler.h"
@@ -22,7 +23,7 @@
 
 #include "Controller.h"
 
-#include "Display/OLEDClockDisplayHandler.h"
+//#include "Display/OLEDClockDisplayHandler.h"
 #include "Display/LEDClockDisplayHandler.h"
 #include "Display/ConsoleDisplayHandler.h"
 #include "Display/TimestampObserver.h"
@@ -59,6 +60,9 @@ constexpr uint8_t   gc_PULS_pin{4};
 constexpr auto       gc_GMT_Plus_2h{ 2* 3600};
 constexpr auto       gc_period_1000_Millis{ 1000};
 
+
+TimeData  timeData;
+
 // Location Nowy Dworm Mazowiecki
 //double  g_Latitude{  52.4465078};  // 52.2507628, 020.4409067
 //double  g_Longitude{ 20.6925219};  // 
@@ -66,10 +70,7 @@ Coordinates_t g_coordinates{  52.4465078, 20.6925219};
 
 MyTime      g_SunriseTime, g_SunsetTime;
 
-
-OLEDClockDisplayHandler     g_OLEDClockDisplayHandler;
-LEDClockDisplayHandler      g_LEDDisplayHandler( gc_STB_pin, gc_CLK_pin, gc_DIO_pin);
-ConsoleDisplayHandler       g_ConsoleDisplayHandler;
+//OLEDClockDisplayHandler     g_OLEDClockDisplayHandler;
 
 Timestamp                   g_LocalTimestamp;
 SplitterTimeHandler         g_SplitterHandler( nullptr, g_LocalTimestamp);  
@@ -77,51 +78,73 @@ DSTSunriseSunsetTimeHandler g_TimeZoneDSTHandler( &g_SplitterHandler, gc_GMT_Plu
 RTCSystemTimeHandler        g_SystemTimeHandler(  &g_TimeZoneDSTHandler, gc_sda_pin, gc_scl_pin, gc_irqIn_pin);
  
 ManualTimeHandler           g_ManualAdjHandler;
-TimestampObserver           g_TimestampObserver;
 Controller                  g_Controller;
 
 static xQueueHandle       g_queueSourceTime= xQueueCreate( 5, sizeof( MessageTime_t));
-static xQueueHandle       g_queueDisplay=     xQueueCreate( 15, sizeof( MessageTime_t));
+static xQueueHandle       g_queueDisplay=    xQueueCreate( 15, sizeof( MessageTime_t));
 static SemaphoreHandle_t  g_xSemaphoreRtc;
 
 AdjustmentAdvisor         g_advisor;
 
-
 //=============================================================================================================
-/*
-void consoleInTask(void *pvParameter) 
+void LedDisplayTask(void *pvParameter)
 {
+  static LEDClockDisplayHandler LedDisplayHandler( gc_STB_pin, gc_CLK_pin, gc_DIO_pin);
+  MyTime lastTime;
 
-  Serial.print( "\nCONSOLE_IN_task:  start\n");
+  printTick();  
+  Serial.print( "\nLED_DISPLAY_task:  start\n");
 
-  uint8_t buttons = 0;
+
   for(;;)
   {
-    vTaskDelay( 100 / portTICK_RATE_MS);
+    vTaskDelay( 30 / portTICK_RATE_MS);
 
-    buttons= g_LEDViewHandler.buttonsRead();
-    g_Controller.handle( ( Buttons_t)buttons);
-
-    switch( g_Controller.getState())
+    if( timeData.lockData())
     {
-      case eShow_Time:
-        Serial.print( "Show TIME\n");
-        g_ConsoleViewHandler.setDisplayMode( displayMode_t::eTime);
-        break;
+      if( timeData.localTime != lastTime)
+      {
+        LedDisplayHandler.update( timeData);
 
-      case eShow_Date:
-        Serial.print( "Show DATE\n");
-        g_ConsoleViewHandler.setDisplayMode( displayMode_t::eDate);
-        break;
-
-      default:;
-    };
+        lastTime = timeData.localTime;
+      }
+      timeData.releaseData();
+    }
 
   }
 
-  vTaskDelete(nullptr);  
+  vTaskDelete(nullptr);
 }
-*/
+
+//=============================================================================================================
+void consoleDisplayTask(void *pvParameter)
+{
+  static ConsoleDisplayHandler consoleDisplayHandler;
+  MyTime lastTime;
+
+  printTick();  
+  Serial.print( "\nCONSOLE_DISPLAY_task:  start\n");
+
+  for(;;)
+  {
+    vTaskDelay( 30 / portTICK_RATE_MS);
+
+    if( timeData.lockData())
+    {
+      if( timeData.localTime != lastTime)
+      {
+        consoleDisplayHandler.update( timeData);
+
+        lastTime = timeData.localTime;
+      }
+
+      timeData.releaseData();
+    }
+
+  }
+
+  vTaskDelete(nullptr);
+}
 
 //=============================================================================================================
 void consoleOutTask(void *pvParameter)
@@ -129,24 +152,30 @@ void consoleOutTask(void *pvParameter)
   // initialize digital pin LED_BUILTIN as an output.
   Timestamp       displayTimestamp;
   MessageTime_t   rcvMsg;
+  MyDate date;
 
   printTick();  
   Serial.print( "\nCONSOLE_OUT_task:  start\n");
 
-
-
   for(;;)
   {
-    vTaskDelay( 10 / portTICK_RATE_MS);                    // wait for a second
-    if (xQueueReceive( g_queueDisplay, (void *)&rcvMsg, 0) == pdFALSE)
+    vTaskDelay( 30 / portTICK_RATE_MS);                  
+    if( timeData.lockData())
     {
-      continue;
-    } 
-    
-    printTick();  Serial.print( "  console_task  ");  Serial.printf( "-> %d   ", rcvMsg.type);
-    displayTimestamp.setEpochTime( rcvMsg.epoch);
+      if (xQueueReceive( g_queueDisplay, (void *)&rcvMsg, 0) == pdTRUE)
+      {
+        displayTimestamp.setEpochTime( rcvMsg.epoch);
 
-    g_TimestampObserver.update( displayTimestamp);
+        displayTimestamp.getDate( date);
+   
+        displayTimestamp.getTime( timeData.localTime);
+        displayTimestamp.getDate( timeData.localDate);
+      } 
+
+      timeData.releaseData();
+    }
+    
+
   }
 
   vTaskDelete(nullptr);
@@ -226,69 +255,6 @@ void gpsTask(void *pvParameter)
 }
 
 //=============================================================================================================
-void manualAdjustmentTask(void *pvParameter)
-{
-  MessageTime_t   adj_msg;
-  adj_msg.type=   src_type_t::MANUAL;
-
-  vTaskDelay( 800 / portTICK_RATE_MS);
-  printTick();  Serial.print( "\n manualAdjustmentTask:  start\n");  
-
-  for(;;)
-  {
-    vTaskDelay(  100 / portTICK_RATE_MS);
-
-    Timestamp timeStamp= g_ManualAdjHandler.getTimestamp();
-    adj_msg.epoch = timeStamp.getEpochTime();
-    while ( xQueueSend( g_queueSourceTime, (void *)&adj_msg, 0) != pdTRUE) 
-    {
-      Serial.println("ERROR: Could not put MAN ADJ time to queue."); 
-      vTaskDelay( 2 / portTICK_RATE_MS); 
-    }
-//    Serial.printf("| MANUAL ADJ...!!!!|\n");
-
-  }
-
-  vTaskDelete(nullptr);
-}
-
-//=============================================================================================================
-/*
-void keyboard_task(void *pvParameter)
-{
-  vTaskDelay( 20000 / portTICK_RATE_MS);
-
-  pinMode( gc_SI_pin, OUTPUT);
-  pinMode( gc_NSCLR_pin, OUTPUT);
-  pinMode( gc_RCK_pin, OUTPUT);
-  pinMode( gc_SCK_pin, OUTPUT);
-
-  digitalWrite( gc_NSCLR_pin, HIGH);
-  digitalWrite( gc_RCK_pin, LOW);
-  digitalWrite( gc_SCK_pin, LOW);
-  digitalWrite( gc_SI_pin,HIGH);
-
-  uint8_t k=0;
-
-  for(;;)
-  {
-    vTaskDelay( 5 / portTICK_RATE_MS);
-
-    digitalWrite( gc_SI_pin, k %8 ==0? HIGH:LOW);
-    k++;
-    
-    digitalWrite( gc_SCK_pin, HIGH);
-    digitalWrite( gc_RCK_pin, LOW);
-    vTaskDelay( 5 / portTICK_RATE_MS);
-
-    digitalWrite( gc_SCK_pin, LOW);
-    digitalWrite( gc_RCK_pin, HIGH);
-  }
-
-  vTaskDelete(nullptr);
-}
-*/
-//=============================================================================================================
 void rtcReadTask(void *pvParameter)  
 {
   Timestamp       rtcTimestamp;
@@ -310,13 +276,13 @@ void rtcReadTask(void *pvParameter)
       // g_LocalTimestamp updated by g_SystemTimeHandler
       if( timeUpdated)
       {
-        Serial.print( "RTC: UPDATE\n");
+        Serial.print( "RTC: UPDATE\t");
       
         digitalWrite( gc_PULS_pin,  gc_PULS_pin? LOW:HIGH); 
 
         // set time for Display
         rtcReadMsg.epoch= g_LocalTimestamp.getEpochTime();
-       
+        
         while( xQueueSend( g_queueDisplay, (void *)&rtcReadMsg, 0) != pdTRUE) 
         {
           Serial.println("ERROR: Could not put RTC read time to queue.");  
@@ -381,18 +347,16 @@ void rtcWriteTask(void *pvParameter)
 void setup() 
 {
   g_xSemaphoreRtc = xSemaphoreCreateMutex();
+
+
   // put your setup code here, to run once:
   Serial.begin(19200);
   Serial.flush();
 
-  g_OLEDClockDisplayHandler.init();
+ // g_OLEDClockDisplayHandler.init();
 
   vTaskDelay( 3000 / portTICK_RATE_MS);
-  g_TimestampObserver.addListener( &g_ConsoleDisplayHandler);
-  g_TimestampObserver.addListener( &g_OLEDClockDisplayHandler);
-  g_TimestampObserver.addListener( &g_LEDDisplayHandler);
 
-  
   pinMode( gc_PULS_pin, OUTPUT);
 
 
@@ -406,12 +370,13 @@ void setup()
 //  xTaskCreate( &gpsTask,              "gps_task",         4048, nullptr, 5, nullptr);
 //  xTaskCreate( &ntpTask,              "ntp_task",         4048, (void*)&g_queueSourceTime, 5, nullptr);
   xTaskCreate( &ntpTask,              "ntp_task",         4048, ( &ntpParams), 5, nullptr);
-//  xTaskCreate( &manualAdjustmentTask, "manual_adj_task",  2048, nullptr, 5, nullptr);
+
   xTaskCreate( &rtcWriteTask,         "rtc_write_task",   2048, nullptr, 5, nullptr);
   xTaskCreate( &rtcReadTask,          "rtc_read_task",    2048, nullptr, 5, nullptr);
-//  xTaskCreate( &consoleInTask,        "console_in_task",  3048, nullptr, 5, nullptr);
-  xTaskCreate( &consoleOutTask,       "console_out_task", 3048, nullptr, 5, nullptr);
 
+  xTaskCreate( &consoleOutTask,       "console_out_task", 3048, nullptr, 5, nullptr);
+  xTaskCreate( &consoleDisplayTask,   "console_display_task", 2048, nullptr, 5, nullptr);
+  xTaskCreate( &LedDisplayTask,       "LED_display_task", 2048, nullptr, 5, nullptr);
 }
 
 //=============================================================================================================

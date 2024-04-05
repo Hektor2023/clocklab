@@ -47,20 +47,16 @@ const char* LEDClockDisplayHandler::getClassName( void)
  }
 
 //===================================================================================
-void LEDClockDisplayHandler::update( TimestampObserver* observer)
+void LEDClockDisplayHandler::update( const TimeData &data)
 { 
  
   std::string s;
 
-  Timestamp timestamp = observer->getTimestamp();
-
-  MyTime    requiredTime;
-  requiredTime= timestamp.getTime();
+  MyTime requiredTime = data.localTime;
+  MyDate requiredDate = data.localDate;
 
   char timeStrBuffer2[ MyTime::getStringBufferSize()];
   s= requiredTime.toString( timeStrBuffer2);
-          //  Serial.printf( "->%s\n",s);
-
   std::replace( s.begin(), s.end(), ':', '-');
 
   if( xSemaphoreTake( xSemaphoreTM1638plus,( TickType_t ) 0) == pdTRUE)
@@ -69,7 +65,7 @@ void LEDClockDisplayHandler::update( TimestampObserver* observer)
 
     //  Serial.printf( "=>%s\n",s);
     tm.setLEDs( 0);
-    tm.setLED( timestamp.getDayOfWeek(), 1);
+    tm.setLED(requiredDate.getDayOfWeek(), 1);
 //    tm.setLED( 7, adjustMode? 1:0); 
     xSemaphoreGive( xSemaphoreTM1638plus);
   }

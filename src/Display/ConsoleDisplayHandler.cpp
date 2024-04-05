@@ -7,14 +7,13 @@ ConsoleDisplayHandler::ConsoleDisplayHandler( void) {};
 ConsoleDisplayHandler::~ConsoleDisplayHandler( void) {};
 
 //===================================================================================
-void ConsoleDisplayHandler::update( TimestampObserver* observer)
+void ConsoleDisplayHandler::update( const TimeData &data)
 {
-  Timestamp timestamp= observer->getTimestamp();
-
-  MyTime currentTime= timestamp.getTime();
+  MyTime currentTime = data.localTime;
   char timeStrBuffer[ MyTime::getStringBufferSize()];
-
-  Serial.printf("[%s]\n", currentTime.toString( timeStrBuffer));  
+  MyDate currentDate = data.localDate;
+  char dateStrBuffer[ MyDate::getStringBufferSize()];
+  Serial.printf("[%s \t|\t %s]\n", currentTime.toString( timeStrBuffer), currentDate.toString( dateStrBuffer));  
 }
 
 //===================================================================================

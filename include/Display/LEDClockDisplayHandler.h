@@ -6,13 +6,13 @@
 
 #include "TimeType/Timestamp.h"
 
-#include "Display/TimestampObserver.h"
+#include "TimeType/TimeData.h"
 
 #include <TM1638plus.h>
 #include "freertos/FreeRTOS.h"
 
 //===================================================================================
-class LEDClockDisplayHandler:public TimestampListener
+class LEDClockDisplayHandler
 {
    private:
       TM1638plus  tm;
@@ -21,12 +21,12 @@ class LEDClockDisplayHandler:public TimestampListener
 
    public:
       LEDClockDisplayHandler( const int STB_pin, const int CLK_pin, const int DIO_pin);
-      virtual ~LEDClockDisplayHandler( void);
+      ~LEDClockDisplayHandler( void);
 
       uint8_t  buttonsRead( void);
      
-      virtual void update( TimestampObserver* observer);
-      virtual const char* getClassName( void);
+      void update( const TimeData &data);
+      const char* getClassName( void);
 };
 
 //===================================================================================

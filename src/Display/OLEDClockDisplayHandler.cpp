@@ -35,14 +35,17 @@ void OLEDClockDisplayHandler::update( TimestampObserver* observer)
   Timestamp timestamp = observer->getTimestamp();
 
   char dateStrBuffer[MyDate::getStringBufferSize()];
-  MyDate date= timestamp.getDate();
+  MyDate date;
+  timestamp.getDate( date);
   std::string dateAsString= date.toString( dateStrBuffer);
   
+  MyTime time;
+  timestamp.getTime( time);
   char timeStrBuffer[MyTime::getStringBufferSize()];
-  std::string timeAsString= timestamp.getTime().toString( timeStrBuffer);
+  std::string timeAsString= time.toString( timeStrBuffer);
 
   char timeShortStrBuffer[MyTime::getStringShortBufferSize()];
-  std::string timeAsShortString= timestamp.getTime().toShortString( timeShortStrBuffer);
+  std::string timeAsShortString= time.toShortString( timeShortStrBuffer);
   
     // Set the font size and color
   tft.setTextSize(5); // choose a suitable font
