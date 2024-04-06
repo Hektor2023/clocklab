@@ -11,10 +11,13 @@
 #include "TimeType/Timestamp.h"
 #include "TimeType/TimeData.h"
 
+#include "Display/ConsoleDisplay/ConsoleDisplayTask.h"
+#include "Display/LEDClockDisplay/LEDClockDisplayTask.h"
+#include "Display/OLEDClockDisplay/OLEDClockDisplayTask.h"
+
 #include "Source/NTP/NTPTask.h"
 #include "Source/RTCSystemTimeHandler.h"
 #include "Source/GPS/GPSTimeHandler2.h"
-#include "Source/ManualTimeHandler.h"
 
 #include "Converter/SplitterTimeHandler.h"
 #include "Converter/DSTSunriseSunsetTimeHandler.h"
@@ -23,35 +26,10 @@
 
 #include "Controller.h"
 
-#include "Display/OLEDClockDisplay/OLEDClockDisplayHandler.h"
-#include "Display/LEDClockDisplay/LEDClockDisplayHandler.h"
-#include "Display/ConsoleDisplay/ConsoleDisplayHandler.h"
-
-
 #include "WifiCred.h"
+#include "PinConfig.h"
 
 //=============================================================================================================
-
-constexpr uint8_t   gc_irqIn_pin{ 15}; // D8 - don't use D4
-
-//constexpr uint8_t   gc_rxd2_pin{17};
-constexpr uint8_t   gc_txd2_pin{16};
-
-constexpr uint8_t   gc_sda_pin{21};
-constexpr uint8_t   gc_scl_pin{22};
-
-constexpr uint8_t   gc_DIO_pin{ 13}; // 25
-constexpr uint8_t   gc_CLK_pin{ 33}; // 26
-constexpr uint8_t   gc_STB_pin{ 32}; // 27
-
-
-constexpr uint8_t   gc_SI_pin{25};
-constexpr uint8_t   gc_RCK_pin{26};
-constexpr uint8_t   gc_SCK_pin{27};
-constexpr uint8_t   gc_NSCLR_pin{14};
-
-constexpr uint8_t   gc_PULS_pin{4};
-
 // Set offset time in seconds to adjust for your timezone, for example:
 // GMT +1 = 3600
 // GMT +8 = 28800
@@ -59,7 +37,6 @@ constexpr uint8_t   gc_PULS_pin{4};
 // GMT  0 = 0
 constexpr auto       gc_GMT_Plus_2h{ 2* 3600};
 constexpr auto       gc_period_1000_Millis{ 1000};
-
 
 static TimeData  timeData;
 
@@ -86,101 +63,6 @@ AdjustmentAdvisor         g_advisor;
 
 static ntpTaskParams_t  ntpParams{ SSID, PASSWD, static_cast< QueueHandle_t* >( &g_queueSourceTime)};
 
-//=============================================================================================================
-void OLedDisplayTask(void *pvParameter)
-{
-  OLEDClockDisplayHandler OLEDClockDisplayHandler;
-  TimeData *ptr2timeData= reinterpret_cast< TimeData*>( pvParameter);
-  MyTime lastTime;
-
-  printTick();  
-  Serial.print( "\nOLED_DISPLAY_task:  start\n");
-
-  OLEDClockDisplayHandler.init();
-
-  for(;;)
-  {
-    vTaskDelay( 30 / portTICK_RATE_MS);
-
-    if(ptr2timeData->lockData())
-    {
-      if( ptr2timeData->localTime != lastTime)
-      {
-        OLEDClockDisplayHandler.update( *ptr2timeData);
-
-        lastTime =ptr2timeData->localTime;
-      }
-
-      ptr2timeData->releaseData();
-    }
-
-  }
-
-  vTaskDelete(nullptr);
-}
-
-//=============================================================================================================
-void LedDisplayTask(void *pvParameter)
-{
-  static LEDClockDisplayHandler LedDisplayHandler( gc_STB_pin, gc_CLK_pin, gc_DIO_pin);
-  TimeData *ptr2timeData= reinterpret_cast< TimeData*>( pvParameter);
-  MyTime lastTime;
-
-  printTick();  
-  Serial.print( "\nLED_DISPLAY_task:  start\n");
-
-
-  for(;;)
-  {
-    vTaskDelay( 30 / portTICK_RATE_MS);
-
-    if( ptr2timeData->lockData())
-    {
-      if( ptr2timeData->localTime != lastTime)
-      {
-        LedDisplayHandler.update( *ptr2timeData);
-
-        lastTime = ptr2timeData->localTime;
-      }
-
-      timeData.releaseData();
-    }
-
-  }
-
-  vTaskDelete(nullptr);
-}
-
-//=============================================================================================================
-void consoleDisplayTask(void *pvParameter)
-{
-  static ConsoleDisplayHandler consoleDisplayHandler;
-  TimeData *ptr2timeData= reinterpret_cast< TimeData*>( pvParameter);
-  MyTime lastTime;
-
-  printTick();  
-  Serial.print( "\nCONSOLE_DISPLAY_task:  start\n");
-
-  for(;;)
-  {
-    vTaskDelay( 30 / portTICK_RATE_MS);
-
-    if( ptr2timeData->lockData())
-    {
-      if( ptr2timeData->localTime != lastTime)
-      {
-        consoleDisplayHandler.update( *ptr2timeData);
-
-        lastTime = ptr2timeData->localTime;
-      }
-
-      timeData.releaseData();
-    }
-
-  }
-
-  vTaskDelete(nullptr);
-}
 
 //=============================================================================================================
 void consoleOutTask(void *pvParameter)
