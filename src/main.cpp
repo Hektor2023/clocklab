@@ -23,9 +23,9 @@
 
 #include "Controller.h"
 
-#include "Display/OLEDClockDisplayHandler.h"
-#include "Display/LEDClockDisplayHandler.h"
-#include "Display/ConsoleDisplayHandler.h"
+#include "Display/OLEDClockDisplay/OLEDClockDisplayHandler.h"
+#include "Display/LEDClockDisplay/LEDClockDisplayHandler.h"
+#include "Display/ConsoleDisplay/ConsoleDisplayHandler.h"
 
 
 #include "WifiCred.h"
@@ -61,7 +61,7 @@ constexpr auto       gc_GMT_Plus_2h{ 2* 3600};
 constexpr auto       gc_period_1000_Millis{ 1000};
 
 
-TimeData  timeData;
+static TimeData  timeData;
 
 // Location Nowy Dworm Mazowiecki
 //double  g_Latitude{  52.4465078};  // 52.2507628, 020.4409067
@@ -75,7 +75,6 @@ SplitterTimeHandler         g_SplitterHandler( nullptr, g_LocalTimestamp);
 DSTSunriseSunsetTimeHandler g_TimeZoneDSTHandler( &g_SplitterHandler, gc_GMT_Plus_2h, g_coordinates, g_SunriseTime, g_SunsetTime);
 RTCSystemTimeHandler        g_SystemTimeHandler(  &g_TimeZoneDSTHandler, gc_sda_pin, gc_scl_pin, gc_irqIn_pin);
  
-ManualTimeHandler           g_ManualAdjHandler;
 Controller                  g_Controller;
 
 static xQueueHandle       g_queueSourceTime= xQueueCreate( 5, sizeof( MessageTime_t));
@@ -84,10 +83,14 @@ static SemaphoreHandle_t  g_xSemaphoreRtc;
 
 AdjustmentAdvisor         g_advisor;
 
+
+static ntpTaskParams_t  ntpParams{ SSID, PASSWD, static_cast< QueueHandle_t* >( &g_queueSourceTime)};
+
 //=============================================================================================================
 void OLedDisplayTask(void *pvParameter)
 {
   OLEDClockDisplayHandler OLEDClockDisplayHandler;
+  TimeData *ptr2timeData= reinterpret_cast< TimeData*>( pvParameter);
   MyTime lastTime;
 
   printTick();  
@@ -99,15 +102,16 @@ void OLedDisplayTask(void *pvParameter)
   {
     vTaskDelay( 30 / portTICK_RATE_MS);
 
-    if( timeData.lockData())
+    if(ptr2timeData->lockData())
     {
-      if( timeData.localTime != lastTime)
+      if( ptr2timeData->localTime != lastTime)
       {
-        OLEDClockDisplayHandler.update( timeData);
+        OLEDClockDisplayHandler.update( *ptr2timeData);
 
-        lastTime = timeData.localTime;
+        lastTime =ptr2timeData->localTime;
       }
-      timeData.releaseData();
+
+      ptr2timeData->releaseData();
     }
 
   }
@@ -119,6 +123,7 @@ void OLedDisplayTask(void *pvParameter)
 void LedDisplayTask(void *pvParameter)
 {
   static LEDClockDisplayHandler LedDisplayHandler( gc_STB_pin, gc_CLK_pin, gc_DIO_pin);
+  TimeData *ptr2timeData= reinterpret_cast< TimeData*>( pvParameter);
   MyTime lastTime;
 
   printTick();  
@@ -129,14 +134,15 @@ void LedDisplayTask(void *pvParameter)
   {
     vTaskDelay( 30 / portTICK_RATE_MS);
 
-    if( timeData.lockData())
+    if( ptr2timeData->lockData())
     {
-      if( timeData.localTime != lastTime)
+      if( ptr2timeData->localTime != lastTime)
       {
-        LedDisplayHandler.update( timeData);
+        LedDisplayHandler.update( *ptr2timeData);
 
-        lastTime = timeData.localTime;
+        lastTime = ptr2timeData->localTime;
       }
+
       timeData.releaseData();
     }
 
@@ -149,6 +155,7 @@ void LedDisplayTask(void *pvParameter)
 void consoleDisplayTask(void *pvParameter)
 {
   static ConsoleDisplayHandler consoleDisplayHandler;
+  TimeData *ptr2timeData= reinterpret_cast< TimeData*>( pvParameter);
   MyTime lastTime;
 
   printTick();  
@@ -158,13 +165,13 @@ void consoleDisplayTask(void *pvParameter)
   {
     vTaskDelay( 30 / portTICK_RATE_MS);
 
-    if( timeData.lockData())
+    if( ptr2timeData->lockData())
     {
-      if( timeData.localTime != lastTime)
+      if( ptr2timeData->localTime != lastTime)
       {
-        consoleDisplayHandler.update( timeData);
+        consoleDisplayHandler.update( *ptr2timeData);
 
-        lastTime = timeData.localTime;
+        lastTime = ptr2timeData->localTime;
       }
 
       timeData.releaseData();
@@ -389,22 +396,16 @@ void setup()
 
   Serial.print("setup: start ======================\n"); 
 
-  static ntpTaskParams_t           ntpParams;
-  ntpParams.ssid = SSID;
-  ntpParams.passwd = PASSWD;
-  ntpParams.srcQueue = static_cast< QueueHandle_t* >( &g_queueSourceTime);
-
 //  xTaskCreate( &gpsTask,              "gps_task",         4048, nullptr, 5, nullptr);
-//  xTaskCreate( &ntpTask,              "ntp_task",         4048, (void*)&g_queueSourceTime, 5, nullptr);
-  xTaskCreate( &ntpTask,              "ntp_task",         4048, ( &ntpParams), 5, nullptr);
+  xTaskCreate( &ntpTask,              "ntp_task",         4048,  &ntpParams, 5, nullptr);
 
   xTaskCreate( &rtcWriteTask,         "rtc_write_task",   2048, nullptr, 5, nullptr);
   xTaskCreate( &rtcReadTask,          "rtc_read_task",    2048, nullptr, 5, nullptr);
 
-  xTaskCreate( &consoleOutTask,       "console_out_task", 3048, nullptr, 5, nullptr);
-  xTaskCreate( &consoleDisplayTask,   "console_display_task", 2048, nullptr, 5, nullptr);
-  xTaskCreate( &LedDisplayTask,       "LED_display_task", 2048, nullptr, 5, nullptr);
-  xTaskCreate( &OLedDisplayTask,      "OLED_display_task", 3048, nullptr, 5, nullptr);
+  xTaskCreate( &consoleOutTask,       "console_out_task",     3048, nullptr, 5, nullptr);
+  xTaskCreate( &consoleDisplayTask,   "console_display_task", 2048,  &timeData, 5, nullptr);
+  xTaskCreate( &LedDisplayTask,       "LED_display_task",     2048,  &timeData, 5, nullptr);
+  xTaskCreate( &OLedDisplayTask,      "OLED_display_task",    3048,  &timeData, 5, nullptr);
 }
 
 //=============================================================================================================

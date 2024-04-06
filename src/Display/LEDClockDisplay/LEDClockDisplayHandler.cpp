@@ -1,4 +1,4 @@
-#include "Display/LEDClockDisplayHandler.h"
+#include "Display/LEDClockDisplay/LEDClockDisplayHandler.h"
 
 //===================================================================================
 LEDClockDisplayHandler::LEDClockDisplayHandler( const int STB_pin, const int CLK_pin, const int DIO_pin)

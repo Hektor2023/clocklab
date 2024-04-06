@@ -1,4 +1,4 @@
-#include "Display/ConsoleDisplayHandler.h"
+#include "Display/ConsoleDisplay/ConsoleDisplayHandler.h"
 
 //===================================================================================
 ConsoleDisplayHandler::ConsoleDisplayHandler( void) {};
