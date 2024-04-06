@@ -55,8 +55,8 @@ void LEDClockDisplayHandler::update( const TimeData &data)
   MyTime requiredTime = data.localTime;
   MyDate requiredDate = data.localDate;
 
-  char timeStrBuffer2[ MyTime::getStringBufferSize()];
-  s= requiredTime.toString( timeStrBuffer2);
+  char timeStrBuffer[ MyTime::getStringBufferSize()];
+  s= requiredTime.toString( timeStrBuffer);
   std::replace( s.begin(), s.end(), ':', '-');
 
   if( xSemaphoreTake( xSemaphoreTM1638plus,( TickType_t ) 0) == pdTRUE)

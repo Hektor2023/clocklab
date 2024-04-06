@@ -5,26 +5,25 @@
 #include "Arduino.h"
 
 #include "TimeType/Timestamp.h"
-
-#include "Display/TimestampObserver.h"
+#include "TimeType/TimeData.h"
 
 #include <TFT_eSPI.h>
 #include <string.h>
 
 // uses SPI pins
 //===================================================================================
-class OLEDClockDisplayHandler:public TimestampListener
+class OLEDClockDisplayHandler
 {
    private:
       TFT_eSPI tft;
    
    public:
       OLEDClockDisplayHandler( void);
-      virtual ~OLEDClockDisplayHandler( void);
+      ~OLEDClockDisplayHandler( void);
 
       void init( void);
-      virtual void update( TimestampObserver* observer);
-      virtual const char* getClassName( void);
+      void update( const TimeData &data);
+      const char* getClassName( void);
 };
 
 //===================================================================================

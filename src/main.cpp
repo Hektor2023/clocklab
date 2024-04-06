@@ -23,10 +23,10 @@
 
 #include "Controller.h"
 
-//#include "Display/OLEDClockDisplayHandler.h"
+#include "Display/OLEDClockDisplayHandler.h"
 #include "Display/LEDClockDisplayHandler.h"
 #include "Display/ConsoleDisplayHandler.h"
-#include "Display/TimestampObserver.h"
+
 
 #include "WifiCred.h"
 
@@ -70,8 +70,6 @@ Coordinates_t g_coordinates{  52.4465078, 20.6925219};
 
 MyTime      g_SunriseTime, g_SunsetTime;
 
-//OLEDClockDisplayHandler     g_OLEDClockDisplayHandler;
-
 Timestamp                   g_LocalTimestamp;
 SplitterTimeHandler         g_SplitterHandler( nullptr, g_LocalTimestamp);  
 DSTSunriseSunsetTimeHandler g_TimeZoneDSTHandler( &g_SplitterHandler, gc_GMT_Plus_2h, g_coordinates, g_SunriseTime, g_SunsetTime);
@@ -85,6 +83,37 @@ static xQueueHandle       g_queueDisplay=    xQueueCreate( 15, sizeof( MessageTi
 static SemaphoreHandle_t  g_xSemaphoreRtc;
 
 AdjustmentAdvisor         g_advisor;
+
+//=============================================================================================================
+void OLedDisplayTask(void *pvParameter)
+{
+  OLEDClockDisplayHandler OLEDClockDisplayHandler;
+  MyTime lastTime;
+
+  printTick();  
+  Serial.print( "\nOLED_DISPLAY_task:  start\n");
+
+  OLEDClockDisplayHandler.init();
+
+  for(;;)
+  {
+    vTaskDelay( 30 / portTICK_RATE_MS);
+
+    if( timeData.lockData())
+    {
+      if( timeData.localTime != lastTime)
+      {
+        OLEDClockDisplayHandler.update( timeData);
+
+        lastTime = timeData.localTime;
+      }
+      timeData.releaseData();
+    }
+
+  }
+
+  vTaskDelete(nullptr);
+}
 
 //=============================================================================================================
 void LedDisplayTask(void *pvParameter)
@@ -353,8 +382,6 @@ void setup()
   Serial.begin(19200);
   Serial.flush();
 
- // g_OLEDClockDisplayHandler.init();
-
   vTaskDelay( 3000 / portTICK_RATE_MS);
 
   pinMode( gc_PULS_pin, OUTPUT);
@@ -377,6 +404,7 @@ void setup()
   xTaskCreate( &consoleOutTask,       "console_out_task", 3048, nullptr, 5, nullptr);
   xTaskCreate( &consoleDisplayTask,   "console_display_task", 2048, nullptr, 5, nullptr);
   xTaskCreate( &LedDisplayTask,       "LED_display_task", 2048, nullptr, 5, nullptr);
+  xTaskCreate( &OLedDisplayTask,      "OLED_display_task", 3048, nullptr, 5, nullptr);
 }
 
 //=============================================================================================================

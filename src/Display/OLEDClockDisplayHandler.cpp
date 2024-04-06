@@ -28,19 +28,15 @@ void OLEDClockDisplayHandler::init( void)
 }
 
 //===================================================================================
-void OLEDClockDisplayHandler::update( TimestampObserver* observer)
+void OLEDClockDisplayHandler::update( const TimeData &data)
 { 
   const String dayOfWeekAsString[]={ "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday","Sunday"};
 
-  Timestamp timestamp = observer->getTimestamp();
-
   char dateStrBuffer[MyDate::getStringBufferSize()];
-  MyDate date;
-  timestamp.getDate( date);
+  MyDate date = data.localDate;
   std::string dateAsString= date.toString( dateStrBuffer);
   
-  MyTime time;
-  timestamp.getTime( time);
+  MyTime time = data.localTime;
   char timeStrBuffer[MyTime::getStringBufferSize()];
   std::string timeAsString= time.toString( timeStrBuffer);
 
