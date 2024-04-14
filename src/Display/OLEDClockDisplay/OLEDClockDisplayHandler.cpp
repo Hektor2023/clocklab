@@ -8,15 +8,6 @@ OLEDClockDisplayHandler::OLEDClockDisplayHandler( void)
 }
 
 //===================================================================================
-OLEDClockDisplayHandler::~OLEDClockDisplayHandler( void) {};
-
-//===================================================================================
-const char* OLEDClockDisplayHandler::getClassName( void)
-{
-  return("OLEDClockDisplayHandler");
-}
-
-//===================================================================================
 void OLEDClockDisplayHandler::init( void)
 {
   // Initialize TFT LCD

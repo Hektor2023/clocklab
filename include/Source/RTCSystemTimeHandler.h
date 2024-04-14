@@ -40,7 +40,7 @@ class RTCSystemTimeHandler:public TimeHandler
 
    public:
       RTCSystemTimeHandler( TimeHandler* ptr2timeHandler, const uint8_t sda_pin, const uint8_t scl_pin, const uint8_t irqIn_pin);
-      virtual ~RTCSystemTimeHandler( void);
+      virtual ~RTCSystemTimeHandler( void) = default;
 
       virtual const char* getClassName( void);
 

@@ -20,15 +20,17 @@ typedef struct
 class NTPSourceTime
 {
   private:
-    WiFiUDP     udp;
-    NTPClient   timeClient;
-    uint32_t    epoch;
+    WiFiUDP       udp;
+    NTPClient     timeClient;
+    Timestamp     timestamp;
     t_credentials credentials;
 
   public:
     NTPSourceTime( t_credentials &credentials);
+    ~NTPSourceTime( void) = default;
 
-    uint32_t update( void);
+    Timestamp& getTimestamp( void);
+    void update( void);
 };
 
 //=============================================================================================================

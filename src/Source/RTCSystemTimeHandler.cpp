@@ -45,9 +45,6 @@ RTCSystemTimeHandler::RTCSystemTimeHandler( TimeHandler* ptr2timeHandler, const 
 } 
 
 //===================================================================================
-RTCSystemTimeHandler::~RTCSystemTimeHandler( void) {}
-
-//===================================================================================
 void RTCSystemTimeHandler::init( void)
 {
   rtc.sqwgSetMode( URTCLIB_SQWG_OFF_0);
@@ -86,7 +83,6 @@ void RTCSystemTimeHandler::setTimestamp( const Timestamp& newTimestamp)
 //===================================================================================
 void RTCSystemTimeHandler::forceUpdateTime( void)
 {
-
   rtc.refresh();
  
   MyTime  time;

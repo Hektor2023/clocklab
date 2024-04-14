@@ -19,11 +19,10 @@ class OLEDClockDisplayHandler
    
    public:
       OLEDClockDisplayHandler( void);
-      ~OLEDClockDisplayHandler( void);
+      ~OLEDClockDisplayHandler( void) = default;
 
       void init( void);
       void update( const TimeData &data);
-      const char* getClassName( void);
 };
 
 //===================================================================================

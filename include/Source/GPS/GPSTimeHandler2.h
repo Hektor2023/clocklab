@@ -1,7 +1,7 @@
 #pragma once
 
 #include <stdint.h>
-#include "TimeType/TimeHandler.h"
+
 #include "TimeType/Timestamp.h"
 #include "clocklab_types.h"
 
@@ -9,20 +9,17 @@ constexpr unsigned char delimeterSizeMap=  20;
 constexpr unsigned char bufferSize=  100;
 
 //===================================================================================
-class GPSTimeHandler2:public TimeHandler
+class GPSTimeHandler2
 {
    protected:
-      TimeHandler*  ptr2timeHandler;
-
       Timestamp     GPSTimestamp;
       uint8_t       milliSecond;
+      Coordinates_t coordinates;
 
       signed char   delimeterMap[  delimeterSizeMap]; // map of delimeter positions
       char          buffer[ bufferSize];  
-      Coordinates_t &coordinates;
-   
+
    private:
-      void updateTime( Timestamp &timestamp);
       void getField( const unsigned char fieldNo, char* field, const char* text);
       bool isValidRecord( void);
       bool isValidCheckSum( void);
@@ -32,19 +29,18 @@ class GPSTimeHandler2:public TimeHandler
 
       
    public:
-      GPSTimeHandler2( TimeHandler* ptr2timeHandler, Coordinates_t &coordinates);
-      virtual ~GPSTimeHandler2( void)= default;
+      GPSTimeHandler2( void);
+      ~GPSTimeHandler2( void)= default;
 
       uint8_t getCentiSecond( void);   
      
-      virtual Timestamp&  getTimestamp( void);
-      uint8_t getMilliSecond( void);
-      virtual const char* getClassName( void);
+      Timestamp&  getTimestamp( void);
+      uint8_t     getMilliSecond( void);
 
+      Coordinates_t  getCoordinate( void);
+
+      bool updateTime( void);
       bool collectRecord( char c);
-      
-      virtual bool updateTime( void);
-
 };
 
 //===================================================================================

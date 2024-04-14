@@ -7,7 +7,7 @@ NTPSourceTime::NTPSourceTime( t_credentials &credentials)
   WiFi.mode(WIFI_STA); 
 };
 
-uint32_t NTPSourceTime::update( void)
+void NTPSourceTime::update( void)
 {
   WiFi.begin( &credentials.gc_Ssid[0], &credentials.gc_Password[0]);
 
@@ -20,7 +20,7 @@ uint32_t NTPSourceTime::update( void)
   timeClient.begin(); 
   timeClient.forceUpdate();
 
-  epoch= timeClient.getEpochTime(); 
+  uint32_t epoch= timeClient.getEpochTime(); 
 //  Serial.printf("epoch ->%u\n", epoch); 
 
   uint32_t epochMillis= (uint32_t)((1000.0f* timeClient.getMillis())/UINT32_MAX);    
@@ -34,5 +34,10 @@ uint32_t NTPSourceTime::update( void)
   //  Serial.printf("\nDisconnect...\n");
   WiFi.disconnect();
 
-  return epoch;
+  timestamp.setEpochTime( epoch);
 }
+
+Timestamp& NTPSourceTime::getTimestamp( void)
+{
+  return timestamp;
+}  

@@ -16,15 +16,6 @@ LEDClockDisplayHandler::LEDClockDisplayHandler( const int STB_pin, const int CLK
 };
 
 //===================================================================================
-LEDClockDisplayHandler::~LEDClockDisplayHandler( void) {};
-
-//===================================================================================
-const char* LEDClockDisplayHandler::getClassName( void)
-{
-  return("LEDClockDisplayHandler");
-}
-
-//===================================================================================
  uint8_t LEDClockDisplayHandler::buttonsRead( void)
  {
     static uint8_t lastKeys= -1;
@@ -49,7 +40,6 @@ const char* LEDClockDisplayHandler::getClassName( void)
 //===================================================================================
 void LEDClockDisplayHandler::update( const TimeData &data)
 { 
- 
   std::string s;
 
   MyTime requiredTime = data.localTime;

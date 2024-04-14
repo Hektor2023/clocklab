@@ -10,7 +10,7 @@ class AdjustmentAdvisor
 
   public:
     AdjustmentAdvisor( void);
-    ~AdjustmentAdvisor() {};
+    ~AdjustmentAdvisor( void) = default;
 
     void setSelectedSource( src_type_t src);
     bool routeSource( MessageTime_t &bestSrc_msg, const MessageTime_t &new_msg);

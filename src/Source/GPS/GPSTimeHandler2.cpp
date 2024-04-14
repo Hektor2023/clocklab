@@ -6,8 +6,9 @@ const char delimeter=',';
 const char checkSumMarker='*';
 
 //===================================================================================
-GPSTimeHandler2::GPSTimeHandler2( TimeHandler* ptr2timeHandler, Coordinates_t &coordinates):
-    TimeHandler( ptr2timeHandler), coordinates( coordinates), GPSTimestamp( 0L), milliSecond( 0) {}
+GPSTimeHandler2::GPSTimeHandler2( void):
+    GPSTimestamp( 0L), milliSecond( 0), coordinates()
+{}
 
 //===================================================================================
 Timestamp& GPSTimeHandler2::getTimestamp( void)
@@ -20,10 +21,11 @@ uint8_t GPSTimeHandler2::getMilliSecond( void)
 {
     return( milliSecond);
 }
- //===================================================================================
-const char* GPSTimeHandler2::getClassName( void)
+
+//===================================================================================
+Coordinates_t GPSTimeHandler2::getCoordinate( void)
 {
-  return( "GPSTimeHandler2");
+    return( coordinates);
 }
 
 //=============================================================================================================
@@ -203,7 +205,7 @@ bool GPSTimeHandler2::updateTime( void)
     if( strstr( buffer, "GPRMC") && isValidCheckSum())
     {
 //        Serial.printf("| GPS... |");
-//        Serial.printf( "GPS: %s\n", buffer);
+        Serial.printf( "GPS: %s\n", buffer);
 
         fieldNo= 1;
         getField( fieldNo, field, buffer);
@@ -265,17 +267,7 @@ bool GPSTimeHandler2::updateTime( void)
         
     }
 
-    if( updated) 
-    {
-        baseUpdateTime( GPSTimestamp);
-    } 
     return( updated);
-}
-
-//===================================================================================
-void GPSTimeHandler2::updateTime( Timestamp &timestamp)
-{
-
 }
 
 //===================================================================================

@@ -116,8 +116,6 @@ void DSTSunriseSunsetTimeHandler::calculateSunriseSunset( Timestamp &timestamp)
     this->sunsetTime.setHour( (uint8_t)Q17);
     this->sunsetTime.setMinute( (uint8_t)modd( Q17, 60));
     this->sunsetTime.setSecond( (uint8_t) modd( Q17, 3600)/10);
-
-
 }
 
 

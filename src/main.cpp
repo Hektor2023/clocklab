@@ -50,7 +50,7 @@ MyTime      g_SunriseTime, g_SunsetTime;
 Timestamp                   g_LocalTimestamp;
 SplitterTimeHandler         g_SplitterHandler( nullptr, g_LocalTimestamp);  
 DSTSunriseSunsetTimeHandler g_TimeZoneDSTHandler( &g_SplitterHandler, gc_GMT_Plus_2h, g_coordinates, g_SunriseTime, g_SunsetTime);
-RTCSystemTimeHandler        g_SystemTimeHandler(  &g_TimeZoneDSTHandler, gc_sda_pin, gc_scl_pin, gc_irqIn_pin);
+RTCSystemTimeHandler        g_RTCSystemTimeHandler(  &g_TimeZoneDSTHandler, gc_sda_pin, gc_scl_pin, gc_irqIn_pin);
  
 Controller                  g_Controller;
 
@@ -102,10 +102,7 @@ void consoleOutTask(void *pvParameter)
 //=============================================================================================================
 void gpsTask(void *pvParameter)
 {
-  GPSTimeHandler2  g_GPSHandler( nullptr, g_coordinates);  
-
-  MessageTime_t   gps_msg;
-  gps_msg.type=   src_type_t::GPS;
+  GPSTimeHandler2  GPSHandler;  
 
   Timestamp   lastGpsTime;
   Serial2.begin(9600);
@@ -132,26 +129,30 @@ void gpsTask(void *pvParameter)
       }
 
       char c = Serial2.read();
-      next= g_GPSHandler.collectRecord( c);
+      next= GPSHandler.collectRecord( c);
     };
 
-    if( !g_GPSHandler.updateTime())
+    if( !GPSHandler.updateTime())
     {
       continue;
     }
 
-    Timestamp diffTime= g_GPSHandler.getTimestamp() - lastGpsTime;
+    Timestamp diffTime= GPSHandler.getTimestamp() - lastGpsTime;
     displayTimestamp( "diffTime", diffTime);
     if( diffTime.getEpochTime() < (1 * 60))
     {
       continue;
     }
 
-    lastGpsTime = g_GPSHandler.getTimestamp();
-
+    lastGpsTime = GPSHandler.getTimestamp();
 //    Serial.printf( "GPS: encoded\n");
-    gps_msg.epoch=  g_GPSHandler.getTimestamp().getEpochTime(); 
-    uint32_t  epochMillis= (uint32_t) g_GPSHandler.getMilliSecond();
+
+    MessageTime_t   gps_msg;
+    gps_msg.type=   src_type_t::GPS;
+    gps_msg.epoch=  GPSHandler.getTimestamp().getEpochTime(); 
+    gps_msg.coordinate = GPSHandler.getCoordinate(); 
+
+    uint32_t  epochMillis= (uint32_t) GPSHandler.getMilliSecond();
    
     // set next entire second
     vTaskDelay( ( 1000 -  epochMillis)/ portTICK_RATE_MS);
@@ -179,7 +180,7 @@ void rtcReadTask(void *pvParameter)
   MessageTime_t   rtcReadMsg;
 
   printTick();  Serial.print( "\nRTC_READ_task:  start\n");
-  g_SystemTimeHandler.init();
+  g_RTCSystemTimeHandler.init();
   
   for(;;)
   { 
@@ -187,8 +188,7 @@ void rtcReadTask(void *pvParameter)
 
     if( xSemaphoreTake( g_xSemaphoreRtc,0) == pdTRUE)
     {
-      
-      bool timeUpdated = g_SystemTimeHandler.updateTime(); 
+      bool timeUpdated = g_RTCSystemTimeHandler.updateTime(); 
       xSemaphoreGive(  g_xSemaphoreRtc);
 
       // g_LocalTimestamp updated by g_SystemTimeHandler
@@ -229,7 +229,7 @@ void rtcWriteTask(void *pvParameter)
   for(;;)
   { 
     vTaskDelay( 10 / portTICK_RATE_MS);
-//    g_advisor.setSelectedSource( src_type_t::GPS);
+    g_advisor.setSelectedSource( src_type_t::GPS);
 
     if (xQueueReceive( g_queueSourceTime, (void *)&rtcWriteMsg, 10) == pdTRUE) 
     {
@@ -247,8 +247,11 @@ void rtcWriteTask(void *pvParameter)
       if( xSemaphoreTake(  g_xSemaphoreRtc,0) == pdTRUE)
       {
 //          Serial.print( "\nRTC_WRITE_task:  setTimestamp\n");
-        g_SystemTimeHandler.setTimestamp( rtcTimestamp);
-
+        g_RTCSystemTimeHandler.setTimestamp( rtcTimestamp);
+        if( bestSrcMsg.type == src_type_t::GPS)
+        {
+          g_coordinates= bestSrcMsg.coordinate;
+        }
 //        lastTimestamp= g_SystemTimeHandler.getTimestamp();
         xSemaphoreGive(  g_xSemaphoreRtc);
       }
@@ -278,8 +281,8 @@ void setup()
 
   Serial.print("setup: start ======================\n"); 
 
-//  xTaskCreate( &gpsTask,              "gps_task",         4048, nullptr, 5, nullptr);
-  xTaskCreate( &ntpTask,              "ntp_task",         4048,  &ntpParams, 5, nullptr);
+  xTaskCreate( &gpsTask,              "gps_task",         4048, nullptr, 5, nullptr);
+//  xTaskCreate( &ntpTask,              "ntp_task",         4048,  &ntpParams, 5, nullptr);
 
   xTaskCreate( &rtcWriteTask,         "rtc_write_task",   2048, nullptr, 5, nullptr);
   xTaskCreate( &rtcReadTask,          "rtc_read_task",    2048, nullptr, 5, nullptr);

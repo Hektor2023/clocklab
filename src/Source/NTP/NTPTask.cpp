@@ -9,14 +9,15 @@ void ntpTask(void *pvParameter)
   credentials.gc_Ssid =     pparams->ssid;
   credentials.gc_Password = pparams->passwd;
   NTPSourceTime   ntpSource( credentials);
-  MessageTime_t   ntp_msg;
+
 
   for(;;)
   {
     vTaskDelay( 20 *(1000 / portTICK_RATE_MS));
 
+    MessageTime_t   ntp_msg;
     ntp_msg.type=   src_type_t::NTP;
-    ntp_msg.epoch=  ntpSource.update();
+    ntp_msg.epoch=  ntpSource.getTimestamp().getEpochTime();
 
     Timestamp  timestamp( ntp_msg.epoch);
     displayTimestamp( "NTP", timestamp);

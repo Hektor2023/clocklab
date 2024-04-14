@@ -3,18 +3,16 @@
 #include <cstddef>
 
 #include "Arduino.h"
-
 #include "TimeType/TimeData.h"
 
 //===================================================================================
 class ConsoleDisplayHandler 
 {
    public:
-      ConsoleDisplayHandler( void);
-      ~ConsoleDisplayHandler( void);
+      ConsoleDisplayHandler( void) = default;
+      ~ConsoleDisplayHandler( void) = default;
       
       void update( const TimeData &data);
-      const char* getClassName( void);    
 ;};
 
 //===================================================================================
