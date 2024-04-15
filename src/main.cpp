@@ -6,7 +6,10 @@
 
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
-#include "Tools.h"
+
+#include "Other/Tools.h"
+#include "Other/AdjustmentAdvisor.h"
+#include "Other/Controller.h"
 
 #include "TimeType/Timestamp.h"
 #include "TimeType/TimeData.h"
@@ -19,13 +22,8 @@
 #include "Source/GPS/GPSTask.h"
 #include "Source/RTCSystemTimeHandler.h"
 
-
 #include "Converter/SplitterTimeHandler.h"
 #include "Converter/DSTSunriseSunsetTimeHandler.h"
-
-#include "AdjustmentAdvisor.h"
-
-#include "Controller.h"
 
 #include "WifiCred.h"
 #include "PinConfig.h"

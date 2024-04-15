@@ -1,4 +1,4 @@
-#include "Menu.h"
+#include "Other/Menu.h"
 #include <assert.h>
 
 Menu::Menu( Menu *parentMenu)
