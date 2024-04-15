@@ -16,8 +16,9 @@
 #include "Display/OLEDClockDisplay/OLEDClockDisplayTask.h"
 
 #include "Source/NTP/NTPTask.h"
+#include "Source/GPS/GPSTask.h"
 #include "Source/RTCSystemTimeHandler.h"
-#include "Source/GPS/GPSTimeHandler2.h"
+
 
 #include "Converter/SplitterTimeHandler.h"
 #include "Converter/DSTSunriseSunsetTimeHandler.h"
@@ -60,10 +61,6 @@ static SemaphoreHandle_t  g_xSemaphoreRtc;
 
 AdjustmentAdvisor         g_advisor;
 
-
-static ntpTaskParams_t  ntpParams{ SSID, PASSWD, static_cast< QueueHandle_t* >( &g_queueSourceTime)};
-
-
 //=============================================================================================================
 void consoleOutTask(void *pvParameter)
 {
@@ -93,80 +90,6 @@ void consoleOutTask(void *pvParameter)
       timeData.releaseData();
     }
     
-
-  }
-
-  vTaskDelete(nullptr);
-}
-
-//=============================================================================================================
-void gpsTask(void *pvParameter)
-{
-  GPSTimeHandler2  GPSHandler;  
-
-  Timestamp   lastGpsTime;
-  Serial2.begin(9600);
-  Serial2.flush();
-
-  vTaskDelay( 800 / portTICK_RATE_MS);
-  printTick();  Serial.print( "\nGPS_task:  start\n");  
-
-  for(;;)
-  {
-    vTaskDelay(  100 / portTICK_RATE_MS);
-
-//    Serial.printf("| GPS...|");
-
-    bool next= true;
-    while( next)
-    {
-      vTaskDelay( 7 / portTICK_RATE_MS);
-      if( !Serial2.available())  
-      {
-//        Serial.printf( "GPS: !Serial2.available\n");
-//        Serial.printf( "*");
-        continue;
-      }
-
-      char c = Serial2.read();
-      next= GPSHandler.collectRecord( c);
-    };
-
-    if( !GPSHandler.updateTime())
-    {
-      continue;
-    }
-
-    Timestamp diffTime= GPSHandler.getTimestamp() - lastGpsTime;
-    displayTimestamp( "diffTime", diffTime);
-    if( diffTime.getEpochTime() < (1 * 60))
-    {
-      continue;
-    }
-
-    lastGpsTime = GPSHandler.getTimestamp();
-//    Serial.printf( "GPS: encoded\n");
-
-    MessageTime_t   gps_msg;
-    gps_msg.type=   src_type_t::GPS;
-    gps_msg.epoch=  GPSHandler.getTimestamp().getEpochTime(); 
-    gps_msg.coordinate = GPSHandler.getCoordinate(); 
-
-    uint32_t  epochMillis= (uint32_t) GPSHandler.getMilliSecond();
-   
-    // set next entire second
-    vTaskDelay( ( 1000 -  epochMillis)/ portTICK_RATE_MS);
-  
-
-    Timestamp timestamp( gps_msg.epoch); 
-    displayTimestamp( "GPS", timestamp);
-     
-    while ( xQueueSend( g_queueSourceTime, (void *)&gps_msg, 0) != pdTRUE) 
-    {
-      Serial.println("ERROR: Could not put GPS time to queue."); 
-      vTaskDelay( 2 / portTICK_RATE_MS); 
-    }
-//    Serial.printf("| GPS...!!!!|\n");
 
   }
 
@@ -229,7 +152,7 @@ void rtcWriteTask(void *pvParameter)
   for(;;)
   { 
     vTaskDelay( 10 / portTICK_RATE_MS);
-    g_advisor.setSelectedSource( src_type_t::NTP);
+    g_advisor.setSelectedSource( src_type_t::GPS);
 
     if (xQueueReceive( g_queueSourceTime, (void *)&rtcWriteMsg, 10) == pdTRUE) 
     {
@@ -267,6 +190,9 @@ void rtcWriteTask(void *pvParameter)
 //=============================================================================================================
 void setup() 
 {
+  static QueueHandle_t*   ptr2src_queue= static_cast< QueueHandle_t* >( &g_queueSourceTime);
+  static ntpTaskParams_t  ntpParams{ SSID, PASSWD, ptr2src_queue};
+  
   g_xSemaphoreRtc = xSemaphoreCreateMutex();
 
 
@@ -281,7 +207,7 @@ void setup()
 
   Serial.print("setup: start ======================\n"); 
 
-  xTaskCreate( &gpsTask,              "gps_task",         4048, nullptr, 5, nullptr);
+  xTaskCreate( &gpsTask,              "gps_task",         4048,  ptr2src_queue, 5, nullptr);
   xTaskCreate( &ntpTask,              "ntp_task",         4048,  &ntpParams, 5, nullptr);
 
   xTaskCreate( &rtcWriteTask,         "rtc_write_task",   2048, nullptr, 5, nullptr);

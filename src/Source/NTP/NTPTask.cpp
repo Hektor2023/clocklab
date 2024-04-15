@@ -29,8 +29,8 @@ void ntpTask(void *pvParameter)
     Timestamp  timestamp( ntp_msg.epoch);
     displayTimestamp( "NTP", timestamp);
 
-    QueueHandle_t* ptr= pparams->srcQueue; 
-    while ( xQueueSend( *ptr, (void *)&ntp_msg, 0) != pdTRUE) 
+    QueueHandle_t*  ptr2queueSource= pparams->srcQueue; 
+    while ( xQueueSend( *ptr2queueSource, (void *)&ntp_msg, 0) != pdTRUE) 
     {
       Serial.println("ERROR: Could not put NTP time to queue.");  
     }
