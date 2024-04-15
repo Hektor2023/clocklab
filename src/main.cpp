@@ -54,8 +54,8 @@ RTCSystemTimeHandler        g_RTCSystemTimeHandler(  &g_TimeZoneDSTHandler, gc_s
  
 Controller                  g_Controller;
 
-static xQueueHandle       g_queueSourceTime= xQueueCreate( 5, sizeof( MessageTime_t));
-static xQueueHandle       g_queueDisplay=    xQueueCreate( 15, sizeof( MessageTime_t));
+static xQueueHandle       g_queueSourceTime= xQueueCreate( 3, sizeof( MessageTime_t));
+static xQueueHandle       g_queueDisplay=    xQueueCreate( 5, sizeof( MessageTime_t));
 static SemaphoreHandle_t  g_xSemaphoreRtc;
 
 AdjustmentAdvisor         g_advisor;
@@ -229,7 +229,7 @@ void rtcWriteTask(void *pvParameter)
   for(;;)
   { 
     vTaskDelay( 10 / portTICK_RATE_MS);
-    g_advisor.setSelectedSource( src_type_t::GPS);
+    g_advisor.setSelectedSource( src_type_t::NTP);
 
     if (xQueueReceive( g_queueSourceTime, (void *)&rtcWriteMsg, 10) == pdTRUE) 
     {
@@ -250,7 +250,7 @@ void rtcWriteTask(void *pvParameter)
         g_RTCSystemTimeHandler.setTimestamp( rtcTimestamp);
         if( bestSrcMsg.type == src_type_t::GPS)
         {
-          g_coordinates= bestSrcMsg.coordinate;
+          g_coordinates= bestSrcMsg.coordinate; // TODO: move to RTC SystemTimeHandler
         }
 //        lastTimestamp= g_SystemTimeHandler.getTimestamp();
         xSemaphoreGive(  g_xSemaphoreRtc);
@@ -282,7 +282,7 @@ void setup()
   Serial.print("setup: start ======================\n"); 
 
   xTaskCreate( &gpsTask,              "gps_task",         4048, nullptr, 5, nullptr);
-//  xTaskCreate( &ntpTask,              "ntp_task",         4048,  &ntpParams, 5, nullptr);
+  xTaskCreate( &ntpTask,              "ntp_task",         4048,  &ntpParams, 5, nullptr);
 
   xTaskCreate( &rtcWriteTask,         "rtc_write_task",   2048, nullptr, 5, nullptr);
   xTaskCreate( &rtcReadTask,          "rtc_read_task",    2048, nullptr, 5, nullptr);
@@ -290,7 +290,7 @@ void setup()
   xTaskCreate( &consoleOutTask,       "console_out_task",     3048, nullptr, 5, nullptr);
   xTaskCreate( &consoleDisplayTask,   "console_display_task", 2048,  &timeData, 5, nullptr);
   xTaskCreate( &LedDisplayTask,       "LED_display_task",     2048,  &timeData, 5, nullptr);
-  xTaskCreate( &OLedDisplayTask,      "OLED_display_task",    3048,  &timeData, 5, nullptr);
+//  xTaskCreate( &OLedDisplayTask,      "OLED_display_task",    3048,  &timeData, 5, nullptr);
 }
 
 //=============================================================================================================

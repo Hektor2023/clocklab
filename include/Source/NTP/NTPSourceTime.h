@@ -30,7 +30,7 @@ class NTPSourceTime
     ~NTPSourceTime( void) = default;
 
     Timestamp& getTimestamp( void);
-    void update( void);
+    bool update( void);
 };
 
 //=============================================================================================================

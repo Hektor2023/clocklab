@@ -254,15 +254,16 @@ bool GPSTimeHandler2::updateTime( void)
         date.setYear(  year);
         date.setMonth( month);
         date.setDay(   day);
-//        char dateAsString[  date.getStringBufferSize()];
-//        Serial.printf( "\nDateAsString= %s  \n",date.toString( dateAsString ));
+
+        char dateAsString[  date.getStringBufferSize()];
+        Serial.printf( "\nDateAsString= %s  \n",date.toString( dateAsString ));
 
         GPSTimestamp.setDate( date);
         GPSTimestamp.setTime( time);
-//        char timestampAsString[  GPSTimestamp.getStringBufferSize()];
-//        Serial.printf( "\nTimestampAsString= %s  \n",GPSTimestamp.toString( timestampAsString ));
+        char timestampAsString[  GPSTimestamp.getStringBufferSize()];
+        Serial.printf( "\nTimestampAsString= %s  \n",GPSTimestamp.toString( timestampAsString ));
 
-//        Serial.printf( "GPS: encoded\n");  
+        Serial.printf( "GPS: encoded\n");  
         updated= true;
         
     }

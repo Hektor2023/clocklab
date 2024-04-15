@@ -15,8 +15,15 @@ void ntpTask(void *pvParameter)
   {
     vTaskDelay( 20 *(1000 / portTICK_RATE_MS));
 
+    if( !ntpSource.update())
+    {
+//      Serial.println("NTP try again....");
+      continue;
+    }
+
     MessageTime_t   ntp_msg;
     ntp_msg.type=   src_type_t::NTP;
+
     ntp_msg.epoch=  ntpSource.getTimestamp().getEpochTime();
 
     Timestamp  timestamp( ntp_msg.epoch);

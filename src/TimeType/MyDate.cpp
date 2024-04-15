@@ -154,7 +154,7 @@ uint8_t MyDate::getCenturyCode( void) const
 //===================================================================================
 uint8_t MyDate::getDayOfWeek() const
 {
-    constexpr uint8_t offsetForFirstDayInMonday= 6;
+    constexpr uint8_t offsetForFirstDayInMonday= 5;
     //            #1 #2  #8            #3         #4                   #5                   #6
     uint8_t code= getYearCode()+ getDayCode()+ getMonthCode()- getLeapCode()+  getCenturyCode()+offsetForFirstDayInMonday;
     return( code % 7);

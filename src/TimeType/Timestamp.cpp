@@ -221,7 +221,7 @@ void Timestamp::setDate( const MyDate &date)
     
     days  = sumDaysOfFullYearsSinceBase( date.getYear());
     days += sumDaysOfFullMonths( date.getMonth());
-    days += date.getDay() -BASE_DAY;
+    days += date.getDay(); //  -BASE_DAY;
 
     epoch = epoch %SECS_PER_DAY;
     epoch += (days  *SECS_PER_DAY);
