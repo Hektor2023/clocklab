@@ -6,14 +6,14 @@
 #include "TimeType/MyDate.h"
 #include "clocklab_types.h"
 
+//===================================================================================
 struct TimeData
 {
   MyDate        localDate;
   MyTime        localTime;
   MyTime        sunriseTime;
   MyTime        sunsetTime;
-  Coordinates_t coordinates;
-
+  
   TimeData( void);
 
   bool lockData( void);

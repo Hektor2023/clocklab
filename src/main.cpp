@@ -7,6 +7,8 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 
+#include "Other/CoordinatesHandler.h"
+
 #include "Other/Tools.h"
 #include "Other/AdjustmentAdvisor.h"
 #include "Other/Controller.h"
@@ -42,7 +44,9 @@ static TimeData  timeData;
 // Location Nowy Dworm Mazowiecki
 //double  g_Latitude{  52.4465078};  // 52.2507628, 020.4409067
 //double  g_Longitude{ 20.6925219};  // 
-Coordinates_t g_coordinates{  52.4465078, 20.6925219};
+Coordinates_t g_coordinates{  52.4465078, 20.6925219}; // TODO: to remove
+
+CoordinatesHandler coordinates;
 
 MyTime      g_SunriseTime, g_SunsetTime;
 
@@ -108,7 +112,9 @@ void rtcReadTask(void *pvParameter)
     vTaskDelay( 10 / portTICK_RATE_MS);
 
     if( xSemaphoreTake( g_xSemaphoreRtc,0) == pdTRUE)
-    {
+    { 
+
+
       bool timeUpdated = g_RTCSystemTimeHandler.updateTime(); 
       xSemaphoreGive(  g_xSemaphoreRtc);
 
@@ -172,6 +178,7 @@ void rtcWriteTask(void *pvParameter)
         if( bestSrcMsg.type == src_type_t::GPS)
         {
           g_coordinates= bestSrcMsg.coordinate; // TODO: move to RTC SystemTimeHandler
+
         }
 //        lastTimestamp= g_SystemTimeHandler.getTimestamp();
         xSemaphoreGive(  g_xSemaphoreRtc);
