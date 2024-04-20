@@ -19,17 +19,18 @@ class DSTSunriseSunsetTimeHandler:public TimeHandler
       MyTime &sunriseTime;
       MyTime &sunsetTime;
 
-      Coordinates_t   &coordinates;
+      Coordinates_t   coordinates;
       const uint16_t  standardTimeOffset;
 
 
     public:
-       DSTSunriseSunsetTimeHandler( TimeHandler* ptr, uint16_t standardTimeOffset, \
-                                     Coordinates_t &coordinates, MyTime& sunrise, MyTime& sunset);
-       virtual ~DSTSunriseSunsetTimeHandler( void);
+      DSTSunriseSunsetTimeHandler( TimeHandler* ptr, uint16_t standardTimeOffset, MyTime& sunrise, MyTime& sunset);
+      virtual ~DSTSunriseSunsetTimeHandler( void) = default;
       
       virtual void updateTime( Timestamp &timestamp);
       virtual const char* getClassName( void);
+
+      void setCoordinates( const Coordinates_t &coordinates);
 
     private:  
       void calculateDST( MyDate &date);

@@ -1,23 +1,21 @@
 #include "Converter/DSTSunriseSunsetTimeHandler.h"
 
                             
-DSTSunriseSunsetTimeHandler::DSTSunriseSunsetTimeHandler( TimeHandler* ptr, uint16_t standardTimeOffset, \
-            Coordinates_t &coordinates, MyTime& sunrise, MyTime& sunset)
+DSTSunriseSunsetTimeHandler::DSTSunriseSunsetTimeHandler( TimeHandler* ptr, uint16_t standardTimeOffset, MyTime& sunrise, MyTime& sunset)
     :TimeHandler( ptr), standardTimeOffset(standardTimeOffset), dSTStartTimestamp( 0), dSTEndTimestamp( 0),\
-      localTimestamp( 0),
-      coordinates( coordinates), sunriseTime( sunrise), sunsetTime( sunset)
+      localTimestamp( 0), sunriseTime( sunrise), sunsetTime( sunset)
 {
     MyTime  time( 1,0,0); // 1:0:0  change time on 1st am universal time
   
     dSTStartTimestamp.setTime( time);
     dSTEndTimestamp.setTime( time);
 }
-
-
-DSTSunriseSunsetTimeHandler::~DSTSunriseSunsetTimeHandler( void) 
+    
+void DSTSunriseSunsetTimeHandler::setCoordinates( const Coordinates_t &new_coordinates)
 {
+  coordinates = new_coordinates;
 }
-      
+
 void DSTSunriseSunsetTimeHandler::updateTime( Timestamp &timestamp)
 {
   uint16_t  currentTimeOffset= getOffset( timestamp);
@@ -34,7 +32,7 @@ void DSTSunriseSunsetTimeHandler::updateTime( Timestamp &timestamp)
   }
 
   static uint8_t  lastday= 0;
-  if( date.getDay() != lastday)
+  if(( date.getDay() != lastday) &&(( coordinates.latitude != 0 ) &&( coordinates.longitude)))
   {
     lastday= date.getDay();
     calculateSunriseSunset( timestamp);

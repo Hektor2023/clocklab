@@ -44,19 +44,17 @@ static TimeData  timeData;
 // Location Nowy Dworm Mazowiecki
 //double  g_Latitude{  52.4465078};  // 52.2507628, 020.4409067
 //double  g_Longitude{ 20.6925219};  // 
-Coordinates_t g_coordinates{  52.4465078, 20.6925219}; // TODO: to remove
+//Coordinates_t g_coordinates{  52.4465078, 20.6925219}; // TODO: to remove
 
-CoordinatesHandler coordinates;
+
 
 MyTime      g_SunriseTime, g_SunsetTime;
 
 Timestamp                   g_LocalTimestamp;
 SplitterTimeHandler         g_SplitterHandler( nullptr, g_LocalTimestamp);  
-DSTSunriseSunsetTimeHandler g_TimeZoneDSTHandler( &g_SplitterHandler, gc_GMT_Plus_2h, g_coordinates, g_SunriseTime, g_SunsetTime);
+DSTSunriseSunsetTimeHandler g_TimeZoneDSTHandler( &g_SplitterHandler, gc_GMT_Plus_2h, g_SunriseTime, g_SunsetTime);
 RTCSystemTimeHandler        g_RTCSystemTimeHandler(  &g_TimeZoneDSTHandler, gc_sda_pin, gc_scl_pin, gc_irqIn_pin);
  
-Controller                  g_Controller;
-
 static xQueueHandle       g_queueSourceTime= xQueueCreate( 3, sizeof( MessageTime_t));
 static xQueueHandle       g_queueDisplay=    xQueueCreate( 5, sizeof( MessageTime_t));
 static SemaphoreHandle_t  g_xSemaphoreRtc;
@@ -92,7 +90,6 @@ void consoleOutTask(void *pvParameter)
       timeData.releaseData();
     }
     
-
   }
 
   vTaskDelete(nullptr);
@@ -149,7 +146,7 @@ void rtcWriteTask(void *pvParameter)
   Timestamp       rtcTimestamp;
   MessageTime_t   rtcWriteMsg;
   MessageTime_t   bestSrcMsg;
-
+  CoordinatesHandler coordinates;
 
   printTick();  Serial.print( "\nRTC_WRITE_task:  start\n");
 
@@ -164,23 +161,38 @@ void rtcWriteTask(void *pvParameter)
       {
         continue;
       }
-
-      // set time for RTC
-      rtcTimestamp.setEpochTime(  bestSrcMsg.epoch);
+   
+      if(( xSemaphoreTake(  g_xSemaphoreRtc,0) == pdTRUE) )
       {
-        Timestamp timestamp( bestSrcMsg.epoch);
-        displayTimestamp( "RTC", timestamp); 
-      }      
-      if( xSemaphoreTake(  g_xSemaphoreRtc,0) == pdTRUE)
-      {
-//          Serial.print( "\nRTC_WRITE_task:  setTimestamp\n");
-        g_RTCSystemTimeHandler.setTimestamp( rtcTimestamp);
         if( bestSrcMsg.type == src_type_t::GPS)
         {
-          g_coordinates= bestSrcMsg.coordinate; // TODO: move to RTC SystemTimeHandler
+          if( coordinates.lockData())
+          {
+            rtcTimestamp.setEpochTime( bestSrcMsg.epoch);
+            {
+              Timestamp timestamp( bestSrcMsg.epoch);
+              displayTimestamp( "RTC", timestamp); 
+            }
+            g_RTCSystemTimeHandler.setTimestamp( rtcTimestamp);
+           
+            coordinates.setCoordinates( bestSrcMsg.coordinate); // TODO: move to RTC SystemTimeHandler
+
+            g_TimeZoneDSTHandler.setCoordinates( coordinates.getCoordinates());
+            coordinates.releaseData();
+          }
 
         }
-//        lastTimestamp= g_SystemTimeHandler.getTimestamp();
+        else
+        {
+          // set time for RTC
+          rtcTimestamp.setEpochTime( bestSrcMsg.epoch);
+          {
+            Timestamp timestamp( bestSrcMsg.epoch);
+            displayTimestamp( "RTC", timestamp); 
+          }
+          g_RTCSystemTimeHandler.setTimestamp( rtcTimestamp);
+        }
+       
         xSemaphoreGive(  g_xSemaphoreRtc);
       }
 
