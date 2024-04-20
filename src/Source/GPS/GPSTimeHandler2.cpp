@@ -204,7 +204,7 @@ bool GPSTimeHandler2::updateTime( void)
     if( strstr( buffer, "GPRMC") && isValidCheckSum())
     {
 //        Serial.printf("| GPS... |");
-        Serial.printf( "GPS: %s\n", buffer);
+//        Serial.printf( "GPS: %s\n", buffer);
 
         fieldNo= 1;
         getField( fieldNo, field, buffer);
@@ -234,14 +234,14 @@ bool GPSTimeHandler2::updateTime( void)
         unsigned int minute= timeAsNumber %100;
         timeAsNumber /=100;
         unsigned int hour=   timeAsNumber %100;
-        Serial.printf( "\nTimeAsString= %00d.%00d.%00d.%00d  \n",hour, minute, second, milliSecond);
+//        Serial.printf( "\nTimeAsString_1= %00d.%00d.%00d.%00d  \n",hour, minute, second, milliSecond);
 
         MyTime time;
         time.setHour( hour);
         time.setMinute( minute);
         time.setSecond( second);
 //        char timeAsString[  time.getStringBufferSize()];
-//        Serial.printf( "\nTimeAsString= %s  \n",time.toString( timeAsString ));
+//        Serial.printf( "\nTimeAsString_2= %s  \n",time.toString( timeAsString ));
 
         unsigned int year= 2000+ dateAsNumber %100; 
         dateAsNumber /=100;
@@ -254,16 +254,16 @@ bool GPSTimeHandler2::updateTime( void)
         date.setMonth( month);
         date.setDay(   day);
 
-        char dateAsString[  date.getStringBufferSize()];
-        Serial.printf( "\nDateAsString= %s  \n",date.toString( dateAsString ));
+//        char dateAsString[  date.getStringBufferSize()];
+//        Serial.printf( "\nDateAsString= %s  \n",date.toString( dateAsString ));
 
         GPSTimestamp.setDate( date);
         GPSTimestamp.setTime( time);
-        
-        char timestampAsString[  GPSTimestamp.getStringBufferSize()];
-        Serial.printf( "\nTimestampAsString= %s  \n",GPSTimestamp.toString( timestampAsString ));
 
-        Serial.printf( "GPS: encoded\n");  
+        char timestampAsString[  GPSTimestamp.getStringBufferSize()];
+        Serial.printf( "\nTimestampAsString_3= %s  \n",GPSTimestamp.toString( timestampAsString ));
+
+//        Serial.printf( "GPS: encoded\n");  
         updated= true;
         
     }

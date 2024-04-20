@@ -54,7 +54,7 @@ DSTSunriseSunsetTimeHandler g_TimeZoneDSTHandler( &g_SplitterHandler, gc_GMT_Plu
 RTCSystemTimeHandler        g_RTCSystemTimeHandler(  &g_TimeZoneDSTHandler, gc_sda_pin, gc_scl_pin, gc_irqIn_pin);
  
 static xQueueHandle       g_queueSourceTime= xQueueCreate( 3, sizeof( MessageTime_t));
-static xQueueHandle       g_queueDisplay=    xQueueCreate( 5, sizeof( MessageTime_t));
+static xQueueHandle       g_queueDisplay=    xQueueCreate( 3, sizeof( MessageTime_t));
 static SemaphoreHandle_t  g_xSemaphoreRtc;
 
 AdjustmentAdvisor         g_advisor;
@@ -119,7 +119,6 @@ void rtcReadTask(void *pvParameter)
 
         // set time for Display
         rtcReadMsg.epoch= g_LocalTimestamp.getEpochTime();
-        
         while( xQueueSend( g_queueDisplay, (void *)&rtcReadMsg, 0) != pdTRUE) 
         {
           Serial.println("ERROR: Could not put RTC read time to queue.");  
@@ -148,9 +147,9 @@ void rtcWriteTask(void *pvParameter)
   for(;;)
   { 
     vTaskDelay( 10 / portTICK_RATE_MS);
-    g_advisor.setSelectedSource( src_type_t::GPS);
+    g_advisor.setSelectedSource( src_type_t::NTP);
 
-    if (xQueueReceive( *ptr2queueSource, (void *)&rtcWriteMsg, 10) == pdTRUE) 
+    if (xQueueReceive( *ptr2queueSource, (void *)&rtcWriteMsg, 0) == pdTRUE) 
     {
       if( g_advisor.routeSource( bestSrcMsg, rtcWriteMsg))
       {
@@ -164,7 +163,7 @@ void rtcWriteTask(void *pvParameter)
           
           if( bestSrcMsg.type == src_type_t::GPS)
           {
-            CoordinatesHandler &handler = g_TimeZoneDSTHandler.getCoordinatesHander();
+            CoordinatesHandler& handler = g_TimeZoneDSTHandler.getCoordinatesHander();
             if( handler.lockData())
             {
               handler.setCoordinates( bestSrcMsg.coordinate); // TODO: move to RTC SystemTimeHandler
@@ -201,7 +200,7 @@ void setup()
 
   Serial.print("setup: start ======================\n"); 
 
-  xTaskCreate( &gpsTask,              "gps_task",         4048,  ptr2src_queue, 5, nullptr);
+  xTaskCreate( &gpsTask,              "gps_task",         5048,  ptr2src_queue, 5, nullptr);
   xTaskCreate( &ntpTask,              "ntp_task",         4048,  &ntpParams, 5, nullptr);
 
   xTaskCreate( &rtcWriteTask,         "rtc_write_task",   2048, ptr2src_queue, 5, nullptr);
