@@ -3,6 +3,7 @@
 #include <stdint.h>
 #include "TimeType/Timehandler.h"
 #include "TimeType/Timestamp.h"
+#include "Other/CoordinatesHandler.h"
 #include "clocklab_types.h"
 
 constexpr  auto RadToGrad= 180.0/PI;
@@ -19,8 +20,8 @@ class DSTSunriseSunsetTimeHandler:public TimeHandler
       MyTime &sunriseTime;
       MyTime &sunsetTime;
 
-      Coordinates_t   coordinates;
-      const uint16_t  standardTimeOffset;
+      CoordinatesHandler  coordinatesHandler;
+      const uint16_t      standardTimeOffset;
 
 
     public:
@@ -30,11 +31,11 @@ class DSTSunriseSunsetTimeHandler:public TimeHandler
       virtual void updateTime( Timestamp &timestamp);
       virtual const char* getClassName( void);
 
-      void setCoordinates( const Coordinates_t &coordinates);
+      CoordinatesHandler& getCoordinatesHander( void);
 
     private:  
       void calculateDST( MyDate &date);
-      void calculateSunriseSunset(Timestamp &timestamp);
+      void calculateSunriseSunset( const Coordinates_t &coordinates, const Timestamp &timestamp);
       uint16_t getOffset( Timestamp& current);
 
       long modd( double a, double b);

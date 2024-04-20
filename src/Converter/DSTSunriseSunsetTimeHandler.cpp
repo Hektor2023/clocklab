@@ -11,9 +11,9 @@ DSTSunriseSunsetTimeHandler::DSTSunriseSunsetTimeHandler( TimeHandler* ptr, uint
     dSTEndTimestamp.setTime( time);
 }
     
-void DSTSunriseSunsetTimeHandler::setCoordinates( const Coordinates_t &new_coordinates)
+CoordinatesHandler& DSTSunriseSunsetTimeHandler::getCoordinatesHander( void)
 {
-  coordinates = new_coordinates;
+  return coordinatesHandler;
 }
 
 void DSTSunriseSunsetTimeHandler::updateTime( Timestamp &timestamp)
@@ -31,15 +31,28 @@ void DSTSunriseSunsetTimeHandler::updateTime( Timestamp &timestamp)
     calculateDST( date);
   }
 
+  static bool needUpdateSunriseSunset = false;
   static uint8_t  lastday= 0;
-  if(( date.getDay() != lastday) &&(( coordinates.latitude != 0 ) &&( coordinates.longitude)))
+  if(( date.getDay() != lastday) &&(( coordinatesHandler.getCoordinates().latitude != 0 ) &&( coordinatesHandler.getCoordinates().longitude != 0)))
+  {
+    needUpdateSunriseSunset = true;
+
+  }
+
+  Serial.printf("\n needUpdateSunriseSunset= %d\n",( int)needUpdateSunriseSunset);
+  if( needUpdateSunriseSunset && coordinatesHandler.lockData())
   {
     lastday= date.getDay();
-    calculateSunriseSunset( timestamp);
+    calculateSunriseSunset( coordinatesHandler.getCoordinates(), timestamp);
+
+    needUpdateSunriseSunset = false;
+
+    Serial.printf("\n SunriseSunset= updatedd\n");
+    coordinatesHandler.releaseData();
   }
 
 //  Serial.printf("\n currentTimeOffset= %d\n", currentTimeOffset);
-  localTimestamp= timestamp +currentTimeOffset;
+  localTimestamp= timestamp + currentTimeOffset;
   baseUpdateTime( localTimestamp);  
 }
 
@@ -61,7 +74,7 @@ void DSTSunriseSunsetTimeHandler::calculateDST( MyDate &date)
 }
 
 
-void DSTSunriseSunsetTimeHandler::calculateSunriseSunset( Timestamp &timestamp)
+void DSTSunriseSunsetTimeHandler::calculateSunriseSunset( const Coordinates_t &coordinates, const Timestamp &timestamp)
 {
     MyDate  date; 
     
@@ -102,7 +115,7 @@ void DSTSunriseSunsetTimeHandler::calculateSunriseSunset( Timestamp &timestamp)
     // Z-1 in Summer, Z in Winter 
     constexpr  uint8_t oneHour= 1;
 
-    Z= (( dSTStartTimestamp <= timestamp) && ( timestamp < dSTEndTimestamp))? Z+ oneHour: Z; 
+    Z= (( dSTStartTimestamp <= timestamp) && ( dSTEndTimestamp > timestamp))? Z+ oneHour: Z; 
     double P17 = Z-P15; //- godzina wschodu Słońca
     double Q17 = Z+P15; //- godzina zachodu Słońca        
 
@@ -119,15 +132,13 @@ void DSTSunriseSunsetTimeHandler::calculateSunriseSunset( Timestamp &timestamp)
 
 uint16_t DSTSunriseSunsetTimeHandler::getOffset( Timestamp& current)
 {
-  uint16_t  currentTimeOffset= standardTimeOffset- SECS_PER_HOUR;
+  uint16_t  currentTimeOffset = standardTimeOffset- SECS_PER_HOUR;
 
-  
   if(( dSTStartTimestamp <= current) &&( current < dSTEndTimestamp))
   {
     // UTC+2 from Marz to October
     currentTimeOffset= standardTimeOffset;    
   }
-
 
   return( currentTimeOffset);
 }

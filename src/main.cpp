@@ -146,7 +146,7 @@ void rtcWriteTask(void *pvParameter)
   Timestamp       rtcTimestamp;
   MessageTime_t   rtcWriteMsg;
   MessageTime_t   bestSrcMsg;
-  CoordinatesHandler coordinates;
+//  CoordinatesHandler coordinates;
 
   printTick();  Serial.print( "\nRTC_WRITE_task:  start\n");
 
@@ -166,7 +166,7 @@ void rtcWriteTask(void *pvParameter)
       {
         if( bestSrcMsg.type == src_type_t::GPS)
         {
-          if( coordinates.lockData())
+          if( g_TimeZoneDSTHandler.getCoordinatesHander().lockData())
           {
             rtcTimestamp.setEpochTime( bestSrcMsg.epoch);
             {
@@ -175,10 +175,9 @@ void rtcWriteTask(void *pvParameter)
             }
             g_RTCSystemTimeHandler.setTimestamp( rtcTimestamp);
            
-            coordinates.setCoordinates( bestSrcMsg.coordinate); // TODO: move to RTC SystemTimeHandler
+            g_TimeZoneDSTHandler.getCoordinatesHander().setCoordinates( bestSrcMsg.coordinate); // TODO: move to RTC SystemTimeHandler
 
-            g_TimeZoneDSTHandler.setCoordinates( coordinates.getCoordinates());
-            coordinates.releaseData();
+            g_TimeZoneDSTHandler.getCoordinatesHander().releaseData();
           }
 
         }
