@@ -151,7 +151,6 @@ void GPSTimeHandler2::getField( const unsigned char fieldNo, char* field, const 
 //=============================================================================================================
 unsigned char  GPSTimeHandler2::calculateChecksum( void)
 {
-    
     unsigned char chkSum= 0;
     for( int i=0; i< (int)strlen( buffer) && buffer[ i]!= checkSumMarker; i++)
     {
@@ -260,6 +259,7 @@ bool GPSTimeHandler2::updateTime( void)
 
         GPSTimestamp.setDate( date);
         GPSTimestamp.setTime( time);
+        
         char timestampAsString[  GPSTimestamp.getStringBufferSize()];
         Serial.printf( "\nTimestampAsString= %s  \n",GPSTimestamp.toString( timestampAsString ));
 

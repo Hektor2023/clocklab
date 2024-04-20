@@ -25,7 +25,7 @@ void  CoordinatesHandler::setCoordinates( const Coordinates_t newCoordinates)
 void  CoordinatesHandler::setCoordinates( double newLongitude, double  newLatitude)
 {
     coordinates.longitude = newLongitude;
-    coordinates.latitude =newLatitude;
+    coordinates.latitude = newLatitude;
 }
 
 //===================================================================================

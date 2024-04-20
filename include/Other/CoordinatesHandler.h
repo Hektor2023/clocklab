@@ -22,5 +22,4 @@ class CoordinatesHandler
 
         bool lockData( void);
         void releaseData( void);
-
 };

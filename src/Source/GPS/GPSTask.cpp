@@ -19,7 +19,6 @@ void gpsTask(void *pvParameter)
     vTaskDelay(  100 / portTICK_RATE_MS);
 
 //    Serial.printf("| GPS...|");
-
     bool next= true;
     while( next)
     {
@@ -40,7 +39,7 @@ void gpsTask(void *pvParameter)
       continue;
     }
 
-    Timestamp diffTime= GPSHandler.getTimestamp() - lastGpsTime;
+    Timestamp diffTime = GPSHandler.getTimestamp() - lastGpsTime;
     displayTimestamp( "diffTime", diffTime);
     if( diffTime.getEpochTime() < (1 * 60))
     {

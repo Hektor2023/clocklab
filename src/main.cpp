@@ -44,8 +44,6 @@ static TimeData  timeData;
 // Location Nowy Dworm Mazowiecki
 //double  g_Latitude{  52.4465078};  // 52.2507628, 020.4409067
 //double  g_Longitude{ 20.6925219};  // 
-//Coordinates_t g_coordinates{  52.4465078, 20.6925219}; // TODO: to remove
-
 
 
 MyTime      g_SunriseTime, g_SunsetTime;
@@ -69,8 +67,7 @@ void consoleOutTask(void *pvParameter)
   MessageTime_t   rcvMsg;
   MyDate date;
 
-  printTick();  
-  Serial.print( "\nCONSOLE_OUT_task:  start\n");
+  printTick();   Serial.print( "\nCONSOLE_OUT_task:  start\n");
 
   for(;;)
   {
@@ -110,8 +107,6 @@ void rtcReadTask(void *pvParameter)
 
     if( xSemaphoreTake( g_xSemaphoreRtc,0) == pdTRUE)
     { 
-
-
       bool timeUpdated = g_RTCSystemTimeHandler.updateTime(); 
       xSemaphoreGive(  g_xSemaphoreRtc);
 
@@ -143,10 +138,10 @@ void rtcReadTask(void *pvParameter)
 //=============================================================================================================
 void rtcWriteTask(void *pvParameter)
 {
+  QueueHandle_t*  ptr2queueSource = reinterpret_cast< QueueHandle_t*>( pvParameter);
   Timestamp       rtcTimestamp;
   MessageTime_t   rtcWriteMsg;
   MessageTime_t   bestSrcMsg;
-//  CoordinatesHandler coordinates;
 
   printTick();  Serial.print( "\nRTC_WRITE_task:  start\n");
 
@@ -155,49 +150,34 @@ void rtcWriteTask(void *pvParameter)
     vTaskDelay( 10 / portTICK_RATE_MS);
     g_advisor.setSelectedSource( src_type_t::GPS);
 
-    if (xQueueReceive( g_queueSourceTime, (void *)&rtcWriteMsg, 10) == pdTRUE) 
+    if (xQueueReceive( *ptr2queueSource, (void *)&rtcWriteMsg, 10) == pdTRUE) 
     {
-      if( !g_advisor.routeSource( bestSrcMsg, rtcWriteMsg))
+      if( g_advisor.routeSource( bestSrcMsg, rtcWriteMsg))
       {
-        continue;
+        if(( xSemaphoreTake(  g_xSemaphoreRtc,0) == pdTRUE) )
+        {
+          rtcTimestamp.setEpochTime( bestSrcMsg.epoch);
+          g_RTCSystemTimeHandler.setTimestamp( rtcTimestamp);
+
+          Timestamp timestamp( bestSrcMsg.epoch);
+          displayTimestamp( "RTC", timestamp); 
+          
+          if( bestSrcMsg.type == src_type_t::GPS)
+          {
+            CoordinatesHandler &handler = g_TimeZoneDSTHandler.getCoordinatesHander();
+            if( handler.lockData())
+            {
+              handler.setCoordinates( bestSrcMsg.coordinate); // TODO: move to RTC SystemTimeHandler
+              handler.releaseData();
+            }
+          }
+          xSemaphoreGive(  g_xSemaphoreRtc);
+        }
+        
       }
    
-      if(( xSemaphoreTake(  g_xSemaphoreRtc,0) == pdTRUE) )
-      {
-        if( bestSrcMsg.type == src_type_t::GPS)
-        {
-          if( g_TimeZoneDSTHandler.getCoordinatesHander().lockData())
-          {
-            rtcTimestamp.setEpochTime( bestSrcMsg.epoch);
-            {
-              Timestamp timestamp( bestSrcMsg.epoch);
-              displayTimestamp( "RTC", timestamp); 
-            }
-            g_RTCSystemTimeHandler.setTimestamp( rtcTimestamp);
-           
-            g_TimeZoneDSTHandler.getCoordinatesHander().setCoordinates( bestSrcMsg.coordinate); // TODO: move to RTC SystemTimeHandler
-
-            g_TimeZoneDSTHandler.getCoordinatesHander().releaseData();
-          }
-
-        }
-        else
-        {
-          // set time for RTC
-          rtcTimestamp.setEpochTime( bestSrcMsg.epoch);
-          {
-            Timestamp timestamp( bestSrcMsg.epoch);
-            displayTimestamp( "RTC", timestamp); 
-          }
-          g_RTCSystemTimeHandler.setTimestamp( rtcTimestamp);
-        }
-       
-        xSemaphoreGive(  g_xSemaphoreRtc);
-      }
-
     }
 
-    
   }
   
   vTaskDelete(nullptr);
@@ -217,16 +197,14 @@ void setup()
   Serial.flush();
 
   vTaskDelay( 3000 / portTICK_RATE_MS);
-
   pinMode( gc_PULS_pin, OUTPUT);
-
 
   Serial.print("setup: start ======================\n"); 
 
   xTaskCreate( &gpsTask,              "gps_task",         4048,  ptr2src_queue, 5, nullptr);
   xTaskCreate( &ntpTask,              "ntp_task",         4048,  &ntpParams, 5, nullptr);
 
-  xTaskCreate( &rtcWriteTask,         "rtc_write_task",   2048, nullptr, 5, nullptr);
+  xTaskCreate( &rtcWriteTask,         "rtc_write_task",   2048, ptr2src_queue, 5, nullptr);
   xTaskCreate( &rtcReadTask,          "rtc_read_task",    2048, nullptr, 5, nullptr);
 
   xTaskCreate( &consoleOutTask,       "console_out_task",     3048, nullptr, 5, nullptr);
