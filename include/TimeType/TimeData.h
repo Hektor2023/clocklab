@@ -9,19 +9,18 @@
 //===================================================================================
 struct TimeData
 {
-  MyDate        localDate;
-  MyTime        localTime;
-  MyTime        sunriseTime;
-  MyTime        sunsetTime;
-  
-  TimeData( void);
+  MyDate localDate;
+  MyTime localTime;
+  MyTime sunriseTime;
+  MyTime sunsetTime;
 
-  bool lockData( void);
-  void releaseData( void);
+  TimeData(void);
 
-  private:
-    SemaphoreHandle_t  SemaphoreTimeData;
+  bool lockData(void);
+  void releaseData(void);
+
+private:
+  SemaphoreHandle_t SemaphoreTimeData;
 };
 
 //===================================================================================
-

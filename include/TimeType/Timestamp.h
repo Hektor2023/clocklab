@@ -8,59 +8,56 @@
 
 //===================================================================================
 /* Useful Constants */
-constexpr uint32_t   SECS_PER_MIN = 60UL;
-constexpr uint32_t   SECS_PER_HOUR = 3600UL;
-constexpr uint32_t   SECS_PER_DAY = SECS_PER_HOUR * 24UL;
+constexpr uint32_t SECS_PER_MIN = 60UL;
+constexpr uint32_t SECS_PER_HOUR = 3600UL;
+constexpr uint32_t SECS_PER_DAY = SECS_PER_HOUR * 24UL;
 
 //===================================================================================
 class Timestamp
 {
-   private:
-      uint32_t epoch;
- 
-   public:
-      Timestamp( uint32_t epoch = 0L);
-      Timestamp( const Timestamp& t);
-      ~Timestamp( void);
-      
-      uint32_t  getEpochTime( void) const;
-      void      setEpochTime( const uint32_t newEpochTime);
+private:
+   uint32_t epoch;
 
-      int getDayOfWeek( void) const;
+public:
+   Timestamp(uint32_t epoch = 0L);
+   Timestamp(const Timestamp &t);
+   ~Timestamp(void);
 
-      Timestamp& operator=(const Timestamp& t);
-      Timestamp& operator++( void);
-      Timestamp  operator++(  int);
+   uint32_t getEpochTime(void) const;
+   void setEpochTime(const uint32_t newEpochTime);
 
-      bool operator==( const Timestamp& t);
-      bool operator!=( const Timestamp& t);
-      bool operator<( const Timestamp& t);
-      bool operator<=( const Timestamp& t);
-      bool operator>( const Timestamp& t);
-      bool operator>=( const Timestamp& t);
+   int getDayOfWeek(void) const;
 
-      Timestamp operator+( const Timestamp& t);
-      Timestamp operator-( const Timestamp& t);
-      Timestamp& operator+=( const Timestamp& t);
-      Timestamp& operator-=( const Timestamp& t);  
-      
-      void  getDate( MyDate& date ) const;
-      void  setDate( const MyDate& date);
+   Timestamp &operator=(const Timestamp &t);
+   Timestamp &operator++(void);
+   Timestamp operator++(int);
 
-      void  getTime( MyTime& time) const;
-      void  setTime( const MyTime& time);
+   bool operator==(const Timestamp &t);
+   bool operator!=(const Timestamp &t);
+   bool operator<(const Timestamp &t);
+   bool operator<=(const Timestamp &t);
+   bool operator>(const Timestamp &t);
+   bool operator>=(const Timestamp &t);
 
-      
-      static size_t getStringBufferSize( void);    
-      char*  toString( char* Stringbuffer);
-      
-  private:
-      uint32_t sumDaysOfFullYearsSinceBase( uint32_t year) const;
-      uint16_t sumDaysOfFullMonths( uint8_t month) const;
+   Timestamp operator+(const Timestamp &t);
+   Timestamp operator-(const Timestamp &t);
+   Timestamp &operator+=(const Timestamp &t);
+   Timestamp &operator-=(const Timestamp &t);
+
+   void getDate(MyDate &date) const;
+   void setDate(const MyDate &date);
+
+   void getTime(MyTime &time) const;
+   void setTime(const MyTime &time);
+
+   static size_t getStringBufferSize(void);
+   char *toString(char *Stringbuffer);
+
+private:
+   uint32_t sumDaysOfFullYearsSinceBase(uint32_t year) const;
+   uint16_t sumDaysOfFullMonths(uint8_t month) const;
 };
 
-
 //===================================================================================
 
 //===================================================================================
-

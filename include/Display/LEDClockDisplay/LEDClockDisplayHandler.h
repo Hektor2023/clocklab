@@ -14,17 +14,17 @@
 //===================================================================================
 class LEDClockDisplayHandler
 {
-   private:
-      TM1638plus  tm;
-      SemaphoreHandle_t  xSemaphoreTM1638plus;
+private:
+   TM1638plus tm;
+   SemaphoreHandle_t xSemaphoreTM1638plus;
 
-   public:
-      LEDClockDisplayHandler( const int STB_pin, const int CLK_pin, const int DIO_pin);
-      ~LEDClockDisplayHandler( void) = default;
+public:
+   LEDClockDisplayHandler(const int STB_pin, const int CLK_pin, const int DIO_pin);
+   ~LEDClockDisplayHandler(void) = default;
 
-      uint8_t  buttonsRead( void);
-     
-      void update( const TimeData &data);
+   uint8_t buttonsRead(void);
+
+   void update(const TimeData &data);
 };
 
 //===================================================================================

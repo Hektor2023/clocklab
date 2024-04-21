@@ -8,28 +8,26 @@
 void consoleDisplayTask(void *pvParameter)
 {
   static ConsoleDisplayHandler consoleDisplayHandler;
-  TimeData *ptr2timeData= reinterpret_cast< TimeData*>( pvParameter);
+  TimeData *ptr2timeData = reinterpret_cast<TimeData *>(pvParameter);
   MyTime lastTime;
 
+  Serial.print("\nCONSOLE_DISPLAY_task:  start\n");
 
-  Serial.print( "\nCONSOLE_DISPLAY_task:  start\n");
-
-  for(;;)
+  for (;;)
   {
-    vTaskDelay( 30 / portTICK_RATE_MS);
+    vTaskDelay(30 / portTICK_RATE_MS);
 
-    if( ptr2timeData->lockData())
+    if (ptr2timeData->lockData())
     {
-      if( ptr2timeData->localTime != lastTime)
+      if (ptr2timeData->localTime != lastTime)
       {
-        consoleDisplayHandler.update( *ptr2timeData);
+        consoleDisplayHandler.update(*ptr2timeData);
 
         lastTime = ptr2timeData->localTime;
       }
 
       ptr2timeData->releaseData();
     }
-
   }
 
   vTaskDelete(nullptr);

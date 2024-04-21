@@ -1,22 +1,21 @@
 #include "TimeType/TimeData.h"
 
-
 //===================================================================================
-TimeData::TimeData( void)
-: SemaphoreTimeData( xSemaphoreCreateMutex())
+TimeData::TimeData(void)
+    : SemaphoreTimeData(xSemaphoreCreateMutex())
 {
 }
 
 //===================================================================================
-bool TimeData::lockData( void)
+bool TimeData::lockData(void)
 {
-  return xSemaphoreTake( SemaphoreTimeData,0) == pdTRUE;
+  return xSemaphoreTake(SemaphoreTimeData, 0) == pdTRUE;
 }
 
 //===================================================================================
-void TimeData::releaseData( void)
+void TimeData::releaseData(void)
 {
-  xSemaphoreGive(  SemaphoreTimeData);
+  xSemaphoreGive(SemaphoreTimeData);
 }
 
 //===================================================================================

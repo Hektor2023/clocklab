@@ -8,18 +8,18 @@
 
 class CoordinatesHandler
 {
-    private:
-        Coordinates_t       coordinates;   
-        SemaphoreHandle_t   semaphoreCoordinates;
+private:
+    Coordinates_t coordinates;
+    SemaphoreHandle_t semaphoreCoordinates;
 
-    public:
-        CoordinatesHandler( void);
-        ~CoordinatesHandler( void) = default;
+public:
+    CoordinatesHandler(void);
+    ~CoordinatesHandler(void) = default;
 
-        const Coordinates_t& getCoordinates( void);
-        void  setCoordinates( const Coordinates_t newCoordinate);
-        void  setCoordinates( double longitude, double  latitude);
+    const Coordinates_t &getCoordinates(void);
+    void setCoordinates(const Coordinates_t newCoordinate);
+    void setCoordinates(double longitude, double latitude);
 
-        bool lockData( void);
-        void releaseData( void);
+    bool lockData(void);
+    void releaseData(void);
 };

@@ -6,16 +6,16 @@
 //=============================================================================================================
 void printTick(void)
 {
-  Serial.print( xTaskGetTickCount());
-  Serial.print( ":\t");
+  Serial.print(xTaskGetTickCount());
+  Serial.print(":\t");
 }
 
 //=============================================================================================================
-void displayTimestamp( const char *srcName, Timestamp timestamp)
+void displayTimestamp(const char *srcName, Timestamp timestamp)
 {
-  char timestampAsString[ timestamp.getStringBufferSize()];
+  char timestampAsString[timestamp.getStringBufferSize()];
 
-  Serial.printf( "\n%s Timestamp= %s\n",srcName, timestamp.toString( timestampAsString ));
-} 
+  Serial.printf("\n%s Timestamp= %s\n", srcName, timestamp.toString(timestampAsString));
+}
 
 //=============================================================================================================

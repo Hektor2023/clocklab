@@ -1,9 +1,9 @@
-#pragma once 
+#pragma once
 
 #include <WiFi.h>
 #include <WiFiUdp.h>
 
-#include <Source/NTP/NTPClient.h>   // https://github.com/arduino-libraries/NTPClient
+#include <Source/NTP/NTPClient.h> // https://github.com/arduino-libraries/NTPClient
 
 #include "TimeType/Timestamp.h"
 #include "clocklab_types.h"
@@ -19,18 +19,18 @@ typedef struct
 //=============================================================================================================
 class NTPSourceTime
 {
-  private:
-    WiFiUDP       udp;
-    NTPClient     timeClient;
-    Timestamp     timestamp;
-    t_credentials credentials;
+private:
+  WiFiUDP udp;
+  NTPClient timeClient;
+  Timestamp timestamp;
+  t_credentials credentials;
 
-  public:
-    NTPSourceTime( t_credentials &credentials);
-    ~NTPSourceTime( void) = default;
+public:
+  NTPSourceTime(t_credentials &credentials);
+  ~NTPSourceTime(void) = default;
 
-    Timestamp& getTimestamp( void);
-    bool update( void);
+  Timestamp &getTimestamp(void);
+  bool update(void);
 };
 
 //=============================================================================================================

@@ -27,31 +27,29 @@
 
 #include "TimeType/TimeHandler.h"
 
-
 //===================================================================================
-class RTCSystemTimeHandler:public TimeHandler
+class RTCSystemTimeHandler : public TimeHandler
 {
-   private:
-      uRTCLib   rtc;
-      Timestamp systemTimestamp;
+private:
+   uRTCLib rtc;
+   Timestamp systemTimestamp;
 
-   private:
-      void updateTime( Timestamp &timestamp);
+private:
+   void updateTime(Timestamp &timestamp);
 
-   public:
-      RTCSystemTimeHandler( TimeHandler* ptr2timeHandler, const uint8_t sda_pin, const uint8_t scl_pin, const uint8_t irqIn_pin);
-      virtual ~RTCSystemTimeHandler( void) = default;
+public:
+   RTCSystemTimeHandler(TimeHandler *ptr2timeHandler, const uint8_t sda_pin, const uint8_t scl_pin, const uint8_t irqIn_pin);
+   virtual ~RTCSystemTimeHandler(void) = default;
 
-      virtual const char* getClassName( void);
+   virtual const char *getClassName(void);
 
-      virtual void init( void);
-   
+   virtual void init(void);
 
-      virtual Timestamp&  getTimestamp( void);
-      virtual void        setTimestamp( const Timestamp& newTimestamp);
+   virtual Timestamp &getTimestamp(void);
+   virtual void setTimestamp(const Timestamp &newTimestamp);
 
-      void forceUpdateTime( void);
-      bool updateTime( void);
+   void forceUpdateTime(void);
+   bool updateTime(void);
 };
 
 //===================================================================================

@@ -2,259 +2,257 @@
 #include "TimeType/Timestamp.h"
 #include "Arduino.h"
 
-
-constexpr uint16_t  BASE_YEAR = 1970;
-constexpr uint8_t   BASE_MONTH = 1;
-constexpr uint8_t   BASE_DAY = 1;
-
+constexpr uint16_t BASE_YEAR = 1970;
+constexpr uint8_t BASE_MONTH = 1;
+constexpr uint8_t BASE_DAY = 1;
 
 //===================================================================================
-Timestamp::Timestamp( uint32_t epoch):epoch( epoch) {};
-      
-//===================================================================================
-Timestamp::Timestamp( const Timestamp& t):epoch( t.epoch) {};
-      
-//===================================================================================
-Timestamp::~Timestamp( void) {};
+Timestamp::Timestamp(uint32_t epoch) : epoch(epoch){};
 
 //===================================================================================
- Timestamp& Timestamp::operator=(const Timestamp& t) 
+Timestamp::Timestamp(const Timestamp &t) : epoch(t.epoch){};
+
+//===================================================================================
+Timestamp::~Timestamp(void){};
+
+//===================================================================================
+Timestamp &Timestamp::operator=(const Timestamp &t)
 {
-  if( &t != this)
+  if (&t != this)
   {
-    epoch= t.epoch;
-  }  
-  return( *this);
-}
-      
-//===================================================================================
-uint32_t Timestamp::getEpochTime( void) const
-{
-  return( epoch);
+    epoch = t.epoch;
+  }
+  return (*this);
 }
 
 //===================================================================================
-void Timestamp::setEpochTime( const uint32_t newEpochTime)
+uint32_t Timestamp::getEpochTime(void) const
 {
-  epoch= newEpochTime;
+  return (epoch);
 }
 
 //===================================================================================
-int Timestamp::getDayOfWeek( void) const
+void Timestamp::setEpochTime(const uint32_t newEpochTime)
+{
+  epoch = newEpochTime;
+}
+
+//===================================================================================
+int Timestamp::getDayOfWeek(void) const
 {
   MyDate date;
-  getDate( date);
-  
-  return( date.getDayOfWeek());
+  getDate(date);
+
+  return (date.getDayOfWeek());
 }
 
 //===================================================================================
-Timestamp& Timestamp::operator++( void)       // Prefix increment operator.
+Timestamp &Timestamp::operator++(void) // Prefix increment operator.
 {
   epoch++;
-  return( *this);
+  return (*this);
 }
 
 //===================================================================================
 Timestamp Timestamp::operator++(int)
 {
   epoch++;
-  return( *this);
+  return (*this);
 }
 
 //===================================================================================
-bool Timestamp::operator==(const Timestamp& t)
+bool Timestamp::operator==(const Timestamp &t)
 {
-  return( epoch== t.epoch);
+  return (epoch == t.epoch);
 }
 
 //===================================================================================
-bool Timestamp::operator!=(const Timestamp& t)
+bool Timestamp::operator!=(const Timestamp &t)
 {
-  return( epoch!= t.epoch);
+  return (epoch != t.epoch);
 }
 
 //===================================================================================
-bool Timestamp::operator<( const Timestamp& t) 
+bool Timestamp::operator<(const Timestamp &t)
 {
-  return( epoch < t.epoch);  
+  return (epoch < t.epoch);
 };
 
 //===================================================================================
-bool Timestamp::operator<=( const Timestamp& t) 
+bool Timestamp::operator<=(const Timestamp &t)
 {
-  return( epoch <= t.epoch);  
+  return (epoch <= t.epoch);
 };
 
 //===================================================================================
-bool Timestamp::operator>( const Timestamp& t) 
+bool Timestamp::operator>(const Timestamp &t)
 {
-  return( epoch > t.epoch);  
+  return (epoch > t.epoch);
 };
 
 //===================================================================================
-bool Timestamp::operator>=( const Timestamp& t) 
+bool Timestamp::operator>=(const Timestamp &t)
 {
-  return( epoch >= t.epoch);  
+  return (epoch >= t.epoch);
 };
 
 //===================================================================================
-Timestamp Timestamp::operator+( const Timestamp& t)
-{  
+Timestamp Timestamp::operator+(const Timestamp &t)
+{
   Timestamp temp;
   temp.epoch = epoch + t.epoch;
   return temp;
 };
 
 //===================================================================================
-Timestamp Timestamp::operator-( const Timestamp& t)
-{  
+Timestamp Timestamp::operator-(const Timestamp &t)
+{
   Timestamp temp;
   temp.epoch = epoch - t.epoch;
   return temp;
 };
 
 //===================================================================================
-Timestamp& Timestamp::operator+=( const Timestamp& t)
+Timestamp &Timestamp::operator+=(const Timestamp &t)
 {
-   epoch = epoch + t.epoch;
-   return *this;
+  epoch = epoch + t.epoch;
+  return *this;
 }
 
 //===================================================================================
-Timestamp& Timestamp::operator-=( const Timestamp& t)
+Timestamp &Timestamp::operator-=(const Timestamp &t)
 {
-   epoch = epoch - t.epoch;
-   return *this;
+  epoch = epoch - t.epoch;
+  return *this;
 }
 
 //===================================================================================
-void Timestamp::getDate( MyDate& date ) const
+void Timestamp::getDate(MyDate &date) const
 {
-    //                      1   2   3   4   5   6   7   8   9   10  11  12
-    const uint8_t dofm[]={ 31, 28, 31, 30, 31, 30, 31, 31, 30,  31, 30, 31};
+  //                      1   2   3   4   5   6   7   8   9   10  11  12
+  const uint8_t dofm[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
-//    Serial.printf( "epoch: %u\n", epoch);
-    // calucate year and rest of days
-    uint16_t days = epoch / SECS_PER_DAY;
-//    days += BASE_DAY;
+  //    Serial.printf( "epoch: %u\n", epoch);
+  // calucate year and rest of days
+  uint16_t days = epoch / SECS_PER_DAY;
+  //    days += BASE_DAY;
 
-//    Serial.printf( "days1: %u\n", days);
-    uint16_t year = BASE_YEAR;
-    while( days > MyDate::daysInYear( year))
+  //    Serial.printf( "days1: %u\n", days);
+  uint16_t year = BASE_YEAR;
+  while (days > MyDate::daysInYear(year))
+  {
+    days = days - MyDate::daysInYear(year);
+
+    year++;
+  };
+  //   Serial.printf( "days2: %u\n", days);
+
+  // calculate months and day
+  uint8_t month;
+  for (month = BASE_MONTH; month < 12; month++)
+  {
+    if (days <= dofm[month - 1])
     {
-        days = days - MyDate::daysInYear( year);
-        
-        year++;
-    };
- //   Serial.printf( "days2: %u\n", days);
-  
-    // calculate months and day
-    uint8_t month;
-    for( month= BASE_MONTH; month <12; month++)
-    {
-      if( days <= dofm[ month -1])
-      {
-        break;
-      }
-
-      if(( month== 2) && MyDate::isLapYear( year))
-      {
-        days--;
-      }
-
-      days = days - dofm[ month -1];
+      break;
     }
-    days++;
+
+    if ((month == 2) && MyDate::isLapYear(year))
+    {
+      days--;
+    }
+
+    days = days - dofm[month - 1];
+  }
+  days++;
   //  Serial.printf( "-> %u-%u-%u\n", days, month, year);
 
-    date.setYear( year);
-    date.setMonth( month);
-    date.setDay( days);
+  date.setYear(year);
+  date.setMonth(month);
+  date.setDay(days);
 }
 
 //===================================================================================
-void Timestamp::getTime( MyTime& time) const
+void Timestamp::getTime(MyTime &time) const
 {
-    uint32_t days= this->epoch% SECS_PER_DAY;
+  uint32_t days = this->epoch % SECS_PER_DAY;
 
-    time.setHour( days / SECS_PER_HOUR);
+  time.setHour(days / SECS_PER_HOUR);
 
-    uint16_t seconds= days % SECS_PER_HOUR;
-    time.setMinute( seconds / SECS_PER_MIN);
-    time.setSecond( seconds % SECS_PER_MIN);
+  uint16_t seconds = days % SECS_PER_HOUR;
+  time.setMinute(seconds / SECS_PER_MIN);
+  time.setSecond(seconds % SECS_PER_MIN);
 }
 
 //===================================================================================
-uint32_t Timestamp::sumDaysOfFullYearsSinceBase( uint32_t year) const
+uint32_t Timestamp::sumDaysOfFullYearsSinceBase(uint32_t year) const
 {
-  uint32_t sum=0;
+  uint32_t sum = 0;
 
-  for( uint16_t y= BASE_YEAR; y< year; y++)
+  for (uint16_t y = BASE_YEAR; y < year; y++)
   {
-    sum += MyDate::daysInYear( y);
+    sum += MyDate::daysInYear(y);
   }
 
-  return( sum);
+  return (sum);
 }
 
 //===================================================================================
-uint16_t Timestamp::sumDaysOfFullMonths( uint8_t month) const
+uint16_t Timestamp::sumDaysOfFullMonths(uint8_t month) const
 {
-    uint16_t  days= 0;
-    
-    //                     0   1   2   3   4   5   6   7   8   9   10  11  12
-    const uint8_t dofm[]={ 0, 31, 28, 31, 30, 31, 30, 31, 31, 30,  31, 30, 31};
+  uint16_t days = 0;
 
-    for( uint8_t m=0; m< month; m++)
-    {
-      days += dofm[ m];
-    }
+  //                     0   1   2   3   4   5   6   7   8   9   10  11  12
+  const uint8_t dofm[] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
-    return( days);
+  for (uint8_t m = 0; m < month; m++)
+  {
+    days += dofm[m];
+  }
+
+  return (days);
 }
 
 //===================================================================================
-void Timestamp::setDate( const MyDate &date)
+void Timestamp::setDate(const MyDate &date)
 {
-    uint32_t  days= 0;
-    
-    days  = sumDaysOfFullYearsSinceBase( date.getYear());
-    days += sumDaysOfFullMonths( date.getMonth());
-    days += date.getDay(); //  -BASE_DAY;
+  uint32_t days = 0;
 
-    epoch = epoch %SECS_PER_DAY;
-    epoch += (days  *SECS_PER_DAY);
+  days = sumDaysOfFullYearsSinceBase(date.getYear());
+  days += sumDaysOfFullMonths(date.getMonth());
+  days += date.getDay(); //  -BASE_DAY;
+
+  epoch = epoch % SECS_PER_DAY;
+  epoch += (days * SECS_PER_DAY);
 }
 
 //===================================================================================
-void Timestamp::setTime( const MyTime &time)
+void Timestamp::setTime(const MyTime &time)
 {
-    this->epoch= ( this->epoch / SECS_PER_DAY) *SECS_PER_DAY;
+  this->epoch = (this->epoch / SECS_PER_DAY) * SECS_PER_DAY;
 
-    this->epoch+= time.getHour()   *SECS_PER_HOUR;
-    this->epoch+= time.getMinute() *SECS_PER_MIN;
-    this->epoch+= time.getSecond();
+  this->epoch += time.getHour() * SECS_PER_HOUR;
+  this->epoch += time.getMinute() * SECS_PER_MIN;
+  this->epoch += time.getSecond();
 }
 
 //===================================================================================
-size_t Timestamp::getStringBufferSize( void)
+size_t Timestamp::getStringBufferSize(void)
 {
-  return( strlen( MyDate::getStringFormat())+ strlen(" - ")+ strlen( MyTime::getStringFormat()));
+  return (strlen(MyDate::getStringFormat()) + strlen(" - ") + strlen(MyTime::getStringFormat()));
 }
 
 //===================================================================================
-char* Timestamp::toString( char* ptr) 
-{  
+char *Timestamp::toString(char *ptr)
+{
   MyDate date;
-  getDate( date);
+  getDate(date);
   MyTime time;
-  getTime( time);
+  getTime(time);
 
-  char dateStrBuffer[ MyDate::getStringBufferSize()];
-  char timeStrBuffer[ MyTime::getStringBufferSize()];
-  sprintf( ptr, "%s -  %s", date.toString( dateStrBuffer), time.toString( timeStrBuffer));
-  return( ptr);
-}  
-    
+  char dateStrBuffer[MyDate::getStringBufferSize()];
+  char timeStrBuffer[MyTime::getStringBufferSize()];
+  sprintf(ptr, "%s -  %s", date.toString(dateStrBuffer), time.toString(timeStrBuffer));
+  return (ptr);
+}
+
 //===================================================================================

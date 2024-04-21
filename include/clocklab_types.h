@@ -1,30 +1,27 @@
 #pragma once
 
-
 #include <Arduino.h>
 
 typedef enum
-{ 
-    NONE= 0,
-    MANUAL,
-    RTC,
-    NTP,
-    GPS
+{
+  NONE = 0,
+  MANUAL,
+  RTC,
+  NTP,
+  GPS
 } src_type_t;
 
-typedef uint32_t  epoch_t;
+typedef uint32_t epoch_t;
 
-typedef struct 
+typedef struct
 {
-  double  longitude;
-  double  latitude;
+  double longitude;
+  double latitude;
 } Coordinates_t;
 
-typedef struct 
+typedef struct
 {
-  src_type_t    type= src_type_t::NONE;
-  epoch_t       epoch;
+  src_type_t type = src_type_t::NONE;
+  epoch_t epoch;
   Coordinates_t coordinate;
 } MessageTime_t;
-
-

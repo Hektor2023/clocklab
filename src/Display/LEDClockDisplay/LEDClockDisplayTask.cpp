@@ -8,28 +8,27 @@
 //===================================================================================
 void LedDisplayTask(void *pvParameter)
 {
-  static LEDClockDisplayHandler LedDisplayHandler( gc_STB_pin, gc_CLK_pin, gc_DIO_pin);
-  TimeData *ptr2timeData= reinterpret_cast< TimeData*>( pvParameter);
+  static LEDClockDisplayHandler LedDisplayHandler(gc_STB_pin, gc_CLK_pin, gc_DIO_pin);
+  TimeData *ptr2timeData = reinterpret_cast<TimeData *>(pvParameter);
   MyTime lastTime;
 
-  Serial.print( "\nLED_DISPLAY_task:  start\n");
+  Serial.print("\nLED_DISPLAY_task:  start\n");
 
-  for(;;)
+  for (;;)
   {
-    vTaskDelay( 30 / portTICK_RATE_MS);
+    vTaskDelay(30 / portTICK_RATE_MS);
 
-    if( ptr2timeData->lockData())
+    if (ptr2timeData->lockData())
     {
-      if( ptr2timeData->localTime != lastTime)
+      if (ptr2timeData->localTime != lastTime)
       {
-        LedDisplayHandler.update( *ptr2timeData);
+        LedDisplayHandler.update(*ptr2timeData);
 
         lastTime = ptr2timeData->localTime;
       }
 
       ptr2timeData->releaseData();
     }
-
   }
 
   vTaskDelete(nullptr);

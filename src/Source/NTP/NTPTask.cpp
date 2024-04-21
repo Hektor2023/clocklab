@@ -1,43 +1,39 @@
 #include "Source/NTP/NTPTask.h"
 
-
 //=============================================================================================================
 void ntpTask(void *pvParameter)
 {
-  ntpTaskParams_t *pparams= reinterpret_cast< ntpTaskParams_t*>( pvParameter);
-  t_credentials             credentials;
-  credentials.gc_Ssid =     pparams->ssid;
+  ntpTaskParams_t *pparams = reinterpret_cast<ntpTaskParams_t *>(pvParameter);
+  t_credentials credentials;
+  credentials.gc_Ssid = pparams->ssid;
   credentials.gc_Password = pparams->passwd;
-  NTPSourceTime   ntpSource( credentials);
+  NTPSourceTime ntpSource(credentials);
 
-
-  for(;;)
+  for (;;)
   {
-    vTaskDelay( 20 *(1000 / portTICK_RATE_MS));
+    vTaskDelay(20 * (1000 / portTICK_RATE_MS));
 
-    if( !ntpSource.update())
+    if (!ntpSource.update())
     {
-//      Serial.println("NTP try again....");
+      //      Serial.println("NTP try again....");
       continue;
     }
 
-    MessageTime_t   ntp_msg;
-    ntp_msg.type=   src_type_t::NTP;
+    MessageTime_t ntp_msg;
+    ntp_msg.type = src_type_t::NTP;
 
-    ntp_msg.epoch=  ntpSource.getTimestamp().getEpochTime();
+    ntp_msg.epoch = ntpSource.getTimestamp().getEpochTime();
 
-    Timestamp  timestamp( ntp_msg.epoch);
-    displayTimestamp( "NTP", timestamp);
+    Timestamp timestamp(ntp_msg.epoch);
+    displayTimestamp("NTP", timestamp);
 
-    QueueHandle_t*  ptr2queueSource= pparams->srcQueue; 
-    while ( xQueueSend( *ptr2queueSource, (void *)&ntp_msg, 0) != pdTRUE) 
+    QueueHandle_t *ptr2queueSource = pparams->srcQueue;
+    while (xQueueSend(*ptr2queueSource, (void *)&ntp_msg, 0) != pdTRUE)
     {
-      Serial.println("ERROR: Could not put NTP time to queue.");  
+      Serial.println("ERROR: Could not put NTP time to queue.");
     }
-
   }
   vTaskDelete(nullptr);
 }
 
 //=============================================================================================================
-

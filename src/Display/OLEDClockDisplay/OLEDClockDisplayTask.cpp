@@ -8,29 +8,28 @@
 void OLedDisplayTask(void *pvParameter)
 {
   OLEDClockDisplayHandler OLEDClockDisplayHandler;
-  TimeData *ptr2timeData= reinterpret_cast< TimeData*>( pvParameter);
+  TimeData *ptr2timeData = reinterpret_cast<TimeData *>(pvParameter);
   MyTime lastTime;
 
-  Serial.print( "\nOLED_DISPLAY_task:  start\n");
+  Serial.print("\nOLED_DISPLAY_task:  start\n");
 
   OLEDClockDisplayHandler.init();
 
-  for(;;)
+  for (;;)
   {
-    vTaskDelay( 30 / portTICK_RATE_MS);
+    vTaskDelay(30 / portTICK_RATE_MS);
 
-    if(ptr2timeData->lockData())
+    if (ptr2timeData->lockData())
     {
-      if( ptr2timeData->localTime != lastTime)
+      if (ptr2timeData->localTime != lastTime)
       {
-        OLEDClockDisplayHandler.update( *ptr2timeData);
+        OLEDClockDisplayHandler.update(*ptr2timeData);
 
-        lastTime =ptr2timeData->localTime;
+        lastTime = ptr2timeData->localTime;
       }
 
       ptr2timeData->releaseData();
     }
-
   }
 
   vTaskDelete(nullptr);

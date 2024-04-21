@@ -1,24 +1,23 @@
 #include "TimeType/TimeHandler.h"
 
 //===================================================================================
-TimeHandler::TimeHandler( TimeHandler* ptr):ptr( ptr) {}
+TimeHandler::TimeHandler(TimeHandler *ptr) : ptr(ptr) {}
 
 //===================================================================================
-void TimeHandler::baseUpdateTime( Timestamp &timestamp)
-{    
-  if( ptr)
+void TimeHandler::baseUpdateTime(Timestamp &timestamp)
+{
+  if (ptr)
   {
-    
-    ptr->updateTime( timestamp);
- //   Serial.println( ptr->getClassName());
+
+    ptr->updateTime(timestamp);
+    //   Serial.println( ptr->getClassName());
   }
-            
 }
-       
+
 //===================================================================================
-void TimeHandler::updateTime( Timestamp &timestamp)
-{            
-  baseUpdateTime( timestamp);
+void TimeHandler::updateTime(Timestamp &timestamp)
+{
+  baseUpdateTime(timestamp);
 }
-       
+
 //===================================================================================

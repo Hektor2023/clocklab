@@ -14,16 +14,15 @@
 //===================================================================================
 class OLEDClockDisplayHandler
 {
-   private:
-      TFT_eSPI tft;
-   
-   public:
-      OLEDClockDisplayHandler( void);
-      ~OLEDClockDisplayHandler( void) = default;
+private:
+   TFT_eSPI tft;
 
-      void init( void);
-      void update( const TimeData &data);
+public:
+   OLEDClockDisplayHandler(void);
+   ~OLEDClockDisplayHandler(void) = default;
+
+   void init(void);
+   void update(const TimeData &data);
 };
 
 //===================================================================================
-
