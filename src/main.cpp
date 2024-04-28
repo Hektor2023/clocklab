@@ -1,4 +1,13 @@
 #include <Arduino.h>
+#include <u8g2lib.h>
+#include <MUIU8g2.h>
+
+#ifdef U8X8_HAVE_HW_SPI
+#include <SPI.h>
+#endif
+#ifdef U8X8_HAVE_HW_I2C
+#include <Wire.h>
+#endif
 
 #include "clocklab_types.h"
 #include <SPI.h>
@@ -49,11 +58,8 @@ MyTime g_SunriseTime, g_SunsetTime;
 
 Timestamp g_LocalTimestamp;
 SplitterTimeHandler g_SplitterHandler(nullptr, g_LocalTimestamp);
-DSTSunriseSunsetTimeHandler g_TimeZoneDSTHandler(&g_SplitterHandler,
-                                                 gc_GMT_Plus_2h, g_SunriseTime,
-                                                 g_SunsetTime);
-RTCSystemTimeHandler g_RTCSystemTimeHandler(&g_TimeZoneDSTHandler, gc_sda_pin,
-                                            gc_scl_pin, gc_irqIn_pin);
+DSTSunriseSunsetTimeHandler g_TimeZoneDSTHandler(&g_SplitterHandler, gc_GMT_Plus_2h, g_SunriseTime, g_SunsetTime);
+RTCSystemTimeHandler g_RTCSystemTimeHandler(&g_TimeZoneDSTHandler, gc_sda_pin, gc_scl_pin, gc_irqIn_pin);
 
 static xQueueHandle g_queueSourceTime = xQueueCreate(3, sizeof(MessageTime_t));
 static xQueueHandle g_queueDisplay = xQueueCreate(3, sizeof(MessageTime_t));
@@ -138,8 +144,7 @@ void rtcReadTask(void *pvParameter)
 //=============================================================================================================
 void rtcWriteTask(void *pvParameter)
 {
-  QueueHandle_t *ptr2queueSource =
-      reinterpret_cast<QueueHandle_t *>(pvParameter);
+  QueueHandle_t *ptr2queueSource = reinterpret_cast<QueueHandle_t *>(pvParameter);
   Timestamp rtcTimestamp;
   MessageTime_t rtcWriteMsg;
   MessageTime_t bestSrcMsg;
@@ -187,8 +192,7 @@ void rtcWriteTask(void *pvParameter)
 //=============================================================================================================
 void setup()
 {
-  static QueueHandle_t *ptr2src_queue =
-      static_cast<QueueHandle_t *>(&g_queueSourceTime);
+  static QueueHandle_t *ptr2src_queue = static_cast<QueueHandle_t *>(&g_queueSourceTime);
   static ntpTaskParams_t ntpParams{SSID, PASSWD, ptr2src_queue};
 
   g_xSemaphoreRtc = xSemaphoreCreateMutex();
@@ -209,14 +213,31 @@ void setup()
   xTaskCreate(&rtcReadTask, "rtc_read_task", 2048, nullptr, 5, nullptr);
 
   xTaskCreate(&consoleOutTask, "console_out_task", 3048, nullptr, 5, nullptr);
-  xTaskCreate(&consoleDisplayTask, "console_display_task", 2048, &timeData, 5,
-              nullptr);
+  xTaskCreate(&consoleDisplayTask, "console_display_task", 2048, &timeData, 5, nullptr);
   xTaskCreate(&LedDisplayTask, "LED_display_task", 2048, &timeData, 5, nullptr);
-  //  xTaskCreate( &OLedDisplayTask,      "OLED_display_task",    3048,
-  //  &timeData, 5, nullptr);
-}
+  xTaskCreate(&OLedDisplayTask, "OLED_display_task", 3048, &timeData, 5, nullptr);
 
-//=============================================================================================================
-void loop()
-{
-}
+  /*
+   TODO: try estimate stack size for tasks
+
+    void vTask1(void *pvParameters)
+    {
+      UBaseType_t uxHighWaterMark;
+
+      // Inspect our own high water mark on entering the task.
+      uxHighWaterMark = uxTaskGetStackHighWaterMark(NULL);
+
+      for (;;)
+      {
+        // Call any function.
+        vTaskDelay(1000);
+
+        // Calling the function will have used some stack space, we would
+        //therefore now expect uxTaskGetStackHighWaterMark() to return a
+        //value lower than when it was called on entering the task.
+        uxHighWaterMark = uxTaskGetStackHighWaterMark(NULL);
+      }
+    }
+  */
+  //=============================================================================================================
+  void loop() {}

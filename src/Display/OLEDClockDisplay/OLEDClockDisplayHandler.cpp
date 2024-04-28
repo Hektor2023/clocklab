@@ -2,19 +2,14 @@
 
 //===================================================================================
 OLEDClockDisplayHandler::OLEDClockDisplayHandler(void)
-    : tft(TFT_eSPI())
+    :u8g2(U8G2_R0, 18, 23, 5, 17, 19)
 {
 }
 
 //===================================================================================
 void OLEDClockDisplayHandler::init(void)
 {
-  // Initialize TFT LCD
-
-  tft.begin();
-  tft.setRotation(90);
-  // Clear the screen
-  tft.fillScreen(TFT_BLACK);
+  u8g2.begin();
 }
 
 //===================================================================================
@@ -32,7 +27,7 @@ void OLEDClockDisplayHandler::update(const TimeData &data)
 
   char timeShortStrBuffer[MyTime::getStringShortBufferSize()];
   std::string timeAsShortString = time.toShortString(timeShortStrBuffer);
-
+/*
   // Set the font size and color
   tft.setTextSize(5); // choose a suitable font
   tft.setTextColor(TFT_GREEN);
@@ -53,6 +48,18 @@ void OLEDClockDisplayHandler::update(const TimeData &data)
 
   //  std::string sunsetAsString= sunset.toShortString( timeShortStrBuffer);
   //  tft.println(  sunsetAsString.c_str());
+*/
+
+  u8g2.clearBuffer(); // clear the internal memory
+  u8g2.enableUTF8Print();
+  u8g2.setFont(u8g2_font_10x20_tf);
+  u8g2.setDrawColor(1);
+
+  u8g2.setCursor(10, 20);
+  u8g2.setContrast(80);
+
+  u8g2.print( timeAsString.c_str());
+  u8g2.sendBuffer();
 }
 
 //===================================================================================
