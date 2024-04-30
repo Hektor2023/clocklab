@@ -70,10 +70,6 @@ AdjustmentAdvisor g_advisor;
 //=============================================================================================================
 void consoleOutTask(void *pvParameter)
 {
-  //  UBaseType_t uxHighWaterMark; // 2320
-  //  uxHighWaterMark = uxTaskGetStackHighWaterMark(NULL);
-
-  // initialize digital pin LED_BUILTIN as an output.
   Timestamp displayTimestamp;
   MessageTime_t rcvMsg;
   MyDate date;
@@ -98,10 +94,6 @@ void consoleOutTask(void *pvParameter)
 
       timeData.releaseData();
     }
-
-    //    uxHighWaterMark = uxTaskGetStackHighWaterMark(NULL);
-    //    Serial.printf("\nConsoleOut_task:  uxHighWaterMark= %d\n", uxHighWaterMark);
-    //    break;
   }
 
   vTaskDelete(nullptr);
@@ -110,9 +102,6 @@ void consoleOutTask(void *pvParameter)
 //=============================================================================================================
 void rtcReadTask(void *pvParameter)
 {
-  //  UBaseType_t uxHighWaterMark; // 968
-  //  uxHighWaterMark = uxTaskGetStackHighWaterMark(NULL);
-
   Timestamp rtcTimestamp;
   MessageTime_t rtcReadMsg;
 
@@ -142,14 +131,8 @@ void rtcReadTask(void *pvParameter)
         {
           Serial.println("ERROR: Could not put RTC read time to queue.");
         }
-        //          Serial.print( "\nRTC_READ_task: AFTER SEND
-        //          systemTimeHandler.updateTime()\n");
       }
     }
-
-    //    uxHighWaterMark = uxTaskGetStackHighWaterMark(NULL);
-    //    Serial.printf("\nRTC_READ_task:  uxHighWaterMark= %d\n", uxHighWaterMark);
-    //    break;
   }
 
   vTaskDelete(nullptr);
@@ -158,9 +141,6 @@ void rtcReadTask(void *pvParameter)
 //=============================================================================================================
 void rtcWriteTask(void *pvParameter)
 {
-  //  UBaseType_t uxHighWaterMark; // 1276
-  //  uxHighWaterMark = uxTaskGetStackHighWaterMark(NULL);
-
   QueueHandle_t *ptr2queueSource = reinterpret_cast<QueueHandle_t *>(pvParameter);
   Timestamp rtcTimestamp;
   MessageTime_t rtcWriteMsg;
@@ -200,10 +180,6 @@ void rtcWriteTask(void *pvParameter)
         }
       }
     }
-
-    //    uxHighWaterMark = uxTaskGetStackHighWaterMark(NULL);
-    //    Serial.printf("\nRTC_WRITE_task:  uxHighWaterMark= %d\n", uxHighWaterMark);
-    //    break;
   }
 
   vTaskDelete(nullptr);
