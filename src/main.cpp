@@ -70,6 +70,9 @@ AdjustmentAdvisor g_advisor;
 //=============================================================================================================
 void consoleOutTask(void *pvParameter)
 {
+  //  UBaseType_t uxHighWaterMark; // 2320
+  //  uxHighWaterMark = uxTaskGetStackHighWaterMark(NULL);
+
   // initialize digital pin LED_BUILTIN as an output.
   Timestamp displayTimestamp;
   MessageTime_t rcvMsg;
@@ -95,6 +98,10 @@ void consoleOutTask(void *pvParameter)
 
       timeData.releaseData();
     }
+
+    //    uxHighWaterMark = uxTaskGetStackHighWaterMark(NULL);
+    //    Serial.printf("\nConsoleOut_task:  uxHighWaterMark= %d\n", uxHighWaterMark);
+    //    break;
   }
 
   vTaskDelete(nullptr);
@@ -103,6 +110,9 @@ void consoleOutTask(void *pvParameter)
 //=============================================================================================================
 void rtcReadTask(void *pvParameter)
 {
+  //  UBaseType_t uxHighWaterMark; // 968
+  //  uxHighWaterMark = uxTaskGetStackHighWaterMark(NULL);
+
   Timestamp rtcTimestamp;
   MessageTime_t rtcReadMsg;
 
@@ -136,6 +146,10 @@ void rtcReadTask(void *pvParameter)
         //          systemTimeHandler.updateTime()\n");
       }
     }
+
+    //    uxHighWaterMark = uxTaskGetStackHighWaterMark(NULL);
+    //    Serial.printf("\nRTC_READ_task:  uxHighWaterMark= %d\n", uxHighWaterMark);
+    //    break;
   }
 
   vTaskDelete(nullptr);
@@ -144,6 +158,9 @@ void rtcReadTask(void *pvParameter)
 //=============================================================================================================
 void rtcWriteTask(void *pvParameter)
 {
+  //  UBaseType_t uxHighWaterMark; // 1276
+  //  uxHighWaterMark = uxTaskGetStackHighWaterMark(NULL);
+
   QueueHandle_t *ptr2queueSource = reinterpret_cast<QueueHandle_t *>(pvParameter);
   Timestamp rtcTimestamp;
   MessageTime_t rtcWriteMsg;
@@ -184,6 +201,10 @@ void rtcWriteTask(void *pvParameter)
         }
       }
     }
+
+    //    uxHighWaterMark = uxTaskGetStackHighWaterMark(NULL);
+    //    Serial.printf("\nRTC_WRITE_task:  uxHighWaterMark= %d\n", uxHighWaterMark);
+    //    break;
   }
 
   vTaskDelete(nullptr);
@@ -209,35 +230,14 @@ void setup()
   xTaskCreate(&gpsTask, "gps_task", 5048, ptr2src_queue, 5, nullptr);
   xTaskCreate(&ntpTask, "ntp_task", 4048, &ntpParams, 5, nullptr);
 
-  xTaskCreate(&rtcWriteTask, "rtc_write_task", 2048, ptr2src_queue, 5, nullptr);
-  xTaskCreate(&rtcReadTask, "rtc_read_task", 2048, nullptr, 5, nullptr);
+  xTaskCreate(&rtcWriteTask, "rtc_write_task", 2048, ptr2src_queue, 5, nullptr); //
+  xTaskCreate(&rtcReadTask, "rtc_read_task", 2048, nullptr, 5, nullptr);         // 2048
 
-  xTaskCreate(&consoleOutTask, "console_out_task", 3048, nullptr, 5, nullptr);
+  xTaskCreate(&consoleOutTask, "console_out_task", 2600, nullptr, 5, nullptr); // 3048
   xTaskCreate(&consoleDisplayTask, "console_display_task", 2048, &timeData, 5, nullptr);
   xTaskCreate(&LedDisplayTask, "LED_display_task", 2048, &timeData, 5, nullptr);
   xTaskCreate(&OLedDisplayTask, "OLED_display_task", 3048, &timeData, 5, nullptr);
+}
 
-  /*
-   TODO: try estimate stack size for tasks
-
-    void vTask1(void *pvParameters)
-    {
-      UBaseType_t uxHighWaterMark;
-
-      // Inspect our own high water mark on entering the task.
-      uxHighWaterMark = uxTaskGetStackHighWaterMark(NULL);
-
-      for (;;)
-      {
-        // Call any function.
-        vTaskDelay(1000);
-
-        // Calling the function will have used some stack space, we would
-        //therefore now expect uxTaskGetStackHighWaterMark() to return a
-        //value lower than when it was called on entering the task.
-        uxHighWaterMark = uxTaskGetStackHighWaterMark(NULL);
-      }
-    }
-  */
-  //=============================================================================================================
-  void loop() {}
+//=============================================================================================================
+void loop() {}

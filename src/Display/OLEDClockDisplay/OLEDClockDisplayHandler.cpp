@@ -52,13 +52,17 @@ void OLEDClockDisplayHandler::update(const TimeData &data)
 
   u8g2.clearBuffer(); // clear the internal memory
   u8g2.enableUTF8Print();
-  u8g2.setFont(u8g2_font_10x20_tf);
+  u8g2.setFont(u8g2_font_12x6LED_tf); 
   u8g2.setDrawColor(1);
 
-  u8g2.setCursor(10, 20);
+  u8g2.setCursor(0, 26);
   u8g2.setContrast(80);
 
   u8g2.print( timeAsString.c_str());
+
+  u8g2.setCursor(0, 46);
+  u8g2.setFont(u8g2_font_helvB12_tf);
+  u8g2.print(dayOfWeekAsString[date.getDayOfWeek()].c_str());
   u8g2.sendBuffer();
 }
 
