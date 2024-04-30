@@ -8,15 +8,6 @@
 #include "TimeType/TimeData.h"
 
 #include <u8g2lib.h>
-#include <MUIU8g2.h>
-
-#ifdef U8X8_HAVE_HW_SPI
-#include <SPI.h>
-#endif
-#ifdef U8X8_HAVE_HW_I2C
-#include <Wire.h>
-#endif
-#include <string.h>
 
 // uses SPI pins
 //===================================================================================
@@ -25,7 +16,8 @@ class OLEDClockDisplayHandler
 private:
    U8G2_ST7565_ERC12864_ALT_F_4W_SW_SPI u8g2;
 
-public : OLEDClockDisplayHandler(void);
+public:
+   OLEDClockDisplayHandler(const uint8_t clock, const uint8_t data, const uint8_t cs, const uint8_t dc, const uint8_t reset);
    ~OLEDClockDisplayHandler(void) = default;
 
    void init(void);

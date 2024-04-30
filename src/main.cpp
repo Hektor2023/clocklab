@@ -188,8 +188,7 @@ void rtcWriteTask(void *pvParameter)
 
           if (bestSrcMsg.type == src_type_t::GPS)
           {
-            CoordinatesHandler &handler =
-                g_TimeZoneDSTHandler.getCoordinatesHander();
+            CoordinatesHandler &handler = g_TimeZoneDSTHandler.getCoordinatesHander();
             if (handler.lockData())
             {
               handler.setCoordinates(
