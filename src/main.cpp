@@ -1,17 +1,10 @@
 #include <Arduino.h>
-#include <u8g2lib.h>
-#include <MUIU8g2.h>
-
-#ifdef U8X8_HAVE_HW_SPI
-#include <SPI.h>
-#endif
-#ifdef U8X8_HAVE_HW_I2C
-#include <Wire.h>
-#endif
+#include <array>
 
 #include "clocklab_types.h"
 #include <SPI.h>
 #include <string.h>
+#include "LimitedSizeString.h"
 
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
@@ -67,6 +60,109 @@ static SemaphoreHandle_t g_xSemaphoreRtc;
 
 AdjustmentAdvisor g_advisor;
 
+constexpr uint8_t cmdStringSize = 30;
+LimitedSizeString<cmdStringSize> cmd;
+
+enum class DisplayMode
+{
+  eLocalTime,
+  eData
+};
+
+class DisplayCommand
+{
+private:
+  DisplayMode mode;
+  LimitedSizeString<cmdStringSize> msg;
+
+public:
+  DisplayCommand(void);
+  ~DisplayCommand(void) = default;
+
+  const DisplayMode &getCmdMode(void);
+  void setCmdMode(const DisplayMode mode);
+
+  const LimitedSizeString<cmdStringSize> &getMessage(void);
+  void setMessage(const LimitedSizeString<cmdStringSize> cmdMsg);
+};
+
+DisplayCommand::DisplayCommand(void)
+    : mode{DisplayMode::eLocalTime}, msg("00:00:00")
+{
+}
+
+const DisplayMode &DisplayCommand::getCmdMode(void)
+{
+  return mode;
+}
+
+void DisplayCommand::setCmdMode(const DisplayMode cmdMode)
+{
+  mode = cmdMode;
+}
+
+const LimitedSizeString<cmdStringSize> &DisplayCommand::getMessage(void)
+{
+  return msg;
+}
+
+void DisplayCommand::setMessage(const LimitedSizeString<cmdStringSize> cmdMsg)
+{
+  msg = cmdMsg;
+}
+
+class DisplayController
+{
+private:
+  DisplayMode displayMode;
+  DisplayCommand cmd;
+
+public:
+  DisplayController(void);
+  ~DisplayController(void) = default;
+
+  void setDisplayMode(const DisplayMode mode);
+  void update(const TimeData &data);
+
+  const DisplayCommand &getCommand(void);
+};
+
+DisplayController::DisplayController(void)
+    : displayMode(DisplayMode::eLocalTime), cmd()
+{
+}
+
+void DisplayController::setDisplayMode(const DisplayMode mode)
+{
+  displayMode = mode;
+}
+
+const DisplayCommand &DisplayController::getCommand(void)
+{
+  return cmd;
+}
+
+void DisplayController::update(const TimeData &data)
+{
+  cmd.setCmdMode(displayMode);
+
+  switch (displayMode)
+  {
+  case DisplayMode::eLocalTime:
+    cmd.setMessage("01:02:03");
+    /*
+        MyTime currentTime = data.localTime;
+        char timeStrBuffer[MyTime::getStringBufferSize()];
+
+        cmd.setMessage( currentTime.toString(timeStrBuffer));
+    */
+    break;
+
+    // default: // didn't work???
+    ;
+  }
+}
+
 //=============================================================================================================
 void consoleOutTask(void *pvParameter)
 {
@@ -107,6 +203,7 @@ void rtcReadTask(void *pvParameter)
 
   printTick();
   Serial.print("\nRTC_READ_task:  start\n");
+
   g_RTCSystemTimeHandler.init();
 
   for (;;)
