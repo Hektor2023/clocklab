@@ -1,6 +1,6 @@
 #pragma once
 
-#include "LimitedSizeString.h"
+#include "Other/LimitedSizeString.h"
 #include "TimeType/TimeData.h"
 
 constexpr uint8_t cmdStringSize = 30;

@@ -1,7 +1,7 @@
 #include <Arduino.h>
 #include <array>
 
-#include "LimitedSizeString.h"
+#include "Other/LimitedSizeString.h"
 #include "clocklab_types.h"
 
 #include "freertos/FreeRTOS.h"
@@ -38,7 +38,6 @@
 // GMT -1 = -3600
 // GMT  0 = 0
 constexpr auto gc_GMT_Plus_2h{2 * 3600};
-constexpr auto gc_period_1000_Millis{1000};
 
 static TimeData timeData;
 
@@ -68,7 +67,6 @@ void consoleOutTask(void *pvParameter) {
       reinterpret_cast<QueueHandle_t *>(pvParameter);
   Timestamp displayTimestamp;
   MessageTime_t rcvMsg;
-  MyDate date;
 
   printTick();
   Serial.print("\nCONSOLE_OUT_task:  start\n");
@@ -79,10 +77,8 @@ void consoleOutTask(void *pvParameter) {
       if (xQueueReceive(*ptr2queueSource, (void *)&rcvMsg, 0) == pdTRUE) {
         displayTimestamp.setEpochTime(rcvMsg.epoch);
 
-        displayTimestamp.getDate(date);
-
-        displayTimestamp.getTime(timeData.localTime);
-        displayTimestamp.getDate(timeData.localDate);
+        timeData.localTime = displayTimestamp.getTime();
+        timeData.localDate = displayTimestamp.getDate();
       }
 
       timeData.releaseData();
@@ -109,7 +105,6 @@ void rtcReadTask(void *pvParameter) {
 
     if (xSemaphoreTake(g_xSemaphoreRtc, 0) == pdTRUE) {
       bool timeUpdated = g_RTCSystemTimeHandler.updateTime();
-      xSemaphoreGive(g_xSemaphoreRtc);
 
       // g_LocalTimestamp updated by g_SystemTimeHandler
       if (timeUpdated) {
@@ -123,6 +118,8 @@ void rtcReadTask(void *pvParameter) {
           Serial.println("ERROR: Could not put RTC read time to queue.");
         }
       }
+
+      xSemaphoreGive(g_xSemaphoreRtc);
     }
   }
 
