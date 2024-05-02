@@ -2,5 +2,8 @@
     "C_Cpp.errorSquiggles": "disabled"
 }
 {
+"clang-format.language.cpp.style": "Microsoft"
+}
+{
     "editor.formatOnSave": true
 }

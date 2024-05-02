@@ -1,18 +1,17 @@
 #include <Arduino.h>
 #include <array>
 
-#include "clocklab_types.h"
-#include <SPI.h>
-#include <string.h>
 #include "LimitedSizeString.h"
+#include "clocklab_types.h"
 
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 
-#include "Other/CoordinatesHandler.h"
-
 #include "Other/AdjustmentAdvisor.h"
 #include "Other/Controller.h"
+#include "Other/CoordinatesHandler.h"
+#include "Other/DisplayController.h"
+
 #include "Other/Tools.h"
 
 #include "TimeType/TimeData.h"
@@ -51,8 +50,11 @@ MyTime g_SunriseTime, g_SunsetTime;
 
 Timestamp g_LocalTimestamp;
 SplitterTimeHandler g_SplitterHandler(nullptr, g_LocalTimestamp);
-DSTSunriseSunsetTimeHandler g_TimeZoneDSTHandler(&g_SplitterHandler, gc_GMT_Plus_2h, g_SunriseTime, g_SunsetTime);
-RTCSystemTimeHandler g_RTCSystemTimeHandler(&g_TimeZoneDSTHandler, gc_sda_pin, gc_scl_pin, gc_irqIn_pin);
+DSTSunriseSunsetTimeHandler g_TimeZoneDSTHandler(&g_SplitterHandler,
+                                                 gc_GMT_Plus_2h, g_SunriseTime,
+                                                 g_SunsetTime);
+RTCSystemTimeHandler g_RTCSystemTimeHandler(&g_TimeZoneDSTHandler, gc_sda_pin,
+                                            gc_scl_pin, gc_irqIn_pin);
 
 static xQueueHandle g_queueSourceTime = xQueueCreate(3, sizeof(MessageTime_t));
 static xQueueHandle g_queueDisplay = xQueueCreate(3, sizeof(MessageTime_t));
@@ -60,112 +62,10 @@ static SemaphoreHandle_t g_xSemaphoreRtc;
 
 AdjustmentAdvisor g_advisor;
 
-constexpr uint8_t cmdStringSize = 30;
-LimitedSizeString<cmdStringSize> cmd;
-
-enum class DisplayMode
-{
-  eLocalTime,
-  eData
-};
-
-class DisplayCommand
-{
-private:
-  DisplayMode mode;
-  LimitedSizeString<cmdStringSize> msg;
-
-public:
-  DisplayCommand(void);
-  ~DisplayCommand(void) = default;
-
-  const DisplayMode &getCmdMode(void);
-  void setCmdMode(const DisplayMode mode);
-
-  const LimitedSizeString<cmdStringSize> &getMessage(void);
-  void setMessage(const LimitedSizeString<cmdStringSize> cmdMsg);
-};
-
-DisplayCommand::DisplayCommand(void)
-    : mode{DisplayMode::eLocalTime}, msg("00:00:00")
-{
-}
-
-const DisplayMode &DisplayCommand::getCmdMode(void)
-{
-  return mode;
-}
-
-void DisplayCommand::setCmdMode(const DisplayMode cmdMode)
-{
-  mode = cmdMode;
-}
-
-const LimitedSizeString<cmdStringSize> &DisplayCommand::getMessage(void)
-{
-  return msg;
-}
-
-void DisplayCommand::setMessage(const LimitedSizeString<cmdStringSize> cmdMsg)
-{
-  msg = cmdMsg;
-}
-
-class DisplayController
-{
-private:
-  DisplayMode displayMode;
-  DisplayCommand cmd;
-
-public:
-  DisplayController(void);
-  ~DisplayController(void) = default;
-
-  void setDisplayMode(const DisplayMode mode);
-  void update(const TimeData &data);
-
-  const DisplayCommand &getCommand(void);
-};
-
-DisplayController::DisplayController(void)
-    : displayMode(DisplayMode::eLocalTime), cmd()
-{
-}
-
-void DisplayController::setDisplayMode(const DisplayMode mode)
-{
-  displayMode = mode;
-}
-
-const DisplayCommand &DisplayController::getCommand(void)
-{
-  return cmd;
-}
-
-void DisplayController::update(const TimeData &data)
-{
-  cmd.setCmdMode(displayMode);
-
-  switch (displayMode)
-  {
-  case DisplayMode::eLocalTime:
-    cmd.setMessage("01:02:03");
-    /*
-        MyTime currentTime = data.localTime;
-        char timeStrBuffer[MyTime::getStringBufferSize()];
-
-        cmd.setMessage( currentTime.toString(timeStrBuffer));
-    */
-    break;
-
-    // default: // didn't work???
-    ;
-  }
-}
-
 //=============================================================================================================
-void consoleOutTask(void *pvParameter)
-{
+void consoleOutTask(void *pvParameter) {
+  QueueHandle_t *ptr2queueSource =
+      reinterpret_cast<QueueHandle_t *>(pvParameter);
   Timestamp displayTimestamp;
   MessageTime_t rcvMsg;
   MyDate date;
@@ -173,13 +73,10 @@ void consoleOutTask(void *pvParameter)
   printTick();
   Serial.print("\nCONSOLE_OUT_task:  start\n");
 
-  for (;;)
-  {
+  for (;;) {
     vTaskDelay(30 / portTICK_RATE_MS);
-    if (timeData.lockData())
-    {
-      if (xQueueReceive(g_queueDisplay, (void *)&rcvMsg, 0) == pdTRUE)
-      {
+    if (timeData.lockData()) {
+      if (xQueueReceive(*ptr2queueSource, (void *)&rcvMsg, 0) == pdTRUE) {
         displayTimestamp.setEpochTime(rcvMsg.epoch);
 
         displayTimestamp.getDate(date);
@@ -196,8 +93,9 @@ void consoleOutTask(void *pvParameter)
 }
 
 //=============================================================================================================
-void rtcReadTask(void *pvParameter)
-{
+void rtcReadTask(void *pvParameter) {
+  QueueHandle_t *ptr2queueSource =
+      reinterpret_cast<QueueHandle_t *>(pvParameter);
   Timestamp rtcTimestamp;
   MessageTime_t rtcReadMsg;
 
@@ -206,26 +104,22 @@ void rtcReadTask(void *pvParameter)
 
   g_RTCSystemTimeHandler.init();
 
-  for (;;)
-  {
+  for (;;) {
     vTaskDelay(10 / portTICK_RATE_MS);
 
-    if (xSemaphoreTake(g_xSemaphoreRtc, 0) == pdTRUE)
-    {
+    if (xSemaphoreTake(g_xSemaphoreRtc, 0) == pdTRUE) {
       bool timeUpdated = g_RTCSystemTimeHandler.updateTime();
       xSemaphoreGive(g_xSemaphoreRtc);
 
       // g_LocalTimestamp updated by g_SystemTimeHandler
-      if (timeUpdated)
-      {
+      if (timeUpdated) {
         Serial.print("RTC: UPDATE\t");
 
         digitalWrite(gc_PULS_pin, gc_PULS_pin ? LOW : HIGH);
 
         // set time for Display
         rtcReadMsg.epoch = g_LocalTimestamp.getEpochTime();
-        while (xQueueSend(g_queueDisplay, (void *)&rtcReadMsg, 0) != pdTRUE)
-        {
+        while (xQueueSend(*ptr2queueSource, (void *)&rtcReadMsg, 0) != pdTRUE) {
           Serial.println("ERROR: Could not put RTC read time to queue.");
         }
       }
@@ -236,9 +130,9 @@ void rtcReadTask(void *pvParameter)
 }
 
 //=============================================================================================================
-void rtcWriteTask(void *pvParameter)
-{
-  QueueHandle_t *ptr2queueSource = reinterpret_cast<QueueHandle_t *>(pvParameter);
+void rtcWriteTask(void *pvParameter) {
+  QueueHandle_t *ptr2queueSource =
+      reinterpret_cast<QueueHandle_t *>(pvParameter);
   Timestamp rtcTimestamp;
   MessageTime_t rtcWriteMsg;
   MessageTime_t bestSrcMsg;
@@ -246,33 +140,29 @@ void rtcWriteTask(void *pvParameter)
   printTick();
   Serial.print("\nRTC_WRITE_task:  start\n");
 
-  for (;;)
-  {
+  for (;;) {
     vTaskDelay(10 / portTICK_RATE_MS);
     g_advisor.setSelectedSource(src_type_t::NTP);
 
-    if (xQueueReceive(*ptr2queueSource, (void *)&rtcWriteMsg, 0) == pdTRUE)
-    {
-      if (g_advisor.routeSource(bestSrcMsg, rtcWriteMsg))
-      {
-        if ((xSemaphoreTake(g_xSemaphoreRtc, 0) == pdTRUE))
-        {
+    if (xQueueReceive(*ptr2queueSource, (void *)&rtcWriteMsg, 0) == pdTRUE) {
+      if (g_advisor.routeSource(bestSrcMsg, rtcWriteMsg)) {
+        if ((xSemaphoreTake(g_xSemaphoreRtc, 0) == pdTRUE)) {
           rtcTimestamp.setEpochTime(bestSrcMsg.epoch);
           g_RTCSystemTimeHandler.setTimestamp(rtcTimestamp);
-
-          Timestamp timestamp(bestSrcMsg.epoch);
-          displayTimestamp("RTC", timestamp);
-
-          if (bestSrcMsg.type == src_type_t::GPS)
           {
-            CoordinatesHandler &handler = g_TimeZoneDSTHandler.getCoordinatesHander();
-            if (handler.lockData())
-            {
+            Timestamp timestamp(bestSrcMsg.epoch);
+            displayTimestamp("RTC", timestamp);
+          }
+          if (bestSrcMsg.type == src_type_t::GPS) {
+            CoordinatesHandler &handler =
+                g_TimeZoneDSTHandler.getCoordinatesHander();
+            if (handler.lockData()) {
               handler.setCoordinates(
                   bestSrcMsg.coordinate); // TODO: move to RTC SystemTimeHandler
               handler.releaseData();
             }
           }
+
           xSemaphoreGive(g_xSemaphoreRtc);
         }
       }
@@ -283,9 +173,9 @@ void rtcWriteTask(void *pvParameter)
 }
 
 //=============================================================================================================
-void setup()
-{
-  static QueueHandle_t *ptr2src_queue = static_cast<QueueHandle_t *>(&g_queueSourceTime);
+void setup() {
+  static QueueHandle_t *ptr2src_queue =
+      static_cast<QueueHandle_t *>(&g_queueSourceTime);
   static ntpTaskParams_t ntpParams{SSID, PASSWD, ptr2src_queue};
 
   g_xSemaphoreRtc = xSemaphoreCreateMutex();
@@ -302,13 +192,18 @@ void setup()
   xTaskCreate(&gpsTask, "gps_task", 5048, ptr2src_queue, 5, nullptr);
   xTaskCreate(&ntpTask, "ntp_task", 4048, &ntpParams, 5, nullptr);
 
-  xTaskCreate(&rtcWriteTask, "rtc_write_task", 2048, ptr2src_queue, 5, nullptr); //
-  xTaskCreate(&rtcReadTask, "rtc_read_task", 2048, nullptr, 5, nullptr);         // 2048
+  xTaskCreate(&rtcWriteTask, "rtc_write_task", 2048, ptr2src_queue, 5,
+              nullptr); //
+  xTaskCreate(&rtcReadTask, "rtc_read_task", 2048, &g_queueDisplay, 5,
+              nullptr); // 2048
 
-  xTaskCreate(&consoleOutTask, "console_out_task", 2600, nullptr, 5, nullptr); // 3048
-  xTaskCreate(&consoleDisplayTask, "console_display_task", 2048, &timeData, 5, nullptr);
+  xTaskCreate(&consoleOutTask, "console_out_task", 2600, &g_queueDisplay, 5,
+              nullptr); // 3048
+  xTaskCreate(&consoleDisplayTask, "console_display_task", 2048, &timeData, 5,
+              nullptr);
   xTaskCreate(&LedDisplayTask, "LED_display_task", 2048, &timeData, 5, nullptr);
-  xTaskCreate(&OLedDisplayTask, "OLED_display_task", 3048, &timeData, 5, nullptr);
+  xTaskCreate(&OLedDisplayTask, "OLED_display_task", 3048, &timeData, 5,
+              nullptr);
 }
 
 //=============================================================================================================

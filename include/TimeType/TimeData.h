@@ -1,14 +1,13 @@
 #pragma once
 
+#include "TimeType/MyDate.h"
+#include "TimeType/MyTime.h"
+#include "clocklab_types.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
-#include "TimeType/MyTime.h"
-#include "TimeType/MyDate.h"
-#include "clocklab_types.h"
 
 //===================================================================================
-struct TimeData
-{
+struct TimeData {
   MyDate localDate;
   MyTime localTime;
   MyTime sunriseTime;

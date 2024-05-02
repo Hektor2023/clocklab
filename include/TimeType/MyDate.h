@@ -1,13 +1,12 @@
 #pragma once
 
-#include <cstddef>
 #include "Arduino.h"
+#include <cstddef>
 
 typedef unsigned char uint8_t;
 
 //===================================================================================
-class MyDate
-{
+class MyDate {
 private:
   uint8_t day;
   uint8_t month;
