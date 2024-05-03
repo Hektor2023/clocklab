@@ -2,26 +2,24 @@
 
 DSTSunriseSunsetTimeHandler::DSTSunriseSunsetTimeHandler(
     uint16_t standardTimeOffset)
-    : standardTimeOffset(standardTimeOffset), dSTStartTimestamp(0),
-      dSTEndTimestamp(0), localTimestamp(0), sunriseTime(), sunsetTime() {
-  MyTime time(1, 0, 0); // 1:0:0  change time on 1st am universal time
-
-  dSTStartTimestamp.setTime(time);
-  dSTEndTimestamp.setTime(time);
+    : standardTimeOffset(standardTimeOffset), 
+      localTimestamp(0)
+{
 }
 
-CoordinatesHandler &DSTSunriseSunsetTimeHandler::getCoordinatesHander(void) {
-  return coordinatesHandler;
-}
+void DSTSunriseSunsetTimeHandler::update(TimeData &timeData) 
+{
+  static const MyTime time(1, 0, 0); // 1:0:0  change time on 1st am universal time
 
-void DSTSunriseSunsetTimeHandler::update(TimeData &timeData) {
+  timeData.dSTStartTimestamp.setTime(time);
+  timeData.dSTEndTimestamp.setTime(time);
+
   Timestamp UTCtimestamp = timeData.UTCTimestamp;
+  MyDate date = UTCtimestamp.getDate();
 
   static uint16_t lastYear = 0;
-  // compare timestamps
-
-  MyDate date = UTCtimestamp.getDate();
-  if (date.getYear() != lastYear) {
+  if (date.getYear() != lastYear) 
+  {
     lastYear = date.getYear();
     calculateDST(timeData.dSTStartTimestamp, timeData.dSTEndTimestamp, date);
   }
@@ -29,23 +27,24 @@ void DSTSunriseSunsetTimeHandler::update(TimeData &timeData) {
   static bool needUpdateSunriseSunset = false;
   static uint8_t lastday = 0;
   if ((date.getDay() != lastday) &&
-      ((coordinatesHandler.getCoordinates().latitude != 0) &&
-       (coordinatesHandler.getCoordinates().longitude != 0))) {
+      ((timeData.coordinates.latitude != 0) &&
+       (timeData.coordinates.longitude != 0))) 
+  {
     needUpdateSunriseSunset = true;
   }
 
-  Serial.printf("\n needUpdateSunriseSunset= %d\n",
-                (int)needUpdateSunriseSunset);
-  if (needUpdateSunriseSunset && coordinatesHandler.lockData()) {
+  Serial.printf("\n needUpdateSunrise= %d\n", (int)needUpdateSunriseSunset);
+
+  if (needUpdateSunriseSunset) 
+  {
     lastday = date.getDay();
     calculateSunriseSunset(timeData.dSTStartTimestamp, timeData.dSTEndTimestamp,
                            timeData.sunriseTime, timeData.sunsetTime,
-                           coordinatesHandler.getCoordinates(), UTCtimestamp);
+                           timeData.coordinates, UTCtimestamp);
 
     needUpdateSunriseSunset = false;
 
-    Serial.printf("\n SunriseSunset= updatedd\n");
-    coordinatesHandler.releaseData();
+    Serial.printf("\n SunriseSunset= updatedd\n");  
   }
   char dateStrBuffer[MyDate::getStringBufferSize()];
   MyDate tmpDate;
@@ -54,14 +53,15 @@ void DSTSunriseSunsetTimeHandler::update(TimeData &timeData) {
   tmpDate = timeData.dSTEndTimestamp.getDate();
   Serial.printf("-  New DSTend: %s\n", tmpDate.toString(dateStrBuffer));
 
-  uint16_t currentTimeOffset = getOffset(UTCtimestamp);
+  uint16_t currentTimeOffset = getOffset( timeData.dSTStartTimestamp, timeData.dSTEndTimestamp, UTCtimestamp);
   Serial.printf("\n currentTimeOffset= %d\n", currentTimeOffset);
   timeData.localTimestamp = UTCtimestamp + currentTimeOffset;
 }
 
 void DSTSunriseSunsetTimeHandler::calculateDST(
     Timestamp &resultDSTStartTimestamp, Timestamp &resultDSTEndTimestamp,
-    MyDate &date) {
+    MyDate &date) 
+{
   MyDate dSTdateStart = MyDate::getDSTStart(date.getYear());
   MyDate dSTdateEnd = MyDate::getDSTEnd(date.getYear());
 
@@ -76,8 +76,8 @@ void DSTSunriseSunsetTimeHandler::calculateDST(
 void DSTSunriseSunsetTimeHandler::calculateSunriseSunset(
     const Timestamp &dSTStart, const Timestamp &dSTEnd, MyTime &sunrise,
     MyTime &sunset, const Coordinates_t &coordinates,
-    const Timestamp &timestamp) {
-
+    const Timestamp &timestamp) 
+{
   MyDate date = timestamp.getDate();
   uint8_t day = date.getDay();
   uint8_t month = date.getMonth();
@@ -130,10 +130,12 @@ void DSTSunriseSunsetTimeHandler::calculateSunriseSunset(
   sunset.setSecond((uint8_t)modd(Q17, 3600) / 10);
 }
 
-uint16_t DSTSunriseSunsetTimeHandler::getOffset(Timestamp &current) {
+uint16_t DSTSunriseSunsetTimeHandler::getOffset(Timestamp& dSTStart,Timestamp& dSTEnd, Timestamp &current) 
+{
   uint16_t currentTimeOffset = standardTimeOffset - SECS_PER_HOUR;
 
-  if ((dSTStartTimestamp <= current) && (current < dSTEndTimestamp)) {
+  if ((dSTStart <= current) && (current < dSTEnd)) 
+  {
     // UTC+2 from Marz to October
     currentTimeOffset = standardTimeOffset;
   }

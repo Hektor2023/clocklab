@@ -22,6 +22,7 @@
  */
 #include "Source/RTCSystemTimeHandler.h"
 
+static constexpr uint16_t Year2K = 2000;
 // uRTCLib rtc;
 // volatile  uint8_t state = 1;
 
@@ -70,7 +71,7 @@ void RTCSystemTimeHandler::setTimestamp(const Timestamp &newTimestamp) {
 
   rtc.set(newTime.getSecond(), newTime.getMinute(), newTime.getHour(),
           newDate.getDayOfWeek(), newDate.getDay(), newDate.getMonth(),
-          newDate.getYear() - 2000);
+          newDate.getYear() - Year2K);
   systemTimestamp.setEpochTime(newTimestamp.getEpochTime());
 }
 
@@ -87,7 +88,7 @@ void RTCSystemTimeHandler::forceUpdateTime(void) {
   MyDate date;
   date.setDay(rtc.day());
   date.setMonth(rtc.month());
-  date.setYear(2000 + rtc.year());
+  date.setYear(Year2K + rtc.year());
   systemTimestamp.setDate(date);
 }
 
