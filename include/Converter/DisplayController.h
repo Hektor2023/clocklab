@@ -34,7 +34,7 @@ public:
   ~DisplayController(void) = default;
 
   void setDisplayMode(const DisplayMode mode);
-  void update(const TimeData &data);
+  void update(TimeData &data);
 
   const DisplayCommand &getCommand(void);
 };

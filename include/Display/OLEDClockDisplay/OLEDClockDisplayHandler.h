@@ -21,7 +21,7 @@ public:
    ~OLEDClockDisplayHandler(void) = default;
 
    void init(void);
-   void update(const TimeData &data);
+//   void update(const TimeData &data);
 };
 
 //===================================================================================

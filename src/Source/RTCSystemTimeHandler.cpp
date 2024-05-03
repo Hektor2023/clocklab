@@ -32,11 +32,10 @@ void ICACHE_RAM_ATTR isr_extern_rtc()
 }
 */
 //===================================================================================
-RTCSystemTimeHandler::RTCSystemTimeHandler(TimeHandler *ptr2timeHandler,
-                                           const uint8_t sda_pin,
+RTCSystemTimeHandler::RTCSystemTimeHandler(const uint8_t sda_pin,
                                            const uint8_t scl_pin,
                                            const uint8_t irqIn_pin)
-    : TimeHandler(ptr2timeHandler), systemTimestamp(0L) {
+    : systemTimestamp(0L) {
   // changed orginal code because of mistake with pin assigment for I2C in
   // ESP8266
   URTCLIB_WIRE.begin(sda_pin, scl_pin); // 4,5 D2 and D1 on ESP8266
@@ -57,11 +56,6 @@ void RTCSystemTimeHandler::init(void) {
   rtc.set(0, 0, 0, 0, 5, 6, 0);
   //  RTCLib::set(byte second, byte minute, byte hour, byte dayOfWeek, byte
   //  dayOfMonth, byte month, byte year)
-}
-
-//===================================================================================
-const char *RTCSystemTimeHandler::getClassName(void) {
-  return ("RTCSystemTimeHandler");
 }
 
 //===================================================================================
@@ -95,12 +89,7 @@ void RTCSystemTimeHandler::forceUpdateTime(void) {
   date.setMonth(rtc.month());
   date.setYear(2000 + rtc.year());
   systemTimestamp.setDate(date);
-
-  baseUpdateTime(systemTimestamp);
 }
-
-//===================================================================================
-void RTCSystemTimeHandler::updateTime(Timestamp &timestamp) {}
 
 //===================================================================================
 bool RTCSystemTimeHandler::updateTime(void) {

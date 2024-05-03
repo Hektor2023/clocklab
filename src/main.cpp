@@ -7,10 +7,11 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 
+#include "Converter/DisplayController.h"
+#include "Converter/ConverterTimestampAdapter.h"
+
 #include "Other/AdjustmentAdvisor.h"
 #include "Other/Controller.h"
-#include "Other/CoordinatesHandler.h"
-#include "Other/DisplayController.h"
 
 #include "Other/Tools.h"
 
@@ -27,6 +28,7 @@
 
 #include "Converter/DSTSunriseSunsetTimeHandler.h"
 #include "Converter/SplitterTimeHandler.h"
+#include "Other/CoordinatesHandler.h"
 
 #include "PinConfig.h"
 #include "WifiCred.h"
@@ -45,15 +47,22 @@ static TimeData timeData;
 // double  g_Latitude{  52.4465078};  // 52.2507628, 020.4409067
 // double  g_Longitude{ 20.6925219};  //
 
-MyTime g_SunriseTime, g_SunsetTime;
+// MyTime g_SunriseTime, g_SunsetTime;
 
-Timestamp g_LocalTimestamp;
-SplitterTimeHandler g_SplitterHandler(nullptr, g_LocalTimestamp);
-DSTSunriseSunsetTimeHandler g_TimeZoneDSTHandler(&g_SplitterHandler,
-                                                 gc_GMT_Plus_2h, g_SunriseTime,
-                                                 g_SunsetTime);
-RTCSystemTimeHandler g_RTCSystemTimeHandler(&g_TimeZoneDSTHandler, gc_sda_pin,
-                                            gc_scl_pin, gc_irqIn_pin);
+//Timestamp g_LocalTimestamp;
+// SplitterTimeHandler g_SplitterHandler(nullptr, g_LocalTimestamp);
+// DSTSunriseSunsetTimeHandler g_TimeZoneDSTHandler(&g_SplitterHandler,
+//                                                 gc_GMT_Plus_2h,
+//                                                 g_SunriseTime, g_SunsetTime);
+// RTCSystemTimeHandler g_RTCSystemTimeHandler(&g_TimeZoneDSTHandler,
+// gc_sda_pin,
+//                                            gc_scl_pin, gc_irqIn_pin);
+
+static RTCSystemTimeHandler g_RTCSystemTimeHandler(gc_sda_pin, gc_scl_pin, gc_irqIn_pin);
+
+static ConverterTimestampAdapter timestampAdapter;
+static DSTSunriseSunsetTimeHandler dstHandlder(gc_GMT_Plus_2h);
+static DisplayController displController;
 
 static xQueueHandle g_queueSourceTime = xQueueCreate(3, sizeof(MessageTime_t));
 static xQueueHandle g_queueDisplay = xQueueCreate(3, sizeof(MessageTime_t));
@@ -71,66 +80,89 @@ void consoleOutTask(void *pvParameter) {
   printTick();
   Serial.print("\nCONSOLE_OUT_task:  start\n");
 
-  for (;;) {
+  for (;;) 
+  {
     vTaskDelay(30 / portTICK_RATE_MS);
-    if (timeData.lockData()) {
-      if (xQueueReceive(*ptr2queueSource, (void *)&rcvMsg, 0) == pdTRUE) {
-        displayTimestamp.setEpochTime(rcvMsg.epoch);
+//    if (timeData.lockData()) {
+      if (xQueueReceive(*ptr2queueSource, (void *)&rcvMsg, 0) == pdTRUE)
+      {
+        //        displayTimestamp.setEpochTime(rcvMsg.epoch);
 
-        timeData.localTime = displayTimestamp.getTime();
-        timeData.localDate = displayTimestamp.getDate();
+        //        timeData.localTime = displayTimestamp.getTime();
+        //        timeData.localDate = displayTimestamp.getDate();
       }
 
-      timeData.releaseData();
-    }
+//      timeData.unlockData();
+//    }
   }
 
   vTaskDelete(nullptr);
 }
 
 //=============================================================================================================
-void rtcReadTask(void *pvParameter) {
-  QueueHandle_t *ptr2queueSource =
-      reinterpret_cast<QueueHandle_t *>(pvParameter);
+void rtcReadTask(void *pvParameter) { // set new time for Displays via DisplayController
+//  QueueHandle_t *ptr2queueSource = reinterpret_cast<QueueHandle_t *>(pvParameter);
+
   Timestamp rtcTimestamp;
-  MessageTime_t rtcReadMsg;
+//  MessageTime_t rtcReadMsg;
 
   printTick();
   Serial.print("\nRTC_READ_task:  start\n");
 
   g_RTCSystemTimeHandler.init();
 
-  for (;;) {
+  for (;;) 
+  {
     vTaskDelay(10 / portTICK_RATE_MS);
 
-    if (xSemaphoreTake(g_xSemaphoreRtc, 0) == pdTRUE) {
+    if (xSemaphoreTake(g_xSemaphoreRtc, 0) == pdTRUE) 
+    {
       bool timeUpdated = g_RTCSystemTimeHandler.updateTime();
 
-      // g_LocalTimestamp updated by g_SystemTimeHandler
-      if (timeUpdated) {
-        Serial.print("RTC: UPDATE\t");
+      if (timeUpdated) 
+      {
+        Serial.print("\nRTC: UPDATE\t");
 
         digitalWrite(gc_PULS_pin, gc_PULS_pin ? LOW : HIGH);
 
-        // set time for Display
-        rtcReadMsg.epoch = g_LocalTimestamp.getEpochTime();
-        while (xQueueSend(*ptr2queueSource, (void *)&rtcReadMsg, 0) != pdTRUE) {
-          Serial.println("ERROR: Could not put RTC read time to queue.");
+        rtcTimestamp = g_RTCSystemTimeHandler.getTimestamp(); 
+        displayTimestamp("RTC2", rtcTimestamp); 
+        
+        timestampAdapter.setTimestamp( rtcTimestamp);
+        if( timeData.lockData())
+        {
+          timestampAdapter.update( timeData); // sends Timestamp to timedata
+          dstHandlder.update( timeData); // modify DSTTimes, sunrise, sunset 
+          displController.update( timeData); // sends selected timedata to displays via cmd
+
+          DisplayCommand cmd= displController.getCommand();
+          auto msg = cmd.getMessage();
+          Serial.printf("\nDisplay Cmd: %s\n",msg.c_str());
+
+          timeData.unlockData();
         }
+
+        // set time for Display
+//        rtcReadMsg.epoch = g_LocalTimestamp.getEpochTime();
+//        while (xQueueSend(*ptr2queueSource, (void *)&rtcReadMsg, 0) != pdTRUE) 
+//        {
+//          Serial.println("ERROR: Could not put RTC read time to queue.");
+//        }
+
       }
 
       xSemaphoreGive(g_xSemaphoreRtc);
     }
+
   }
 
   vTaskDelete(nullptr);
 }
 
 //=============================================================================================================
-void rtcWriteTask(void *pvParameter) {
-  QueueHandle_t *ptr2queueSource =
-      reinterpret_cast<QueueHandle_t *>(pvParameter);
-  Timestamp rtcTimestamp;
+void rtcWriteTask(void *pvParameter) { // sets new RTC time 
+  QueueHandle_t *ptr2queueSource = reinterpret_cast<QueueHandle_t *>(pvParameter);
+
   MessageTime_t rtcWriteMsg;
   MessageTime_t bestSrcMsg;
 
@@ -139,31 +171,40 @@ void rtcWriteTask(void *pvParameter) {
 
   for (;;) {
     vTaskDelay(10 / portTICK_RATE_MS);
-    g_advisor.setSelectedSource(src_type_t::NTP);
+    g_advisor.setSelectedSource(src_type_t::GPS);
 
-    if (xQueueReceive(*ptr2queueSource, (void *)&rtcWriteMsg, 0) == pdTRUE) {
-      if (g_advisor.routeSource(bestSrcMsg, rtcWriteMsg)) {
-        if ((xSemaphoreTake(g_xSemaphoreRtc, 0) == pdTRUE)) {
+    if (xQueueReceive(*ptr2queueSource, (void *)&rtcWriteMsg, 0) == pdTRUE) 
+    {
+      if (g_advisor.routeSource(bestSrcMsg, rtcWriteMsg)) 
+      {
+        if ((xSemaphoreTake(g_xSemaphoreRtc, 0) == pdTRUE)) 
+        {
+          Timestamp rtcTimestamp;
           rtcTimestamp.setEpochTime(bestSrcMsg.epoch);
+
           g_RTCSystemTimeHandler.setTimestamp(rtcTimestamp);
           {
             Timestamp timestamp(bestSrcMsg.epoch);
             displayTimestamp("RTC", timestamp);
           }
-          if (bestSrcMsg.type == src_type_t::GPS) {
-            CoordinatesHandler &handler =
-                g_TimeZoneDSTHandler.getCoordinatesHander();
-            if (handler.lockData()) {
-              handler.setCoordinates(
-                  bestSrcMsg.coordinate); // TODO: move to RTC SystemTimeHandler
-              handler.releaseData();
+
+          if (bestSrcMsg.type == src_type_t::GPS) 
+          {
+            if (timeData.lockData()) 
+            {
+              timeData.coordinates = bestSrcMsg.coordinate;
+              timeData.unlockData();
             }
+
           }
 
           xSemaphoreGive(g_xSemaphoreRtc);
         }
+
       }
+
     }
+
   }
 
   vTaskDelete(nullptr);
@@ -171,8 +212,7 @@ void rtcWriteTask(void *pvParameter) {
 
 //=============================================================================================================
 void setup() {
-  static QueueHandle_t *ptr2src_queue =
-      static_cast<QueueHandle_t *>(&g_queueSourceTime);
+  static QueueHandle_t *ptr2src_queue = static_cast<QueueHandle_t *>(&g_queueSourceTime);
   static ntpTaskParams_t ntpParams{SSID, PASSWD, ptr2src_queue};
 
   g_xSemaphoreRtc = xSemaphoreCreateMutex();
@@ -198,9 +238,10 @@ void setup() {
               nullptr); // 3048
   xTaskCreate(&consoleDisplayTask, "console_display_task", 2048, &timeData, 5,
               nullptr);
-  xTaskCreate(&LedDisplayTask, "LED_display_task", 2048, &timeData, 5, nullptr);
-  xTaskCreate(&OLedDisplayTask, "OLED_display_task", 3048, &timeData, 5,
-              nullptr);
+  // xTaskCreate(&LedDisplayTask, "LED_display_task", 2048, &timeData, 5,
+  // nullptr);
+  // xTaskCreate(&OLedDisplayTask, "OLED_display_task", 3048,
+  // &timeData, 5, nullptr);
 }
 
 //=============================================================================================================

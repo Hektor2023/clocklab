@@ -1,4 +1,6 @@
-#include "Other/DisplayController.h"
+#include "Converter/DisplayController.h"
+#include "TimeType/TimeData.h"
+#include "TimeType/Timestamp.h"
 
 DisplayCommand::DisplayCommand(void)
     : mode{DisplayMode::eLocalTime}, msg("00:00:00") {}
@@ -24,25 +26,23 @@ void DisplayController::setDisplayMode(const DisplayMode mode) {
 
 const DisplayCommand &DisplayController::getCommand(void) { return cmd; }
 
-void DisplayController::update(const TimeData &data) {
+void DisplayController::update(TimeData &data) {
   cmd.setCmdMode(displayMode);
 
   switch (displayMode) {
   case DisplayMode::eLocalTime: {
-    cmd.setMessage("01:02:03");
-
-    MyTime localTime = data.localTime;
-    char timeStrBuffer[MyTime::getStringBufferSize()];
-    cmd.setMessage(localTime.toString(timeStrBuffer));
+//    cmd.setMessage("01:02:03|0");
+      MyTime localTime = data.localTimestamp.getTime();
+      char timeStrBuffer[MyTime::getStringBufferSize()];
+      cmd.setMessage(localTime.toString(timeStrBuffer));
     break;
   }
 
   case DisplayMode::eDate: {
-    cmd.setMessage("04/05/06");
-
-    MyDate localDate = data.localDate;
-    char dateStrBuffer[MyDate::getStringBufferSize()];
-    cmd.setMessage(localDate.toString(dateStrBuffer));
+//    cmd.setMessage("04/05/06");
+      MyDate localDate = data.localTimestamp.getDate();
+      char dateStrBuffer[MyDate::getStringBufferSize()];
+      cmd.setMessage(localDate.toString(dateStrBuffer));
     break;
   }
 

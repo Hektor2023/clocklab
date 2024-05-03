@@ -13,7 +13,7 @@ bool TimeData::lockData(void)
 }
 
 //===================================================================================
-void TimeData::releaseData(void)
+void TimeData::unlockData(void)
 {
   xSemaphoreGive(SemaphoreTimeData);
 }

@@ -11,6 +11,7 @@ public:
   LimitedSizeString(void);
   LimitedSizeString(const char *cstr);
 
+  uint8_t getMaxLen(void);
   const char *c_str(void);
   bool operator==(LimitedSizeString<maxSize> &rhs);
   bool operator!=(LimitedSizeString<maxSize> &rhs);
@@ -44,6 +45,10 @@ LimitedSizeString<maxSize>::operator=(const LimitedSizeString<maxSize> &other) {
 
   strncpy(array.data(), other.array.data(), maxSize);
   return *this;
+}
+
+template <uint8_t maxSize> uint8_t LimitedSizeString<maxSize>::getMaxLen(void) {
+  return maxSize - 1;
 }
 
 template <uint8_t maxSize>

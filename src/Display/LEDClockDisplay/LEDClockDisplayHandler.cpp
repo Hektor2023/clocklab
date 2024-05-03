@@ -1,9 +1,10 @@
 #include "Display/LEDClockDisplay/LEDClockDisplayHandler.h"
 
 //===================================================================================
-LEDClockDisplayHandler::LEDClockDisplayHandler(const int STB_pin, const int CLK_pin, const int DIO_pin)
-    : tm(STB_pin, CLK_pin, DIO_pin, true)
-{
+LEDClockDisplayHandler::LEDClockDisplayHandler(const int STB_pin,
+                                               const int CLK_pin,
+                                               const int DIO_pin)
+    : tm(STB_pin, CLK_pin, DIO_pin, true) {
   pinMode(STB_pin, OUTPUT);
   pinMode(CLK_pin, OUTPUT);
   pinMode(DIO_pin, OUTPUT);
@@ -15,18 +16,15 @@ LEDClockDisplayHandler::LEDClockDisplayHandler(const int STB_pin, const int CLK_
 };
 
 //===================================================================================
-uint8_t LEDClockDisplayHandler::buttonsRead(void)
-{
+uint8_t LEDClockDisplayHandler::buttonsRead(void) {
   static uint8_t lastKeys = -1;
   uint8_t keys;
 
-  if (xSemaphoreTake(xSemaphoreTM1638plus, (TickType_t)0) == pdTRUE)
-  {
+  if (xSemaphoreTake(xSemaphoreTM1638plus, (TickType_t)0) == pdTRUE) {
     keys = tm.readButtons();
     xSemaphoreGive(xSemaphoreTM1638plus);
 
-    if (keys != lastKeys)
-    {
+    if (keys != lastKeys) {
       lastKeys = keys;
       return (keys);
     }
@@ -35,6 +33,7 @@ uint8_t LEDClockDisplayHandler::buttonsRead(void)
   return (0);
 }
 
+/*
 //===================================================================================
 void LEDClockDisplayHandler::update(const TimeData &data)
 {
@@ -58,5 +57,5 @@ void LEDClockDisplayHandler::update(const TimeData &data)
     xSemaphoreGive(xSemaphoreTM1638plus);
   }
 }
-
+*/
 //===================================================================================
