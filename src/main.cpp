@@ -153,7 +153,7 @@ void rtcWriteTask(void *pvParameter) { // sets new RTC time
 
   for (;;) {
     vTaskDelay(10 / portTICK_RATE_MS);
-    g_advisor.setSelectedSource(src_type_t::GPS);
+    g_advisor.setSelectedSource(src_type_t::NTP);
 
     if (xQueueReceive(*ptr2queueSource, (void *)&rtcWriteMsg, 0) == pdTRUE) 
     {

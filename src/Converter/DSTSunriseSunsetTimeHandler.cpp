@@ -26,14 +26,10 @@ void DSTSunriseSunsetTimeHandler::update(TimeData &timeData)
 
   static bool needUpdateSunriseSunset = false;
   static uint8_t lastday = 0;
-  if ((date.getDay() != lastday) &&
-      ((timeData.coordinates.latitude != 0) &&
-       (timeData.coordinates.longitude != 0))) 
+  if ((date.getDay() != lastday) &&((timeData.coordinates.latitude != 0) &&(timeData.coordinates.longitude != 0))) 
   {
     needUpdateSunriseSunset = true;
   }
-
-  Serial.printf("\n needUpdateSunrise= %d\n", (int)needUpdateSunriseSunset);
 
   if (needUpdateSunriseSunset) 
   {
@@ -43,19 +39,11 @@ void DSTSunriseSunsetTimeHandler::update(TimeData &timeData)
                            timeData.coordinates, UTCtimestamp);
 
     needUpdateSunriseSunset = false;
-
-    Serial.printf("\n SunriseSunset= updatedd\n");  
+//    Serial.printf("\n SunriseSunset= updated\n");  
   }
-  char dateStrBuffer[MyDate::getStringBufferSize()];
-  MyDate tmpDate;
-  tmpDate = timeData.dSTStartTimestamp.getDate();
-  Serial.printf("\nNew DSTstart:  %s ", tmpDate.toString(dateStrBuffer));
-  tmpDate = timeData.dSTEndTimestamp.getDate();
-  Serial.printf("-  New DSTend: %s\n", tmpDate.toString(dateStrBuffer));
-
   uint16_t currentTimeOffset = getOffset( timeData.dSTStartTimestamp, timeData.dSTEndTimestamp, UTCtimestamp);
-  Serial.printf("\n currentTimeOffset= %d\n", currentTimeOffset);
   timeData.localTimestamp = UTCtimestamp + currentTimeOffset;
+//  Serial.printf("\n currentTimeOffset= %d\n", currentTimeOffset);
 }
 
 void DSTSunriseSunsetTimeHandler::calculateDST(
@@ -86,8 +74,7 @@ void DSTSunriseSunsetTimeHandler::calculateSunriseSunset(
   double E6 = (month <= 2) ? (month + 12) : month;
   double E7 = (month <= 2) ? (year - 1) : year;
   double L6 = 2 - int(year / 100) + int(year / 400);
-  double L7 =
-      int(365.25 * (E7 + 4716)) + int(30.6001 * (E6 + 1)) + day + L6 - 1524.5;
+  double L7 = int(365.25 * (E7 + 4716)) + int(30.6001 * (E6 + 1)) + day + L6 - 1524.5;
   double M3 = (L7 - 2451545) / 36525;
   double M4 = 280.46646 + 36000.76983 * M3 + 0.0003032 * M3 * M3;
   double M5 = 357.52911 + 35999.05029 * M3 - 0.0001537 * M3 * M3;
@@ -115,7 +102,7 @@ void DSTSunriseSunsetTimeHandler::calculateSunriseSunset(
   double P15 = (acos(N16 / O16) * 57.29577951) / 15;
 
   // Z-1 in Summer, Z in Winter
-  constexpr uint8_t oneHour = 1;
+  static constexpr uint8_t oneHour = 1;
 
   Z = (const_cast<Timestamp &>(dSTStart) <= timestamp) && ((const_cast<Timestamp &>(dSTEnd) > timestamp))? Z + oneHour: Z;
   double P17 = Z - P15; //- godzina wschodu Słońca
