@@ -40,6 +40,9 @@ public:
   ~RTCSystemTimeHandler(void) = default;
 
   void init(void);
+  void refresh(void);
+
+  uint8_t getSeconds( void);
 
   Timestamp &getTimestamp(void);
   void setTimestamp(const Timestamp &newTimestamp);

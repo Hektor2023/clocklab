@@ -2,6 +2,7 @@
 
 #include "Source/NTP/NTPSourceTime.h"
 
+//===================================================================================
 extern void ntpTask(void *pvParameter);
 
 typedef struct
@@ -10,3 +11,5 @@ typedef struct
     const char *passwd;
     QueueHandle_t *srcQueue;
 } ntpTaskParams_t;
+
+//===================================================================================

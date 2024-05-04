@@ -199,7 +199,7 @@ void Timestamp::setTime(const MyTime &time) {
 //===================================================================================
 size_t Timestamp::getStringBufferSize(void) {
   return (strlen(MyDate::getStringFormat()) + strlen(" - ") +
-          strlen(MyTime::getStringFormat()));
+          strlen(MyTime::getStringFormat()) + strlen("DoW: % d"));
 }
 
 //===================================================================================
@@ -209,8 +209,8 @@ char *Timestamp::toString(char *ptr) {
 
   char dateStrBuffer[MyDate::getStringBufferSize()];
   char timeStrBuffer[MyTime::getStringBufferSize()];
-  sprintf(ptr, "%s -  %s", date.toString(dateStrBuffer),
-          time.toString(timeStrBuffer));
+  sprintf(ptr, "%s - %s DoW:%d", date.toString(dateStrBuffer),
+          time.toString(timeStrBuffer), date.getDayOfWeek());
   return (ptr);
 }
 

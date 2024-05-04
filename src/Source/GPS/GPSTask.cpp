@@ -39,7 +39,6 @@ void gpsTask(void *pvParameter)
         Serial.printf("GPS: encoded\n");
 
         Timestamp diffTime = GPSHandler.getTimestamp() - lastGpsTime;
-        displayTimestamp("diffTime ", diffTime);
 
         uint32_t epochMillis = (uint32_t)GPSHandler.getMilliSecond();
         vTaskDelay((1000 - epochMillis) / portTICK_RATE_MS); // set next entire second

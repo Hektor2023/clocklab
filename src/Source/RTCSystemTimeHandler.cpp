@@ -76,36 +76,42 @@ void RTCSystemTimeHandler::setTimestamp(const Timestamp &newTimestamp) {
 }
 
 //===================================================================================
-void RTCSystemTimeHandler::forceUpdateTime(void) {
-  rtc.refresh();
-
-  MyTime time;
-  time.setSecond(rtc.second());
-  time.setMinute(rtc.minute());
-  time.setHour(rtc.hour());
-  systemTimestamp.setTime(time);
-
-  MyDate date;
-  date.setDay(rtc.day());
-  date.setMonth(rtc.month());
-  date.setYear(Year2K + rtc.year());
-  systemTimestamp.setDate(date);
-}
+uint8_t RTCSystemTimeHandler::getSeconds(void) { return rtc.second(); }
 
 //===================================================================================
-bool RTCSystemTimeHandler::updateTime(void) {
-  static uint8_t lastSec2 = 0;
+void RTCSystemTimeHandler::refresh(void) { rtc.refresh(); }
 
-  rtc.refresh();
-  if (lastSec2 != rtc.second()) {
-    //    state=0; // for irq handling
+//===================================================================================
+void RTCSystemTimeHandler::forceUpdateTime(void) {
+    refresh();
 
-    lastSec2 = rtc.second();
-    forceUpdateTime();
-    return (true);
+    MyTime time;
+    time.setSecond(rtc.second());
+    time.setMinute(rtc.minute());
+    time.setHour(rtc.hour());
+    systemTimestamp.setTime(time);
+
+    MyDate date;
+    date.setDay(rtc.day());
+    date.setMonth(rtc.month());
+    date.setYear(Year2K + rtc.year());
+    systemTimestamp.setDate(date);
   }
 
-  return (false);
-}
+  //===================================================================================
+  bool RTCSystemTimeHandler::updateTime(void) {
+    static uint8_t lastSec2 = 0;
 
-//===================================================================================
+    refresh();
+    if (lastSec2 != rtc.second()) {
+      //    state=0; // for irq handling
+
+      lastSec2 = rtc.second();
+      forceUpdateTime();
+      return (true);
+    }
+
+    return (false);
+  }
+
+  //===================================================================================
