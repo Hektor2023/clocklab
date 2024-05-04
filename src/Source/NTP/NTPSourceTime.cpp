@@ -1,11 +1,13 @@
 #include "Source/NTP/NTPSourceTime.h"
 
+//===================================================================================
 NTPSourceTime::NTPSourceTime(t_credentials &credentials)
     : timeClient(udp), credentials(credentials)
 {
   WiFi.mode(WIFI_STA);
 };
 
+//===================================================================================
 bool NTPSourceTime::update(void)
 {
   Serial.printf("Connecting...");
@@ -43,7 +45,10 @@ bool NTPSourceTime::update(void)
   return true;
 }
 
+//===================================================================================
 Timestamp &NTPSourceTime::getTimestamp(void)
 {
   return timestamp;
 }
+
+//===================================================================================

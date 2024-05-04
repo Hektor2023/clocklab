@@ -5,8 +5,7 @@
 #include <string>
 
 
-#include "TimeType/Timestamp.h"
-
+#include "Converter/DisplayController.h"
 #include "TimeType/TimeData.h"
 
 #include "freertos/FreeRTOS.h"
@@ -24,9 +23,8 @@ public:
                          const int DIO_pin);
   ~LEDClockDisplayHandler(void) = default;
 
+  void updateCommand(DisplayCommand &cmd);
   uint8_t buttonsRead(void);
-
-  //   void update(const TimeData &data);
 };
 
 //===================================================================================

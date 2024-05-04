@@ -1,5 +1,6 @@
 #include "Converter/DSTSunriseSunsetTimeHandler.h"
 
+//===================================================================================
 DSTSunriseSunsetTimeHandler::DSTSunriseSunsetTimeHandler(
     uint16_t standardTimeOffset)
     : standardTimeOffset(standardTimeOffset), 
@@ -7,6 +8,7 @@ DSTSunriseSunsetTimeHandler::DSTSunriseSunsetTimeHandler(
 {
 }
 
+//===================================================================================
 void DSTSunriseSunsetTimeHandler::update(TimeData &timeData) 
 {
   static const MyTime time(1, 0, 0); // 1:0:0  change time on 1st am universal time
@@ -46,6 +48,7 @@ void DSTSunriseSunsetTimeHandler::update(TimeData &timeData)
 //  Serial.printf("\n currentTimeOffset= %d\n", currentTimeOffset);
 }
 
+//===================================================================================
 void DSTSunriseSunsetTimeHandler::calculateDST(
     Timestamp &resultDSTStartTimestamp, Timestamp &resultDSTEndTimestamp,
     MyDate &date) 
@@ -61,6 +64,7 @@ void DSTSunriseSunsetTimeHandler::calculateDST(
   Serial.printf("-  New DSTend: %s\n", dSTdateEnd.toString(dateStrBuffer));
 }
 
+//===================================================================================
 void DSTSunriseSunsetTimeHandler::calculateSunriseSunset(
     const Timestamp &dSTStart, const Timestamp &dSTEnd, MyTime &sunrise,
     MyTime &sunset, const Coordinates_t &coordinates,
@@ -117,6 +121,7 @@ void DSTSunriseSunsetTimeHandler::calculateSunriseSunset(
   sunset.setSecond((uint8_t)modd(Q17, 3600) / 10);
 }
 
+//===================================================================================
 uint16_t DSTSunriseSunsetTimeHandler::getOffset(Timestamp& dSTStart,Timestamp& dSTEnd, Timestamp &current) 
 {
   uint16_t currentTimeOffset = standardTimeOffset - SECS_PER_HOUR;
@@ -130,6 +135,9 @@ uint16_t DSTSunriseSunsetTimeHandler::getOffset(Timestamp& dSTStart,Timestamp& d
   return (currentTimeOffset);
 }
 
+//===================================================================================
 long DSTSunriseSunsetTimeHandler::modd(double a, double b) {
   return ((a - long(a)) * b);
 }
+
+//===================================================================================

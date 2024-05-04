@@ -5,7 +5,7 @@
 #include "Arduino.h"
 
 #include "TimeType/Timestamp.h"
-#include "TimeType/TimeData.h"
+#include "Converter/DisplayController.h"
 
 #include <u8g2lib.h>
 
@@ -21,7 +21,8 @@ public:
    ~OLEDClockDisplayHandler(void) = default;
 
    void init(void);
-//   void update(const TimeData &data);
+ 
+   void updateCommand(DisplayCommand &cmd);
 };
 
 //===================================================================================

@@ -2,6 +2,7 @@
 
 #include <Arduino.h>
 
+//===================================================================================
 typedef enum { NONE = 0, MANUAL, RTC, NTP, GPS } src_type_t;
 
 typedef uint32_t epoch_t;
@@ -16,3 +17,5 @@ typedef struct {
   epoch_t epoch;
   Coordinates_t coordinate;
 } MessageTime_t;
+
+//===================================================================================

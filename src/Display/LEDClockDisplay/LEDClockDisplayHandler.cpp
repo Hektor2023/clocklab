@@ -33,29 +33,55 @@ uint8_t LEDClockDisplayHandler::buttonsRead(void) {
   return (0);
 }
 
-/*
 //===================================================================================
-void LEDClockDisplayHandler::update(const TimeData &data)
-{
-  std::string s;
+void LEDClockDisplayHandler::updateCommand(DisplayCommand &cmd) {
+  /*
+    std::string s;
 
-  MyTime requiredTime = data.localTime;
-  MyDate requiredDate = data.localDate;
+    MyTime requiredTime = data.localTime;
+    MyDate requiredDate = data.localDate;
 
-  char timeStrBuffer[MyTime::getStringBufferSize()];
-  s = requiredTime.toString(timeStrBuffer);
-  std::replace(s.begin(), s.end(), ':', '-');
+    char timeStrBuffer[MyTime::getStringBufferSize()];
+    s = requiredTime.toString(timeStrBuffer);
+    std::replace(s.begin(), s.end(), ':', '-');
 
-  if (xSemaphoreTake(xSemaphoreTM1638plus, (TickType_t)0) == pdTRUE)
-  {
-    tm.displayText(s.c_str());
+    if (xSemaphoreTake(xSemaphoreTM1638plus, (TickType_t)0) == pdTRUE)
+    {
+      tm.displayText(s.c_str());
 
-    //  Serial.printf( "=>%s\n",s);
-    tm.setLEDs(0);
-    tm.setLED(requiredDate.getDayOfWeek(), 1);
-    //    tm.setLED( 7, adjustMode? 1:0);
-    xSemaphoreGive(xSemaphoreTM1638plus);
+      //  Serial.printf( "=>%s\n",s);
+      tm.setLEDs(0);
+      tm.setLED(requiredDate.getDayOfWeek(), 1);
+      //    tm.setLED( 7, adjustMode? 1:0);
+      xSemaphoreGive(xSemaphoreTM1638plus);
+    }
+  */
+
+  switch (cmd.getCmdMode()) {
+  case DisplayMode::eLocalTime: {
+/*  cmd.getMessage();
+    
+    MyTime requiredTime = data.localTime;
+    char timeStrBuffer[MyTime::getStringBufferSize()];
+    std::string s = requiredTime.toString(timeStrBuffer);
+    std::replace(s.begin(), s.end(), ':', '-');
+*/
+    break;
+  }
+  case DisplayMode::eUTCTime: {
+//    Serial.printf("[%s]\n", cmd.getMessage());
+    break;
+  }
+  case DisplayMode::eSunriseTime: {
+//    Serial.printf("|%s|\n", cmd.getMessage());
+    break;
+  }
+  case DisplayMode::eSunsetTime: {
+//    Serial.printf("|%s|\n", cmd.getMessage());
+    break;
+  }
+  default:;
   }
 }
-*/
+
 //===================================================================================

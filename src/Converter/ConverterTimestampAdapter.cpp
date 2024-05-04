@@ -1,5 +1,6 @@
 #include "Converter/ConverterTimestampAdapter.h"
 
+//===================================================================================
 void ConverterTimestampAdapter::update(TimeData &data) {
   data.UTCTimestamp = myTimestamp;
 }

@@ -3,7 +3,9 @@
 #include <Arduino.h>
 #include <array>
 
-template <uint8_t maxSize> class LimitedSizeString {
+//===================================================================================
+template <uint8_t maxSize> 
+class LimitedSizeString {
 private:
   std::array<char, maxSize> array;
 
@@ -20,10 +22,12 @@ public:
   operator=(const LimitedSizeString<maxSize> &other);
 };
 
+//===================================================================================
 template <uint8_t maxSize> LimitedSizeString<maxSize>::LimitedSizeString(void) {
   strncpy(array.data(), "", maxSize);
 }
 
+//===================================================================================
 template <uint8_t maxSize>
 LimitedSizeString<maxSize>::LimitedSizeString(const char *cstr) {
   assert(cstr != nullptr);
@@ -32,10 +36,12 @@ LimitedSizeString<maxSize>::LimitedSizeString(const char *cstr) {
   strncpy(array.data(), cstr, maxSize);
 }
 
+//===================================================================================
 template <uint8_t maxSize> const char *LimitedSizeString<maxSize>::c_str(void) {
   return array.data();
 }
 
+//===================================================================================
 template <uint8_t maxSize>
 LimitedSizeString<maxSize> &
 LimitedSizeString<maxSize>::operator=(const LimitedSizeString<maxSize> &other) {
@@ -47,16 +53,22 @@ LimitedSizeString<maxSize>::operator=(const LimitedSizeString<maxSize> &other) {
   return *this;
 }
 
-template <uint8_t maxSize> uint8_t LimitedSizeString<maxSize>::getMaxLen(void) {
+//===================================================================================
+template <uint8_t maxSize> 
+uint8_t LimitedSizeString<maxSize>::getMaxLen(void) {
   return maxSize - 1;
 }
 
+//===================================================================================
 template <uint8_t maxSize>
 bool LimitedSizeString<maxSize>::operator==(LimitedSizeString<maxSize> &rhs) {
   return strncmp(c_str(), rhs.c_str(), maxSize) == 0;
 }
 
+//===================================================================================
 template <uint8_t maxSize>
 bool LimitedSizeString<maxSize>::operator!=(LimitedSizeString<maxSize> &rhs) {
   return strncmp(c_str(), rhs.c_str(), maxSize) != 0;
 }
+
+//===================================================================================

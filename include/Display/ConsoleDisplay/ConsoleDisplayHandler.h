@@ -12,9 +12,7 @@ public:
   ConsoleDisplayHandler(void) = default;
   ~ConsoleDisplayHandler(void) = default;
 
-  //  void update(const TimeData &data);
   void updateCommand(DisplayCommand &cmd);
-  ;
 };
 
 //===================================================================================

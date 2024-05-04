@@ -4,6 +4,7 @@
 
 constexpr uint8_t DEFAULT_MENU_SIZE = 8;
 
+//===================================================================================
 typedef enum
 {
   eNOP,
@@ -18,6 +19,7 @@ typedef enum
   eState_9,
 } State_t;
 
+//===================================================================================
 class Menu;
 typedef struct MenuItem
 {
@@ -25,6 +27,7 @@ typedef struct MenuItem
   Menu *pSubmenu{nullptr};
 } MenuItem_t;
 
+//===================================================================================
 class Menu
 {
 private:
@@ -45,3 +48,5 @@ public:
   Menu *getSubmenu(void);
   Menu *getParentMenu(void);
 };
+
+//===================================================================================

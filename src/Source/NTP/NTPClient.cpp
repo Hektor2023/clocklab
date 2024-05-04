@@ -21,23 +21,27 @@
 
 #include "Source/NTP/NTPClient.h"
 
+//===================================================================================
 NTPClient::NTPClient(UDP &udp)
 {
   this->_udp = &udp;
 }
 
+//===================================================================================
 NTPClient::NTPClient(UDP &udp, long timeOffset)
 {
   this->_udp = &udp;
   this->_timeOffset = timeOffset;
 }
 
+//===================================================================================
 NTPClient::NTPClient(UDP &udp, const char *poolServerName)
 {
   this->_udp = &udp;
   this->_poolServerName = poolServerName;
 }
 
+//===================================================================================
 NTPClient::NTPClient(UDP &udp, IPAddress poolServerIP)
 {
   this->_udp = &udp;
@@ -45,6 +49,7 @@ NTPClient::NTPClient(UDP &udp, IPAddress poolServerIP)
   this->_poolServerName = NULL;
 }
 
+//===================================================================================
 NTPClient::NTPClient(UDP &udp, const char *poolServerName, long timeOffset)
 {
   this->_udp = &udp;
@@ -52,6 +57,7 @@ NTPClient::NTPClient(UDP &udp, const char *poolServerName, long timeOffset)
   this->_poolServerName = poolServerName;
 }
 
+//===================================================================================
 NTPClient::NTPClient(UDP &udp, IPAddress poolServerIP, long timeOffset)
 {
   this->_udp = &udp;
@@ -60,6 +66,7 @@ NTPClient::NTPClient(UDP &udp, IPAddress poolServerIP, long timeOffset)
   this->_poolServerName = NULL;
 }
 
+//===================================================================================
 NTPClient::NTPClient(UDP &udp, const char *poolServerName, long timeOffset, unsigned long updateInterval)
 {
   this->_udp = &udp;
@@ -68,6 +75,7 @@ NTPClient::NTPClient(UDP &udp, const char *poolServerName, long timeOffset, unsi
   this->_updateInterval = updateInterval;
 }
 
+//===================================================================================
 NTPClient::NTPClient(UDP &udp, IPAddress poolServerIP, long timeOffset, unsigned long updateInterval)
 {
   this->_udp = &udp;
@@ -77,11 +85,13 @@ NTPClient::NTPClient(UDP &udp, IPAddress poolServerIP, long timeOffset, unsigned
   this->_updateInterval = updateInterval;
 }
 
+//===================================================================================
 void NTPClient::begin()
 {
   this->begin(NTP_DEFAULT_LOCAL_PORT);
 }
 
+//===================================================================================
 void NTPClient::begin(unsigned int port)
 {
   this->_port = port;
@@ -91,6 +101,7 @@ void NTPClient::begin(unsigned int port)
   this->_udpSetup = true;
 }
 
+//===================================================================================
 bool NTPClient::forceUpdate()
 {
 #ifdef DEBUG_NTPClient
@@ -138,6 +149,7 @@ bool NTPClient::forceUpdate()
   return true; // return true after successful update
 }
 
+//===================================================================================
 bool NTPClient::update()
 {
   if ((millis() - this->_lastUpdate >= this->_updateInterval) || this->_lastUpdate == 0)
@@ -151,11 +163,13 @@ bool NTPClient::update()
   return false; // return false if update does not occur
 }
 
+//===================================================================================
 bool NTPClient::isTimeSet() const
 {
   return (this->_lastUpdate != 0); // returns true if the time has been set, else false
 }
 
+//===================================================================================
 unsigned long NTPClient::getEpochTime() const
 {
   return this->_timeOffset +                      // User offset
@@ -163,31 +177,37 @@ unsigned long NTPClient::getEpochTime() const
          ((millis() - this->_lastUpdate) / 1000); // Time since last update
 }
 
+//===================================================================================
 unsigned long NTPClient::getMillis() const
 {
   return this->currentMillis;
 }
 
+//===================================================================================
 int NTPClient::getDay() const
 {
   return (((this->getEpochTime() / 86400L) + 4) % 7); // 0 is Sunday
 }
 
+//===================================================================================
 int NTPClient::getHours() const
 {
   return ((this->getEpochTime() % 86400L) / 3600);
 }
 
+//===================================================================================
 int NTPClient::getMinutes() const
 {
   return ((this->getEpochTime() % 3600) / 60);
 }
 
+//===================================================================================
 int NTPClient::getSeconds() const
 {
   return (this->getEpochTime() % 60);
 }
 
+//===================================================================================
 String NTPClient::getFormattedTime() const
 {
   unsigned long rawTime = this->getEpochTime();
@@ -203,6 +223,7 @@ String NTPClient::getFormattedTime() const
   return hoursStr + ":" + minuteStr + ":" + secondStr;
 }
 
+//===================================================================================
 void NTPClient::end()
 {
   this->_udp->stop();
@@ -210,21 +231,25 @@ void NTPClient::end()
   this->_udpSetup = false;
 }
 
+//===================================================================================
 void NTPClient::setTimeOffset(int timeOffset)
 {
   this->_timeOffset = timeOffset;
 }
 
+//===================================================================================
 void NTPClient::setUpdateInterval(unsigned long updateInterval)
 {
   this->_updateInterval = updateInterval;
 }
 
+//===================================================================================
 void NTPClient::setPoolServerName(const char *poolServerName)
 {
   this->_poolServerName = poolServerName;
 }
 
+//===================================================================================
 void NTPClient::sendNTPPacket()
 {
   // set all bytes in the buffer to 0
@@ -254,8 +279,11 @@ void NTPClient::sendNTPPacket()
   this->_udp->endPacket();
 }
 
+//===================================================================================
 void NTPClient::setRandomPort(unsigned int minValue, unsigned int maxValue)
 {
   randomSeed(analogRead(0));
   this->_port = random(minValue, maxValue);
 }
+
+//===================================================================================

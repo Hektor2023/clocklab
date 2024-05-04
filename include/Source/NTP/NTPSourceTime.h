@@ -10,6 +10,7 @@
 #include "Other/Tools.h"
 #include "WifiCred.h"
 
+//===================================================================================
 typedef struct
 {
   const char *gc_Ssid;
