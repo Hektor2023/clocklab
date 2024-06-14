@@ -2,13 +2,17 @@
 
 #include "Other/LimitedSizeString.h"
 #include "TimeType/TimeData.h"
+#include "freertos/FreeRTOS.h"
 
+enum class DisplayMode {
+  eLocalTime,
+  eUTCTime,
+  eLocalDate, 
+  eSunsetTime,
+  eSunriseTime
+};
 
-
-enum class DisplayMode { eLocalTime, eUTCTime, eSunsetTime, eSunriseTime };
-
-constexpr uint8_t cmdStringSize = 30;
-using CommandString = LimitedSizeString<cmdStringSize>;
+using CommandString = std::string;
 
 //===================================================================================
 class DisplayCommand {
@@ -30,6 +34,8 @@ public:
 //===================================================================================
 class DisplayController {
 private:
+  SemaphoreHandle_t SemaphoreDisplayController;
+
   DisplayMode displayMode;
   DisplayCommand cmd;
 
@@ -41,6 +47,9 @@ public:
   void update(TimeData &data);
 
   const DisplayCommand &getCommand(void);
+
+  bool lockData(void);
+  void unlockData(void);
 };
 
 //===================================================================================

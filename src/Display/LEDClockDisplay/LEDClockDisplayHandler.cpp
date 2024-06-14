@@ -35,53 +35,80 @@ uint8_t LEDClockDisplayHandler::buttonsRead(void) {
 
 //===================================================================================
 void LEDClockDisplayHandler::updateCommand(DisplayCommand &cmd) {
-  /*
-    std::string s;
+  CommandString msg = cmd.getMessage();
+  Serial.printf("\nDisplay CmdLED-2: %s\n", msg.c_str());
 
-    MyTime requiredTime = data.localTime;
-    MyDate requiredDate = data.localDate;
-
-    char timeStrBuffer[MyTime::getStringBufferSize()];
-    s = requiredTime.toString(timeStrBuffer);
-    std::replace(s.begin(), s.end(), ':', '-');
-
-    if (xSemaphoreTake(xSemaphoreTM1638plus, (TickType_t)0) == pdTRUE)
+  switch (cmd.getCmdMode()) 
+  {
+    case DisplayMode::eLocalTime:
+    case DisplayMode::eUTCTime: 
     {
-      tm.displayText(s.c_str());
+      size_t endOfFirstField = msg.find('|');
+      size_t endOfSecondField = msg.find('|', endOfFirstField+1);
 
-      //  Serial.printf( "=>%s\n",s);
+      std::string timeAsString =
+          msg.substr(endOfFirstField + 1, endOfSecondField - endOfFirstField - 1);
+      std::replace(timeAsString.begin(), timeAsString.end(), ':', '-');
+      std::string dayOfWeekNumber =
+          msg.substr(endOfSecondField + 1, msg.length() - endOfSecondField - 1);
+
+      Serial.printf("\nDisplay CmdLED-TIME: (%s)%s|%d\n", timeAsString.c_str(),
+                    dayOfWeekNumber.c_str(),
+                    atoi(const_cast<const char *>(dayOfWeekNumber.c_str())));
+
+      while (xSemaphoreTake(xSemaphoreTM1638plus, (TickType_t)0) != pdTRUE) {}; 
+      
+      tm.displayText(timeAsString.c_str());
+
       tm.setLEDs(0);
-      tm.setLED(requiredDate.getDayOfWeek(), 1);
-      //    tm.setLED( 7, adjustMode? 1:0);
+      tm.setLED( atoi( const_cast< const char*>( dayOfWeekNumber.c_str())), 1); 
+  
       xSemaphoreGive(xSemaphoreTM1638plus);
+      
+      break;
     }
-  */
 
-  switch (cmd.getCmdMode()) {
-  case DisplayMode::eLocalTime: {
-/*  cmd.getMessage();
-    
-    MyTime requiredTime = data.localTime;
-    char timeStrBuffer[MyTime::getStringBufferSize()];
-    std::string s = requiredTime.toString(timeStrBuffer);
-    std::replace(s.begin(), s.end(), ':', '-');
-*/
-    break;
-  }
-  case DisplayMode::eUTCTime: {
-//    Serial.printf("[%s]\n", cmd.getMessage());
-    break;
-  }
-  case DisplayMode::eSunriseTime: {
+    case DisplayMode::eLocalDate:
+    {
+      size_t endOfFirstField = msg.find('|');
+      size_t endOfSecondField = msg.find('|', endOfFirstField + 1);
+
+      std::string dateAsString = msg.substr(  0, endOfFirstField);
+      std::replace(dateAsString.begin(), dateAsString.end(), '/', '.');
+      std::string dayOfWeekNumber =
+          msg.substr(endOfSecondField + 1, msg.length() - endOfSecondField - 1);
+
+      Serial.printf("\nDisplay CmdLED-DATE: (%s)%s|%d\n", dateAsString.c_str(),
+                    dayOfWeekNumber.c_str(),
+                    atoi(const_cast<const char *>(dayOfWeekNumber.c_str())));
+
+      while (xSemaphoreTake(xSemaphoreTM1638plus, (TickType_t)0) != pdTRUE) {
+      };
+
+      tm.displayText(dateAsString.c_str());
+
+      tm.setLEDs(0);
+      tm.setLED(atoi(const_cast<const char *>(dayOfWeekNumber.c_str())), 1);
+
+      xSemaphoreGive(xSemaphoreTM1638plus);
+      break;
+    }
+
+    case DisplayMode::eSunriseTime: 
+    {
 //    Serial.printf("|%s|\n", cmd.getMessage());
-    break;
-  }
-  case DisplayMode::eSunsetTime: {
+      break;
+    }
+
+    case DisplayMode::eSunsetTime: 
+    {
 //    Serial.printf("|%s|\n", cmd.getMessage());
-    break;
+      break;
+    }
+
+    default:;
   }
-  default:;
-  }
+
 }
 
 //===================================================================================

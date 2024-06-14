@@ -20,7 +20,8 @@ void DisplayCommand::setMessage(const CommandString cmdMsg) { msg = cmdMsg; }
 
 //===================================================================================
 DisplayController::DisplayController(void)
-    : displayMode(DisplayMode::eLocalTime), cmd() {}
+    : SemaphoreDisplayController(xSemaphoreCreateMutex()),
+      displayMode(DisplayMode::eLocalTime), cmd() {}
 
 //===================================================================================
 void DisplayController::setDisplayMode(const DisplayMode mode) {
@@ -34,8 +35,10 @@ const DisplayCommand &DisplayController::getCommand(void) { return cmd; }
 void DisplayController::update(TimeData &data) {
   cmd.setCmdMode(displayMode);
 
-  switch (displayMode) {
-  case DisplayMode::eLocalTime: {
+  switch (displayMode) 
+  {
+  case DisplayMode::eLocalTime:
+  case DisplayMode::eLocalDate: {
     Timestamp localTimestamp = data.localTimestamp;
 
     char timestampStrBuffer[Timestamp::getStringBufferSize()];
@@ -77,6 +80,16 @@ void DisplayController::update(TimeData &data) {
 
   default:;
   }
+}
+
+//===================================================================================
+bool DisplayController::lockData(void) {
+  return xSemaphoreTake(SemaphoreDisplayController, 0) == pdTRUE;
+}
+
+//===================================================================================
+void DisplayController::unlockData(void) {
+  xSemaphoreGive(SemaphoreDisplayController);
 }
 
 //===================================================================================

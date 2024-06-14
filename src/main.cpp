@@ -44,28 +44,33 @@ static TimeData timeData;
 // double  g_Longitude{ 20.6925219};  //
 
 static RTCSystemTimeHandler g_RTCSystemTimeHandler(gc_sda_pin, gc_scl_pin, gc_irqIn_pin);
+static DisplayController displController;
 
 static xQueueHandle g_queueSourceTime = xQueueCreate(3, sizeof(MessageTime_t));
 static SemaphoreHandle_t g_xSemaphoreRtc;
-
 static AdjustmentAdvisor g_advisor;
 
 //=============================================================================================================
 void consoleOutTask(void *pvParameter) {
+  DisplayController *dspController =  reinterpret_cast<DisplayController *>(pvParameter);
   printTick();  Serial.print("\nCONSOLE_OUT_task:  start\n");
+  CommandString msg, old_msg;
 
   for (;;) 
   {
     vTaskDelay(30 / portTICK_RATE_MS);
-    if (timeData.lockData()) 
+    if (dspController->lockData()) {
+
+      DisplayCommand cmd = dspController->getCommand();
+      msg = cmd.getMessage();
+
+      if( msg != old_msg)
       {
-        //        displayTimestamp.setEpochTime(rcvMsg.epoch);
-
-        //        timeData.localTime = displayTimestamp.getTime();
-        //        timeData.localDate = displayTimestamp.getDate();
+        Serial.printf("\nDisplay DISPLAY: %s\n", msg.c_str());
+        old_msg = msg;
       }
-
-      timeData.unlockData();
+      dspController->unlockData();
+    }
 //   
   }
 
@@ -76,7 +81,7 @@ void consoleOutTask(void *pvParameter) {
 void rtcReadTask(void *pvParameter) { // set new time for Displays via DisplayController
   static ConverterTimestampAdapter timestampAdapter;
   static DSTSunriseSunsetTimeHandler dstHandlder(gc_GMT_Plus_2h);
-  static DisplayController displController;
+
 
   Timestamp rtcTimestamp;
 
@@ -118,9 +123,9 @@ void rtcReadTask(void *pvParameter) { // set new time for Displays via DisplayCo
         dstHandlder.update(timeData);      // modify DSTTimes, sunrise, sunset
         displController.update( timeData); // sends selected timedata to displays via cmd
 
-        DisplayCommand cmd = displController.getCommand();
-        auto msg = cmd.getMessage();
-        Serial.printf("\nDisplay Cmd: %s\n", msg.c_str());
+//        DisplayCommand cmd = displController.getCommand();
+//        auto msg = cmd.getMessage();
+//        Serial.printf("\nDisplay Cmd: %s\n", msg.c_str());
 
         timeData.unlockData();
       }
@@ -145,7 +150,7 @@ void rtcWriteTask(void *pvParameter) { // sets new RTC time
 
   for (;;) {
     vTaskDelay(10 / portTICK_RATE_MS);
-    g_advisor.setSelectedSource(src_type_t::GPS);
+    g_advisor.setSelectedSource(src_type_t::NTP);
 
     if (xQueueReceive(*ptr2queueSource, (void *)&rtcWriteMsg, 0) == pdTRUE) 
     {
@@ -206,10 +211,11 @@ void setup() {
   xTaskCreate(&rtcWriteTask, "rtc_write_task", 2048, ptr2src_queue, 5, nullptr); //
   xTaskCreate(&rtcReadTask, "rtc_read_task", 2048, nullptr, 5, nullptr); // 2048
 
-  //xTaskCreate(&consoleOutTask, "console_out_task", 2600, nullptr, 5, nullptr); // 3048
-  xTaskCreate(&consoleDisplayTask, "console_display_task", 2048, &timeData, 5, nullptr);
-  // xTaskCreate(&LedDisplayTask, "LED_display_task", 2048, &timeData, 5, nullptr);
-  // xTaskCreate(&OLedDisplayTask, "OLED_display_task", 3048, &timeData, 5, nullptr);
+  xTaskCreate(&consoleOutTask, "console_out_task", 2600, &displController, 5, nullptr); // 3048
+//  xTaskCreate(&consoleDisplayTask, "console_display_task", 2048, &timeData,5, nullptr);
+  xTaskCreate(&LedDisplayTask, "LED_display_task", 2048, &displController, 5, nullptr);
+  //  xTaskCreate(&OLedDisplayTask, "OLED_display_task", 3048, &timeData, 5,
+  //  nullptr);
 }
 
 //=============================================================================================================
