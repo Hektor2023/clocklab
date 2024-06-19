@@ -65,20 +65,21 @@ void OLEDClockDisplayHandler::updateCommand(DisplayCommand &cmd)
     break;
   }
 
-case DisplayMode::eSunriseTime: 
-{
-      //    Serial.printf("|%s|\n", cmd.getMessage());
-  break;
-}
+  case DisplayMode::eSunriseTime: 
+  {
+    Serial.printf("SUNR|%s|\n", msg.c_str());
+    break;
+  }
 
-case DisplayMode::eSunsetTime: 
-{
-      //    Serial.printf("|%s|\n", cmd.getMessage());
-  break;
-}
+  case DisplayMode::eSunsetTime: 
+  {
+    Serial.printf("SUNS|%s|\n", msg.c_str());
+    break;
+  }
 
-      default:;
-    }
+  default:;
+
+  }  
     
 }
 

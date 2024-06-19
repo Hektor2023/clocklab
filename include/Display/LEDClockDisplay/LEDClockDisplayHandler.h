@@ -24,7 +24,7 @@ public:
   ~LEDClockDisplayHandler(void) = default;
 
   void updateCommand(DisplayCommand &cmd);
-  uint8_t buttonsRead(void);
+  uint16_t buttonsRead(void);
 };
 
 //===================================================================================

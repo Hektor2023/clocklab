@@ -16,9 +16,9 @@ LEDClockDisplayHandler::LEDClockDisplayHandler(const int STB_pin,
 };
 
 //===================================================================================
-uint8_t LEDClockDisplayHandler::buttonsRead(void) {
-  static uint8_t lastKeys = -1;
-  uint8_t keys;
+uint16_t LEDClockDisplayHandler::buttonsRead(void) {
+  static uint16_t lastKeys = -1;
+  uint16_t keys;
 
   if (xSemaphoreTake(xSemaphoreTM1638plus, (TickType_t)0) == pdTRUE) {
     keys = tm.readButtons();
@@ -96,13 +96,13 @@ void LEDClockDisplayHandler::updateCommand(DisplayCommand &cmd) {
 
     case DisplayMode::eSunriseTime: 
     {
-//    Serial.printf("|%s|\n", cmd.getMessage());
+      Serial.printf("SUNRISE |%s|\n", msg.c_str());
       break;
     }
 
     case DisplayMode::eSunsetTime: 
     {
-//    Serial.printf("|%s|\n", cmd.getMessage());
+      Serial.printf("SUNSET |%s|\n", msg.c_str());
       break;
     }
 

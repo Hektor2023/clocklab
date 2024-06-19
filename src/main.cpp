@@ -80,31 +80,56 @@ static AdjustmentAdvisor g_advisor;
 
 //=============================================================================================================
 void buttonControlerTask(void *pvParameter) {
-/*
-  DisplayController *dspController =
-      reinterpret_cast<DisplayController *>(pvParameter);
-  printTick();
-  Serial.print("\nCONSOLE_OUT_task:  start\n");
-  CommandString msg, old_msg;
+  ledTaskParams_t *ptr2ledParams =  reinterpret_cast<ledTaskParams_t *>(pvParameter);
 
-  for (;;) {
+  ButtonController controller;
+  Buttons_t button;
+
+  Serial.print("\nBUTTON_task:  start\n");
+
+  for (;;) 
+  {
     vTaskDelay(30 / portTICK_RATE_MS);
 
-    if (dspController->lockData()) {
-      DisplayCommand cmd = dspController->getCommand();
-      msg = cmd.getMessage();
+    uint16_t btn = ptr2ledParams->ptr2ledDisplayHandler->buttonsRead();
+    if (( btn!= 0) && ptr2ledParams->ptr2dspController->lockData()) {
+        button = static_cast< Buttons_t>( btn);
 
-      if (msg != old_msg) {
-        Serial.printf("\nDisplay DISPLAY: %s\n", msg.c_str());
-        old_msg = msg;
+        Serial.printf("\n###### Button: %d # %d\n", btn, button);
+        switch (button) {
+        case Buttons_t::eButton1:
+          ptr2ledParams->ptr2dspController->setDisplayMode(
+              DisplayMode::eLocalTime);
+          break;
+
+        case Buttons_t::eButton2:
+          ptr2ledParams->ptr2dspController
+            ->setDisplayMode(DisplayMode::eUTCTime);
+            break;
+
+        case Buttons_t::eButton3:
+          ptr2ledParams->ptr2dspController->setDisplayMode(
+              DisplayMode::eLocalDate);
+          break;
+
+        case Buttons_t::eButton4:
+          ptr2ledParams->ptr2dspController->setDisplayMode(
+              DisplayMode::eSunriseTime);
+          break;
+
+        case Buttons_t::eButton5:
+          ptr2ledParams->ptr2dspController->setDisplayMode(
+              DisplayMode::eSunsetTime);
+          break;
+
+        default:;
+        }
+
+        ptr2ledParams->ptr2dspController->unlockData();
       }
-      dspController->unlockData();
-    }
-    //
   }
 
   vTaskDelete(nullptr);
-*/  
 }
 
 //=============================================================================================================
@@ -273,6 +298,8 @@ void setup() {
 
   xTaskCreate(&LedDisplayTask, "LED_display_task", 2048, &ledTaskParams, 5, nullptr);
   xTaskCreate(&OLedDisplayTask, "OLED_display_task", 3048, &oledTaskParams, 5, nullptr);
+
+  xTaskCreate(&buttonControlerTask, "buttons_task", 3048, &ledTaskParams, 5,  nullptr);
 }
 
 //=============================================================================================================
