@@ -1,9 +1,9 @@
-#include "Other/Controller.h"
+#include "Other/ButtonController.h"
 
 #include "Arduino.h"
 
 //===================================================================================
-Controller::Controller(void)
+ButtonController::ButtonController(void)
     : state(State_t::eNOP), menuView(nullptr)
 {
   menuView.addItem(State_t::eShow_Time);
@@ -11,7 +11,7 @@ Controller::Controller(void)
 };
 
 //===================================================================================
-void Controller::handle(Buttons_t buttons)
+void ButtonController::handle(Buttons_t buttons)
 {
 
   /*
@@ -63,7 +63,7 @@ void Controller::handle(Buttons_t buttons)
 }
 
 //===================================================================================
-State_t Controller::getState(void)
+State_t ButtonController::getState(void)
 {
   return state;
 }

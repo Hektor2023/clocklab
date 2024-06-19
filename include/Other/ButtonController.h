@@ -18,15 +18,15 @@ typedef enum // counting from the left
 } Buttons_t;
 
 //===================================================================================
-class Controller
+class ButtonController
 {
 private:
    State_t state;
    Menu menuView;
 
 public:
-   Controller(void);
-   ~Controller(void) = default;
+   ButtonController(void);
+   ~ButtonController(void) = default;
 
    void handle(Buttons_t button);
 

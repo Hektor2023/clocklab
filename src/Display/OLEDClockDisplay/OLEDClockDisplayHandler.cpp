@@ -14,39 +14,72 @@ void OLEDClockDisplayHandler::init(void) { u8g2.begin(); }
 //===================================================================================
 void OLEDClockDisplayHandler::updateCommand(DisplayCommand &cmd)
 {
-    /*
-     void OLEDClockDisplayHandler::update(const TimeData &data)
-     {
-       const String dayOfWeekAsString[] = {"Monday", "Tuesday", "Wednesday",
-     "Thursday", "Friday", "Saturday", "Sunday"};
+  CommandString msg = cmd.getMessage();
 
-       char dateStrBuffer[MyDate::getStringBufferSize()];
-       MyDate date = data.localDate;
-       std::string dateAsString = date.toString(dateStrBuffer);
+  Serial.printf("\n!!!!  Display CmdOLED: %s\n", msg.c_str());
 
-       MyTime time = data.localTime;
-       char timeStrBuffer[MyTime::getStringBufferSize()];
-       std::string timeAsString = time.toString(timeStrBuffer);
+  switch (cmd.getCmdMode()) {
+  case DisplayMode::eLocalTime:
+  case DisplayMode::eUTCTime:
+  case DisplayMode::eLocalDate: 
+  {
+    const String dayOfWeekAsString[] = {"Monday",   "Tuesday", "Wednesday",
+                                        "Thursday", "Friday",  "Saturday",
+                                        "Sunday"};
 
-       char timeShortStrBuffer[MyTime::getStringShortBufferSize()];
-       std::string timeAsShortString = time.toShortString(timeShortStrBuffer);
+    size_t endOfFirstField = msg.find('|');
+    size_t endOfSecondField = msg.find('|', endOfFirstField + 1);
 
-       u8g2.clearBuffer(); // clear the internal memory
-       u8g2.enableUTF8Print();
-       u8g2.setFont(u8g2_font_12x6LED_tf);
-       u8g2.setDrawColor(1);
+    std::string dateAsString = msg.substr(0, endOfFirstField);
 
-       u8g2.setCursor(0, 26);
-       u8g2.setContrast(80);
+    std::string timeAsString =
+        msg.substr(endOfFirstField + 1, endOfSecondField - endOfFirstField - 1);
+    
+    std::string dayOfWeekNumber =
+        msg.substr(endOfSecondField + 1, msg.length() - endOfSecondField - 1);
 
-       u8g2.print(timeAsString.c_str());
+    Serial.printf("\nDisplay CmdOLED-TIME: (%s)%s|%d\n", timeAsString.c_str(),
+                  dayOfWeekNumber.c_str(),
+                  atoi(const_cast<const char *>(dayOfWeekNumber.c_str())));
 
-       u8g2.setCursor(0, 46);
-       u8g2.setFont(u8g2_font_helvB12_tf);
-       u8g2.print(dayOfWeekAsString[date.getDayOfWeek()].c_str());
-       u8g2.sendBuffer();
-     }
-    */
+    u8g2.clearBuffer(); // clear the internal memory
+    u8g2.enableUTF8Print();
+    u8g2.setFont(u8g2_font_12x6LED_tf);
+    u8g2.setDrawColor(1);
+
+    u8g2.setCursor(0, 20);
+    u8g2.setContrast(80);
+
+    u8g2.print(timeAsString.c_str());
+    u8g2.setCursor(0, 40);
+
+    u8g2.print(dateAsString.c_str());
+    u8g2.setCursor(0, 60);
+    u8g2.setFont(u8g2_font_helvB12_tf);
+
+    uint8_t dayOfWeek =
+        atoi(const_cast<const char *>(dayOfWeekNumber.c_str()));
+    u8g2.print(dayOfWeekAsString[dayOfWeek].c_str());
+    u8g2.sendBuffer();
+
+    break;
+  }
+
+case DisplayMode::eSunriseTime: 
+{
+      //    Serial.printf("|%s|\n", cmd.getMessage());
+  break;
+}
+
+case DisplayMode::eSunsetTime: 
+{
+      //    Serial.printf("|%s|\n", cmd.getMessage());
+  break;
+}
+
+      default:;
+    }
+    
 }
 
 //===================================================================================

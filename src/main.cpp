@@ -1,7 +1,6 @@
 #include <Arduino.h>
 #include <array>
 
-#include "PinConfig.h"
 #include "WifiCred.h"
 
 #include "TimeType/TimeData.h"
@@ -19,13 +18,37 @@
 #include "Source/NTP/NTPTask.h"
 #include "Source/RTCSystemTimeHandler.h"
 
-#include "Display/ConsoleDisplay/ConsoleDisplayTask.h"
 #include "Display/LEDClockDisplay/LEDClockDisplayTask.h"
 #include "Display/OLEDClockDisplay/OLEDClockDisplayTask.h"
 
 #include "Other/AdjustmentAdvisor.h"
-#include "Other/Controller.h"
+#include "Other/ButtonController.h"
 #include "Other/Tools.h"
+
+constexpr uint8_t gc_irqIn_pin{15}; // D8 - don't use D4
+
+// constexpr uint8_t   gc_rxd2_pin{17};
+constexpr uint8_t gc_txd2_pin{16};
+
+constexpr uint8_t gc_sda_pin{21};
+constexpr uint8_t gc_scl_pin{22};
+
+constexpr uint8_t gc_DIO_pin{13}; // 25
+constexpr uint8_t gc_CLK_pin{33}; // 26
+constexpr uint8_t gc_STB_pin{32}; // 27
+
+constexpr uint8_t gc_SI_pin{25};
+constexpr uint8_t gc_RCK_pin{26};
+constexpr uint8_t gc_SCK_pin{27};
+constexpr uint8_t gc_NSCLR_pin{14};
+
+constexpr uint8_t gc_PULS_pin{4};
+
+constexpr uint8_t gc_OLED_clock_pin{18};
+constexpr uint8_t gc_OLED_data_pin{23};
+constexpr uint8_t gc_OLED_cs_pin{5};
+constexpr uint8_t gc_OLED_dc_pin{17};
+constexpr uint8_t gc_OLED_reset_pin{19};
 
 //=============================================================================================================
 // Set offset time in seconds to adjust for your timezone, for example:
@@ -44,6 +67,11 @@ static TimeData timeData;
 // double  g_Longitude{ 20.6925219};  //
 
 static RTCSystemTimeHandler g_RTCSystemTimeHandler(gc_sda_pin, gc_scl_pin, gc_irqIn_pin);
+static LEDClockDisplayHandler LedDisplayHandler(gc_STB_pin, gc_CLK_pin, gc_DIO_pin);
+static OLEDClockDisplayHandler OLEDClockDisplayHandler(gc_OLED_clock_pin,
+                                                gc_OLED_data_pin,
+                                                gc_OLED_cs_pin, gc_OLED_dc_pin,
+                                                gc_OLED_reset_pin);
 static DisplayController displController;
 
 static xQueueHandle g_queueSourceTime = xQueueCreate(3, sizeof(MessageTime_t));
@@ -51,17 +79,47 @@ static SemaphoreHandle_t g_xSemaphoreRtc;
 static AdjustmentAdvisor g_advisor;
 
 //=============================================================================================================
+void buttonControlerTask(void *pvParameter) {
+/*
+  DisplayController *dspController =
+      reinterpret_cast<DisplayController *>(pvParameter);
+  printTick();
+  Serial.print("\nCONSOLE_OUT_task:  start\n");
+  CommandString msg, old_msg;
+
+  for (;;) {
+    vTaskDelay(30 / portTICK_RATE_MS);
+
+    if (dspController->lockData()) {
+      DisplayCommand cmd = dspController->getCommand();
+      msg = cmd.getMessage();
+
+      if (msg != old_msg) {
+        Serial.printf("\nDisplay DISPLAY: %s\n", msg.c_str());
+        old_msg = msg;
+      }
+      dspController->unlockData();
+    }
+    //
+  }
+
+  vTaskDelete(nullptr);
+*/  
+}
+
+//=============================================================================================================
 void consoleOutTask(void *pvParameter) {
-  DisplayController *dspController =  reinterpret_cast<DisplayController *>(pvParameter);
+  DisplayController *ptr2dspController =  reinterpret_cast<DisplayController *>(pvParameter);
   printTick();  Serial.print("\nCONSOLE_OUT_task:  start\n");
   CommandString msg, old_msg;
 
   for (;;) 
   {
     vTaskDelay(30 / portTICK_RATE_MS);
-    if (dspController->lockData()) {
 
-      DisplayCommand cmd = dspController->getCommand();
+    if (ptr2dspController->lockData()) 
+    {
+      DisplayCommand cmd = ptr2dspController->getCommand();
       msg = cmd.getMessage();
 
       if( msg != old_msg)
@@ -69,7 +127,7 @@ void consoleOutTask(void *pvParameter) {
         Serial.printf("\nDisplay DISPLAY: %s\n", msg.c_str());
         old_msg = msg;
       }
-      dspController->unlockData();
+      ptr2dspController->unlockData();
     }
 //   
   }
@@ -81,7 +139,6 @@ void consoleOutTask(void *pvParameter) {
 void rtcReadTask(void *pvParameter) { // set new time for Displays via DisplayController
   static ConverterTimestampAdapter timestampAdapter;
   static DSTSunriseSunsetTimeHandler dstHandlder(gc_GMT_Plus_2h);
-
 
   Timestamp rtcTimestamp;
 
@@ -150,7 +207,7 @@ void rtcWriteTask(void *pvParameter) { // sets new RTC time
 
   for (;;) {
     vTaskDelay(10 / portTICK_RATE_MS);
-    g_advisor.setSelectedSource(src_type_t::NTP);
+    g_advisor.setSelectedSource(src_type_t::GPS);
 
     if (xQueueReceive(*ptr2queueSource, (void *)&rtcWriteMsg, 0) == pdTRUE) 
     {
@@ -191,8 +248,9 @@ void rtcWriteTask(void *pvParameter) { // sets new RTC time
 
 //=============================================================================================================
 void setup() {
-  static QueueHandle_t *ptr2src_queue = static_cast<QueueHandle_t *>(&g_queueSourceTime);
-  static ntpTaskParams_t ntpParams{SSID, PASSWD, ptr2src_queue};
+  static ntpTaskParams_t ntpTaskParams{SSID, PASSWD, &g_queueSourceTime};
+  static ledTaskParams_t ledTaskParams{ &LedDisplayHandler, &displController};
+  static OledTaskParams_t oledTaskParams{&OLEDClockDisplayHandler, &displController};
 
   g_xSemaphoreRtc = xSemaphoreCreateMutex();
 
@@ -205,17 +263,16 @@ void setup() {
 
   Serial.print("setup: start ======================\n");
 
-  xTaskCreate(&gpsTask, "gps_task", 5048, ptr2src_queue, 5, nullptr);
-  xTaskCreate(&ntpTask, "ntp_task", 4048, &ntpParams, 5, nullptr);
+  xTaskCreate(&gpsTask, "gps_task", 5048, &g_queueSourceTime, 5, nullptr);
+  xTaskCreate(&ntpTask, "ntp_task", 4048, &ntpTaskParams, 5, nullptr);
 
-  xTaskCreate(&rtcWriteTask, "rtc_write_task", 2048, ptr2src_queue, 5, nullptr); //
+  xTaskCreate(&rtcWriteTask, "rtc_write_task", 2048, &g_queueSourceTime, 5, nullptr);                                                  //
   xTaskCreate(&rtcReadTask, "rtc_read_task", 2048, nullptr, 5, nullptr); // 2048
 
   xTaskCreate(&consoleOutTask, "console_out_task", 2600, &displController, 5, nullptr); // 3048
-//  xTaskCreate(&consoleDisplayTask, "console_display_task", 2048, &timeData,5, nullptr);
-  xTaskCreate(&LedDisplayTask, "LED_display_task", 2048, &displController, 5, nullptr);
-  //  xTaskCreate(&OLedDisplayTask, "OLED_display_task", 3048, &timeData, 5,
-  //  nullptr);
+
+  xTaskCreate(&LedDisplayTask, "LED_display_task", 2048, &ledTaskParams, 5, nullptr);
+  xTaskCreate(&OLedDisplayTask, "OLED_display_task", 3048, &oledTaskParams, 5, nullptr);
 }
 
 //=============================================================================================================
