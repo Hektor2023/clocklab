@@ -159,11 +159,11 @@ uint8_t MyDate::getDayOfWeek() const
 }
 
 //===================================================================================
-const char *MyDate::getDayOfWeekAsString(void)
+const char *MyDate::getDayOfWeekAsString( uint8_t dayOfWeek)
 {
   const char *dayOfWeekAsString[] = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
 
-  return (dayOfWeekAsString[getDayOfWeek()]);
+  return (dayOfWeekAsString[ dayOfWeek]);
 }
 
 //===================================================================================
@@ -205,7 +205,7 @@ MyDate MyDate::getDSTStart(uint16_t year)
   const uint8_t SUNDAY = 6;
   MyDate date(31, 03, year);
 
-  auto dofw = date.getDayOfWeek();
+  auto dofw = date.getDayOfWeek( );
   if (dofw != SUNDAY)
   {
     date.setDay(31 - (dofw + 1));
@@ -221,7 +221,7 @@ MyDate MyDate::getDSTEnd(uint16_t year)
   MyDate date(31, 10, year);
 
   // 31.10.2023  dofw = 1  TUESDAY //  DSTEnd 29.10.23 dofw = 6
-  auto dofw = date.getDayOfWeek();
+  auto dofw = date.getDayOfWeek( );
   if (dofw != SUNDAY)
   {
     date.setDay(31 - (dofw + 1));

@@ -41,7 +41,7 @@ public:
 
   // 0 = Sunday, 1 = Monday ... 7 = Unknown
   uint8_t getDayOfWeek(void) const;
-  const char *getDayOfWeekAsString(void);
+  static const char *getDayOfWeekAsString(uint8_t dayOfWeek);
 
   static MyDate getDSTStart(uint16_t year);
   static MyDate getDSTEnd(uint16_t year);

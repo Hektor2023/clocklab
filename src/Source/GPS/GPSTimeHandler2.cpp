@@ -259,7 +259,7 @@ bool GPSTimeHandler2::updateTime(void)
         GPSTimestamp.setTime(time);
 
         char timestampAsString[GPSTimestamp.getStringBufferSize()];
-        Serial.printf("\nTimestampAsString_3= %s  \n", GPSTimestamp.toString(timestampAsString));
+        Serial.printf("\nTimestampAsString_GPS= %s  \n", GPSTimestamp.toString(timestampAsString));
 
         //        Serial.printf( "GPS: encoded\n");
         updated = true;

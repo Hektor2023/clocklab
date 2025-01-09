@@ -17,7 +17,7 @@ void OLedDisplayTask(void *pvParameter) {
   ptr2oledTaskParams->ptr2OledDisplayHandler->init();
 
   for (;;) {
-    vTaskDelay(30 / portTICK_RATE_MS);
+    vTaskDelay(20 / portTICK_RATE_MS);
 
     if (ptr2oledTaskParams->ptr2dspController->lockData()) {
       DisplayCommand cmd = ptr2oledTaskParams->ptr2dspController->getCommand();

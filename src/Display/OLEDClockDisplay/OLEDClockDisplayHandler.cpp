@@ -16,16 +16,16 @@ void OLEDClockDisplayHandler::updateCommand(DisplayCommand &cmd)
 {
   CommandString msg = cmd.getMessage();
 
-  Serial.printf("\n!!!!  Display CmdOLED: %s\n", msg.c_str());
+//  Serial.printf("\n!!!!  Display CmdOLED: %s\n", msg.c_str());
 
   switch (cmd.getCmdMode()) {
   case DisplayMode::eLocalTime:
   case DisplayMode::eUTCTime:
   case DisplayMode::eLocalDate: 
   {
-    const String dayOfWeekAsString[] = {"Monday",   "Tuesday", "Wednesday",
-                                        "Thursday", "Friday",  "Saturday",
-                                        "Sunday"};
+//    const String dayOfWeekAsString[] = {"Monday",   "Tuesday", "Wednesday",
+//                                        "Thursday", "Friday",  "Saturday",
+//                                        "Sunday"};
 
     size_t endOfFirstField = msg.find('|');
     size_t endOfSecondField = msg.find('|', endOfFirstField + 1);
@@ -59,7 +59,9 @@ void OLEDClockDisplayHandler::updateCommand(DisplayCommand &cmd)
 
     uint8_t dayOfWeek =
         atoi(const_cast<const char *>(dayOfWeekNumber.c_str()));
-    u8g2.print(dayOfWeekAsString[dayOfWeek].c_str());
+  //  u8g2.print(dayOfWeekAsString[dayOfWeek].c_str());
+    u8g2.print(MyDate::getDayOfWeekAsString(dayOfWeek));
+
     u8g2.sendBuffer();
 
     break;
