@@ -52,7 +52,9 @@ public:
   static size_t getStringBufferSize(void);
   char *toString(char *Stringbuffer);
 
-private:
+  const uint16_t daysInMonth(uint16_t _year, uint8_t month) const;
+
+private : 
   uint32_t sumDaysOfFullYearsSinceBase(uint32_t year) const;
   uint16_t sumDaysOfFullMonths(uint8_t month) const;
 };

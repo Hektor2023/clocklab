@@ -21,6 +21,7 @@
  * @email naguissa@foroelectro.net
  */
 #include "Source/RTCSystemTimeHandler.h"
+#include "Other/Tools.h"
 
 static constexpr uint16_t Year2K = 2000;
 // uRTCLib rtc;
@@ -37,7 +38,7 @@ RTCSystemTimeHandler::RTCSystemTimeHandler(const uint8_t sda_pin,
                                            const uint8_t scl_pin,
                                            const uint8_t irqIn_pin)
     : systemTimestamp(0L) {
-  // changed orginal code because of mistake with pin assigment for I2C in
+  // changed original code because of mistake with pin assigment for I2C in
   // ESP8266
   URTCLIB_WIRE.begin(sda_pin, scl_pin); // 4,5 D2 and D1 on ESP8266
 
@@ -54,9 +55,10 @@ void RTCSystemTimeHandler::init(void) {
   rtc.sqwgSetMode(URTCLIB_SQWG_1H);
 
   // for test
-  rtc.set(0, 0, 0, 0, 5, 6, 0);
+  rtc.set(0, 0, 0, 2, 5, 6, 24);
   //  RTCLib::set(byte second, byte minute, byte hour, byte dayOfWeek, byte
   //  dayOfMonth, byte month, byte year)
+
 }
 
 //===================================================================================
@@ -69,10 +71,14 @@ void RTCSystemTimeHandler::setTimestamp(const Timestamp &newTimestamp) {
   MyTime newTime = newTimestamp.getTime();
   MyDate newDate = newTimestamp.getDate();
 
+
   rtc.set(newTime.getSecond(), newTime.getMinute(), newTime.getHour(),
           newDate.getDayOfWeek(), newDate.getDay(), newDate.getMonth(),
           newDate.getYear() - Year2K);
   systemTimestamp.setEpochTime(newTimestamp.getEpochTime());
+
+//  Timestamp timestamp(newTimestamp.getEpochTime());
+//  displayTimestamp("2. setTimestamp RTC:", timestamp);
 }
 
 //===================================================================================
@@ -92,10 +98,15 @@ void RTCSystemTimeHandler::forceUpdateTime(void) {
     systemTimestamp.setTime(time);
 
     MyDate date;
-    date.setDay(rtc.day());
-    date.setMonth(rtc.month());
+    date.setDay( rtc.day());
+    date.setMonth( rtc.month());
     date.setYear(Year2K + rtc.year());
     systemTimestamp.setDate(date);
+
+  //  displayTimestamp("3. getTimestamp RTC:", systemTimestamp);
+
+    
+  //  Serial.printf("\nDAY= %d | %d | %d\n", rtc.day(), date.getDay(), systemTimestamp.getDate().getDay());
   }
 
   //===================================================================================

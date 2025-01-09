@@ -96,39 +96,40 @@ Timestamp &Timestamp::operator-=(const Timestamp &t) {
 }
 
 //===================================================================================
-const MyDate Timestamp::getDate(void) const {
-  //                      1   2   3   4   5   6   7   8   9   10  11  12
+const uint16_t Timestamp::daysInMonth(uint16_t _year, uint8_t month) const {
   const uint8_t dofm[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
-  //    Serial.printf( "epoch: %u\n", epoch);
+  return dofm[month - 1];
+}
+
+//===================================================================================
+const MyDate Timestamp::getDate(void) const {
+//  Serial.printf("! epoch: %u\n", epoch);
   // calucate year and rest of days
+
   uint16_t days = epoch / SECS_PER_DAY;
-  //    days += BASE_DAY;
 
   //    Serial.printf( "days1: %u\n", days);
   uint16_t year = BASE_YEAR;
-  while (days > MyDate::daysInYear(year)) {
+  while (days >= MyDate::daysInYear(year)) {
     days = days - MyDate::daysInYear(year);
 
     year++;
   };
-  //   Serial.printf( "days2: %u\n", days);
+//  Serial.printf( "left days: %u\n", days);
 
   // calculate months and day
   uint8_t month;
   for (month = BASE_MONTH; month < 12; month++) {
-    if (days <= dofm[month - 1]) {
+    if (days < daysInMonth(year, month)) {
       break;
     }
 
-    if ((month == 2) && MyDate::isLapYear(year)) {
-      days--;
-    }
-
-    days = days - dofm[month - 1];
+    days = days - daysInMonth(year, month);
   }
-  days++;
-  //  Serial.printf( "-> %u-%u-%u\n", days, month, year);
+   days++;
+
+//  Serial.printf( "! -> %u-%u-%u\n", days, month, year);
 
   MyDate date;
   date.setYear(year);
@@ -179,21 +180,31 @@ uint16_t Timestamp::sumDaysOfFullMonths(uint8_t month) const {
 void Timestamp::setDate(const MyDate &date) {
   uint32_t days = 0;
 
-  days = sumDaysOfFullYearsSinceBase(date.getYear());
-  days += sumDaysOfFullMonths(date.getMonth());
-  days += date.getDay(); //  -BASE_DAY;
+  
+  days = sumDaysOfFullYearsSinceBase(  date.getYear());
+  days += sumDaysOfFullMonths( date.getMonth());
+  days += date.getDay();
 
   epoch = epoch % SECS_PER_DAY;
-  epoch += (days * SECS_PER_DAY);
+  epoch += ((days -1) * SECS_PER_DAY);
+
+//  Serial.printf("# date: %u %u %u\n", date.getYear(), date.getMonth(),
+//                date.getDay());
+//  Serial.printf("# epoch: %u\n", epoch);
 }
 
 //===================================================================================
 void Timestamp::setTime(const MyTime &time) {
-  this->epoch = (this->epoch / SECS_PER_DAY) * SECS_PER_DAY;
+  uint32_t tmp = this->epoch;
 
-  this->epoch += time.getHour() * SECS_PER_HOUR;
-  this->epoch += time.getMinute() * SECS_PER_MIN;
-  this->epoch += time.getSecond();
+  tmp = (tmp / SECS_PER_DAY) * SECS_PER_DAY;
+
+  tmp += time.getHour() * SECS_PER_HOUR;
+  tmp += time.getMinute() * SECS_PER_MIN;
+  tmp += time.getSecond();
+
+  this->epoch = tmp;
+//  Serial.printf("#! epoch: %u\n", epoch);
 }
 
 //===================================================================================

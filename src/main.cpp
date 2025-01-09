@@ -197,7 +197,7 @@ void rtcReadTask(void *pvParameter) { // set new time for Displays via DisplayCo
         digitalWrite(gc_PULS_pin, gc_PULS_pin ? LOW : HIGH);
 
         rtcTimestamp = g_RTCSystemTimeHandler.getTimestamp();
-        displayTimestamp("RTC2", rtcTimestamp);
+        displayTimestamp("rtcReadTask RTC:", rtcTimestamp);
 
         timestampAdapter.setTimestamp(rtcTimestamp);
 
@@ -232,7 +232,7 @@ void rtcWriteTask(void *pvParameter) { // sets new RTC time
 
   for (;;) {
     vTaskDelay(10 / portTICK_RATE_MS);
-    g_advisor.setSelectedSource(src_type_t::GPS);
+    g_advisor.setSelectedSource(src_type_t::NTP);
 
     if (xQueueReceive(*ptr2queueSource, (void *)&rtcWriteMsg, 0) == pdTRUE) 
     {

@@ -28,7 +28,7 @@ bool NTPSourceTime::update(void)
   }
 
   uint32_t epoch = timeClient.getEpochTime();
-  //  Serial.printf("epoch ->%u\n", epoch);
+ // Serial.printf("epoch ->%u\n", epoch);
 
   uint32_t epochMillis = (uint32_t)((1000.0f * timeClient.getMillis()) / UINT32_MAX);
   //  Serial.printf("millis => %u\n", epochMillis);
